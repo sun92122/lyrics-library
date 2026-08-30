@@ -1,0 +1,182 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { SongViewContainer } from '@/components/SongViewContainer';
+import {
+  FileText,
+  FileSpreadsheet,
+  Music,
+  ExternalLink,
+  Download,
+  ArrowLeft,
+  Tag,
+  Clock,
+  User,
+  Hash,
+} from 'lucide-react';
+
+export async function getStaticPaths() {
+  const songEntries = await getCollection('songs');
+  return songEntries.map((entry) => ({
+    params: { id: entry.id },
+    props: { song: entry.data },
+  }));
+}
+
+const { song } = Astro.props;
+const pageTitle = `${song.meta.title.a}${song.meta.title.b ? ` (${song.meta.title.b})` : ''} - Lyrics Library`;
+
+// Helper to determine asset icon
+const getAssetIcon = (type: string) => {
+  switch (type) {
+    case 'sheet':
+      return FileText;
+    case 'ppt':
+      return FileSpreadsheet;
+    case 'audio':
+      return Music;
+    case 'external':
+    default:
+      return ExternalLink;
+  }
+};
+---
+
+<Layout title={pageTitle} description={`詩歌歌詞與和弦：${song.meta.title.a}`}>
+  <div class="space-y-8">
+    <!-- Navigation Breadcrumbs & Back -->
+    <div>
+      <a
+        href="/"
+        class="inline-flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors"
+      >
+        <ArrowLeft className="w-4 h-4" />
+        <span>返回詩歌總覽</span>
+      </a>
+    </div>
+
+    <!-- Song Header & Metadata -->
+    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+      <div class="space-y-2">
+        <div class="flex flex-wrap items-baseline gap-3">
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+            {song.meta.title.a}
+          </h1>
+          {
+            song.meta.title.b && (
+              <span class="text-xl sm:text-2xl font-medium text-slate-400">
+                {song.meta.title.b}
+              </span>
+            )
+          }
+        </div>
+
+        {
+          song.meta.author && (
+            <div class="flex items-center gap-1.5 text-sm text-slate-600">
+              <User className="w-4 h-4 text-slate-400" />
+              <span>{song.meta.author}</span>
+            </div>
+          )
+        }
+      </div>
+
+      <!-- Quick Info Meta Chips -->
+      <div class="flex flex-wrap items-center gap-3 pt-2 border-t border-slate-100 text-sm">
+        {
+          song.meta.originalKey && (
+            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 text-amber-800 border border-amber-200/60 font-medium">
+              <Music className="w-3.5 h-3.5 text-amber-600" />
+              <span>原調：<strong class="font-mono">{song.meta.originalKey}</strong></span>
+            </div>
+          )
+        }
+
+        {
+          song.meta.bpm && (
+            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 font-medium">
+              <Clock className="w-3.5 h-3.5 text-slate-500" />
+              <span>速度：<strong class="font-mono">{song.meta.bpm}</strong> BPM</span>
+            </div>
+          )
+        }
+
+        {
+          song.meta.ccli && (
+            <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 font-medium">
+              <Hash className="w-3.5 h-3.5 text-slate-500" />
+              <span>CCLI：<strong class="font-mono">{song.meta.ccli}</strong></span>
+            </div>
+          )
+        }
+
+        {
+          song.meta.tags && song.meta.tags.length > 0 && (
+            <div class="flex flex-wrap items-center gap-1.5">
+              {song.meta.tags.map((tag) => (
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 text-xs font-medium">
+                  <Tag className="w-3 h-3" />
+                  {tag}
+                </span>
+              ))}
+            </div>
+          )
+        }
+      </div>
+    </div>
+
+    <!-- Core Interactive Lyrics & Key Controller Island -->
+    <SongViewContainer song={song} client:load />
+
+    <!-- Downloadable Assets & Resources -->
+    {
+      song.meta.assets && song.meta.assets.length > 0 && (
+        <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
+          <div class="flex items-center gap-2">
+            <Download className="w-5 h-5 text-indigo-600" />
+            <h2 class="text-xl font-bold text-slate-900">附加資源與下載</h2>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            {song.meta.assets.map((asset) => {
+              const IconComponent = getAssetIcon(asset.type);
+              const isExternal = asset.type === 'external' || asset.url.startsWith('http');
+
+              return (
+                <a
+                  href={asset.url}
+                  target={isExternal ? '_blank' : undefined}
+                  rel={isExternal ? 'noopener noreferrer' : undefined}
+                  download={!isExternal}
+                  class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 hover:bg-indigo-50/60 border border-slate-200/80 hover:border-indigo-200 transition-all group"
+                >
+                  <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-indigo-600 shadow-sm border border-slate-200/60 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                      <IconComponent className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <div class="font-medium text-slate-900 group-hover:text-indigo-900 transition-colors">
+                        {asset.name}
+                      </div>
+                      {asset.size && (
+                        <div class="text-xs text-slate-400">{asset.size}</div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div class="text-slate-400 group-hover:text-indigo-600 transition-colors">
+                    {isExternal ? (
+                      <ExternalLink className="w-4 h-4" />
+                    ) : (
+                      <Download className="w-4 h-4" />
+                    )}
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      )
+    }
+  </div>
+</Layout>
