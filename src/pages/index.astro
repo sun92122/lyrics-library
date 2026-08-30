@@ -1,0 +1,56 @@
+---
+import { getCollection } from 'astro:content';
+import '../styles/global.css';
+
+const songs = await getCollection('songs');
+const libraries = await getCollection('libraries');
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lyrics Library</title>
+  </head>
+  <body class="p-8 max-w-4xl mx-auto">
+    <h1 class="text-3xl font-bold mb-6">Lyrics Library</h1>
+
+    <section class="mb-8">
+      <h2 class="text-xl font-semibold mb-3">詩歌清單 ({songs.length})</h2>
+      <ul class="space-y-2">
+        {
+          songs.map((song) => (
+            <li class="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+              <div class="font-medium text-lg">
+                {song.data.meta.title.a} {song.data.meta.title.b ? `(${song.data.meta.title.b})` : ''}
+              </div>
+              <div class="text-sm text-slate-500">
+                原調: {song.data.meta.originalKey ?? '未指定'} | BPM: {song.data.meta.bpm ?? '未指定'} | 標籤: {song.data.meta.tags.join(', ')}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="text-xl font-semibold mb-3">歌庫清單 ({libraries.length})</h2>
+      <ul class="space-y-2">
+        {
+          libraries.map((lib) => (
+            <li class="p-4 bg-white rounded-lg shadow-sm border border-slate-200">
+              <div class="font-medium text-lg">
+                {lib.data.meta.title.a} {lib.data.meta.title.b ? `(${lib.data.meta.title.b})` : ''}
+              </div>
+              <p class="text-sm text-slate-600 mt-1">{lib.data.meta.description}</p>
+              <div class="text-xs text-slate-400 mt-2">
+                收錄歌曲: {lib.data.songIds.join(', ')}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+  </body>
+</html>

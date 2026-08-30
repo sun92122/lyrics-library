@@ -1,0 +1,94 @@
+{
+  "id": "it-is-well",
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我心靈得安寧",
+      "b": "It Is Well with My Soul"
+    },
+    "originalKey": "C",
+    "bpm": 68,
+    "author": "Horatio Spafford / Philip Bliss (1873)",
+    "tags": ["平安", "傳統聖詩", "信心", "安慰"],
+    "assets": [
+      {
+        "type": "sheet",
+        "name": "五線譜 (PDF)",
+        "url": "/assets/sheets/it-is-well.pdf"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "type": "verse",
+      "index": 1,
+      "lines": [
+        {
+          "a": "平安如長江水，常常常環繞我，",
+          "b": "When peace like a river, attendeth my way,",
+          "chords": [
+            { "index": 0, "chord": "C" },
+            { "index": 3, "chord": "F" },
+            { "index": 6, "chord": "G" },
+            { "index": 9, "chord": "C" }
+          ]
+        },
+        {
+          "a": "悲傷如大波浪漫過身；",
+          "b": "When sorrows like sea billows roll;",
+          "chords": [
+            { "index": 0, "chord": "Am" },
+            { "index": 3, "chord": "D7" },
+            { "index": 6, "chord": "G" }
+          ]
+        },
+        {
+          "a": "無論何環境，祢已教我說：",
+          "b": "Whatever my lot, Thou hast taught me to say,",
+          "chords": [
+            { "index": 0, "chord": "C" },
+            { "index": 3, "chord": "F" },
+            { "index": 5, "chord": "D" },
+            { "index": 7, "chord": "G" }
+          ]
+        },
+        {
+          "a": "我心靈，得安寧，得安寧。",
+          "b": "It is well, it is well with my soul.",
+          "chords": [
+            { "index": 0, "chord": "C" },
+            { "index": 3, "chord": "F" },
+            { "index": 6, "chord": "G7" },
+            { "index": 9, "chord": "C" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "chorus",
+      "lines": [
+        {
+          "a": "我心靈，得安寧，",
+          "b": "It is well with my soul,",
+          "chords": [
+            { "index": 0, "chord": "C" },
+            { "index": 4, "chord": "G" }
+          ]
+        },
+        {
+          "a": "我心靈，得安寧，得安寧。",
+          "b": "It is well, it is well with my soul.",
+          "chords": [
+            { "index": 0, "chord": "F" },
+            { "index": 3, "chord": "C" },
+            { "index": 6, "chord": "G7" },
+            { "index": 9, "chord": "C" }
+          ]
+        }
+      ]
+    }
+  ]
+}

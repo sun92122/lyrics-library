@@ -1,0 +1,116 @@
+{
+  "id": "amazing-grace",
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "奇異恩典",
+      "b": "Amazing Grace"
+    },
+    "originalKey": "G",
+    "bpm": 72,
+    "author": "John Newton (1779)",
+    "tags": ["讚美", "傳統聖詩", "救恩", "恩典"],
+    "assets": [
+      {
+        "type": "ppt",
+        "name": "投影片 (PPTX)",
+        "url": "/assets/ppt/amazing-grace.pptx",
+        "size": "1.2 MB"
+      },
+      {
+        "type": "sheet",
+        "name": "簡譜 (PDF)",
+        "url": "/assets/sheets/amazing-grace.pdf"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "type": "verse",
+      "index": 1,
+      "lines": [
+        {
+          "a": "奇異恩典，何等甘甜，",
+          "b": "Amazing grace! How sweet the sound",
+          "chords": [
+            { "index": 0, "chord": "G" },
+            { "index": 4, "chord": "C" },
+            { "index": 6, "chord": "G" },
+            { "index": 10, "chord": "D7" }
+          ]
+        },
+        {
+          "a": "我罪已得赦免；",
+          "b": "That saved a wretch like me!",
+          "chords": [
+            { "index": 0, "chord": "G" },
+            { "index": 4, "chord": "Em" }
+          ]
+        },
+        {
+          "a": "前我失喪，今被尋回，",
+          "b": "I once was lost, but now am found,",
+          "chords": [
+            { "index": 0, "chord": "G" },
+            { "index": 4, "chord": "C" },
+            { "index": 6, "chord": "G" }
+          ]
+        },
+        {
+          "a": "瞎眼今得看見。",
+          "b": "Was blind, but now I see.",
+          "chords": [
+            { "index": 0, "chord": "Em" },
+            { "index": 2, "chord": "D" },
+            { "index": 4, "chord": "G" }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "verse",
+      "index": 2,
+      "lines": [
+        {
+          "a": "如此恩典，使我敬畏，",
+          "b": "'Twas grace that taught my heart to fear,",
+          "chords": [
+            { "index": 0, "chord": "G" },
+            { "index": 4, "chord": "C" },
+            { "index": 6, "chord": "G" },
+            { "index": 10, "chord": "D7" }
+          ]
+        },
+        {
+          "a": "使我心得安慰；",
+          "b": "And grace my fears relieved;",
+          "chords": [
+            { "index": 0, "chord": "G" },
+            { "index": 4, "chord": "Em" }
+          ]
+        },
+        {
+          "a": "初信之時，即蒙恩惠，",
+          "b": "How precious did that grace appear",
+          "chords": [
+            { "index": 0, "chord": "G" },
+            { "index": 4, "chord": "C" },
+            { "index": 6, "chord": "G" }
+          ]
+        },
+        {
+          "a": "何等何等寶貴。",
+          "b": "The hour I first believed.",
+          "chords": [
+            { "index": 0, "chord": "Em" },
+            { "index": 2, "chord": "D" },
+            { "index": 4, "chord": "G" }
+          ]
+        }
+      ]
+    }
+  ]
+}

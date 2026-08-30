@@ -1,0 +1,75 @@
+{
+  "id": "holy-holy-holy",
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "聖哉三一",
+      "b": "Holy, Holy, Holy"
+    },
+    "originalKey": "D",
+    "bpm": 84,
+    "author": "Reginald Heber / John B. Dykes (1826)",
+    "tags": ["敬拜", "傳統聖詩", "三一神", "頌讚"],
+    "assets": [
+      {
+        "type": "sheet",
+        "name": "四部合唱譜 (PDF)",
+        "url": "/assets/sheets/holy-holy-holy.pdf"
+      }
+    ]
+  },
+  "sections": [
+    {
+      "type": "verse",
+      "index": 1,
+      "lines": [
+        {
+          "a": "聖哉，聖哉，聖哉！全能大主宰！",
+          "b": "Holy, holy, holy! Lord God Almighty!",
+          "chords": [
+            { "index": 0, "chord": "D" },
+            { "index": 3, "chord": "Bm" },
+            { "index": 6, "chord": "A" },
+            { "index": 10, "chord": "D" },
+            { "index": 14, "chord": "A7" }
+          ]
+        },
+        {
+          "a": "清晨我眾歌聲，穿雲上達天庭；",
+          "b": "Early in the morning our song shall rise to Thee;",
+          "chords": [
+            { "index": 0, "chord": "D" },
+            { "index": 3, "chord": "Bm" },
+            { "index": 6, "chord": "A" },
+            { "index": 10, "chord": "E7" },
+            { "index": 14, "chord": "A" }
+          ]
+        },
+        {
+          "a": "聖哉，聖哉，聖哉！慈悲與全能！",
+          "b": "Holy, holy, holy! Merciful and mighty!",
+          "chords": [
+            { "index": 0, "chord": "D" },
+            { "index": 3, "chord": "Bm" },
+            { "index": 6, "chord": "A" },
+            { "index": 10, "chord": "Bm" },
+            { "index": 13, "chord": "G" }
+          ]
+        },
+        {
+          "a": "榮耀歸三一神，萬代受讚美。",
+          "b": "God in three Persons, blessed Trinity!",
+          "chords": [
+            { "index": 0, "chord": "D" },
+            { "index": 3, "chord": "G" },
+            { "index": 6, "chord": "A7" },
+            { "index": 10, "chord": "D" }
+          ]
+        }
+      ]
+    }
+  ]
+}
