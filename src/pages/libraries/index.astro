@@ -1,0 +1,89 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@/layouts/Layout.astro';
+import { BookOpen, Tag, ArrowRight, PlusCircle, Layers } from 'lucide-react';
+
+const libraries = await getCollection('libraries');
+---
+
+<Layout title="子歌曲庫總覽 - Lyrics Library" description="靜態子歌曲庫總覽，收錄各類主題詩歌選集與敬拜手冊">
+  <div class="space-y-8">
+    <!-- Header -->
+    <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+      <div class="space-y-1">
+        <div class="flex items-center gap-2">
+          <BookOpen className="w-6 h-6 text-indigo-600" />
+          <h1 class="text-3xl font-extrabold text-slate-900 tracking-tight">
+            靜態子歌曲庫
+          </h1>
+        </div>
+        <p class="text-sm text-slate-500">
+          適合長期維護的詩歌選集、詩歌本與主題歌庫，全站純靜態 SSG 預渲染
+        </p>
+      </div>
+
+      <a
+        href="/tools/library-builder"
+        class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold shadow-sm transition-all active:scale-95"
+      >
+        <PlusCircle className="w-4 h-4" />
+        <span>建立新歌庫</span>
+      </a>
+    </div>
+
+    <!-- Libraries Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {
+        libraries.map((lib) => (
+          <a
+            href={`/libraries/${lib.id}`}
+            class="group p-6 sm:p-7 bg-white rounded-3xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all flex flex-col justify-between space-y-6"
+          >
+            <div class="space-y-3">
+              <div class="flex items-start justify-between gap-3">
+                <div>
+                  <h2 class="text-xl font-bold text-slate-900 group-hover:text-indigo-600 transition-colors">
+                    {lib.data.meta.title.a}
+                  </h2>
+                  {lib.data.meta.title.b && (
+                    <span class="text-sm font-medium text-slate-400">
+                      {lib.data.meta.title.b}
+                    </span>
+                  )}
+                </div>
+
+                <span class="inline-flex items-center gap-1 px-3 py-1 rounded-xl bg-indigo-50 text-indigo-700 text-xs font-semibold">
+                  <Layers className="w-3.5 h-3.5" />
+                  <span>{lib.data.songIds.length} 首</span>
+                </span>
+              </div>
+
+              {lib.data.meta.description && (
+                <p class="text-sm text-slate-600 leading-relaxed">
+                  {lib.data.meta.description}
+                </p>
+              )}
+            </div>
+
+            <div class="space-y-3 pt-3 border-t border-slate-100">
+              <div class="flex flex-wrap gap-1.5">
+                {lib.data.meta.tags.map((tag) => (
+                  <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-600 text-xs font-medium">
+                    <Tag className="w-3 h-3 text-slate-400" />
+                    {tag}
+                  </span>
+                ))}
+              </div>
+
+              <div class="flex items-center justify-end text-xs font-semibold text-indigo-600 group-hover:translate-x-0.5 transition-transform">
+                <span class="flex items-center gap-1">
+                  進入歌庫瀏覽 <ArrowRight className="w-3.5 h-3.5" />
+                </span>
+              </div>
+            </div>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</Layout>
