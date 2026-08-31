@@ -29,10 +29,13 @@ const { title, description = '現代化靜態詩歌歌詞與敬拜管理平台' 
           <span>Lyrics Library</span>
         </a>
 
-        <nav class="flex items-center gap-4 text-sm font-medium text-slate-600">
+        <nav class="flex items-center gap-4 sm:gap-6 text-sm font-medium text-slate-600">
           <a href="/" class="hover:text-indigo-600 transition-colors">詩歌總覽</a>
           <a href="/libraries" class="hover:text-indigo-600 transition-colors">精選歌庫</a>
           <a href="/playlist" class="hover:text-indigo-600 transition-colors">活動歌單</a>
+          <div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
+          <a href="/tools/playlist-builder" class="hover:text-indigo-600 transition-colors hidden sm:inline-block">歌單產生器</a>
+          <a href="/tools/library-builder" class="hover:text-indigo-600 transition-colors hidden sm:inline-block">歌庫建構器</a>
         </nav>
       </div>
     </header>
