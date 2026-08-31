@@ -1,12 +1,12 @@
 ---
-import '../styles/global.css';
+import "../styles/global.css";
 
 export interface Props {
   title: string;
   description?: string;
 }
 
-const { title, description = '現代化靜態詩歌歌詞與敬拜管理平台' } = Astro.props;
+const { title, description = "現代化靜態詩歌歌詞與敬拜管理平台" } = Astro.props;
 ---
 
 <!doctype html>
@@ -18,38 +18,69 @@ const { title, description = '現代化靜態詩歌歌詞與敬拜管理平台' 
     <title>{title}</title>
     <meta name="description" content={description} />
   </head>
-  <body class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
+  <body
+    class="min-h-screen h-screen overflow-y-clip bg-slate-50 text-slate-900 flex flex-col font-sans"
+  >
     <!-- Navbar -->
-    <header class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80">
-      <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2 font-bold text-lg text-slate-900 hover:text-indigo-600 transition-colors">
-          <span class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-sm">
+    <header
+      class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80"
+    >
+      <div
+        class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between"
+      >
+        <a
+          href="/"
+          class="flex items-center gap-2 font-bold text-lg text-slate-900 hover:text-indigo-600 transition-colors"
+        >
+          <span
+            class="w-8 h-8 rounded-lg bg-indigo-600 text-white flex items-center justify-center font-black text-sm"
+          >
             ♫
           </span>
           <span>Lyrics Library</span>
         </a>
 
-        <nav class="flex items-center gap-4 sm:gap-6 text-sm font-medium text-slate-600">
-          <a href="/" class="hover:text-indigo-600 transition-colors">詩歌總覽</a>
-          <a href="/libraries" class="hover:text-indigo-600 transition-colors">精選歌庫</a>
-          <a href="/playlist" class="hover:text-indigo-600 transition-colors">活動歌單</a>
+        <nav
+          class="flex items-center gap-4 sm:gap-6 text-sm font-medium text-slate-600"
+        >
+          <a href="/" class="hover:text-indigo-600 transition-colors"
+            >詩歌總覽</a
+          >
+          <a href="/libraries" class="hover:text-indigo-600 transition-colors"
+            >瀏覽歌庫</a
+          >
           <div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
-          <a href="/tools/playlist-builder" class="hover:text-indigo-600 transition-colors hidden sm:inline-block">歌單產生器</a>
-          <a href="/tools/library-builder" class="hover:text-indigo-600 transition-colors hidden sm:inline-block">歌庫建構器</a>
+          <a
+            href="/tools/playlist-builder"
+            class="hover:text-indigo-600 transition-colors hidden sm:inline-block"
+            >產生歌單</a
+          >
+          <a
+            href="/tools/library-builder"
+            class="hover:text-indigo-600 transition-colors hidden sm:inline-block"
+            >建構歌庫</a
+          >
         </nav>
       </div>
     </header>
 
     <!-- Main Content -->
-    <main class="flex-1 max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
-      <slot />
-    </main>
-
-    <!-- Footer -->
-    <footer class="border-t border-slate-200 bg-white py-8 text-center text-xs text-slate-500">
-      <div class="max-w-6xl mx-auto px-4">
-        <p>Lyrics Library - 基於 Astro + TypeScript + Tailwind CSS 打造的現代化靜態詩歌與敬拜管理平台</p>
+    <main
+      class="flex-1 w-full h-full overflow-y-auto"
+      style="scrollbar-width: none; scrollbar-color: rgba(148,163,184,0.5) transparent;"
+    >
+      <div class="min-h-full max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
+        <slot />
       </div>
-    </footer>
+      
+      <!-- Footer -->
+      <footer
+        class="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500"
+      >
+        <div class="max-w-6xl mx-auto px-4">
+          <p>Lyrics Library - 歌詞資料版權歸原作者所有</p>
+        </div>
+      </footer>
+    </main>
   </body>
 </html>

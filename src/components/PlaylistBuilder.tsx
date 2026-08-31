@@ -1,13 +1,13 @@
-import React, { useState, useMemo, useEffect } from 'react';
-import type { SongData } from '@/content/config';
-import { CHROMATIC_SCALE } from '@/constants/keys';
+import React, { useState, useMemo, useEffect } from "react";
+import type { SongData } from "@/content/config";
+import { CHROMATIC_SCALE } from "@/constants/keys";
 import {
   encodePlaylist,
   decodePlaylist,
   formatPlaylistOutline,
   type PlaylistPayload,
   type PlaylistItem,
-} from '@/utils/playlistEncoder';
+} from "@/utils/playlistEncoder";
 import {
   Search,
   Plus,
@@ -21,43 +21,37 @@ import {
   Sparkles,
   Layers,
   FileText,
-} from 'lucide-react';
+} from "lucide-react";
 
 export interface PlaylistBuilderProps {
   availableSongs: SongData[];
 }
 
-const FLOW_PRESETS = ['V1', 'V2', 'V3', 'C', 'Bridge', 'Pre-C', 'Tag', 'Outro'];
+const FLOW_PRESETS = ["V1", "V2", "V3", "C", "Bridge", "Pre-C", "Tag", "Outro"];
 
-export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs }) => {
-  const [title, setTitle] = useState('主日敬拜');
+export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
+  availableSongs,
+}) => {
+  const [title, setTitle] = useState("主日敬拜");
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [items, setItems] = useState<PlaylistItem[]>([]);
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const [copiedLink, setCopiedLink] = useState(false);
   const [copiedOutline, setCopiedOutline] = useState(false);
-  const [origin, setOrigin] = useState('');
+  const [origin, setOrigin] = useState("");
 
   // Map song ID to song data
   const songMap = useMemo(() => {
     return new Map(availableSongs.map((s) => [s.id, s]));
   }, [availableSongs]);
 
-  // Extract all tags
-  const allTags = useMemo(() => {
-    const tags = new Set<string>();
-    availableSongs.forEach((s) => s.meta.tags.forEach((t) => tags.add(t)));
-    return Array.from(tags);
-  }, [availableSongs]);
-
   // Load from hash if present on client
   useEffect(() => {
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       setOrigin(window.location.origin);
-      if (window.location.hash.startsWith('#data=')) {
+      if (window.location.hash.startsWith("#data=")) {
         const encoded = window.location.hash.slice(6);
         const decoded = decodePlaylist(encoded);
         if (decoded) {
@@ -80,11 +74,9 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
         (song.meta.title.b && song.meta.title.b.toLowerCase().includes(q)) ||
         (song.meta.author && song.meta.author.toLowerCase().includes(q));
 
-      const matchesTag = !selectedTag || song.meta.tags.includes(selectedTag);
-
-      return matchesQuery && matchesTag;
+      return matchesQuery;
     });
-  }, [availableSongs, searchQuery, selectedTag]);
+  }, [availableSongs, searchQuery]);
 
   // Add song to playlist
   const addSong = (song: SongData) => {
@@ -92,7 +84,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
       id: song.id,
       k: song.meta.originalKey,
       flow: [],
-      note: '',
+      note: "",
     };
     setItems([...items, newItem]);
   };
@@ -103,8 +95,8 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
   };
 
   // Move item
-  const moveItem = (index: number, direction: 'up' | 'down') => {
-    const targetIndex = direction === 'up' ? index - 1 : index + 1;
+  const moveItem = (index: number, direction: "up" | "down") => {
+    const targetIndex = direction === "up" ? index - 1 : index + 1;
     if (targetIndex < 0 || targetIndex >= items.length) return;
     const nextItems = [...items];
     const temp = nextItems[index];
@@ -115,9 +107,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
 
   // Update item field
   const updateItem = (index: number, updates: Partial<PlaylistItem>) => {
-    setItems(
-      items.map((it, i) => (i === index ? { ...it, ...updates } : it))
-    );
+    setItems(items.map((it, i) => (i === index ? { ...it, ...updates } : it)));
   };
 
   // Toggle flow tag for an item
@@ -138,7 +128,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
   // Encode payload
   const encodedData = useMemo(() => {
     const payload: PlaylistPayload = {
-      t: title.trim() || '敬拜歌單',
+      t: title.trim() || "敬拜歌單",
       ...(date.trim() ? { d: date.trim() } : {}),
       s: items,
     };
@@ -153,15 +143,17 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(shareUrl);
       } else {
-        const textArea = document.createElement('textarea');
+        const textArea = document.createElement("textarea");
         textArea.value = shareUrl;
-        textArea.style.position = 'fixed';
-        textArea.style.opacity = '0';
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
         try {
-          (document as unknown as { execCommand: (cmd: string) => boolean }).execCommand('copy');
+          (
+            document as unknown as { execCommand: (cmd: string) => boolean }
+          ).execCommand("copy");
         } catch {
           // ignore
         }
@@ -170,13 +162,16 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
       setCopiedLink(true);
       setTimeout(() => setCopiedLink(false), 2000);
     } catch (err) {
-      console.error('Failed to copy: ', err);
+      console.error("Failed to copy: ", err);
     }
   };
 
   // Copy outline text
   const handleCopyOutline = async () => {
-    const outlineMap = new Map<string, { titleA: string; titleB?: string; originalKey?: string }>();
+    const outlineMap = new Map<
+      string,
+      { titleA: string; titleB?: string; originalKey?: string }
+    >();
     availableSongs.forEach((s) => {
       outlineMap.set(s.id, {
         titleA: s.meta.title.a,
@@ -187,22 +182,24 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
 
     const outline = formatPlaylistOutline(
       { t: title, d: date, s: items },
-      outlineMap
+      outlineMap,
     );
 
     try {
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(outline);
       } else {
-        const textArea = document.createElement('textarea');
+        const textArea = document.createElement("textarea");
         textArea.value = outline;
-        textArea.style.position = 'fixed';
-        textArea.style.opacity = '0';
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
         try {
-          (document as unknown as { execCommand: (cmd: string) => boolean }).execCommand('copy');
+          (
+            document as unknown as { execCommand: (cmd: string) => boolean }
+          ).execCommand("copy");
         } catch {
           // ignore
         }
@@ -211,36 +208,39 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
       setCopiedOutline(true);
       setTimeout(() => setCopiedOutline(false), 2000);
     } catch (err) {
-      console.error('Failed to copy outline: ', err);
+      console.error("Failed to copy outline: ", err);
     }
   };
 
   return (
     <div className="space-y-8">
       {/* Top Banner */}
-      <div className="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl flex flex-wrap items-center justify-between gap-6">
+      <div className="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl flex flex-wrap items-start justify-between gap-6">
         <div className="space-y-2 max-w-2xl">
           <div className="flex items-center gap-2 text-amber-400 font-semibold text-xs uppercase tracking-wider">
             <Sparkles className="w-4 h-4" />
-            <span>無狀態零後端活動工具</span>
+            <span>Playlist Builder</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
-            敬拜歌單產生器 (Playlist Builder)
+            產生敬拜歌單
           </h1>
           <p className="text-sm text-slate-300 leading-relaxed">
-            挑選詩歌、自訂個別調性、排定段落流程（如 V1 ➔ C ➔ V2 ➔ C ➔ Tag）與司琴備註，所有資料直接壓縮於分享網址中，無需註冊或資料庫即可隨發隨用！
+            挑選詩歌、自訂個別調性、排定段落流程（e.g., V1 ➔ C ➔ V2 ➔ C ➔
+            Tag）與司琴備註
+            <br />
+            所有資料直接壓縮於分享網址中，無需註冊或資料庫即可隨發隨用！
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3 pt-4">
           <button
             type="button"
             onClick={handleCopyOutline}
             disabled={items.length === 0}
             className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all shadow-sm ${
               copiedOutline
-                ? 'bg-emerald-600 text-white'
-                : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 disabled:opacity-40 active:scale-95'
+                ? "bg-emerald-600 text-white"
+                : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 disabled:opacity-40 active:scale-95"
             }`}
           >
             {copiedOutline ? (
@@ -262,8 +262,8 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
             disabled={items.length === 0}
             className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all shadow-md active:scale-95 ${
               copiedLink
-                ? 'bg-emerald-600 text-white'
-                : 'bg-indigo-600 hover:bg-indigo-500 text-white disabled:opacity-40'
+                ? "bg-emerald-600 text-white"
+                : "bg-indigo-600 hover:bg-indigo-500 text-white disabled:opacity-40"
             }`}
           >
             {copiedLink ? (
@@ -316,50 +316,34 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
             />
           </div>
 
-          {/* Tag filters */}
-          {allTags.length > 0 && (
-            <div className="flex flex-wrap gap-1.5">
-              <button
-                type="button"
-                onClick={() => setSelectedTag(null)}
-                className={`px-2.5 py-0.5 rounded-lg text-xs font-medium ${
-                  selectedTag === null
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                }`}
-              >
-                全部
-              </button>
-              {allTags.map((tag) => (
-                <button
-                  key={tag}
-                  type="button"
-                  onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
-                  className={`px-2.5 py-0.5 rounded-lg text-xs font-medium ${
-                    selectedTag === tag
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
-                  }`}
-                >
-                  {tag}
-                </button>
-              ))}
-            </div>
-          )}
-
           {/* Song list with Add button */}
-          <div className="space-y-2 max-h-[580px] overflow-y-auto pr-1">
+          <div
+            className="space-y-2 max-h-96 overflow-y-auto pr-1"
+            style={{
+              scrollbarWidth: "thin",
+              scrollbarColor: "rgba(148,163,184,0.5) transparent",
+            }}
+          >
             {filteredCatalog.map((song) => (
               <div
                 key={song.id}
                 className="flex items-center justify-between p-3 rounded-2xl border border-slate-200 hover:border-indigo-200 hover:bg-slate-50 transition-all group"
               >
                 <div className="space-y-0.5">
-                  <div className="font-semibold text-sm text-slate-900">
-                    {song.meta.title.a}
+                  <div className="flex flex-row gap-2 items-baseline">
+                    <div className="font-semibold text-sm text-slate-900">
+                      {song.meta.title.a}
+                    </div>
+                    <div className="text-xs text-slate-400">
+                      {song.meta.title.b || song.id}
+                    </div>
                   </div>
-                  <div className="text-xs text-slate-400">
-                    {song.meta.title.b || song.id}
+                  <div className="flex flex-row gap-2 items-baseline">
+                    {song.meta.author && (
+                      <div className="text-[11px] text-slate-400">
+                        {song.meta.author}
+                      </div>
+                    )}
                   </div>
                 </div>
 
@@ -369,15 +353,44 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
                       {song.meta.originalKey}
                     </span>
                   )}
+                  {song.meta.bpm && (
+                    <span className="font-mono text-xs px-2 py-0.5 bg-slate-100 rounded text-slate-600 font-semibold">
+                      {song.meta.bpm} BPM
+                    </span>
+                  )}
 
-                  <button
+                  {
+                    // if the song is already in the playlist, show a checkmark instead of "加入"
+                  }
+                  {/* <button
                     type="button"
                     onClick={() => addSong(song)}
                     className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-indigo-50 group-hover:bg-indigo-600 text-indigo-700 group-hover:text-white text-xs font-semibold transition-all active:scale-95 shadow-sm"
                   >
                     <Plus className="w-3.5 h-3.5" />
                     <span>加入</span>
-                  </button>
+                  </button> */}
+                  {items.some((it) => it.id === song.id) ? (
+                    <button
+                      type="button"
+                      onClick={() => addSong(song)}
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 text-xs font-semibold shadow-sm"
+                    >
+                      <Check className="group-hover:hidden w-3.5 h-3.5" />
+                      <span className="group-hover:hidden">已加入</span>
+                      <Plus className="hidden group-hover:flex w-3.5 h-3.5" />
+                      <span className="hidden group-hover:flex">再加</span>
+                    </button>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => addSong(song)}
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white text-xs font-semibold transition-all active:scale-95 shadow-sm"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>加入</span>
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
@@ -477,7 +490,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
                         <div className="flex items-center gap-1">
                           <button
                             type="button"
-                            onClick={() => moveItem(index, 'up')}
+                            onClick={() => moveItem(index, "up")}
                             disabled={index === 0}
                             className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200 disabled:opacity-30 transition-colors"
                             title="上移"
@@ -487,7 +500,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
 
                           <button
                             type="button"
-                            onClick={() => moveItem(index, 'down')}
+                            onClick={() => moveItem(index, "down")}
                             disabled={index === items.length - 1}
                             className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200 disabled:opacity-30 transition-colors"
                             title="下移"
@@ -514,13 +527,16 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
                             使用調性:
                           </label>
                           <select
-                            value={item.k || song?.meta.originalKey || 'C'}
-                            onChange={(e) => updateItem(index, { k: e.target.value })}
+                            value={item.k || song?.meta.originalKey || "C"}
+                            onChange={(e) =>
+                              updateItem(index, { k: e.target.value })
+                            }
                             className="px-2 py-1 bg-white border border-slate-300 rounded-lg text-xs font-bold font-mono text-amber-700 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                           >
                             {CHROMATIC_SCALE.map((k) => (
                               <option key={k} value={k}>
-                                {k} {song?.meta.originalKey === k ? '(原調)' : ''}
+                                {k}{" "}
+                                {song?.meta.originalKey === k ? "(原調)" : ""}
                               </option>
                             ))}
                           </select>
@@ -530,8 +546,10 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
                         <div className="sm:col-span-8">
                           <input
                             type="text"
-                            value={item.note || ''}
-                            onChange={(e) => updateItem(index, { note: e.target.value })}
+                            value={item.note || ""}
+                            onChange={(e) =>
+                              updateItem(index, { note: e.target.value })
+                            }
                             placeholder="備註（例: 開頭由鋼琴引導由弱漸強）..."
                             className="w-full px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500"
                           />
@@ -541,9 +559,13 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
                       {/* Flow Builder */}
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between text-xs">
-                          <span className="text-slate-500 font-medium">段落流程排程:</span>
+                          <span className="text-slate-500 font-medium">
+                            段落流程排程:
+                          </span>
                           <div className="flex items-center gap-1">
-                            <span className="text-[11px] text-slate-400">快速加入標籤：</span>
+                            <span className="text-[11px] text-slate-400">
+                              快速加入標籤：
+                            </span>
                             {FLOW_PRESETS.map((preset) => (
                               <button
                                 key={preset}
@@ -566,14 +588,18 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
                                   <span>{tag}</span>
                                   <button
                                     type="button"
-                                    onClick={() => removeFlowTagAt(index, tIndex)}
+                                    onClick={() =>
+                                      removeFlowTagAt(index, tIndex)
+                                    }
                                     className="hover:text-rose-600 transition-colors ml-0.5"
                                   >
                                     ×
                                   </button>
                                 </span>
                                 {tIndex < flow.length - 1 && (
-                                  <span className="text-slate-300 text-xs select-none">➔</span>
+                                  <span className="text-slate-300 text-xs select-none">
+                                    ➔
+                                  </span>
                                 )}
                               </React.Fragment>
                             ))}
@@ -590,7 +616,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({ availableSongs
               </div>
             ) : (
               <div className="p-8 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-slate-400 text-sm">
-                請由左側曲目庫點擊「加入」編排您的敬拜歌單
+                請由曲目庫點擊「加入」編排您的敬拜歌單
               </div>
             )}
           </div>

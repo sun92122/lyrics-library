@@ -1,12 +1,11 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
-import { SearchPanel } from '@/components/SearchPanel';
-import type { SearchDoc } from '@/pages/search-index.json';
-import { BookOpen, ArrowRight, Sparkles, SlidersHorizontal } from 'lucide-react';
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { SearchPanel } from "@/components/SearchPanel";
+import type { SearchDoc } from "@/pages/search-index.json";
+import { BookOpen, SlidersHorizontal } from "lucide-react";
 
-const songEntries = await getCollection('songs');
-const libraries = await getCollection('libraries');
+const songEntries = await getCollection("songs");
 
 // Prepare initial search docs for SSR
 const searchDocs: SearchDoc[] = songEntries.map((song) => {
@@ -23,31 +22,31 @@ const searchDocs: SearchDoc[] = songEntries.map((song) => {
   return {
     id: song.id,
     titleA: song.data.meta.title.a,
-    titleB: song.data.meta.title.b || '',
-    originalKey: song.data.meta.originalKey || '',
+    titleB: song.data.meta.title.b || "",
+    originalKey: song.data.meta.originalKey || "",
     bpm: song.data.meta.bpm,
     tags: song.data.meta.tags || [],
-    author: song.data.meta.author || '',
-    lyricsA: lyricsALines.join(' '),
-    lyricsB: lyricsBLines.join(' '),
+    author: song.data.meta.author || "",
+    lyricsA: lyricsALines.join(" "),
+    lyricsB: lyricsBLines.join(" "),
   };
 });
 ---
 
 <Layout title="Lyrics Library - 現代化靜態詩歌歌詞與敬拜管理平台">
-  <div class="space-y-14">
+  <div class="space-y-8">
     <!-- Hero Banner -->
     <div class="text-center py-10 sm:py-14 space-y-4">
-      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold border border-indigo-100/80 mb-2">
+      <!-- <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold border border-indigo-100/80 mb-2">
         <Sparkles className="w-3.5 h-3.5" />
         <span>純靜態 SSG ‧ 毫秒級全文檢索 ‧ 客戶端零後端</span>
-      </div>
+      </div> -->
       <h1 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight">
-        現代化靜態詩歌與敬拜庫
+        Worship Lyrics Library
       </h1>
-      <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
+      <!-- <p class="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
         精準字元和弦對齊、即時升降調、四態歌詞切換、無後端分享歌單與視覺化建構器
-      </p>
+      </p> -->
 
       <div class="flex flex-wrap items-center justify-center gap-3 pt-2">
         <a
@@ -55,14 +54,14 @@ const searchDocs: SearchDoc[] = songEntries.map((song) => {
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:text-indigo-600 hover:border-indigo-200 text-sm font-medium shadow-sm transition-all"
         >
           <BookOpen className="w-4 h-4 text-indigo-600" />
-          <span>瀏覽子歌曲庫</span>
+          <span>瀏覽歌曲庫</span>
         </a>
         <a
-          href="/tools/library-builder"
+          href="/tools/playlist-builder"
           class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-sm font-medium shadow-sm transition-all"
         >
           <SlidersHorizontal className="w-4 h-4 text-amber-400" />
-          <span>歌庫建構器</span>
+          <span>製作歌單</span>
         </a>
       </div>
     </div>
@@ -71,70 +70,5 @@ const searchDocs: SearchDoc[] = songEntries.map((song) => {
     <section>
       <SearchPanel client:load initialDocs={searchDocs} />
     </section>
-
-    <!-- Featured Static Libraries -->
-    {libraries.length > 0 && (
-      <section class="space-y-6 pt-6 border-t border-slate-200/80">
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-indigo-600" />
-            <h2 class="text-2xl font-bold text-slate-900">精選子歌曲庫</h2>
-          </div>
-
-          <a
-            href="/libraries"
-            class="text-sm font-semibold text-indigo-600 hover:text-indigo-800 flex items-center gap-1"
-          >
-            <span>查看全部歌庫</span>
-            <ArrowRight className="w-4 h-4" />
-          </a>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {libraries.map((lib) => (
-            <a
-              href={`/libraries/${lib.id}`}
-              class="group p-6 bg-white rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md hover:border-indigo-300 transition-all flex flex-col justify-between space-y-4"
-            >
-              <div class="space-y-2">
-                <div class="flex items-start justify-between gap-2">
-                  <h3 class="font-bold text-lg text-slate-900 group-hover:text-indigo-600 transition-colors">
-                    {lib.data.meta.title.a}
-                    {lib.data.meta.title.b && (
-                      <span class="text-sm font-normal text-slate-400 ml-2">
-                        ({lib.data.meta.title.b})
-                      </span>
-                    )}
-                  </h3>
-                  <span class="px-2.5 py-1 rounded-lg bg-indigo-50 text-indigo-700 text-xs font-semibold">
-                    {lib.data.songIds.length} 首曲目
-                  </span>
-                </div>
-
-                {lib.data.meta.description && (
-                  <p class="text-sm text-slate-600 leading-relaxed">
-                    {lib.data.meta.description}
-                  </p>
-                )}
-              </div>
-
-              <div class="flex items-center justify-between pt-3 border-t border-slate-100 text-xs text-slate-500">
-                <div class="flex flex-wrap gap-1">
-                  {lib.data.meta.tags.map((t) => (
-                    <span class="px-2 py-0.5 bg-slate-100 text-slate-600 rounded">
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <span class="flex items-center gap-1 font-medium text-indigo-600 group-hover:translate-x-0.5 transition-transform">
-                  瀏覽歌庫 <ArrowRight className="w-3 h-3" />
-                </span>
-              </div>
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
   </div>
 </Layout>

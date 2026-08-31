@@ -1,14 +1,14 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import MiniSearch from 'minisearch';
-import type { SearchDoc } from '@/pages/search-index.json';
-import { Search, X, Music, ArrowRight, Sparkles, Filter } from 'lucide-react';
+import React, { useState, useEffect, useMemo } from "react";
+import MiniSearch from "minisearch";
+import type { SearchDoc } from "@/pages/search-index.json";
+import { Search, X, Music, ArrowRight, Sparkles, Filter } from "lucide-react";
 
 export interface SearchPanelProps {
   initialDocs: SearchDoc[];
 }
 
 export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
-  const [query, setQuery] = useState('');
+  const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [docs, setDocs] = useState<SearchDoc[]>(initialDocs);
 
@@ -26,14 +26,18 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
   // Initialize MiniSearch instance with CJK-friendly tokenizer
   const miniSearch = useMemo(() => {
     const ms = new MiniSearch<SearchDoc>({
-      fields: ['titleA', 'titleB', 'lyricsA', 'lyricsB', 'author', 'tags'],
-      storeFields: ['id', 'titleA', 'titleB', 'originalKey', 'bpm', 'tags', 'author'],
+      fields: ["titleA", "titleB", "lyricsA", "lyricsB", "author", "tags"],
+      storeFields: [
+        "id",
+        "titleA",
+        "titleB",
+        "originalKey",
+        "bpm",
+        "tags",
+        "author",
+      ],
       tokenize: (text: string) => {
-        return (
-          text
-            .toLowerCase()
-            .match(/[\p{L}\p{N}]+|\p{Script=Han}/gu) || []
-        );
+        return text.toLowerCase().match(/[\p{L}\p{N}]+|\p{Script=Han}/gu) || [];
       },
       searchOptions: {
         prefix: true,
@@ -55,7 +59,7 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
 
   // Fetch updated search index if needed on client
   useEffect(() => {
-    fetch('/search-index.json')
+    fetch("/search-index.json")
       .then((res) => {
         if (res.ok) return res.json();
         return null;
@@ -91,7 +95,7 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
   }, [query, selectedTag, docs, miniSearch]);
 
   const clearFilters = () => {
-    setQuery('');
+    setQuery("");
     setSelectedTag(null);
   };
 
@@ -111,7 +115,7 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
           {query && (
             <button
               type="button"
-              onClick={() => setQuery('')}
+              onClick={() => setQuery("")}
               className="absolute right-4 p-1 rounded-lg text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors"
             >
               <X className="w-4 h-4" />
@@ -133,8 +137,8 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
             onClick={() => setSelectedTag(null)}
             className={`px-3 py-1 rounded-xl text-xs font-medium transition-all ${
               selectedTag === null
-                ? 'bg-indigo-600 text-white shadow-sm font-semibold'
-                : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                ? "bg-indigo-600 text-white shadow-sm font-semibold"
+                : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
             }`}
           >
             全部 ({docs.length})
@@ -149,14 +153,16 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
                 onClick={() => setSelectedTag(isSelected ? null : tag)}
                 className={`flex items-center gap-1.5 px-3 py-1 rounded-xl text-xs font-medium transition-all ${
                   isSelected
-                    ? 'bg-indigo-600 text-white shadow-sm font-semibold'
-                    : 'bg-white text-slate-600 border border-slate-200 hover:bg-slate-50'
+                    ? "bg-indigo-600 text-white shadow-sm font-semibold"
+                    : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
                 }`}
               >
                 <span>{tag}</span>
                 <span
                   className={`text-[10px] px-1.5 py-0.2 rounded-full ${
-                    isSelected ? 'bg-indigo-700 text-indigo-100' : 'bg-slate-100 text-slate-500'
+                    isSelected
+                      ? "bg-indigo-700 text-indigo-100"
+                      : "bg-slate-100 text-slate-500"
                   }`}
                 >
                   {count}
@@ -182,7 +188,9 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
         <div className="flex items-center gap-2">
           <Music className="w-5 h-5 text-indigo-600" />
           <h2 className="text-xl font-bold text-slate-900">
-            {query || selectedTag ? `搜尋結果 (${filteredResults.length})` : `詩歌庫總覽 (${filteredResults.length})`}
+            {query || selectedTag
+              ? `搜尋結果 (${filteredResults.length})`
+              : `詩歌庫總覽 (${filteredResults.length})`}
           </h2>
         </div>
       </div>
@@ -220,8 +228,8 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
                       key={tag}
                       className={`px-2 py-0.5 rounded-md text-xs font-medium ${
                         selectedTag === tag
-                          ? 'bg-indigo-100 text-indigo-800 font-semibold'
-                          : 'bg-slate-100 text-slate-600'
+                          ? "bg-indigo-100 text-indigo-800 font-semibold"
+                          : "bg-slate-100 text-slate-600"
                       }`}
                     >
                       {tag}
@@ -231,7 +239,18 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
               </div>
 
               <div className="flex items-center justify-between pt-4 mt-3 border-t border-slate-100 text-xs text-slate-500">
-                <span className="font-mono">原調: {song.originalKey || '—'}</span>
+                <div>
+                  {song.bpm && (
+                    <span className="font-mono bg-slate-100 px-2 py-0.5 rounded">
+                      {song.bpm} BPM
+                    </span>
+                  )}
+                  {song.originalKey && (
+                    <span className="ml-2 font-mono bg-slate-100 px-2 py-0.5 rounded">
+                      {song.originalKey} key
+                    </span>
+                  )}
+                </div>
                 <span className="flex items-center gap-1 font-medium text-indigo-600 group-hover:translate-x-0.5 transition-transform">
                   查看歌詞與和弦 <ArrowRight className="w-3 h-3" />
                 </span>
@@ -244,7 +263,9 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
           <div className="w-12 h-12 rounded-full bg-slate-100 text-slate-400 mx-auto flex items-center justify-center">
             <Search className="w-6 h-6" />
           </div>
-          <h3 className="text-lg font-semibold text-slate-700">找不到符合條件的詩歌</h3>
+          <h3 className="text-lg font-semibold text-slate-700">
+            找不到符合條件的詩歌
+          </h3>
           <p className="text-sm text-slate-500 max-w-sm mx-auto">
             請嘗試使用其他關鍵字、簡化搜尋字詞，或清除分類標籤過濾。
           </p>
