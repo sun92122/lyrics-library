@@ -1,25 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import type { SongData } from '@/content/config';
-import { KeyController } from './KeyController';
-import { LyricsViewer } from './LyricsViewer';
+import React, { useState, useEffect } from "react";
+import type { SongData } from "@/content/config";
+import { KeyController } from "./KeyController";
+import { LyricsViewer } from "./LyricsViewer";
 
 export interface SongViewContainerProps {
   song: SongData;
 }
 
-export const SongViewContainer: React.FC<SongViewContainerProps> = ({ song }) => {
-  const defaultKey = song.meta.originalKey || 'C';
+export const SongViewContainer: React.FC<SongViewContainerProps> = ({
+  song,
+}) => {
+  const defaultKey = song.meta.originalKey || "C";
   const [currentKey, setCurrentKey] = useState<string>(defaultKey);
+  const [currentFlow, setCurrentFlow] = useState<string[] | undefined>(
+    undefined,
+  );
+  const [currentHash, setCurrentHash] = useState("");
 
-  // Initialize key from URL parameter if present
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      const keyFromUrl = urlParams.get('key');
-      if (keyFromUrl) {
-        setCurrentKey(keyFromUrl);
+    const paramsHash = () => {
+      if (typeof window === "undefined") return;
+      const hash = window.location.hash;
+      setCurrentHash(decodeURIComponent(hash));
+
+      // #{key}---{flow}
+      const match = hash.match(/#([^---]+)(?:---(.+))?/);
+      if (match) {
+        const keyParam = match[1];
+        const flowParam = match[2] ?? undefined;
+
+        if (keyParam) {
+          setCurrentKey(keyParam);
+        }
+        if (flowParam) {
+          setCurrentFlow(flowParam.split(","));
+        }
       }
-    }
+    };
+
+    paramsHash();
+    window.addEventListener("hashchange", paramsHash);
+    return () => {
+      window.removeEventListener("hashchange", paramsHash);
+    };
   }, []);
 
   return (
@@ -36,7 +59,11 @@ export const SongViewContainer: React.FC<SongViewContainerProps> = ({ song }) =>
       </div>
 
       {/* Main Lyrics Display */}
-      <LyricsViewer song={song} currentKey={currentKey} />
+      <LyricsViewer
+        song={song}
+        currentKey={currentKey}
+        currentFlow={currentFlow}
+      />
     </div>
   );
 };

@@ -17,6 +17,7 @@ const { title, description = "現代化靜態詩歌歌詞與敬拜管理平台" 
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <meta name="robots" content="noindex" />
   </head>
   <body
     class="min-h-screen h-screen overflow-y-clip bg-slate-50 text-slate-900 flex flex-col font-sans"
@@ -72,7 +73,7 @@ const { title, description = "現代化靜態詩歌歌詞與敬拜管理平台" 
       <div class="min-h-full max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
         <slot />
       </div>
-      
+
       <!-- Footer -->
       <footer
         class="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500"

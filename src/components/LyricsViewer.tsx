@@ -19,12 +19,14 @@ import {
 export interface LyricsViewerProps {
   song: SongData;
   currentKey: string;
+  currentFlow?: string[];
   className?: string;
 }
 
 export const LyricsViewer: React.FC<LyricsViewerProps> = ({
   song,
   currentKey,
+  currentFlow,
   className = '',
 }) => {
   const [languageMode, setLanguageMode] = useState<LanguageMode>('a');
