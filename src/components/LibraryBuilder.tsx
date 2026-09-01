@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react';
-import type { SongData } from '@/content/config';
+import type { SongWithId } from '@/content/config';
 import {
   Search,
   Trash2,
@@ -17,7 +17,7 @@ import {
 } from 'lucide-react';
 
 export interface LibraryBuilderProps {
-  availableSongs: SongData[];
+  availableSongs: SongWithId[];
 }
 
 export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }) => {

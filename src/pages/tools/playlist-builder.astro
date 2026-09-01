@@ -5,7 +5,7 @@ import { PlaylistBuilder } from '@/components/PlaylistBuilder';
 import { ArrowLeft } from 'lucide-react';
 
 const songEntries = await getCollection('songs');
-const availableSongs = songEntries.map((entry) => entry.data);
+const availableSongs = songEntries.map((entry) => ({ id: entry.id, ...entry.data }));
 ---
 
 <Layout title="敬拜歌單產生器 - Lyrics Library" description="視覺化挑選曲目、配置個別調性與流程排程，即時產出無狀態分享網址">

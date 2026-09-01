@@ -17,7 +17,7 @@ export async function getStaticPaths() {
   const libraryEntries = await getCollection('libraries');
   const songEntries = await getCollection('songs');
 
-  const songMap = new Map(songEntries.map((s) => [s.id, s.data]));
+  const songMap = new Map(songEntries.map((s) => [s.id, { id: s.id, ...s.data }]));
 
   return libraryEntries.map((lib) => {
     // Resolve ordered songs

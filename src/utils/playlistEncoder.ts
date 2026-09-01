@@ -1,10 +1,11 @@
-import LZString from 'lz-string';
+import LZString from "lz-string";
 
 export interface PlaylistItem {
   id: string; // 歌曲 ID
   k?: string; // 自訂使用調性 (例: "A")
   flow?: string[]; // 段落自訂排程 (例: ["V1", "C", "V2", "C", "Tag"])
   note?: string; // 敬拜備註 (例: "開頭鋼琴引導由弱漸強")
+  customFlow?: string[]; // 額外自訂段落排程 (例: ["V1", "C", "V2", "C", "Tag"])
 }
 
 export interface PlaylistPayload {
@@ -35,7 +36,7 @@ export function decodePlaylist(encoded: string): PlaylistPayload | null {
     }
     return null;
   } catch (err) {
-    console.error('Failed to decode playlist:', err);
+    console.error("Failed to decode playlist:", err);
     return null;
   }
 }
@@ -45,14 +46,17 @@ export function decodePlaylist(encoded: string): PlaylistPayload | null {
  */
 export function formatPlaylistOutline(
   payload: PlaylistPayload,
-  songMap: Map<string, { titleA: string; titleB?: string; originalKey?: string }>
+  songMap: Map<
+    string,
+    { titleA: string; titleB?: string; originalKey?: string }
+  >,
 ): string {
   const lines: string[] = [];
-  lines.push(`🎵 敬拜歌單：${payload.t || '主日敬拜'}`);
+  lines.push(`🎵 敬拜歌單：${payload.t || "主日敬拜"}`);
   if (payload.d) {
     lines.push(`📅 日期：${payload.d}`);
   }
-  lines.push('────────────────────────');
+  lines.push("────────────────────────");
 
   payload.s.forEach((item, index) => {
     const song = songMap.get(item.id);
@@ -60,13 +64,13 @@ export function formatPlaylistOutline(
     const keyInfo = item.k
       ? `[調性: ${item.k}]`
       : song?.originalKey
-      ? `[原調: ${song.originalKey}]`
-      : '';
+        ? `[原調: ${song.originalKey}]`
+        : "";
 
     lines.push(`${index + 1}. ${title} ${keyInfo}`);
 
     if (item.flow && item.flow.length > 0) {
-      lines.push(`   ▸ 流程：${item.flow.join(' ➔ ')}`);
+      lines.push(`   ▸ 流程：${item.flow.join(" ➔ ")}`);
     }
 
     if (item.note) {
@@ -74,6 +78,6 @@ export function formatPlaylistOutline(
     }
   });
 
-  lines.push('────────────────────────');
-  return lines.join('\n').trim();
+  lines.push("────────────────────────");
+  return lines.join("\n").trim();
 }

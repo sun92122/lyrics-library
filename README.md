@@ -99,7 +99,7 @@ export interface LineItem {
 }
 
 export interface SongSchema {
-  id: string; // URL 唯一識別碼 (Slug)
+  // 歌曲 ID 自動使用檔案名稱（例：`amazing-grace.json` ➜ ID 為 `amazing-grace`）
   meta: {
     languages: {
       a: string; // 語言 A 名稱 (必填，預設: "中文")
@@ -133,7 +133,6 @@ JSON 範例（`amazing-grace.json`）：
 
 ```json
 {
-  "id": "amazing-grace",
   "meta": {
     "languages": { "a": "中文", "b": "English" },
     "title": { "a": "奇異恩典", "b": "Amazing Grace" },

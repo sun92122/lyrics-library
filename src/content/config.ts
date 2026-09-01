@@ -25,7 +25,6 @@ export const songAssetSchema = z.object({
 });
 
 export const songSchema = z.object({
-  id: z.string(),
   meta: z.object({
     languages: z.object({
       a: z.string().default('中文'),
@@ -74,4 +73,5 @@ export type LineItem = z.infer<typeof lineItemSchema>;
 export type SectionItem = z.infer<typeof sectionItemSchema>;
 export type SongAsset = z.infer<typeof songAssetSchema>;
 export type SongData = z.infer<typeof songSchema>;
+export type SongWithId = SongData & { id: string };
 export type LibraryData = z.infer<typeof librarySchema>;

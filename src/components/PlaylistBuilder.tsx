@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
-import type { SongData } from "@/content/config";
+import type { SongWithId } from "@/content/config";
 import { CHROMATIC_SCALE } from "@/constants/keys";
+import { FLOW_STYLE, FLOW_ALIASES } from "@/constants/flow";
 import {
   encodePlaylist,
   decodePlaylist,
@@ -24,10 +25,10 @@ import {
 } from "lucide-react";
 
 export interface PlaylistBuilderProps {
-  availableSongs: SongData[];
+  availableSongs: SongWithId[];
 }
 
-const FLOW_PRESETS = ["V1", "V2", "V3", "C", "Bridge", "Pre-C", "Tag", "Outro"];
+const FLOWS = ["前奏", "間奏", "自由敬拜", "禱告", "尾奏"];
 
 export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
   availableSongs,
@@ -79,12 +80,13 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
   }, [availableSongs, searchQuery]);
 
   // Add song to playlist
-  const addSong = (song: SongData) => {
+  const addSong = (song: SongWithId) => {
     const newItem: PlaylistItem = {
       id: song.id,
       k: song.meta.originalKey,
       flow: [],
       note: "",
+      customFlow: [],
     };
     setItems([...items, newItem]);
   };
@@ -116,6 +118,16 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
     const currentFlow = it.flow || [];
     const nextFlow = [...currentFlow, tag];
     updateItem(index, { flow: nextFlow });
+  };
+
+  // Add a custom flow tag for an item
+  const addCustomFlowTag = (index: number, tag: string) => {
+    const it = items[index];
+    const currentCustomFlow = it.customFlow || [];
+    if (!currentCustomFlow.includes(tag)) {
+      const nextCustomFlow = [...currentCustomFlow, tag];
+      updateItem(index, { customFlow: nextCustomFlow });
+    }
   };
 
   // Remove a specific flow tag instance
@@ -359,27 +371,16 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                     </span>
                   )}
 
-                  {
-                    // if the song is already in the playlist, show a checkmark instead of "加入"
-                  }
-                  {/* <button
-                    type="button"
-                    onClick={() => addSong(song)}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-indigo-50 group-hover:bg-indigo-600 text-indigo-700 group-hover:text-white text-xs font-semibold transition-all active:scale-95 shadow-sm"
-                  >
-                    <Plus className="w-3.5 h-3.5" />
-                    <span>加入</span>
-                  </button> */}
                   {items.some((it) => it.id === song.id) ? (
                     <button
                       type="button"
                       onClick={() => addSong(song)}
-                      className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-emerald-50 text-emerald-700 text-xs font-semibold shadow-sm"
+                      className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-emerald-50 hover:bg-emerald-600 text-emerald-700 hover:text-white text-xs font-semibold transition-all active:scale-95 shadow-sm group"
                     >
                       <Check className="group-hover:hidden w-3.5 h-3.5" />
-                      <span className="group-hover:hidden">已加入</span>
-                      <Plus className="hidden group-hover:flex w-3.5 h-3.5" />
-                      <span className="hidden group-hover:flex">再加</span>
+                      <span className="group-hover:hidden w-9">已加入</span>
+                      <Plus className="hidden group-hover:block w-3.5 h-3.5" />
+                      <span className="hidden group-hover:block w-9">再加</span>
                     </button>
                   ) : (
                     <button
@@ -388,7 +389,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                       className="flex items-center gap-1 px-3 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-600 text-indigo-700 hover:text-white text-xs font-semibold transition-all active:scale-95 shadow-sm"
                     >
                       <Plus className="w-3.5 h-3.5" />
-                      <span>加入</span>
+                      <span className="w-9">加入</span>
                     </button>
                   )}
                 </div>
@@ -462,6 +463,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                 {items.map((item, index) => {
                   const song = songMap.get(item.id);
                   const flow = item.flow || [];
+                  const customFlowTags = item.customFlow || [];
 
                   return (
                     <div
@@ -524,19 +526,19 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                         {/* Key select */}
                         <div className="sm:col-span-4 flex items-center gap-2">
                           <label className="text-xs font-medium text-slate-500 whitespace-nowrap">
-                            使用調性:
+                            Key:
                           </label>
                           <select
-                            value={item.k || song?.meta.originalKey || "C"}
+                            value={item.k || song?.meta.originalKey || "-"}
                             onChange={(e) =>
                               updateItem(index, { k: e.target.value })
                             }
                             className="px-2 py-1 bg-white border border-slate-300 rounded-lg text-xs font-bold font-mono text-amber-700 focus:outline-none focus:ring-1 focus:ring-indigo-500"
                           >
+                            <option value="-">-</option>
                             {CHROMATIC_SCALE.map((k) => (
                               <option key={k} value={k}>
-                                {k}{" "}
-                                {song?.meta.originalKey === k ? "(原調)" : ""}
+                                {k} {song?.meta.originalKey === k ? "(原)" : ""}
                               </option>
                             ))}
                           </select>
@@ -560,22 +562,67 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                       <div className="space-y-1.5">
                         <div className="flex items-center justify-between text-xs">
                           <span className="text-slate-500 font-medium">
-                            段落流程排程:
+                            歌序
                           </span>
-                          <div className="flex items-center gap-1">
-                            <span className="text-[11px] text-slate-400">
-                              快速加入標籤：
-                            </span>
-                            {FLOW_PRESETS.map((preset) => (
+                          <span className="text-[11px] text-slate-400 ml-auto mr-1">
+                            段落：
+                          </span>
+                          <div className="flex flex-wrap max-w-[80%] w-full items-center gap-1">
+                            {song?.sections.map((preset) => (
+                              <button
+                                key={preset.type}
+                                type="button"
+                                onClick={() =>
+                                  toggleFlowTag(index, preset.type)
+                                }
+                                className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
+                              >
+                                {preset.type}
+                              </button>
+                            ))}
+                            {/* gap */}
+                            <div className="flex-initial flex-shrink-0 w-px h-3 bg-slate-200 mx-1"></div>
+                            {FLOWS.map((preset) => (
                               <button
                                 key={preset}
                                 type="button"
                                 onClick={() => toggleFlowTag(index, preset)}
-                                className="px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
+                                className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
                               >
-                                +{preset}
+                                {preset}
                               </button>
                             ))}
+                            {/* custom tags input */}
+                            {customFlowTags.map((tag) => (
+                              <button
+                                key={tag}
+                                type="button"
+                                onClick={() => toggleFlowTag(index, tag)}
+                                className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
+                              >
+                                {tag}
+                              </button>
+                            ))}
+                            <input
+                              type="text"
+                              placeholder="other..."
+                              onKeyDown={(e) => {
+                                if (
+                                  e.key === "Enter" &&
+                                  e.currentTarget.value
+                                ) {
+                                  const newTag = e.currentTarget.value.trim();
+                                  if (
+                                    newTag &&
+                                    !customFlowTags.includes(newTag)
+                                  ) {
+                                    addCustomFlowTag(index, newTag);
+                                  }
+                                  e.currentTarget.value = "";
+                                }
+                              }}
+                              className="flex-shrink-0 w-[6ic] px-1.5 py-0.5 rounded bg-white border border-slate-200 text-[10px] text-slate-600 focus:outline-none focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500"
+                            />
                           </div>
                         </div>
 
@@ -584,7 +631,22 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                           <div className="flex flex-wrap items-center gap-1.5 p-2 bg-white rounded-xl border border-slate-200/80 min-h-[36px]">
                             {flow.map((tag, tIndex) => (
                               <React.Fragment key={tIndex}>
-                                <span className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100">
+                                <span
+                                  className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
+                                  style={{
+                                    backgroundColor:
+                                      ((FLOW_STYLE[
+                                        (FLOW_ALIASES[tag] ||
+                                          tag) as keyof typeof FLOW_STYLE
+                                      ] ?? FLOW_STYLE["default"]) as string) +
+                                      "22",
+                                    color:
+                                      FLOW_STYLE[
+                                        (FLOW_ALIASES[tag] ||
+                                          tag) as keyof typeof FLOW_STYLE
+                                      ] ?? FLOW_STYLE["default"],
+                                  }}
+                                >
                                   <span>{tag}</span>
                                   <button
                                     type="button"
