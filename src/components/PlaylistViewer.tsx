@@ -1,6 +1,13 @@
 import React, { useState, useEffect, useMemo } from "react";
 import type { SongWithId } from "@/content/config";
-import { FLOW_STYLE, FLOW_ALIASES } from "@/constants/flow";
+import {
+  FLOW_STYLE,
+  FLOW_ALIASES,
+  FLOW_NAMES,
+  EX_FLOWS,
+  getFlowName,
+  type FlowMapping,
+} from "@/constants/flow";
 import { getSemitoneOffset } from "@/utils/transposer";
 import {
   decodePlaylist,
@@ -261,8 +268,11 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
           const originalKey = song?.meta.originalKey || customKey;
           const semitoneOffset = getSemitoneOffset(originalKey, customKey);
           const flow = item.flow || [];
+          const customFlow = item.customFlow || [];
 
-          const songUrl = `/songs/${item.id}?playlist=${encodeURIComponent(currentHash.slice(6))}#${encodeURIComponent(customKey)}---${encodeURIComponent(flow.join(","))}`;
+          const songUrl =
+            `/songs/${item.id}?playlist=${encodeURIComponent(currentHash.slice(6))}` +
+            `#${encodeURIComponent(customKey)}---${flow.join(",")}---${encodeURIComponent(customFlow.join(","))}`;
 
           return (
             <div
@@ -327,33 +337,52 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                   <div className="text-xs font-semibold text-slate-500">
                     歌序：
                   </div>
-                  <div className="flex flex-wrap items-center gap-1">
-                    {flow.map((tag, tIndex) => (
-                      <React.Fragment key={tIndex}>
-                        <span
-                          className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-100/80"
-                          style={{
-                            backgroundColor:
-                              ((FLOW_STYLE[
-                                (FLOW_ALIASES[tag] ||
-                                  tag) as keyof typeof FLOW_STYLE
-                              ] ?? FLOW_STYLE["default"]) as string) + "22",
-                            color:
-                              FLOW_STYLE[
-                                (FLOW_ALIASES[tag] ||
-                                  tag) as keyof typeof FLOW_STYLE
-                              ] ?? FLOW_STYLE["default"],
-                          }}
+                  <div className="!mt-0 inline-block items-center">
+                    {flow.map((tagId, tIndex) => {
+                      const tag =
+                        tagId < (song?.sections.length || 0)
+                          ? song!.sections[tagId].type
+                          : tagId <
+                              (song?.sections.length || 0) + EX_FLOWS.length
+                            ? EX_FLOWS[tagId - (song?.sections.length || 0)]
+                            : (customFlow?.[
+                                tagId -
+                                  (song?.sections.length || 0) -
+                                  EX_FLOWS.length
+                              ] ?? "?");
+
+                      return (
+                        <div
+                          className="mt-1 inline-block text-wrap items-center"
+                          key={tIndex}
                         >
-                          {tag}
-                        </span>
-                        {tIndex < flow.length - 1 && (
-                          <span className="text-slate-300 text-xs select-none">
-                            ➔
+                          <span
+                            className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-100/80"
+                            style={{
+                              backgroundColor:
+                                (FLOW_STYLE[tag as keyof FlowMapping] ??
+                                  FLOW_STYLE["default"]) + "22",
+                              color:
+                                FLOW_STYLE[tag as keyof FlowMapping] ??
+                                FLOW_STYLE["default"],
+                              borderColor:
+                                (FLOW_STYLE[tag as keyof FlowMapping] ??
+                                  FLOW_STYLE["default"]) + "44",
+                            }}
+                          >
+                            {getFlowName(tag)}
                           </span>
-                        )}
-                      </React.Fragment>
-                    ))}
+                          {tIndex < flow.length - 1 && (
+                            <>
+                              <span style={{ fontSize: 0 }}> </span>
+                              <span className="text-slate-300 text-xs select-none mx-1">
+                                ➔
+                              </span>
+                            </>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               )}

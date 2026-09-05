@@ -1,4 +1,4 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
 export const chordItemSchema = z.object({
   index: z.number().int().min(0),
@@ -12,13 +12,14 @@ export const lineItemSchema = z.object({
 });
 
 export const sectionItemSchema = z.object({
-  type: z.enum(['verse', 'chorus', 'bridge', 'pre-chorus', 'tag', 'outro']),
+  // type: z.enum(['verse', 'chorus', 'bridge', 'pre-chorus', 'tag', 'outro']),
+  type: z.string(),
   index: z.number().optional(),
   lines: z.array(lineItemSchema),
 });
 
 export const songAssetSchema = z.object({
-  type: z.enum(['sheet', 'ppt', 'audio', 'external']),
+  type: z.enum(["sheet", "ppt", "audio", "external"]),
   name: z.string(),
   url: z.string(),
   size: z.string().optional(),
@@ -27,19 +28,21 @@ export const songAssetSchema = z.object({
 export const songSchema = z.object({
   meta: z.object({
     languages: z.object({
-      a: z.string().default('中文'),
+      a: z.string().default("中文"),
       b: z.string().optional(),
     }),
     title: z.object({
       a: z.string(),
       b: z.string().optional(),
     }),
+    note: z.string().optional(),
     originalKey: z.string().optional(),
     bpm: z.number().optional(),
     author: z.string().optional(),
     ccli: z.string().optional(),
     tags: z.array(z.string()).default([]),
     assets: z.array(songAssetSchema).optional(),
+    arrangement: z.array(z.number()).optional(),
   }),
   sections: z.array(sectionItemSchema),
 });
@@ -59,11 +62,11 @@ export const librarySchema = z.object({
 
 export const collections = {
   songs: defineCollection({
-    type: 'data',
+    type: "data",
     schema: songSchema,
   }),
   libraries: defineCollection({
-    type: 'data',
+    type: "data",
     schema: librarySchema,
   }),
 };

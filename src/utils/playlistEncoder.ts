@@ -3,7 +3,7 @@ import LZString from "lz-string";
 export interface PlaylistItem {
   id: string; // 歌曲 ID
   k?: string; // 自訂使用調性 (例: "A")
-  flow?: string[]; // 段落自訂排程 (例: ["V1", "C", "V2", "C", "Tag"])
+  flow?: number[]; // 段落自訂排程 (例: [0, 1, 2, 1, 3] 對應到 sections 的索引)
   note?: string; // 敬拜備註 (例: "開頭鋼琴引導由弱漸強")
   customFlow?: string[]; // 額外自訂段落排程 (例: ["V1", "C", "V2", "C", "Tag"])
 }

@@ -12,6 +12,7 @@
     "bpm": 72,
     "author": "John Newton (1779)",
     "tags": ["讚美", "傳統聖詩", "救恩", "恩典"],
+    "arrangement": [0, 1, 0, 1],
     "assets": [
       {
         "type": "ppt",
@@ -28,7 +29,7 @@
   },
   "sections": [
     {
-      "type": "verse",
+      "type": "$V",
       "index": 1,
       "lines": [
         {
@@ -70,7 +71,7 @@
       ]
     },
     {
-      "type": "verse",
+      "type": "$V",
       "index": 2,
       "lines": [
         {

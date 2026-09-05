@@ -1,7 +1,13 @@
 import React, { useState, useMemo, useEffect } from "react";
 import type { SongWithId } from "@/content/config";
 import { CHROMATIC_SCALE } from "@/constants/keys";
-import { FLOW_STYLE, FLOW_ALIASES } from "@/constants/flow";
+import {
+  FLOW_STYLE,
+  FLOW_ALIASES,
+  EX_FLOWS,
+  getFlowName,
+  type FlowMapping,
+} from "@/constants/flow";
 import {
   encodePlaylist,
   decodePlaylist,
@@ -27,8 +33,6 @@ import {
 export interface PlaylistBuilderProps {
   availableSongs: SongWithId[];
 }
-
-const FLOWS = ["前奏", "間奏", "自由敬拜", "禱告", "尾奏"];
 
 export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
   availableSongs,
@@ -113,7 +117,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
   };
 
   // Toggle flow tag for an item
-  const toggleFlowTag = (index: number, tag: string) => {
+  const toggleFlowTag = (index: number, tag: number) => {
     const it = items[index];
     const currentFlow = it.flow || [];
     const nextFlow = [...currentFlow, tag];
@@ -568,36 +572,58 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                             段落：
                           </span>
                           <div className="flex flex-wrap max-w-[80%] w-full items-center gap-1">
-                            {song?.sections.map((preset) => (
-                              <button
-                                key={preset.type}
-                                type="button"
-                                onClick={() =>
-                                  toggleFlowTag(index, preset.type)
-                                }
-                                className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
-                              >
-                                {preset.type}
-                              </button>
-                            ))}
+                            {song?.sections.map((preset, presetIndex) => {
+                              const tag = getFlowName(preset.type);
+                              const tagIndex = presetIndex;
+                              return (
+                                <button
+                                  key={`tag-${tagIndex}`}
+                                  type="button"
+                                  onClick={() =>
+                                    toggleFlowTag(index, presetIndex)
+                                  }
+                                  className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
+                                >
+                                  {tag}
+                                </button>
+                              );
+                            })}
                             {/* gap */}
                             <div className="flex-initial flex-shrink-0 w-px h-3 bg-slate-200 mx-1"></div>
-                            {FLOWS.map((preset) => (
-                              <button
-                                key={preset}
-                                type="button"
-                                onClick={() => toggleFlowTag(index, preset)}
-                                className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
-                              >
-                                {preset}
-                              </button>
-                            ))}
+                            {EX_FLOWS.map((preset, presetIndex) => {
+                              const tag = getFlowName(preset);
+                              const tagIndex =
+                                presetIndex + (song?.sections.length || 0);
+                              return (
+                                <button
+                                  key={`tag-${tagIndex}`}
+                                  type="button"
+                                  onClick={() =>
+                                    toggleFlowTag(
+                                      index,
+                                      presetIndex +
+                                        (song?.sections.length || 0),
+                                    )
+                                  }
+                                  className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
+                                >
+                                  {tag}
+                                </button>
+                              );
+                            })}
                             {/* custom tags input */}
-                            {customFlowTags.map((tag) => (
+                            {customFlowTags.map((tag, tagIndex) => (
                               <button
-                                key={tag}
+                                key={`custom-tag-${tagIndex}`}
                                 type="button"
-                                onClick={() => toggleFlowTag(index, tag)}
+                                onClick={() =>
+                                  toggleFlowTag(
+                                    index,
+                                    tagIndex +
+                                      (song?.sections.length || 0) +
+                                      EX_FLOWS.length,
+                                  )
+                                }
                                 className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
                               >
                                 {tag}
@@ -628,44 +654,79 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
 
                         {/* Flow badges sequence */}
                         {flow.length > 0 ? (
-                          <div className="flex flex-wrap items-center gap-1.5 p-2 bg-white rounded-xl border border-slate-200/80 min-h-[36px]">
-                            {flow.map((tag, tIndex) => (
-                              <React.Fragment key={tIndex}>
-                                <span
-                                  className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
-                                  style={{
-                                    backgroundColor:
-                                      ((FLOW_STYLE[
-                                        (FLOW_ALIASES[tag] ||
-                                          tag) as keyof typeof FLOW_STYLE
-                                      ] ?? FLOW_STYLE["default"]) as string) +
-                                      "22",
-                                    color:
-                                      FLOW_STYLE[
-                                        (FLOW_ALIASES[tag] ||
-                                          tag) as keyof typeof FLOW_STYLE
-                                      ] ?? FLOW_STYLE["default"],
-                                  }}
-                                >
-                                  <span>{tag}</span>
-                                  <button
-                                    type="button"
-                                    onClick={() =>
-                                      removeFlowTagAt(index, tIndex)
-                                    }
-                                    className="hover:text-rose-600 transition-colors ml-0.5"
+                          <>
+                            <div className="w-full inline-block items-center !mt-1 px-2 pt-1 pb-2 bg-white rounded-xl border border-slate-200/80 min-h-[36px]">
+                              {flow.map((tagIndex, tIndex) => {
+                                const tag =
+                                  tagIndex < (song?.sections.length || 0)
+                                    ? song!.sections[tagIndex].type
+                                    : tagIndex <
+                                        (song?.sections.length || 0) +
+                                          EX_FLOWS.length
+                                      ? EX_FLOWS[
+                                          tagIndex -
+                                            (song?.sections.length || 0)
+                                        ]
+                                      : customFlowTags[
+                                          tagIndex -
+                                            (song?.sections.length || 0) -
+                                            EX_FLOWS.length
+                                        ] || "?";
+                                return (
+                                  <div
+                                    className="mt-1 inline-block text-wrap items-center"
+                                    key={tIndex}
                                   >
-                                    ×
-                                  </button>
-                                </span>
-                                {tIndex < flow.length - 1 && (
-                                  <span className="text-slate-300 text-xs select-none">
-                                    ➔
-                                  </span>
-                                )}
-                              </React.Fragment>
-                            ))}
-                          </div>
+                                    <span
+                                      className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
+                                      style={{
+                                        backgroundColor:
+                                          (FLOW_STYLE[
+                                            tag as keyof FlowMapping
+                                          ] ?? FLOW_STYLE["default"]) + "22",
+                                        color:
+                                          FLOW_STYLE[
+                                            tag as keyof FlowMapping
+                                          ] ?? FLOW_STYLE["default"],
+                                        borderColor:
+                                          (FLOW_STYLE[
+                                            tag as keyof FlowMapping
+                                          ] ?? FLOW_STYLE["default"]) + "44",
+                                      }}
+                                    >
+                                      {getFlowName(tag)}
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          removeFlowTagAt(index, tIndex)
+                                        }
+                                        className="hover:text-rose-600 transition-colors ml-0.5 select-none"
+                                      >
+                                        ×
+                                      </button>
+                                    </span>
+                                    {tIndex < flow.length - 1 && (
+                                      <>
+                                        <span style={{ fontSize: 0 }}> </span>
+                                        <span className="text-slate-300 text-xs select-none mx-1">
+                                          ➔
+                                        </span>
+                                      </>
+                                    )}
+                                  </div>
+                                );
+                              })}
+                            </div>
+                            <div className="w-full flex justify-end">
+                              <button
+                                type="button"
+                                onClick={() => updateItem(index, { flow: [] })}
+                                className="text-[11px] text-rose-600 hover:text-rose-800 font-medium select-none transition-colors"
+                              >
+                                清除歌序
+                              </button>
+                            </div>
+                          </>
                         ) : (
                           <div className="text-[11px] text-slate-400 italic">
                             尚未設定流程（點選上方標籤即可依序加入流程）
