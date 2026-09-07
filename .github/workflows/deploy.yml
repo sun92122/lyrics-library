@@ -18,6 +18,8 @@ concurrency:
 jobs:
   validate-and-build:
     runs-on: ubuntu-latest
+    env:
+      NODE_OPTIONS: --max-old-space-size=8192
     steps:
       - name: Checkout Code
         uses: actions/checkout@v5
