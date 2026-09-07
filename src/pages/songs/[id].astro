@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import { SongViewContainer } from "@/components/SongViewContainer";
+import { LyricsModal } from "@/components/LyricsModal";
 import {
   FileText,
   FileSpreadsheet,
@@ -195,6 +196,9 @@ const getAssetIcon = (type: string) => {
 
     <!-- Core Interactive Lyrics & Key Controller Island -->
     <SongViewContainer song={song} client:load />
+
+    <!-- Modal Preview -->
+    <LyricsModal client:only song={song} />
 
     <!-- Downloadable Assets & Resources -->
     {

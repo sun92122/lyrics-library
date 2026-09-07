@@ -1,6 +1,6 @@
 import type { SongData, LineItem } from "@/content/config";
 
-import ProFileProcessor from "propresenter-js";
+import ProFileProcessor, { generateUUID } from "propresenter-js";
 import {
   type ProFormat,
   type Arrangement,
@@ -9,28 +9,110 @@ import {
   type UUID,
 } from "propresenter-js";
 
-import { EXPORT_TEMPLATE_DEFAULT } from "@/constants/setting";
+import {
+  EXPORT_TEMPLATE_DEFAULT,
+  type slideElementOptions,
+} from "@/constants/setting";
 import { FLOW_NAMES, FLOW_ALIASES } from "@/constants/flow";
 
-function generateUUID(): UUID {
-  return crypto.randomUUID() as UUID;
-}
+// import iconv from "iconv-lite";
 
-interface slideElementOptions {
-  name: string;
-  x?: number;
-  y?: number;
-  width?: number;
-  height?: number;
-  align?: "center" | "left" | "right";
-  justify?: "center" | "left" | "right";
-  fontSize?: number;
-  fontFamily?: string;
-  fontWeight?: "normal" | "bold";
-  color?: string;
-  strokeColor?: string;
-  strokeWidth?: number;
-  hidden?: boolean;
+/**
+ * 檢查字元是否能被 CP950 正確編碼
+ */
+// function isInCp950(char: string): boolean {
+//   const buf = iconv.encode(char, "cp950");
+//   // 若字元不在 CP950 內，iconv-lite 預設會替換為 '?' (0x3F)
+//   // 透過解碼比對，若不相等則代表遺失/不在編碼表中
+//   return iconv.decode(buf, "cp950") === char;
+// }
+
+/**
+ * 將文字轉為相容 CP950 的 RTF 內容，缺字自動轉為 Unicode (\uN?)
+ */
+// function stringToRtfWithUnicode(str: string): string {
+//   let result = "";
+
+//   // 使用 for...of 按 Unicode Code Point 迭代，確保 Emoji 等代理對字元不被切斷
+//   for (const char of str) {
+//     // 1. RTF 保留字元跳脫
+//     if (char === "\\" || char === "{" || char === "}") {
+//       result += `\\${char}`;
+//       continue;
+//     }
+
+//     // 2. 基本 ASCII 可見字元與空格直接輸出
+//     const codePoint = char.codePointAt(0)!;
+//     if (codePoint >= 32 && codePoint <= 126) {
+//       result += char;
+//       continue;
+//     }
+
+//     // 3. 換行符號處理（可選）
+//     if (char === "\n") {
+//       result += "\\par\n";
+//       continue;
+//     }
+
+//     // 4. 判斷是否屬於 CP950
+//     if (isInCp950(char)) {
+//       const buf = iconv.encode(char, "cp950");
+//       for (const byte of buf) {
+//         result += `\\\'${byte.toString(16).padStart(2, "0")}`;
+//       }
+//     } else {
+//       // 5. 不在 CP950 內，轉為 Unicode (\uN?)
+//       // char.length 可能為 1 (BMP 字元) 或 2 (Surrogate Pair)
+//       for (let i = 0; i < char.length; i++) {
+//         const codeUnit = char.charCodeAt(i);
+//         // 轉為 16-bit 有號整數 (-32768 ~ 32767)
+//         const signedCode = codeUnit > 32767 ? codeUnit - 65536 : codeUnit;
+//         // 接上 '?' 作為 \uc1 的替代字元
+//         result += `\\u${signedCode}?`;
+//       }
+//     }
+//   }
+
+//   return result;
+// }
+
+export function escapeRtfUnicode(text: string): string {
+  let result = "";
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    const code = text.charCodeAt(i);
+
+    // 1. 特殊字元跳脫
+    if (char === "\\") {
+      result += "\\\\";
+    } else if (char === "{") {
+      result += "\\{";
+    } else if (char === "}") {
+      result += "\\}";
+    } else if (char === "\n") {
+      result += "\\par\n";
+    } else if (char === "\r") {
+      // 若為 Windows CRLF，跳過 \r，由接續的 \n 處理
+      if (text[i + 1] !== "\n") {
+        result += "\\par\n";
+      }
+    } else if (char === "\t") {
+      result += "\\tab ";
+    } else if (code >= 32 && code <= 126) {
+      // 2. 標準可見 ASCII
+      result += char;
+    } else {
+      // 3. Unicode 字元處理 (含中文與 Emoji Surrogate Pair)
+      // RTF 規範規定 N 必須為 16 位元有號整數 (-32768 ~ 32767)
+      const signedCode = code > 32767 ? code - 65536 : code;
+
+      // \uc1 表示該 unicode 控制字後跟隨 1 個 ANSI 備援字元（通常放 '?'）
+      result += `\\u${signedCode}?`;
+    }
+  }
+
+  return result;
 }
 
 export interface ProOptions {
@@ -39,7 +121,14 @@ export interface ProOptions {
   includeDefaultArrangement?: boolean;
   includeTitleSlide?: boolean;
   addBlankSlideBeforeTitle?: boolean;
+  addBlankSlideAfterTitle?: boolean;
+  addBlankSlideDuringIntro?: boolean;
+  addBlankSlideDuringInterlude?: boolean;
+  addBlankSlideDuringWorship?: boolean;
+  addBlankSlideDuringPrayer?: boolean;
+  addBlankSlideAfterEnding?: boolean;
   includeLanguage2?: boolean;
+  includeAuthor?: boolean;
   flowMapping?: string; // name of flow mapping, default is "Magical"
 
   // template for export, if not provided, use default template
@@ -54,36 +143,120 @@ export interface ProOptions {
 
 export type { ProFormat };
 
+function textToRtf(text: string, format: slideElementOptions): Uint8Array {
+  const color = {
+    r: format.color ? parseInt(format.color.slice(1, 3), 16) : 255,
+    g: format.color ? parseInt(format.color.slice(3, 5), 16) : 255,
+    b: format.color ? parseInt(format.color.slice(5, 7), 16) : 255,
+  };
+  const q = ["\\ql", "\\qc", "\\qr"][format.horizontalAlign ?? 1];
+  // {\\rtf1\\ansi\\ansicpg950\\cocoartf2870
+  // \\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset134 PingFangSC-Regular;\\f1\\fnil\\fcharset0 HelveticaNeue;}
+  // {\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}
+  // {\\*\\expandedcolortbl;;\\cssrgb\\c100000\\c100000\\c100000;}
+  // \\deftab1680
+  // \\pard\\pardeftab1680\\pardirnatural\\qc\\partightenfactor0
+  //
+  // \f0\\fs84 \\cf2 \\CocoaLigature0 \\'c6\\'e6\\'ae\\'90\\'b6\\'f7\\'b5\\'e4
+  // \\f1  / Amazing Grace}
+  const rtfHeader = `{\\rtf1\\ansi\\ansicpg950\\cocoartf2870
+\\cocoatextscaling0\\cocoaplatform0{\\fonttbl\\f0\\fnil\\fcharset136 HelveticaNeue;}
+{\\colortbl;\\red255\\green255\\blue255;\\red${color.r}\\green${color.g}\\blue${color.b};}
+{\\*\\expandedcolortbl;;\\cssrgb\\c100000\\c100000\\c100000;}
+\\deftab1680
+\\pard\\pardeftab1680\\pardirnatural${q}\\partightenfactor0
+
+\\f0\\fs${format.fontSize ? format.fontSize * 2 : 96} \\cf2 \\CocoaLigature0 `;
+  const rtfFooter = " }";
+
+  // text -> unicode escape -> RTF
+  const encodedText = escapeRtfUnicode(text);
+
+  return new TextEncoder().encode(rtfHeader + encodedText + rtfFooter);
+}
+
 function getProFormatSlideElements(
   line: LineItem,
   options: ProOptions,
   title3: string | null = null,
 ): Element[] {
+  const options_template_language1 =
+    options?.template?.language1 ?? EXPORT_TEMPLATE_DEFAULT.language1;
+  const options_template_language2 =
+    options?.template?.language2 ?? EXPORT_TEMPLATE_DEFAULT.language2;
+  const options_template_title1 =
+    options?.template?.title1 ?? EXPORT_TEMPLATE_DEFAULT.title1;
+  const options_template_title2 =
+    options?.template?.title2 ?? EXPORT_TEMPLATE_DEFAULT.title2;
+  const options_template_title3 =
+    options?.template?.title3 ?? EXPORT_TEMPLATE_DEFAULT.title3;
+
   if (!line) return [];
   const elements: Element[] = [];
   if (title3 !== null) {
     elements.push({
       name: "Title1",
-      textRtf: new TextEncoder().encode(line.a || ""),
+      textRtf: textToRtf(line.a || "", options_template_title1),
+      align: options_template_title1?.verticalAlign ?? 1,
+      bounds: {
+        x: options_template_title1?.x ?? 0,
+        y: options_template_title1?.y ?? 0,
+        width: options_template_title1?.width ?? 1920,
+        height: options_template_title1?.height ?? 1080,
+      },
     });
-    elements.push({
-      name: "Title2",
-      textRtf: new TextEncoder().encode(line.b || ""),
-    });
-    elements.push({
-      name: "Title3",
-      textRtf: new TextEncoder().encode(title3),
-    });
+    if (options.includeLanguage2 ?? true) {
+      elements.push({
+        name: "Title2",
+        textRtf: textToRtf(line.b || "", options_template_title2),
+        align: options_template_title2?.verticalAlign ?? 1,
+        bounds: {
+          x: options_template_title2?.x ?? 0,
+          y: options_template_title2?.y ?? 0,
+          width: options_template_title2?.width ?? 1920,
+          height: options_template_title2?.height ?? 1080,
+        },
+      });
+    }
+    if (options.includeAuthor ?? true) {
+      elements.push({
+        name: "Title3",
+        textRtf: textToRtf(title3, options_template_title3),
+        align: options_template_title3?.verticalAlign ?? 1,
+        bounds: {
+          x: options_template_title3?.x ?? 0,
+          y: options_template_title3?.y ?? 0,
+          width: options_template_title3?.width ?? 1920,
+          height: options_template_title3?.height ?? 1080,
+        },
+      });
+    }
   } else {
     // normal slide, use language1 and language2 template
     elements.push({
-      name: "Language1",
-      textRtf: new TextEncoder().encode(line.a || ""),
+      name: "Lang1",
+      textRtf: textToRtf(line.a || "", options_template_language1),
+      align: options_template_language1?.verticalAlign ?? 1,
+      bounds: {
+        x: options_template_language1?.x ?? 0,
+        y: options_template_language1?.y ?? 0,
+        width: options_template_language1?.width ?? 1920,
+        height: options_template_language1?.height ?? 1080,
+      },
     });
-    elements.push({
-      name: "Language2",
-      textRtf: new TextEncoder().encode(line.b || ""),
-    });
+    if (options.includeLanguage2 ?? true) {
+      elements.push({
+        name: "Lang2",
+        textRtf: textToRtf(line.b || "", options_template_language2),
+        align: options_template_language2?.verticalAlign ?? 1,
+        bounds: {
+          x: options_template_language2?.x ?? 0,
+          y: options_template_language2?.y ?? 0,
+          width: options_template_language2?.width ?? 1920,
+          height: options_template_language2?.height ?? 1080,
+        },
+      });
+    }
   }
   return elements;
 }
@@ -101,24 +274,25 @@ export function getProFormat(
   const options_includeTitleSlide = options.includeTitleSlide ?? true;
   const options_addBlankSlideBeforeTitle =
     options.addBlankSlideBeforeTitle ?? true;
-  const options_includeLanguage2 = options.includeLanguage2 ?? true;
+  const options_addBlankSlideAfterTitle =
+    options.addBlankSlideAfterTitle ?? true;
+  const options_addBlankSlideDuringIntro =
+    options.addBlankSlideDuringIntro ?? false;
+  const options_addBlankSlideDuringInterlude =
+    options.addBlankSlideDuringInterlude ?? true;
+  const options_addBlankSlideDuringWorship =
+    options.addBlankSlideDuringWorship ?? true;
+  const options_addBlankSlideDuringPrayer =
+    options.addBlankSlideDuringPrayer ?? true;
+  const options_addBlankSlideAfterEnding =
+    options.addBlankSlideAfterEnding ?? true;
   const options_flowMapping = options.flowMapping ?? "Magical";
-  const options_template_language1 =
-    options.template?.language1 ?? EXPORT_TEMPLATE_DEFAULT.language1;
-  const options_template_language2 =
-    options.template?.language2 ?? EXPORT_TEMPLATE_DEFAULT.language2;
-  const options_template_title1 =
-    options.template?.title1 ?? EXPORT_TEMPLATE_DEFAULT.title1;
-  const options_template_title2 =
-    options.template?.title2 ?? EXPORT_TEMPLATE_DEFAULT.title2;
-  const options_template_title3 =
-    options.template?.title3 ?? EXPORT_TEMPLATE_DEFAULT.title3;
 
   // Implementation for formatting song data into ProPresenter format
   const flowMap = FLOW_NAMES[options_flowMapping] || FLOW_NAMES["Magical"];
 
   // get all slides from song.sections, and format them into ProFormat slides
-  let selectedArrangement: Arrangement | null = null; // Placeholder for current arrangement logic
+  let selectedArrangement: UUID | null = null; // Placeholder for current arrangement logic
   const arrangements: Arrangement[] = [];
   const groupKV = new Map();
   const groups: Group[] = [];
@@ -156,6 +330,19 @@ export function getProFormat(
       slideUuids: [tempuuid],
     });
   }
+  if (options_addBlankSlideAfterTitle) {
+    const tempuuid = generateUUID();
+    slides.push({
+      uuid: tempuuid,
+      elements: [],
+    });
+    groupKV.set("blank_after_title", generateUUID());
+    groups.push({
+      uuid: groupKV.get("blank_after_title"),
+      name: "Blank",
+      slideUuids: [tempuuid],
+    });
+  }
 
   let currentSectionIndex = 0;
   for (const section of song.sections) {
@@ -186,12 +373,82 @@ export function getProFormat(
     currentSectionIndex++;
   }
 
+  if (options_addBlankSlideDuringIntro) {
+    const tempuuid = generateUUID();
+    slides.push({
+      uuid: tempuuid,
+      elements: [],
+      label: "前奏 Intro",
+    });
+    groupKV.set(currentSectionIndex, generateUUID());
+    groups.push({
+      uuid: groupKV.get(currentSectionIndex),
+      name: "Blank",
+      slideUuids: [tempuuid],
+    });
+  }
+  currentSectionIndex++;
+  if (options_addBlankSlideDuringInterlude) {
+    const tempuuid = generateUUID();
+    slides.push({
+      uuid: tempuuid,
+      elements: [],
+      label: "間奏 Interlude",
+    });
+    groupKV.set(currentSectionIndex, generateUUID());
+    groups.push({
+      uuid: groupKV.get(currentSectionIndex),
+      name: "Blank",
+      slideUuids: [tempuuid],
+    });
+  }
+  currentSectionIndex++;
+  if (options_addBlankSlideDuringWorship) {
+    const tempuuid = generateUUID();
+    slides.push({
+      uuid: tempuuid,
+      elements: [],
+      label: "自由敬拜 Worship",
+    });
+    groupKV.set(currentSectionIndex, generateUUID());
+    groups.push({
+      uuid: groupKV.get(currentSectionIndex),
+      name: "Blank",
+      slideUuids: [tempuuid],
+    });
+  }
+  currentSectionIndex++;
+  if (options_addBlankSlideDuringPrayer) {
+    const tempuuid = generateUUID();
+    slides.push({
+      uuid: tempuuid,
+      elements: [],
+      label: "禱告 Prayer",
+    });
+    groupKV.set(currentSectionIndex, generateUUID());
+    groups.push({
+      uuid: groupKV.get(currentSectionIndex),
+      name: "Blank",
+      slideUuids: [tempuuid],
+    });
+  }
+
+  if (options_addBlankSlideAfterEnding) {
+    const tempuuid = generateUUID();
+    slides.push({
+      uuid: tempuuid,
+      elements: [],
+    });
+    groupKV.set("blank_after_ending", generateUUID());
+    groups.push({
+      uuid: groupKV.get("blank_after_ending"),
+      name: "Blank",
+      slideUuids: [tempuuid],
+    });
+  }
+
   // set arrangement
-  if (
-    options_includeDefaultArrangement &&
-    song.meta.arrangement &&
-    song.meta.arrangement.length > 0
-  ) {
+  if (options_includeDefaultArrangement && song.meta?.arrangement) {
     const arrangementUuid = generateUUID();
     const arrangementGroupUuids: string[] = [];
     if (options_addBlankSlideBeforeTitle) {
@@ -212,7 +469,7 @@ export function getProFormat(
       groupUuids: arrangementGroupUuids as UUID[],
     });
   }
-  if (options_includeCurrentArrangement) {
+  if (options_includeCurrentArrangement && flow) {
     const arrangementUuid = generateUUID();
     const arrangementGroupUuids: string[] = [];
     if (flow && flow.length > 0) {
@@ -234,7 +491,7 @@ export function getProFormat(
       name: `Current`,
       groupUuids: arrangementGroupUuids as UUID[],
     });
-    selectedArrangement = arrangements[arrangements.length - 1];
+    selectedArrangement = arrangementUuid;
   }
 
   return {

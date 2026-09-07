@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import type { SongData, LineItem } from "@/content/config";
 import {
   FLOW_STYLE,
@@ -15,7 +15,7 @@ import {
 } from "@/utils/lyricsFormatter";
 import { Copy, Check, LayoutList, AlignLeft } from "lucide-react";
 import { KeyController } from "./KeyController";
-import { LyricsModal } from "./LyricsModal";
+import { proPresenterExportModalOpen } from "@/stores/settings";
 
 export interface LyricsViewerProps {
   song: SongData;
@@ -40,8 +40,6 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
   const [layoutMode, setLayoutMode] = useState<LayoutMode>("segmented");
   const [showChords, setShowChords] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-  // const [isModalOpen, setIsModalOpen] = useState<boolean>(true); // for testing
 
   const semitoneOffset = useMemo(() => {
     return getSemitoneOffset(song.meta.originalKey || "C", currentKey);
@@ -183,18 +181,13 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
 
               {/* Propresenter modal */}
               <button
+                id="pro-presenter-export-modal-button"
                 type="button"
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => proPresenterExportModalOpen.set(true)}
                 className={`flex items-center px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm ${"bg-amber-500 hover:bg-amber-600 text-amber-100 active:scale-95"}`}
               >
                 <span>ProPresenter</span>
               </button>
-              <LyricsModal
-                song={song}
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                flow={currentFlow}
-              />
             </div>
           </div>
         </div>

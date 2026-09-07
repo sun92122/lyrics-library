@@ -3,6 +3,7 @@ import type { SongData } from "@/content/config";
 import { EX_FLOWS, getFlowName } from "@/constants/flow";
 import { KeyController } from "./KeyController";
 import { LyricsViewer } from "./LyricsViewer";
+import { flow } from "@/stores/settings";
 
 export interface SongViewContainerProps {
   song: SongData;
@@ -39,14 +40,14 @@ export const SongViewContainer: React.FC<SongViewContainerProps> = ({
           setCustomFlow(customFlowParam.split(","));
         }
         if (flowParam) {
-          setCurrentFlow(
-            flowParam
-              .split(",")
-              .map((tag) => {
-                return parseInt(tag, 10);
-              })
-              .filter((tag) => !isNaN(tag)),
-          );
+          const flowArray = flowParam
+            .split(",")
+            .map((tag) => {
+              return parseInt(tag, 10);
+            })
+            .filter((tag) => !isNaN(tag));
+          setCurrentFlow(flowArray.length > 0 ? flowArray : undefined);
+          flow.set(flowArray.length > 0 ? flowArray : undefined);
         }
       }
     };

@@ -7,3 +7,15 @@
     @apply bg-slate-50 text-slate-900 antialiased selection:bg-indigo-100 selection:text-indigo-900 min-h-screen;
   }
 }
+
+.slide-preview {
+  zoom: calc(calc(100vw - 6rem) / 1920px);
+  @media (min-width: 768px) {
+    zoom: calc(16rem / 1920px);
+  }
+}
+
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}

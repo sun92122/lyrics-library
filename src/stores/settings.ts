@@ -1,4 +1,5 @@
 import { persistentAtom } from "@nanostores/persistent";
+import { atom } from "nanostores";
 import LZString from "lz-string";
 
 import {
@@ -42,3 +43,6 @@ export const songExportTemplate = persistentAtom(
     },
   },
 );
+
+export const proPresenterExportModalOpen = atom(false);
+export const flow = atom<number[] | undefined>(undefined);
