@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import type { SongData } from "@/content/config";
-import { EX_FLOWS, getFlowName } from "@/constants/flow";
-import { KeyController } from "./KeyController";
 import { LyricsViewer } from "./LyricsViewer";
 import { flow } from "@/stores/settings";
 
@@ -12,8 +10,8 @@ export interface SongViewContainerProps {
 export const SongViewContainer: React.FC<SongViewContainerProps> = ({
   song,
 }) => {
-  const defaultKey = song.meta.originalKey || "C";
-  const [currentKey, setCurrentKey] = useState<string>(defaultKey);
+  const defaultKey = song.meta.originalKey;
+  const [currentKey, setCurrentKey] = useState<string | undefined>(defaultKey);
   const [currentFlow, setCurrentFlow] = useState<number[] | undefined>(
     undefined,
   );

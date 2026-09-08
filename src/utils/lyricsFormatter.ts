@@ -38,7 +38,7 @@ export function formatLyricsText(
     const sectionLines: string[] = [];
 
     if (layoutMode === "segmented") {
-      const header = `[${getFlowName(section.type)}]`;
+      const header = `[${getFlowName(section.name)}]`;
       sectionLines.push(header);
     }
 

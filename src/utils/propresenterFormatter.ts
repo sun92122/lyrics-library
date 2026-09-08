@@ -358,13 +358,13 @@ export function getProFormat(
       });
     }
     const groupName =
-      section.type in flowMap
-        ? flowMap[section.type as keyof typeof flowMap]
-        : section.type in FLOW_ALIASES
+      section.name in flowMap
+        ? flowMap[section.name as keyof typeof flowMap]
+        : section.name in FLOW_ALIASES
           ? flowMap[
-              (FLOW_ALIASES[section.type] || "default") as keyof typeof flowMap
+              (FLOW_ALIASES[section.name] || "default") as keyof typeof flowMap
             ]
-          : section.type;
+          : section.name;
     groups.push({
       uuid: sectionUuid,
       name: groupName,
@@ -457,17 +457,24 @@ export function getProFormat(
     if (options_includeTitleSlide) {
       arrangementGroupUuids.push(groupKV.get("title"));
     }
+    if (options_addBlankSlideAfterTitle) {
+      arrangementGroupUuids.push(groupKV.get("blank_after_title"));
+    }
     for (const arrangementIndex of song.meta.arrangement) {
       const groupUuid = groupKV.get(arrangementIndex);
       if (groupUuid) {
         arrangementGroupUuids.push(groupUuid);
       }
     }
+    if (options_addBlankSlideAfterEnding) {
+      arrangementGroupUuids.push(groupKV.get("blank_after_ending"));
+    }
     arrangements.push({
       uuid: arrangementUuid,
       name: `Default`,
       groupUuids: arrangementGroupUuids as UUID[],
     });
+    selectedArrangement = arrangementUuid;
   }
   if (options_includeCurrentArrangement && flow) {
     const arrangementUuid = generateUUID();
@@ -479,11 +486,17 @@ export function getProFormat(
       if (options_includeTitleSlide) {
         arrangementGroupUuids.push(groupKV.get("title"));
       }
+      if (options_addBlankSlideAfterTitle) {
+        arrangementGroupUuids.push(groupKV.get("blank_after_title"));
+      }
       for (const flowIndex of flow) {
         const groupUuid = groupKV.get(flowIndex);
         if (groupUuid) {
           arrangementGroupUuids.push(groupUuid);
         }
+      }
+      if (options_addBlankSlideAfterEnding) {
+        arrangementGroupUuids.push(groupKV.get("blank_after_ending"));
       }
     }
     arrangements.push({

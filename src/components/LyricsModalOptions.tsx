@@ -55,7 +55,7 @@ export const LyricsModalOptions: React.FC<LyricsModalOptionsProps> = ({
           <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
         </Checkbox>
         <Label>
-          包含當前編曲
+          包含當前編曲<span className="text-xs text-gray-400">（如果有）</span>
           <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
             Include the current arrangement.
           </span>
@@ -73,7 +73,7 @@ export const LyricsModalOptions: React.FC<LyricsModalOptionsProps> = ({
         </Checkbox>
         {/* <Label>Include Default Arrangement</Label> */}
         <Label>
-          包含預設編曲
+          包含預設編曲<span className="text-xs text-gray-400">（如果有）</span>
           <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
             Include the default arrangement.
           </span>
@@ -94,42 +94,59 @@ export const LyricsModalOptions: React.FC<LyricsModalOptionsProps> = ({
           </span>
         </Label>
       </Field>
-      <Field className="flex items-start gap-2 cursor-pointer">
-        <Checkbox
-          checked={options.addBlankSlideBeforeTitle ?? true}
-          onChange={(value) =>
-            handleOptionChange("addBlankSlideBeforeTitle", value)
-          }
-          className={checkboxClassName}
-        >
-          <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
-        </Checkbox>
-        <Label>
-          在標題前添加空白幻燈片
-          <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
-            Add a blank slide before the title.
-          </span>
-        </Label>
-      </Field>
-      <Field className="flex items-start gap-2 cursor-pointer">
-        <Checkbox
-          checked={options.addBlankSlideAfterTitle ?? true}
-          onChange={(value) =>
-            handleOptionChange("addBlankSlideAfterTitle", value)
-          }
-          className={checkboxClassName}
-        >
-          <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
-        </Checkbox>
-        <Label>
-          在標題後添加空白幻燈片
-          <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
-            Add a blank slide after the title.
-          </span>
-        </Label>
-      </Field>
       <p className="text-sm text-gray-400">添加空白幻燈片的選項</p>
       <div className="flex flex-col gap-3 pl-4">
+        <Field className="flex items-start gap-2 cursor-pointer">
+          <Checkbox
+            checked={options.addBlankSlideBeforeTitle ?? true}
+            onChange={(value) =>
+              handleOptionChange("addBlankSlideBeforeTitle", value)
+            }
+            className={checkboxClassName}
+          >
+            <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+          </Checkbox>
+          <Label>
+            在標題前添加空白幻燈片
+            <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+              Add a blank slide before the title.
+            </span>
+          </Label>
+        </Field>
+        <Field className="flex items-start gap-2 cursor-pointer">
+          <Checkbox
+            checked={options.addBlankSlideAfterTitle ?? true}
+            onChange={(value) =>
+              handleOptionChange("addBlankSlideAfterTitle", value)
+            }
+            className={checkboxClassName}
+          >
+            <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+          </Checkbox>
+          <Label>
+            在標題後添加空白幻燈片
+            <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+              Add a blank slide after the title.
+            </span>
+          </Label>
+        </Field>
+        <Field className="flex items-start gap-2 cursor-pointer">
+          <Checkbox
+            checked={options.addBlankSlideAfterEnding ?? true}
+            onChange={(value) =>
+              handleOptionChange("addBlankSlideAfterEnding", value)
+            }
+            className={checkboxClassName}
+          >
+            <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+          </Checkbox>
+          <Label>
+            在結尾後添加空白幻燈片
+            <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+              Add a blank slide after the ending.
+            </span>
+          </Label>
+        </Field>
         <Field className="flex items-start gap-2 cursor-pointer">
           <Checkbox
             checked={options.addBlankSlideDuringIntro ?? false}
@@ -208,7 +225,7 @@ export const LyricsModalOptions: React.FC<LyricsModalOptionsProps> = ({
           <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
         </Checkbox>
         <Label>
-          包含次要語言
+          包含次要語言<span className="text-xs text-gray-400">（如果有）</span>
           <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
             Include Language 2.
           </span>

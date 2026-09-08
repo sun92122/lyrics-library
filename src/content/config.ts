@@ -12,14 +12,12 @@ export const lineItemSchema = z.object({
 });
 
 export const sectionItemSchema = z.object({
-  // type: z.enum(['verse', 'chorus', 'bridge', 'pre-chorus', 'tag', 'outro']),
-  type: z.string(),
-  index: z.number().optional(),
+  name: z.string(),
   lines: z.array(lineItemSchema),
 });
 
 export const songAssetSchema = z.object({
-  type: z.enum(["sheet", "ppt", "audio", "external"]),
+  type: z.enum(["pdf", "video", "audio", "slide", "youtube", "other"]),
   name: z.string(),
   url: z.string(),
   size: z.string().optional(),

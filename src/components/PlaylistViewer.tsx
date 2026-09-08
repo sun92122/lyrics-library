@@ -341,7 +341,7 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                     {flow.map((tagId, tIndex) => {
                       const tag =
                         tagId < (song?.sections.length || 0)
-                          ? song!.sections[tagId].type
+                          ? song!.sections[tagId].name
                           : tagId <
                               (song?.sections.length || 0) + EX_FLOWS.length
                             ? EX_FLOWS[tagId - (song?.sections.length || 0)]

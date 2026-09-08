@@ -573,7 +573,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                           </span>
                           <div className="flex flex-wrap max-w-[80%] w-full items-center gap-1">
                             {song?.sections.map((preset, presetIndex) => {
-                              const tag = getFlowName(preset.type);
+                              const tag = getFlowName(preset.name);
                               const tagIndex = presetIndex;
                               return (
                                 <button
@@ -659,7 +659,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                               {flow.map((tagIndex, tIndex) => {
                                 const tag =
                                   tagIndex < (song?.sections.length || 0)
-                                    ? song!.sections[tagIndex].type
+                                    ? song!.sections[tagIndex].name
                                     : tagIndex <
                                         (song?.sections.length || 0) +
                                           EX_FLOWS.length

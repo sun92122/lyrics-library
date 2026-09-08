@@ -6,12 +6,13 @@ import { LyricsModal } from "@/components/LyricsModal";
 import {
   FileText,
   FileSpreadsheet,
+  SquarePlay,
   Music,
   ExternalLink,
   Download,
   ArrowLeft,
   Tag,
-  Clock,
+  Metronome,
   User,
   Hash,
 } from "lucide-react";
@@ -32,16 +33,25 @@ const pageTitle = `${song.meta.title.a}${song.meta.title.b ? ` (${song.meta.titl
 // Helper to determine asset icon
 const getAssetIcon = (type: string) => {
   switch (type) {
-    case "sheet":
+    case "pdf":
       return FileText;
-    case "ppt":
-      return FileSpreadsheet;
+    case "video":
+      return SquarePlay;
     case "audio":
       return Music;
-    case "external":
+    case "slide":
+      return FileSpreadsheet;
+    case "youtube":
+      return SquarePlay;
     default:
       return ExternalLink;
   }
+};
+
+const getYoutubeEmbedUrl = (url: string) => {
+  const urlObj = new URL(url);
+  const videoId = urlObj.searchParams.get("v");
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
 };
 ---
 
@@ -136,7 +146,9 @@ const getAssetIcon = (type: string) => {
           song.meta.author && (
             <div class="flex items-center gap-1.5 text-sm text-slate-600">
               <User className="w-4 h-4 text-slate-400" />
-              <span>{song.meta.author}</span>
+              <span class="whitespace-pre-line break-words overflow-hidden text-ellipsis">
+                {song.meta.author}
+              </span>
             </div>
           )
         }
@@ -160,9 +172,9 @@ const getAssetIcon = (type: string) => {
         {
           song.meta.bpm && (
             <div class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 text-slate-700 font-medium">
-              <Clock className="w-3.5 h-3.5 text-slate-500" />
+              <Metronome className="w-3.5 h-3.5 text-slate-500" />
               <span>
-                速度：<strong class="font-mono">{song.meta.bpm}</strong> BPM
+                <strong class="font-mono">{song.meta.bpm}</strong> BPM
               </span>
             </div>
           )
@@ -206,45 +218,57 @@ const getAssetIcon = (type: string) => {
         <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
           <div class="flex items-center gap-2">
             <Download className="w-5 h-5 text-indigo-600" />
-            <h2 class="text-xl font-bold text-slate-900">附加資源與下載</h2>
+            <h2 class="text-xl font-bold text-slate-900">附加資源</h2>
           </div>
 
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {song.meta.assets.map((asset) => {
               const IconComponent = getAssetIcon(asset.type);
               const isExternal =
-                asset.type === "external" || asset.url.startsWith("http");
+                asset.type in ["youtube", "other"] ||
+                asset.url.startsWith("http");
 
               return (
-                <a
-                  href={asset.url}
-                  target={isExternal ? "_blank" : undefined}
-                  rel={isExternal ? "noopener noreferrer" : undefined}
-                  download={!isExternal}
-                  class="flex items-center justify-between p-4 rounded-2xl bg-slate-50 hover:bg-indigo-50/60 border border-slate-200/80 hover:border-indigo-200 transition-all group"
-                >
-                  <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-indigo-600 shadow-sm border border-slate-200/60 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
-                      <IconComponent className="w-5 h-5" />
-                    </div>
-                    <div>
-                      <div class="font-medium text-slate-900 group-hover:text-indigo-900 transition-colors">
-                        {asset.name}
+                <div class="flex flex-col p-2 rounded-2xl bg-slate-50 hover:bg-indigo-50/60 border border-slate-200/80 hover:border-indigo-200 transition-all group">
+                  <a
+                    href={asset.url}
+                    target={isExternal ? "_blank" : undefined}
+                    rel={isExternal ? "noopener noreferrer" : undefined}
+                    download={!isExternal}
+                    class="flex items-center justify-between w-full gap-3 pb-4 p-2 sm:p-5 rounded-2xl transition-colors"
+                  >
+                    <div class="flex items-center gap-3">
+                      <div class="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-indigo-600 shadow-sm border border-slate-200/60 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                        <IconComponent className="w-5 h-5" />
                       </div>
-                      {asset.size && (
-                        <div class="text-xs text-slate-400">{asset.size}</div>
+                      <div>
+                        <div class="font-medium text-slate-900 group-hover:text-indigo-900 transition-colors">
+                          {asset.name}
+                        </div>
+                        {asset.size && (
+                          <div class="text-xs text-slate-400">{asset.size}</div>
+                        )}
+                      </div>
+                    </div>
+
+                    <div class="text-slate-400 group-hover:text-indigo-600 transition-colors">
+                      {isExternal ? (
+                        <ExternalLink className="w-4 h-4" />
+                      ) : (
+                        <Download className="w-4 h-4" />
                       )}
                     </div>
-                  </div>
-
-                  <div class="text-slate-400 group-hover:text-indigo-600 transition-colors">
-                    {isExternal ? (
-                      <ExternalLink className="w-4 h-4" />
-                    ) : (
-                      <Download className="w-4 h-4" />
-                    )}
-                  </div>
-                </a>
+                  </a>
+                  {asset.type === "youtube" && (
+                    <iframe
+                      id="ytplayer"
+                      class="w-full aspect-video rounded-lg border border-slate-200/80"
+                      src={getYoutubeEmbedUrl(asset.url)}
+                      title={asset.name}
+                      allowfullscreen
+                    />
+                  )}
+                </div>
               );
             })}
           </div>

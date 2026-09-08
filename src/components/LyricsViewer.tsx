@@ -19,8 +19,8 @@ import { proPresenterExportModalOpen } from "@/stores/settings";
 
 export interface LyricsViewerProps {
   song: SongData;
-  originalKey: string;
-  currentKey: string;
+  originalKey?: string;
+  currentKey?: string;
   onKeyChange: (newKey: string) => void;
   currentFlow?: number[];
   customFlow?: string[];
@@ -42,10 +42,26 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
   const [copied, setCopied] = useState<boolean>(false);
 
   const semitoneOffset = useMemo(() => {
-    return getSemitoneOffset(song.meta.originalKey || "C", currentKey);
+    return getSemitoneOffset(
+      song.meta.originalKey || "C",
+      currentKey || song.meta.originalKey || "C",
+    );
   }, [song.meta.originalKey, currentKey]);
 
-  const hasLanguageB = Boolean(song.meta.languages.b && song.meta.title.b);
+  const hasLanguageB = Boolean(
+    song.meta.languages.b &&
+    song.sections.some((section) =>
+      section.lines.some((line) => line.b && line.b.trim() !== ""),
+    ),
+  );
+  const hasChords = Boolean(
+    originalKey ||
+    song.sections.some((section) =>
+      section.lines.some((line) => line.chords && line.chords.length > 0),
+    ),
+  );
+  const flow =
+    currentFlow && currentFlow.length > 0 ? currentFlow : song.meta.arrangement;
 
   const handleCopy = async () => {
     const text = formatLyricsText(song, {
@@ -94,7 +110,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
                 type="button"
                 onClick={() => setLanguageMode("a")}
                 className={`px-3 py-1.5 rounded-lg transition-all ${
-                  languageMode === "a"
+                  languageMode === "a" || !hasLanguageB
                     ? "bg-white text-indigo-600 shadow-sm font-semibold"
                     : "text-slate-600 hover:text-slate-900"
                 }`}
@@ -149,13 +165,15 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
 
           {/* Right: Chords Toggle & Copy Button */}
           <div className="flex items-center gap-2 max-sm:flex-col max-sm:items-start">
-            <KeyController
-              showChords={showChords}
-              setShowChords={setShowChords}
-              originalKey={originalKey}
-              currentKey={currentKey}
-              onKeyChange={onKeyChange}
-            />
+            {hasChords && (
+              <KeyController
+                showChords={showChords}
+                setShowChords={setShowChords}
+                originalKey={originalKey}
+                currentKey={currentKey || originalKey || "C"}
+                onKeyChange={onKeyChange}
+              />
+            )}
             <div className="flex items-center gap-2">
               <button
                 type="button"
@@ -191,18 +209,19 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
             </div>
           </div>
         </div>
-        {currentFlow && currentFlow.length > 0 && (
+        {flow && flow.length > 0 && (
           <div className="space-y-1.5 p-4 pt-2 border-t border-slate-100">
-            <div className="text-xs font-semibold text-slate-500">歌序：</div>
+            <div className="text-xs font-semibold text-slate-500">
+              {customFlow && customFlow.length > 0 ? "歌序" : "預設歌序"}
+            </div>
             <div className="inline-block items-center !mt-0">
-              {currentFlow.map((tagIndex, tIndex) => {
+              {flow.map((tagIndex, tIndex) => {
                 const tag =
                   tagIndex < (song?.sections.length || 0)
-                    ? getFlowName(song.sections[tagIndex].type)
+                    ? getFlowName(song.sections[tagIndex].name)
                     : getFlowName(
                         EX_FLOWS[tagIndex - (song?.sections.length || 0)],
-                      ) ||
-                      customFlow?.[tagIndex - (song?.sections.length || 0)];
+                      ) || flow?.[tagIndex - (song?.sections.length || 0)];
                 if (!tag) return null;
 
                 const tagColor =
@@ -224,7 +243,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
                     >
                       {tag}
                     </span>
-                    {tIndex < currentFlow.length - 1 && (
+                    {tIndex < flow.length - 1 && (
                       <>
                         <span style={{ fontSize: 0 }}> </span>
                         <span className="text-slate-300 text-xs select-none mx-1">
@@ -252,17 +271,17 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
                     className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-100/80"
                     style={{
                       backgroundColor:
-                        (FLOW_STYLE[section.type as keyof FlowMapping] ??
+                        (FLOW_STYLE[section.name as keyof FlowMapping] ??
                           FLOW_STYLE["default"]) + "22",
                       color:
-                        FLOW_STYLE[section.type as keyof FlowMapping] ??
+                        FLOW_STYLE[section.name as keyof FlowMapping] ??
                         FLOW_STYLE["default"],
                       borderColor:
-                        (FLOW_STYLE[section.type as keyof FlowMapping] ??
+                        (FLOW_STYLE[section.name as keyof FlowMapping] ??
                           FLOW_STYLE["default"]) + "44",
                     }}
                   >
-                    {getFlowName(section.type)}
+                    {getFlowName(section.name)}
                   </span>
                 </React.Fragment>
               </div>
