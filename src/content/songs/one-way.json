@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "One Way",
+      "b": ""
+    },
+    "tags": ["約書亞樂團", "Hillsong"],
+    "arrangement": [4, 0, 2, 1, 2, 2, 3, 3, 3, 2, 2, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=k1h-gwbakCI"
+      }
+    ],
+    "author": "約書亞樂團\nWords & Music by Joel Houston and Jonathon Douglass",
+    "bpm": 125,
+    "originalKey": "Bb"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "在祢腳前獻上生命",
+          "b": "I lay my life down at Your feet"
+        },
+        {
+          "a": "因祢是我唯一所需",
+          "b": "You're the only One I need"
+        },
+        {
+          "a": "我轉向祢 祢永遠不離棄",
+          "b": "I turn to You and You are always there"
+        },
+        {
+          "a": "危難臨到我尋求祢",
+          "b": "In troubled times it's You I seek"
+        },
+        {
+          "a": "我只需把祢擺第一",
+          "b": "I put You first that's all I need"
+        },
+        {
+          "a": "降服我所有 全給祢",
+          "b": "I humble all I am all to You"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "祢總是在我身邊",
+          "b": "You are always, always there"
+        },
+        {
+          "a": "每時每刻每一天",
+          "b": "Every how and every where"
+        },
+        {
+          "a": "我心充滿祢豐盛恩典",
+          "b": "Your grace abounds so deeply within me"
+        },
+        {
+          "a": "祢總是不會改變",
+          "b": "You will never ever change"
+        },
+        {
+          "a": "昨日今日到永遠",
+          "b": "Yesterday today the same"
+        },
+        {
+          "a": "從亙古直到永恆無限",
+          "b": "Forever 'til forever meets no end"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "One way 耶穌",
+          "b": "One way Jesus"
+        },
+        {
+          "a": "唯有祢能讓我為祢而活",
+          "b": "You're the only One that I could live for"
+        },
+        {
+          "a": "One way 耶穌",
+          "b": "One way Jesus"
+        },
+        {
+          "a": "唯有祢能讓我為祢而活",
+          "b": "You're the only One that I could live for"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "祢是道路 真理 生命",
+          "b": "You are the Way, the Truth and the Life"
+        },
+        {
+          "a": "我憑信心 不憑眼見為祢",
+          "b": "We live by faith and not by sight - For You"
+        },
+        {
+          "a": "我活著只為祢",
+          "b": "We're living all for You"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我要全心讚美",
+      "b": "My Heart Will Praise You, Lord"
+    },
+    "tags": ["讚美之泉", "愛可以再更多一點點"],
+    "arrangement": [2, 0, 1, 3, 0, 1, 1, 6],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=Bs-pQZ9b0OU"
+      }
+    ],
+    "author": "讚美之泉\n詞、曲：曾祥怡 Grace Tseng",
+    "ccli": "5727122",
+    "originalKey": "F",
+    "bpm": 150
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "全心感謝 全心讚美 進入祢的院",
+          "b": "With all my heart, I will give thanks and enter Your court"
+        },
+        {
+          "a": "全心頌讚 獻上為祭 是嘴唇的果子",
+          "b": "Offering my praise to You, Lord, It's the fruit of my lips"
+        },
+        {
+          "a": "在祢裡面 一無罣慮 喜樂滿溢",
+          "b": "In Your presence, free of worries, joy overflows"
+        },
+        {
+          "a": "常常感謝 不住禱告 盼望在於祢",
+          "b": "Always grateful, always praying, my hope is in You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我要全心讚美 跳舞頌揚祢名",
+          "b": "My heart will praise You, Lord, I'll dance before Your throne"
+        },
+        {
+          "a": "在祢殿中一日 勝過在世上千日",
+          "b": "One day with You is better than a thousand elsewhere"
+        },
+        {
+          "a": "我要全心讚美 讚美還要讚美不停",
+          "b": "My heart will praise You, Lord, I'll never stop praising Your name"
+        },
+        {
+          "a": "義人棚裡 歡呼聲永不息",
+          "b": "The righteous will declare Your victory"
+        }
+      ]
+    }
+  ]
+}

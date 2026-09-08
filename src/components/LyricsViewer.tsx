@@ -381,7 +381,7 @@ const RenderLine: React.FC<RenderLineProps> = ({
               )}
 
               {/* Character Slot */}
-              <div className="text-slate-800 text-lg md:text-xl font-normal leading-relaxed *:whitespace-pre-line">
+              <div className="text-slate-800 text-lg md:text-xl font-normal leading-relaxed whitespace-pre">
                 {char ||
                   (isTrailingSpacer ? (
                     <span className="inline-block w-4">&nbsp;</span>

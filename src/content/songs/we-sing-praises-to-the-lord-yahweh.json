@@ -1,0 +1,165 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "耶和華是應當稱頌的",
+      "b": "We Sing Praises To The Lord, Yahweh"
+    },
+    "tags": ["讚美之泉", "我能給你什麼"],
+    "arrangement": [5, 0, 1, 5, 2, 3, 6, 4, 4, 3, 1, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=YDKx_bzW3-c"
+      }
+    ],
+    "ccli": "7238641",
+    "author": "讚美之泉\n詞：鄭懋柔 Tiffany M. Cheng／曲：恆恩 Brook Heng-En",
+    "originalKey": "F",
+    "bpm": 153,
+    "note": "MV 副歌升至 G key"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "天屬於祢 地也屬於祢",
+          "b": "The heavens are Yours, the earth belongs to You"
+        },
+        {
+          "a": "萬物都因祢歡欣",
+          "b": "The ones You love are filled with joy"
+        },
+        {
+          "a": "都要歡呼讚美祢",
+          "b": "They shall shout and praise Your name"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "耶和華是應當稱頌的",
+          "b": "We sing praises to the Lord, Yahweh"
+        },
+        {
+          "a": "擊鼓跳舞彈琴歌頌祢",
+          "b": "With a song and dance, we bring You praise"
+        },
+        {
+          "a": "耶和華 祢喜愛祢的百姓",
+          "b": "You delight in the praises that we sing"
+        },
+        {
+          "a": "在祢殿中唱新歌",
+          "b": "In Your sanctuary"
+        },
+        {
+          "a": "耶和華是應當稱頌的",
+          "b": "We sing praises to the Lord, Yahweh"
+        },
+        {
+          "a": "擊鼓跳舞彈琴歌頌祢",
+          "b": "With a song and dance, we bring You praise"
+        },
+        {
+          "a": "向祢歡呼的民是有福的",
+          "b": "You praise Blessed are the ones who shout Your name"
+        },
+        {
+          "a": "因祢的名終日歡喜 讚美祢",
+          "b": "We rejoice in You every day - Praise Your name"
+        }
+      ]
+    },
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "天屬於祢 地也屬於祢",
+          "b": "The heavens are Yours, the earth belongs to You"
+        },
+        {
+          "a": "萬物都因祢歡欣",
+          "b": "The ones You love are filled with joy"
+        },
+        {
+          "a": "都要歡呼",
+          "b": "They shall shout and -"
+        },
+        {
+          "a": "都要歡呼",
+          "b": "They shall shout and -"
+        },
+        {
+          "a": "都要歡呼讚美祢",
+          "b": "They shall shout and praise Your name"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "耶和華是應當稱頌的",
+          "b": "We sing praises to the Lord, Yahweh"
+        },
+        {
+          "a": "擊鼓跳舞彈琴歌頌祢",
+          "b": "With a song and dance, we bring You praise"
+        },
+        {
+          "a": "耶和華 祢喜愛祢的百姓",
+          "b": "You delight in the praises that we sing"
+        },
+        {
+          "a": "在祢殿中唱新歌",
+          "b": "In Your sanctuary"
+        },
+        {
+          "a": "耶和華是應當稱頌的",
+          "b": "We sing praises to the Lord, Yahweh"
+        },
+        {
+          "a": "擊鼓跳舞彈琴歌頌祢",
+          "b": "With a song and dance, we bring You praise"
+        },
+        {
+          "a": "向祢歡呼的民是有福的",
+          "b": "You praise Blessed are the ones who shout Your name"
+        },
+        {
+          "a": "因祢的名終日歡喜",
+          "b": "We rejoice in You every day"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我的口 稱讚神為高",
+          "b": "With my mouth, praising God on high"
+        },
+        {
+          "a": "行大能 仇敵都逃跑",
+          "b": "All my foes, they will run away"
+        },
+        {
+          "a": "以救恩作我的妝飾",
+          "b": "I am clothed by Your saving grace"
+        },
+        {
+          "a": "喜樂的歌 為我依靠",
+          "b": "I will go forth with songs of joy"
+        }
+      ]
+    }
+  ]
+}

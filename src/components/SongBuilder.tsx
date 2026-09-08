@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import * as ContextMenu from "@radix-ui/react-context-menu";
 import {
   FLOW_STYLE,
   FLOW_ALIASES,
@@ -188,7 +189,7 @@ export const SongBuilder: React.FC = () => {
     title: { a: "", b: "" },
     tags: [],
     arrangement: [],
-    assets: [],
+    assets: [{ type: "youtube", name: "YouTube", url: "" }],
   });
   const [tagsInput, setTagsInput] = useState<string>("");
   const [sections, setSections] = useState<SectionItem[]>([]);
@@ -219,12 +220,16 @@ export const SongBuilder: React.FC = () => {
       meta,
       sections,
     };
+    songData.meta.assets = songData.meta.assets?.filter(
+      (asset) => asset.name && asset.url,
+    );
     if (!songData.meta.title.a || !songData.meta.languages.a) {
       setIdError("請設定歌曲主要名稱和語言");
       return;
     }
     const currentId =
-      id || (meta.title.b && meta.title.b.replace(/\s+/g, "-").toLowerCase());
+      id ||
+      (meta.title.b && meta.title.b.replace(/[\s,]+/g, "-").toLowerCase());
     if (!id) {
       setId(currentId || "");
     }
@@ -249,7 +254,7 @@ export const SongBuilder: React.FC = () => {
         <Input
           value={id}
           onChange={(e) => {
-            setId(e.target.value.replace(/\s+/g, "-").toLowerCase());
+            setId(e.target.value.replace(/[\s,]+/g, "-").toLowerCase());
             setIdError(null);
           }}
           placeholder="song-id"
@@ -542,7 +547,7 @@ export const SongBuilder: React.FC = () => {
                               return { ...prev, assets: newAssets };
                             })
                           }
-                          className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                          className="w-full !rounded-lg border border-slate-300 h-[46px] text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 *:block"
                         >
                           <option value="youtube">YouTube</option>
                           <option value="other">其他連結</option>
@@ -686,40 +691,145 @@ export const SongBuilder: React.FC = () => {
                           className="mt-1 inline-block text-wrap items-center"
                           key={tIndex}
                         >
-                          <span
-                            className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
-                            style={{
-                              backgroundColor:
-                                (FLOW_STYLE[tag as keyof FlowMapping] ??
-                                  FLOW_STYLE["default"]) + "22",
-                              color:
-                                FLOW_STYLE[tag as keyof FlowMapping] ??
-                                FLOW_STYLE["default"],
-                              borderColor:
-                                (FLOW_STYLE[tag as keyof FlowMapping] ??
-                                  FLOW_STYLE["default"]) + "44",
-                            }}
-                          >
-                            {getFlowName(tag)}
-                            <button
-                              type="button"
-                              onClick={() => {
-                                setMeta((prev) => {
-                                  const newArrangement = prev.arrangement
-                                    ? [...prev.arrangement]
-                                    : [];
-                                  newArrangement.splice(tIndex, 1);
-                                  return {
-                                    ...prev,
-                                    arrangement: newArrangement,
-                                  };
-                                });
-                              }}
-                              className="hover:text-rose-600 transition-colors ml-0.5 select-none"
-                            >
-                              ×
-                            </button>
-                          </span>
+                          <ContextMenu.Root>
+                            <ContextMenu.Trigger asChild>
+                              <span
+                                className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
+                                style={{
+                                  backgroundColor:
+                                    (FLOW_STYLE[tag as keyof FlowMapping] ??
+                                      FLOW_STYLE["default"]) + "22",
+                                  color:
+                                    FLOW_STYLE[tag as keyof FlowMapping] ??
+                                    FLOW_STYLE["default"],
+                                  borderColor:
+                                    (FLOW_STYLE[tag as keyof FlowMapping] ??
+                                      FLOW_STYLE["default"]) + "44",
+                                }}
+                              >
+                                {getFlowName(tag)}
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    setMeta((prev) => {
+                                      const newArrangement = prev.arrangement
+                                        ? [...prev.arrangement]
+                                        : [];
+                                      newArrangement.splice(tIndex, 1);
+                                      return {
+                                        ...prev,
+                                        arrangement: newArrangement,
+                                      };
+                                    });
+                                  }}
+                                  className="hover:text-rose-600 transition-colors ml-0.5 select-none"
+                                >
+                                  ×
+                                </button>
+                              </span>
+                            </ContextMenu.Trigger>
+                            <ContextMenu.Content className="bg-white rounded-lg shadow-lg border border-slate-200/80 p-2 min-w-[120px] z-50">
+                              {/* 左移、右移、更換 */}
+                              <ContextMenu.Item
+                                onSelect={() => {
+                                  setMeta((prev) => {
+                                    if (!prev.arrangement) return prev;
+                                    const newArrangement = [
+                                      ...prev.arrangement,
+                                    ];
+                                    if (tIndex > 0) {
+                                      const temp = newArrangement[tIndex - 1];
+                                      newArrangement[tIndex - 1] =
+                                        newArrangement[tIndex];
+                                      newArrangement[tIndex] = temp;
+                                    }
+                                    return {
+                                      ...prev,
+                                      arrangement: newArrangement,
+                                    };
+                                  });
+                                }}
+                                className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
+                              >
+                                左移
+                              </ContextMenu.Item>
+                              <ContextMenu.Item
+                                onSelect={() => {
+                                  setMeta((prev) => {
+                                    if (!prev.arrangement) return prev;
+                                    const newArrangement = [
+                                      ...prev.arrangement,
+                                    ];
+                                    if (tIndex < newArrangement.length - 1) {
+                                      const temp = newArrangement[tIndex + 1];
+                                      newArrangement[tIndex + 1] =
+                                        newArrangement[tIndex];
+                                      newArrangement[tIndex] = temp;
+                                    }
+                                    return {
+                                      ...prev,
+                                      arrangement: newArrangement,
+                                    };
+                                  });
+                                }}
+                                className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
+                              >
+                                右移
+                              </ContextMenu.Item>
+                              <ContextMenu.Separator className="my-1 border-t border-slate-200" />
+                              {sections.map((preset, presetIndex) => {
+                                const presetTag = getFlowName(preset.name);
+                                const presetTagIndex = presetIndex;
+                                return (
+                                  <ContextMenu.Item
+                                    key={`replace-${presetTagIndex}`}
+                                    onSelect={() => {
+                                      setMeta((prev) => {
+                                        if (!prev.arrangement) return prev;
+                                        const newArrangement = [
+                                          ...prev.arrangement,
+                                        ];
+                                        newArrangement[tIndex] = presetTagIndex;
+                                        return {
+                                          ...prev,
+                                          arrangement: newArrangement,
+                                        };
+                                      });
+                                    }}
+                                    className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
+                                  >
+                                    更換為 {presetTag}
+                                  </ContextMenu.Item>
+                                );
+                              })}
+                              {EX_FLOWS.map((preset, presetIndex) => {
+                                const presetTag = getFlowName(preset);
+                                const presetTagIndex =
+                                  presetIndex + (sections.length || 0);
+                                return (
+                                  <ContextMenu.Item
+                                    key={`replace-ex-${presetTagIndex}`}
+                                    onSelect={() => {
+                                      setMeta((prev) => {
+                                        if (!prev.arrangement) return prev;
+                                        const newArrangement = [
+                                          ...prev.arrangement,
+                                        ];
+                                        newArrangement[tIndex] = presetTagIndex;
+                                        return {
+                                          ...prev,
+                                          arrangement: newArrangement,
+                                        };
+                                      });
+                                    }}
+                                    className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
+                                  >
+                                    更換為 {presetTag}
+                                  </ContextMenu.Item>
+                                );
+                              })}
+                            </ContextMenu.Content>
+                          </ContextMenu.Root>
                           {meta.arrangement &&
                             tIndex < meta.arrangement.length - 1 && (
                               <>

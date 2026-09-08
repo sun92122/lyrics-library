@@ -1,0 +1,99 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "在祢沒有難成的事",
+      "b": "Nothing Is Impossible"
+    },
+    "tags": ["讚美之泉"],
+    "arrangement": [4, 0, 1, 0, 1, 6, 1, 1, 2, 3, 3, 3, 3, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=3QSUYtAcJjk"
+      }
+    ],
+    "author": "讚美之泉\n詞：鄭懋柔 Tiffany M. Cheng／曲：游智婷 Sandy Yu",
+    "ccli": "7197681",
+    "bpm": 158,
+    "originalKey": "A"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "芥菜種的信心 可以將大山挪開",
+          "b": "Mountains and hills can move at the smallest seed of faith"
+        },
+        {
+          "a": "相信神的應許 可以跨越困難",
+          "b": "Through the trials and hardships, I can trust in His way"
+        },
+        {
+          "a": "信心的禱告 神都聽見",
+          "b": "God hears my every word, when I pray in faith"
+        },
+        {
+          "a": "大聲地宣告 勇敢向前",
+          "b": "I will shout it out, I'm not afraid"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "在祢沒有 沒有難成的事",
+          "b": "In You, there is nothing impossible"
+        },
+        {
+          "a": "軟弱和憂慮中 祢不曾放棄我",
+          "b": "Even when I am weak, You never let me go"
+        },
+        {
+          "a": "祢的應許 應許 不論有多少",
+          "b": "All Your promises, promises, I can't count them all"
+        },
+        {
+          "a": "在基督裡都是阿們",
+          "b": "Every promise is yes and amen"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "祢的應許 應許 不論有多少",
+          "b": "All Your promises, promises, I can't count them all"
+        },
+        {
+          "a": "在基督裡都是阿們",
+          "b": "Every promise is yes and amen"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "都是阿們",
+          "b": "Yes and amen"
+        },
+        {
+          "a": "都是阿們",
+          "b": "Yes and amen"
+        },
+        {
+          "a": "都是阿們",
+          "b": "Yes and amen"
+        }
+      ]
+    }
+  ]
+}

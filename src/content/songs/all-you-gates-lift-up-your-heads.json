@@ -1,0 +1,97 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "眾城門抬起頭",
+      "b": "All You Gates Lift Up Your Heads"
+    },
+    "tags": ["生命河靈糧堂", "神機會的風"],
+    "arrangement": [4, 0, 1, 2, 5, 0, 1, 2, 5, 2, 3, 3, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=hYXAgjWziyI"
+      }
+    ],
+    "author": "生命河靈糧堂\n詞曲：曾祥非 Philip Tseng",
+    "originalKey": "F"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "眾城門 你要抬起頭",
+          "b": "All you gates lift your heads in praise"
+        },
+        {
+          "a": "永久的門戶 你們要被舉起",
+          "b": "All ancient doors be lifted up in His name"
+        },
+        {
+          "a": "那榮耀君王就是耶和華",
+          "b": "The King of glory, He is God Almighty"
+        },
+        {
+          "a": "齊來歡呼讚美祂",
+          "b": "Shout for joy and give Him praise"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "向聖所舉手稱頌",
+          "b": "Lift your hands to the holy place"
+        },
+        {
+          "a": "地和其中所充滿 都屬於祂",
+          "b": "The world and all that's within shall go to Him"
+        },
+        {
+          "a": "那榮耀君王就是耶和華",
+          "b": "The King of glory, He is God Almighty"
+        },
+        {
+          "a": "齊來歡呼讚美祂",
+          "b": "Shout for joy and give Him praise"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我們在這裡 歡迎祢降臨",
+          "b": "Here we stand, oh Lord - Come and fill this temple"
+        },
+        {
+          "a": "萬軍耶和華 配得一切尊榮",
+          "b": "Glory and honor - All to You, God Almighty"
+        },
+        {
+          "a": "我們在這裡 榮耀君王將要進來",
+          "b": "Here we stand, oh Lord - Lift You up, the King of glory"
+        },
+        {
+          "a": "主啊 祢百姓真歡迎你",
+          "b": "Oh Lord, here we stand to welcome You"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "主啊 祢百姓真歡迎你",
+          "b": "Oh Lord, here we stand to welcome You"
+        }
+      ]
+    }
+  ]
+}

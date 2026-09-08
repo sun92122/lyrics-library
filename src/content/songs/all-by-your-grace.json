@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "全是恩典",
+      "b": "All By Your Grace"
+    },
+    "tags": ["火把音樂"],
+    "arrangement": [5, 0, 1, 2, 3, 6, 0, 1, 2, 3, 4, 4, 4, 2, 3, 4, 4, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=uR16oqekYrY"
+      }
+    ],
+    "author": "火把音樂\n詞／曲：林書葦 Shu Wei Lin、洪珮貞 PJ Hung、黃喜蓉 Kiyo Huang、盧苑儀 Vivien Loh",
+    "originalKey": "F"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "創世之前 我已被揀選",
+          "b": "I was chosen, before time began"
+        },
+        {
+          "a": "愛子的血 使我成為聖潔",
+          "b": "A sacred man, by the blood of the Son"
+        },
+        {
+          "a": "忘記背後 來努力面前",
+          "b": "Leaving the past, I strive for what's ahead"
+        },
+        {
+          "a": "朝著標竿 奔赴直到終點",
+          "b": "With all my might, I'll press on to the end"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "放下過去 傷痕累累",
+          "b": "All wounds will heal, all scars will cease"
+        },
+        {
+          "a": "相信會有 華冠代替爐灰",
+          "b": "A crown of beauty instead of ashes"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "因祢已命定我",
+          "b": "For you have planned it all"
+        },
+        {
+          "a": "得著救贖 都全是恩典",
+          "b": "Now I'm redeemed, all by Your grace"
+        },
+        {
+          "a": "得蒙赦免 都全是恩典",
+          "b": "Sins forgiven, all by Your grace"
+        },
+        {
+          "a": "回想一切 怎能不感謝祢 心充滿感謝",
+          "b": "Reflecting back, overflowing with grace, My heart finds its place"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "得著建造 都全是恩典",
+          "b": "Built up by You, all by Your grace"
+        },
+        {
+          "a": "得以站立 都全是恩典",
+          "b": "I'm standing tall, all by Your grace"
+        },
+        {
+          "a": "開口稱謝 一起來稱謝祢 一起來稱謝",
+          "b": "Let's shout it out, give thanks and praise to You, Give thanks and praise"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "拿起火把 傳遞無限希望",
+          "b": "Lifting the torch, Igniting hearts with hope"
+        }
+      ]
+    }
+  ]
+}

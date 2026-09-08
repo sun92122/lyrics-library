@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "無人能與祢相比",
+      "b": "No One Compares With You"
+    },
+    "tags": ["約書亞樂團", "大衛帳幕的榮耀"],
+    "arrangement": [5, 0, 1, 2, 6, 0, 1, 2, 1, 6, 3, 3, 4, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=L_ggLp6cZ10"
+      }
+    ],
+    "author": "詞曲 / Redo Daeng Badji\n中文翻譯 台北真道教會",
+    "note": "VPCIVPCPIC1C1EO",
+    "bpm": 152,
+    "originalKey": "G"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "永活全能的主宰",
+          "b": "Eternal and mighty God"
+        },
+        {
+          "a": "道成肉身顯明你的愛",
+          "b": "You became flesh to show Your love"
+        },
+        {
+          "a": "奇妙主 榮耀神 何等的偉大",
+          "b": "Amazing Lord, glory to God, how great You are"
+        },
+        {
+          "a": "聖潔尊貴的君王",
+          "b": "Holy and honorable King"
+        },
+        {
+          "a": "超乎萬名在全地之上",
+          "b": "You surpass all the name of earth"
+        },
+        {
+          "a": "為我罪流寶血 贖回我生命",
+          "b": "For my sins You bled for me, to save my life"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "無人能與你相比 你掌權直到永遠",
+          "b": "No one compares to You, You rule for eternity"
+        },
+        {
+          "a": "我要揚聲讚美你",
+          "b": "I will raise my voice to praise You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "喔 何等偉大的愛 高過諸天深海",
+          "b": "Oh, how great is Your love, greater than the sky and sea"
+        },
+        {
+          "a": "當受極大讚美",
+          "b": "You deserve such a praise, Oh"
+        },
+        {
+          "a": "喔 主你滿有能力 世界盼望是你",
+          "b": "Oh, Lord You are full of power, You are the hope of the world"
+        },
+        {
+          "a": "我要敬拜你 耶穌我的主",
+          "b": "I will worship You, Jesus, my Lord"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "喔 何等偉大的愛 高過諸天深海",
+          "b": "Oh, how great is Your love, greater than the sky and sea"
+        },
+        {
+          "a": "當受極大讚美",
+          "b": "You deserve such a praise, Oh"
+        },
+        {
+          "a": "喔 主你滿有能力 世界盼望是你",
+          "b": "Oh, Lord You are full of power, You are the hope of the world"
+        },
+        {
+          "a": "我要敬拜你",
+          "b": "I will worship You"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "我要敬拜你 耶穌我的主",
+          "b": "I will worship You, Jesus, my Lord"
+        }
+      ]
+    }
+  ]
+}

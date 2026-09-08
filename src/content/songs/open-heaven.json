@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "將天敞開",
+      "b": "Open Heaven"
+    },
+    "tags": ["讚美之泉"],
+    "arrangement": [4, 0, 1, 5, 0, 1, 2, 3, 3, 0, 1, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=OVUPLFLdmpE"
+      }
+    ],
+    "author": "讚美之泉\n詞： 鄭懋柔 Tiffany M. Cheng /曲： 游智婷 Sandy Yu",
+    "ccli": "6400479",
+    "bpm": 152,
+    "originalKey": "G"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "將天敞開 祢的榮耀降下來",
+          "b": "Lord, release an open heaven and come down"
+        },
+        {
+          "a": "將天敞開 祢的同在降下來",
+          "b": "Lord, release an open heaven and come down"
+        },
+        {
+          "a": "將天敞開 祢的榮耀降下來",
+          "b": "Lord, release an open heaven and come down"
+        },
+        {
+          "a": "萬國讚嘆祢 祢是榮耀君王",
+          "b": "May the nations sing, You're the glorious King"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "天上地下 合一敬拜",
+          "b": "Heaven and earth will join as one"
+        },
+        {
+          "a": "歡呼耶穌基督 聖潔羔羊 榮耀歸於祢",
+          "b": "Singing Jesus Christ, the Lamb of God\nIs worthy of our praise"
+        },
+        {
+          "a": "天上地下 在永恆裡敬拜",
+          "b": "Heaven and earth singing everlasting praise"
+        },
+        {
+          "a": "哈利路亞 哈利路亞",
+          "b": "Hallelujah, hallelujah"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "神就在這裡 我們歡迎祢",
+          "b": "God is here with us, dwelling in this place"
+        },
+        {
+          "a": "讓一切焦點轉向祢",
+          "b": "Let our eyes be fixed on You"
+        },
+        {
+          "a": "神就在這裡 我們歡迎祢",
+          "b": "Nations will declare You alone are God"
+        },
+        {
+          "a": "寶座前敬拜不停息",
+          "b": "We will give You the highest praise"
+        }
+      ]
+    },
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "將天敞開 祢的榮耀降下來",
+          "b": "Lord, release an open heaven and come down"
+        },
+        {
+          "a": "將天敞開 祢的同在降下來",
+          "b": "Lord, release an open heaven and come down"
+        }
+      ]
+    }
+  ]
+}
