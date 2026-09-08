@@ -21,10 +21,14 @@ export interface LyricsViewerProps {
   song: SongData;
   originalKey?: string;
   currentKey?: string;
-  onKeyChange: (newKey: string) => void;
+  onKeyChange?: (newKey: string) => void;
   currentFlow?: number[];
   customFlow?: string[];
   className?: string;
+  readonly?: boolean;
+  ui?: {
+    container?: string;
+  };
 }
 
 export const LyricsViewer: React.FC<LyricsViewerProps> = ({
@@ -35,6 +39,8 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
   currentFlow,
   customFlow,
   className = "",
+  readonly = false,
+  ui,
 }) => {
   const [languageMode, setLanguageMode] = useState<LanguageMode>("both");
   const [layoutMode, setLayoutMode] = useState<LayoutMode>("segmented");
@@ -100,167 +106,176 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
   return (
     <div className={`space-y-6 ${className}`}>
       {/* Controls Bar */}
-      <div className="mt-2 flex flex-wrap items-center justify-between gap-1 bg-white rounded-2xl border border-slate-200/80 shadow-sm">
-        <div className="flex flex-wrap items-center justify-between gap-3 p-3">
-          {/* Left: Language & Layout Toggles */}
-          <div className="flex flex-wrap items-center gap-2">
-            {/* Language Switcher */}
-            <div className="inline-flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200/60 text-xs font-medium">
-              <button
-                type="button"
-                onClick={() => setLanguageMode("a")}
-                className={`px-3 py-1.5 rounded-lg transition-all ${
-                  languageMode === "a" || !hasLanguageB
-                    ? "bg-white text-indigo-600 shadow-sm font-semibold"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                {song.meta.languages.a || "主語言"}
-              </button>
-              {hasLanguageB && (
+      {!readonly && (
+        <div className="mt-2 flex flex-wrap items-center justify-between gap-1 bg-white rounded-2xl border border-slate-200/80 shadow-sm">
+          <div className="flex flex-wrap items-center justify-between gap-3 p-3">
+            {/* Left: Language & Layout Toggles */}
+            <div className="flex flex-wrap items-center gap-2">
+              {/* Language Switcher */}
+              <div className="inline-flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200/60 text-xs font-medium">
                 <button
                   type="button"
-                  onClick={() => setLanguageMode("both")}
+                  onClick={() => setLanguageMode("a")}
                   className={`px-3 py-1.5 rounded-lg transition-all ${
-                    languageMode === "both"
+                    languageMode === "a" || !hasLanguageB
                       ? "bg-white text-indigo-600 shadow-sm font-semibold"
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
-                  雙語對照
+                  {song.meta.languages.a || "主語言"}
                 </button>
-              )}
-            </div>
-
-            {/* Layout Mode Switcher */}
-            <div className="inline-flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200/60 text-xs font-medium">
-              <button
-                type="button"
-                onClick={() => setLayoutMode("segmented")}
-                title="分段標記模式"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${
-                  layoutMode === "segmented"
-                    ? "bg-white text-indigo-600 shadow-sm font-semibold"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                <LayoutList className="w-3.5 h-3.5" />
-                <span>分段</span>
-              </button>
-              <button
-                type="button"
-                onClick={() => setLayoutMode("continuous")}
-                title="連續流暢模式"
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${
-                  layoutMode === "continuous"
-                    ? "bg-white text-indigo-600 shadow-sm font-semibold"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                <AlignLeft className="w-3.5 h-3.5" />
-                <span>連續</span>
-              </button>
-            </div>
-          </div>
-
-          {/* Right: Chords Toggle & Copy Button */}
-          <div className="flex items-center gap-2 max-sm:flex-col max-sm:items-start">
-            {hasChords && (
-              <KeyController
-                showChords={showChords}
-                setShowChords={setShowChords}
-                originalKey={originalKey}
-                currentKey={currentKey || originalKey || "C"}
-                onKeyChange={onKeyChange}
-              />
-            )}
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={handleCopy}
-                className={`flex items-center px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm ${
-                  copied
-                    ? "bg-emerald-600 text-white"
-                    : "bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95"
-                }`}
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-3.5 h-3.5" />
-                    <span>已複製歌詞</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3.5 h-3.5" />
-                    <span>　複製歌詞</span>
-                  </>
-                )}
-              </button>
-
-              {/* Propresenter modal */}
-              <button
-                id="pro-presenter-export-modal-button"
-                type="button"
-                onClick={() => proPresenterExportModalOpen.set(true)}
-                className={`flex items-center px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm ${"bg-amber-500 hover:bg-amber-600 text-amber-100 active:scale-95"}`}
-              >
-                <span>ProPresenter</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        {flow && flow.length > 0 && (
-          <div className="space-y-1.5 p-4 pt-2 border-t border-slate-100">
-            <div className="text-xs font-semibold text-slate-500">
-              {customFlow && customFlow.length > 0 ? "歌序" : "預設歌序"}
-            </div>
-            <div className="inline-block items-center !mt-0">
-              {flow.map((tagIndex, tIndex) => {
-                const tag =
-                  tagIndex < (song?.sections.length || 0)
-                    ? getFlowName(song.sections[tagIndex].name)
-                    : getFlowName(
-                        EX_FLOWS[tagIndex - (song?.sections.length || 0)],
-                      ) || flow?.[tagIndex - (song?.sections.length || 0)];
-                if (!tag) return null;
-
-                const tagColor =
-                  FLOW_STYLE[FLOW_ALIASES[tag] as keyof FlowMapping] ??
-                  FLOW_STYLE["default"];
-
-                return (
-                  <div
-                    className="mt-1 inline-block text-wrap items-center"
-                    key={tIndex}
+                {hasLanguageB && (
+                  <button
+                    type="button"
+                    onClick={() => setLanguageMode("both")}
+                    className={`px-3 py-1.5 rounded-lg transition-all ${
+                      languageMode === "both"
+                        ? "bg-white text-indigo-600 shadow-sm font-semibold"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
                   >
-                    <span
-                      className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-100/80"
-                      style={{
-                        backgroundColor: tagColor + "22",
-                        color: tagColor,
-                        borderColor: tagColor + "44",
-                      }}
-                    >
-                      {tag}
-                    </span>
-                    {tIndex < flow.length - 1 && (
+                    雙語對照
+                  </button>
+                )}
+              </div>
+
+              {/* Layout Mode Switcher */}
+              <div className="inline-flex items-center p-1 bg-slate-100 rounded-xl border border-slate-200/60 text-xs font-medium">
+                <button
+                  type="button"
+                  onClick={() => setLayoutMode("segmented")}
+                  title="分段標記模式"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${
+                    layoutMode === "segmented"
+                      ? "bg-white text-indigo-600 shadow-sm font-semibold"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  <LayoutList className="w-3.5 h-3.5" />
+                  <span>分段</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setLayoutMode("continuous")}
+                  title="連續流暢模式"
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-all ${
+                    layoutMode === "continuous"
+                      ? "bg-white text-indigo-600 shadow-sm font-semibold"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  <AlignLeft className="w-3.5 h-3.5" />
+                  <span>連續</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Right: Chords Toggle & Copy Button */}
+            {!readonly && (
+              <div className="flex items-center gap-2 max-sm:flex-col max-sm:items-start">
+                {hasChords && (
+                  <KeyController
+                    showChords={showChords}
+                    setShowChords={setShowChords}
+                    originalKey={originalKey}
+                    currentKey={currentKey || originalKey || "C"}
+                    onKeyChange={onKeyChange || (() => {})}
+                  />
+                )}
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={handleCopy}
+                    className={`flex items-center px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm ${
+                      copied
+                        ? "bg-emerald-600 text-white"
+                        : "bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95"
+                    }`}
+                  >
+                    {copied ? (
                       <>
-                        <span style={{ fontSize: 0 }}> </span>
-                        <span className="text-slate-300 text-xs select-none mx-1">
-                          ➔
-                        </span>
+                        <Check className="w-3.5 h-3.5" />
+                        <span>已複製歌詞</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="w-3.5 h-3.5" />
+                        <span>　複製歌詞</span>
                       </>
                     )}
-                  </div>
-                );
-              })}
-            </div>
+                  </button>
+
+                  {/* Propresenter modal */}
+                  <button
+                    id="pro-presenter-export-modal-button"
+                    type="button"
+                    onClick={() => proPresenterExportModalOpen.set(true)}
+                    className={`flex items-center px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm ${"bg-amber-500 hover:bg-amber-600 text-amber-100 active:scale-95"}`}
+                  >
+                    <span>ProPresenter</span>
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+          {flow && flow.length > 0 && (
+            <div className="space-y-1.5 p-4 pt-2 border-t border-slate-100">
+              <div className="text-xs font-semibold text-slate-500">
+                {customFlow && customFlow.length > 0 ? "歌序" : "預設歌序"}
+              </div>
+              <div className="inline-block items-center !mt-0">
+                {flow.map((tagIndex, tIndex) => {
+                  const tag =
+                    tagIndex < (song?.sections.length || 0)
+                      ? getFlowName(song.sections[tagIndex].name)
+                      : getFlowName(
+                          EX_FLOWS[tagIndex - (song?.sections.length || 0)],
+                        ) || flow?.[tagIndex - (song?.sections.length || 0)];
+                  if (!tag) return null;
+
+                  const tagColor =
+                    FLOW_STYLE[FLOW_ALIASES[tag] as keyof FlowMapping] ??
+                    FLOW_STYLE["default"];
+
+                  return (
+                    <div
+                      className="mt-1 inline-block text-wrap items-center"
+                      key={tIndex}
+                    >
+                      <span
+                        className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-100/80"
+                        style={{
+                          backgroundColor: tagColor + "22",
+                          color: tagColor,
+                          borderColor: tagColor + "44",
+                        }}
+                      >
+                        {tag}
+                      </span>
+                      {tIndex < flow.length - 1 && (
+                        <>
+                          <span style={{ fontSize: 0 }}> </span>
+                          <span className="text-slate-300 text-xs select-none mx-1">
+                            ➔
+                          </span>
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
+      )}
 
       {/* Lyrics Render Area */}
-      <div className="p-6 md:p-8 bg-white rounded-3xl border border-slate-200 shadow-sm space-y-8">
+      <div
+        className={
+          "p-6 md:p-8 bg-white rounded-3xl border border-slate-200 shadow-sm space-y-8 " +
+          ui?.container
+        }
+      >
         {song.sections.map((section, sIndex) => (
           <div key={sIndex} className="space-y-4">
             {/* Section Header (if segmented) */}
@@ -366,7 +381,7 @@ const RenderLine: React.FC<RenderLineProps> = ({
               )}
 
               {/* Character Slot */}
-              <div className="text-slate-800 text-lg md:text-xl font-normal leading-relaxed">
+              <div className="text-slate-800 text-lg md:text-xl font-normal leading-relaxed *:whitespace-pre-line">
                 {char ||
                   (isTrailingSpacer ? (
                     <span className="inline-block w-4">&nbsp;</span>
@@ -381,7 +396,7 @@ const RenderLine: React.FC<RenderLineProps> = ({
 
       {/* Secondary Language Subtitle (if enabled) */}
       {languageMode === "both" && line.b && (
-        <div className="text-slate-500 text-sm md:text-base font-normal leading-normal pt-0.5">
+        <div className="text-slate-500 text-sm md:text-base font-normal leading-normal pt-0.5 whitespace-pre-line">
           {line.b}
         </div>
       )}
