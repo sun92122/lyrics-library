@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "需要祢",
+      "b": "I need You"
+    },
+    "tags": ["Gateway", "約書亞樂團"],
+    "arrangement": [
+      6, 0, 1, 2, 3, 1, 2, 7, 4, 4, 4, 1, 2, 4, 7, 1, 2, 7, 5, 5, 5, 5, 10
+    ],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=_UTuLAdWv48"
+      }
+    ],
+    "originalKey": "D",
+    "author": "Gateway\n詞曲 / Matthew Harris, Kyle Lee\n中譯詞 / 吳芳儀、周巽光"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我的渴求 唯有祢能滿足我",
+          "b": "I have this thirst, only You can satisfy"
+        },
+        {
+          "a": "焚燒我心 以祢炙熱的愛火",
+          "b": "My heart it burns, with an all-consuming fire"
+        },
+        {
+          "a": "切切尋求 我就必定尋見祢",
+          "b": "I search and seek, but You're never hard to find"
+        },
+        {
+          "a": "越多的尋見祢",
+          "b": "The more of You I see"
+        },
+        {
+          "a": "我就越渴慕祢",
+          "b": "The more that I desire"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "需要祢 勝過所呼吸的空氣",
+          "b": "I need You, more than the air that I breathe"
+        },
+        {
+          "a": "抓住我每一個心跳",
+          "b": "You've captured my heart, every beat"
+        },
+        {
+          "a": "使我更靠近",
+          "b": "You're pulling me closer"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "需要祢 在祢腳前傾倒自己",
+          "b": "I need You, all that I am at Your feet"
+        },
+        {
+          "a": "用我的愛來讚美祢",
+          "b": "To pour out my love, and to praise You"
+        },
+        {
+          "a": "我再次回應",
+          "b": "Over and over"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "無人能像祢 能與祢的愛相比",
+          "b": "There is no one else, there is nothing like Your love"
+        },
+        {
+          "a": "嘗過主的恩典",
+          "b": "With every taste I get"
+        },
+        {
+          "a": "我只想更多有祢",
+          "b": "Jesus I can't get enough"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "更多認識祢 就更渴慕祢",
+          "b": "The more I know You, the more I want to"
+        },
+        {
+          "a": "我要更多有祢",
+          "b": "And I can't get enough"
+        },
+        {
+          "a": "更多認識祢 就更渴慕祢",
+          "b": "The more I know You, the more I want to"
+        },
+        {
+          "a": "我要更多有祢",
+          "b": "And I can't get enough"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "祢是我所想",
+          "b": "You're all that I want"
+        },
+        {
+          "a": "祢是我所需",
+          "b": "You're all that I need"
+        },
+        {
+          "a": "是我心所渴望",
+          "b": "You're my heart's desire"
+        },
+        {
+          "a": "是我的一切",
+          "b": "You're my everything"
+        }
+      ]
+    }
+  ]
+}

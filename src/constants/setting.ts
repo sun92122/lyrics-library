@@ -38,7 +38,7 @@ export const EXPORT_TEMPLATE_DEFAULT: {
     height: 540,
     verticalAlign: 2,
     horizontalAlign: 1,
-    fontSize: 104,
+    fontSize: 96,
     fontFamily: "Noto Sans TC",
     fontWeight: "bold",
     color: "#ffffff",

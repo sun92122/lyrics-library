@@ -1,0 +1,271 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "誰能配得＋何等榮美的名",
+      "b": "Who else + What A Beautiful Name"
+    },
+    "tags": ["多首", "約書亞樂團"],
+    "arrangement": [10, 0, 1, 2, 1, 1, 3, 3, 4, 1, 5, 5, 14, 6, 7, 8, 7, 9, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=PcYonF-sKdA"
+      }
+    ],
+    "author": "誰能配得：詞曲／Abbie Gamboa, Josiah Funderburk, Zac Rowe\n何等榮美的名：詞曲／Ben Fielding & Brooke Ligertwood\n",
+    "originalKey": ""
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我是敬拜器皿 尊崇讚美祢",
+          "b": "I am an instrument of exaltation"
+        },
+        {
+          "a": "受造為了高舉祢名超乎萬名",
+          "b": "And I was born to lift Your name above all names"
+        },
+        {
+          "a": "祢聽萬物宣揚 歌唱的旋律",
+          "b": "You hear the melody of all creation"
+        },
+        {
+          "a": "但有首歌只有我能獻上給祢",
+          "b": "But there's a song of praise that only I can bring"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "有誰能配得",
+          "b": "Who else is worthy"
+        },
+        {
+          "a": "有誰能配得",
+          "b": "Who else is worthy"
+        },
+        {
+          "a": "無人配得 只有祢耶穌",
+          "b": "There is no one, only You Jesus"
+        },
+        {
+          "a": "有誰能配得",
+          "b": "Who else is worthy"
+        },
+        {
+          "a": "有誰能配得",
+          "b": "Who else is worthy"
+        },
+        {
+          "a": "無人配得 只有祢耶穌",
+          "b": "There is no one, only You Jesus"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "祢是世世代代 永恆的上帝",
+          "b": "You are the infinite God of the ages"
+        },
+        {
+          "a": "祢卻選擇我心為祢所在之地",
+          "b": "Yet You chose to make my heart Your dwelling place"
+        },
+        {
+          "a": "醫治我的破碎 祢榮耀顯明",
+          "b": "You healed my brokenness, showed me Your glory"
+        },
+        {
+          "a": "天使無法像我獻上感恩的心",
+          "b": "So I have songs of thanks not even angels sing"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "神羔羊受膏君王",
+          "b": "Lamb of God anointed one"
+        },
+        {
+          "a": "昔在今在永在盼望",
+          "b": "Who was and is and is to come"
+        },
+        {
+          "a": "坐在榮耀寶座上",
+          "b": "Seated on the throne above"
+        },
+        {
+          "a": "聖哉 聖哉",
+          "b": "Holy, Holy"
+        },
+        {
+          "a": "公義主流出寶血",
+          "b": "Righteous one who shed His blood"
+        },
+        {
+          "a": "天父的愛完全彰顯",
+          "b": "To prove to us the Father's love"
+        },
+        {
+          "a": "基督遠勝過一切",
+          "b": "Jesus Christ be lifted up"
+        },
+        {
+          "a": "聖哉 聖哉",
+          "b": "Holy, Holy"
+        }
+      ]
+    },
+    {
+      "name": "$B1",
+      "lines": [
+        {
+          "a": "神羔羊受膏君王",
+          "b": "Lamb of God anointed one"
+        },
+        {
+          "a": "昔在今在永在盼望",
+          "b": "Who was and is and is to come"
+        },
+        {
+          "a": "坐在榮耀寶座上",
+          "b": "Seated on the throne above"
+        },
+        {
+          "a": "聖哉 聖哉",
+          "b": "Holy, Holy"
+        },
+        {
+          "a": "公義主流出寶血",
+          "b": "Righteous one who shed His blood"
+        },
+        {
+          "a": "天父的愛完全彰顯",
+          "b": "To prove to us the Father's love"
+        },
+        {
+          "a": "基督遠勝過一切",
+          "b": "Jesus Christ be lifted up"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "無人配得 只有祢耶穌",
+          "b": "There is no one, only You Jesus"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "死困不住祢 幔子已挪去",
+          "b": "Death could not hold You, the veil tore before You"
+        },
+        {
+          "a": "罪和陰間屈服於祢",
+          "b": "You silenced the boast of sin and grave"
+        },
+        {
+          "a": "與天堂歡慶 祢榮耀顯明",
+          "b": "The heavens are roaring the praise of Your glory"
+        },
+        {
+          "a": "死裡復活祢得勝利",
+          "b": "For You are raised to life again"
+        },
+        {
+          "a": "祢無所匹敵 祢無人相比",
+          "b": "You have no rival, You have no equal"
+        },
+        {
+          "a": "耶穌掌權直到永遠",
+          "b": "Now and forever, God, You reign"
+        },
+        {
+          "a": "國度屬於祢 榮耀屬於祢",
+          "b": "Yours is the Kingdom, Yours is the glory"
+        },
+        {
+          "a": "超乎一切我主聖名",
+          "b": "Yours is the name above all names"
+        }
+      ]
+    },
+    {
+      "name": "$C3",
+      "lines": [
+        {
+          "a": "這是何等大能的名",
+          "b": "What a powerful name it is"
+        },
+        {
+          "a": "這是何等大能的名",
+          "b": "What a powerful name it is"
+        },
+        {
+          "a": "我王耶穌基督聖名",
+          "b": "The name of Jesus Christ my King"
+        },
+        {
+          "a": "這是何等大能的名",
+          "b": "What a powerful name it is"
+        },
+        {
+          "a": "無一事物相比",
+          "b": "Nothing can stand against"
+        },
+        {
+          "a": "這是何等大能的名 耶穌的聖名",
+          "b": "What a powerful name it is, the name of Jesus"
+        }
+      ]
+    },
+    {
+      "name": "$B3",
+      "lines": [
+        {
+          "a": "祢無所匹敵 祢無人相比",
+          "b": "You have no rival, You have no equal"
+        },
+        {
+          "a": "耶穌掌權直到永遠",
+          "b": "Now and forever, God, You reign"
+        },
+        {
+          "a": "國度屬於祢 榮耀屬於祢",
+          "b": "Yours is the Kingdom, Yours is the glory"
+        },
+        {
+          "a": "超乎一切我主聖名",
+          "b": "Yours is the name above all names"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "這是何等大能的名 耶穌的聖名",
+          "b": "What a powerful name it is, the name of Jesus"
+        }
+      ]
+    }
+  ]
+}

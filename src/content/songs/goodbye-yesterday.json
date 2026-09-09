@@ -1,0 +1,162 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "Goodbye Yesterday",
+      "b": ""
+    },
+    "tags": ["Radical"],
+    "arrangement": [
+      8, 0, 0, 9, 2, 0, 1, 2, 2, 3, 3, 3, 3, 4, 4, 2, 2, 5, 6, 6, 6, 6, 6, 6, 6,
+      6, 6, 6, 6, 7
+    ],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=lTFb_6TPNaY&t=167"
+      }
+    ],
+    "author": "詞曲：Elevation rhythm",
+    "originalKey": "G"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "Goodbye Yesterday"
+        },
+        {
+          "a": "我活在光明的 全新一天",
+          "b": "I'm living in the light of a new day"
+        },
+        {
+          "a": "不浪費一分一秒在 過去歲月",
+          "b": "I won't waste another minute in my old ways"
+        },
+        {
+          "a": "讚美主 我重生改變",
+          "b": "Praise the Lord I've been born again"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "Goodbye Yesterday"
+        },
+        {
+          "a": "主聖靈就澆灌 在我身上",
+          "b": "The Spirit of the Load is upon me"
+        },
+        {
+          "a": "救恩正在血液 中流淌",
+          "b": "I've got resurrection in my veins"
+        },
+        {
+          "a": "讚美主 我重生改變",
+          "b": "Praise the Lord I've been born again"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "一遍又一遍 哦 一遍又一遍",
+          "b": "Again and again and again and again"
+        },
+        {
+          "a": "祢拯救我脫離混亂的局面",
+          "b": "You rescued me out of the mess I was in"
+        },
+        {
+          "a": "挪去我悲哀 改換上喜樂袍",
+          "b": "Traded my sorrow for something to sing"
+        },
+        {
+          "a": "得勝跳舞踐踏過去所有失敗",
+          "b": "I'm dancing on the grave that I once lived in"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我已經決定",
+          "b": "I have decided"
+        },
+        {
+          "a": "要跟隨耶穌",
+          "b": "To follow Jesus"
+        },
+        {
+          "a": "十架在前 世界在後",
+          "b": "The world behind, The cross before"
+        },
+        {
+          "a": "我永不回頭",
+          "b": "I won't turn back"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "我永不回頭",
+          "b": "I won't turn back"
+        },
+        {
+          "a": "我永不回頭",
+          "b": "I won't turn back"
+        },
+        {
+          "a": "十架在前 世界在後",
+          "b": "The world behind, The cross before"
+        },
+        {
+          "a": "我永不回頭",
+          "b": "I won't turn back"
+        }
+      ]
+    },
+    {
+      "name": "$B3",
+      "lines": [
+        {
+          "a": "讚美主 我重生改變",
+          "b": "Praise the Lord I've been born again"
+        },
+        {
+          "a": "讚美主 我重生改變",
+          "b": "Praise the Lord I've been born again"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "得勝跳舞踐踏過去所有失敗",
+          "b": "I'm dancing on the grave that I once lived in"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "讚美主 我重生改變",
+          "b": "Praise the Lord I've been born again"
+        }
+      ]
+    }
+  ]
+}

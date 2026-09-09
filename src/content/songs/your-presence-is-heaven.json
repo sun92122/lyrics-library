@@ -1,0 +1,153 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "祢同在如天堂降臨",
+      "b": "Your Presence Is Heaven"
+    },
+    "tags": ["約書亞樂團", "亞洲為耶穌"],
+    "arrangement": [7, 0, 1, 2, 1, 1, 3, 8, 4, 5, 1, 1, 3, 3, 8, 3, 6, 11],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=fp16JdbAL_4"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：Israel Houghton & Micah Massey\n中譯詞：蕭郁芸",
+    "bpm": 70,
+    "originalKey": "Bm"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "這世上有誰能夠像祢",
+          "b": "Who is like You, Load in all the earth"
+        },
+        {
+          "a": "祢的愛與榮美無止盡",
+          "b": "Matchless love and beauty, endless worth"
+        },
+        {
+          "a": "世上無一事物能相比",
+          "b": "Nothing in this world can satisfy"
+        },
+        {
+          "a": "唯有耶穌祢能滿足我心",
+          "b": "Jesus, You're the cup that won't run dry"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祢同在如天堂降臨",
+          "b": "Your presence is heaven to me"
+        },
+        {
+          "a": "祢同在如天堂降臨",
+          "b": "Your presence is heaven to me"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "主祢是我生命的至寶",
+          "b": "Treasure of my heart and of my soul"
+        },
+        {
+          "a": "我軟弱時祢充滿憐憫",
+          "b": "In my weakness, You are merciful"
+        },
+        {
+          "a": "從一切錯誤當中拯救我",
+          "b": "Redeemer of my past and present wrongs"
+        },
+        {
+          "a": "賜給我未來的新生命",
+          "b": "Holder of my future days to come"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "喔耶穌 喔耶穌",
+          "b": "Oh, Jesus, oh, Jesus"
+        },
+        {
+          "a": "祢同在如天堂降臨",
+          "b": "Your presence is heaven to me"
+        },
+        {
+          "a": "喔耶穌 喔耶穌",
+          "b": "Oh, Jesus, oh, Jesus"
+        },
+        {
+          "a": "祢同在如天堂降臨",
+          "b": "Your presence is heaven to me"
+        }
+      ]
+    },
+    {
+      "name": "$V3",
+      "lines": [
+        {
+          "a": "我願用一生年日等待",
+          "b": "All my days on earth I will await"
+        },
+        {
+          "a": "直到那日與祢面對面",
+          "b": "The moment that I see You face to face"
+        },
+        {
+          "a": "世上無一事物能相比",
+          "b": "Nothing in this world will satisfy"
+        },
+        {
+          "a": "唯有耶穌祢能滿足我心",
+          "b": "Jesus, You're the cup that won't run dry"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "世上無一事物能相比",
+          "b": "Nothing in this world will satisfy"
+        },
+        {
+          "a": "唯有耶穌祢能滿足我心",
+          "b": "Jesus, You're the cup that won't run dry"
+        },
+        {
+          "a": "唯有耶穌祢能滿足我心",
+          "b": "Jesus, You're the cup that won't run dry"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "祢同在如天堂降臨",
+          "b": "Your presence is heaven to me"
+        },
+        {
+          "a": "祢同在如天堂降臨",
+          "b": "Your presence is heaven to me"
+        }
+      ]
+    }
+  ]
+}

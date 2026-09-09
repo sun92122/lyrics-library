@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我心靈得安息",
+      "b": "It Is Well"
+    },
+    "tags": ["KUA"],
+    "arrangement": [7, 0, 1, 8, 2, 1, 3, 4, 5, 6, 6, 3, 4, 4, 11],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=yLewypc2ZDQ"
+      }
+    ],
+    "author": "Horatio Gates Spafford, Kristene DiMarco, Philip Paul Bliss\n中文翻譯：天堂敬拜",
+    "ccli": "7021972",
+    "bpm": 72,
+    "originalKey": "G"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "大地都曾經震動  因祂聲音顫抖",
+          "b": "Grander earth has quaked before, moved by the sound of His voice"
+        },
+        {
+          "a": "大海洶湧風浪翻騰  因我仰望祢而平息",
+          "b": "Seas that are shaken and stirred, can be calmed and broken for my regard"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "帶領我 帶領我 眼光專注祢",
+          "b": "And through it all, through it all, my eyes are on You"
+        },
+        {
+          "a": "帶領我 帶領我 得安息",
+          "b": "And through it all, through it all, it is well"
+        },
+        {
+          "a": "帶領我 帶領我 眼光專注祢",
+          "b": "And through it all, through it all, my eyes are on You"
+        },
+        {
+          "a": "我的心 安息",
+          "b": "And it is well with me"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "雖我眼還未看見  我心卻不懷疑",
+          "b": "And far be it from me to not believe, even when my eyes can't see"
+        },
+        {
+          "a": "即使大山在我面前  祢能挪移投進海裡",
+          "b": "And this mountain that's in front of me, will be thrown into the midst of the sea"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我靈交託  堅定相信",
+          "b": "So let go my soul and trust in Him"
+        },
+        {
+          "a": "奉祢名 風浪平靜",
+          "b": "The waves and wind still know His name"
+        },
+        {
+          "a": "我靈交託  堅定相信",
+          "b": "So let go my soul and trust in Him"
+        },
+        {
+          "a": "奉祢名 風浪平靜",
+          "b": "The waves and wind still know His name"
+        },
+        {
+          "a": "我靈交託  堅定相信",
+          "b": "So let go my soul and trust in Him"
+        },
+        {
+          "a": "奉祢名 風浪平靜",
+          "b": "The waves and wind still know His name"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "奉祢名 風浪平靜",
+          "b": "The waves and wind still know His name"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我的心 得安息",
+          "b": "And it is well with my soul"
+        },
+        {
+          "a": "我的心 得安息",
+          "b": "And it is well with my soul"
+        },
+        {
+          "a": "我的心 得安息",
+          "b": "And it is well with my soul"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "我的心 我的心 得安息",
+          "b": "And it is well with my soul"
+        }
+      ]
+    }
+  ]
+}

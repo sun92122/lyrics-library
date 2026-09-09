@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "被造的意義",
+      "b": "What You Created Me For"
+    },
+    "tags": ["約書亞樂團", "火把音樂"],
+    "arrangement": [5, 0, 1, 2, 4, 3, 6, 0, 1, 2, 4, 3, 6, 2, 4, 4, 3, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0xax3FdeoY0"
+      }
+    ],
+    "originalKey": "G",
+    "bpm": 150,
+    "author": "約書亞樂團\n詞曲： 趙治德\n中譯詞：王建玫"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我的主我讚美祢 當一切充滿意義",
+          "b": "Oh my Lord I praise Your name 'Cuz everything is meant to be"
+        },
+        {
+          "a": "真高興因祢時刻都與我同在",
+          "b": "Oh how happy for You are here With me all the time"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "祢賦予我的價值 是一生為祢所用",
+          "b": "You call me valuable All my life for Your name's sake"
+        },
+        {
+          "a": "當別人軟弱缺乏 我伸出雙手",
+          "b": "When people are weak or in lack I reach out to them"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "讚美祢 是我被造的意義",
+          "b": "Praise Your name is the reason why I'm here"
+        },
+        {
+          "a": "祢對我的愛 在我愛祢已先存在",
+          "b": "Your love for me it came even long before me"
+        },
+        {
+          "a": "當祢觸摸我 從我的靈魂最深處",
+          "b": "As you touched me from the bottom of my whole heart"
+        },
+        {
+          "a": "湧出了輕快的歌曲",
+          "b": "Bursting out joyful songs"
+        },
+        {
+          "a": "美妙旋律要唱給祢聽",
+          "b": "Beautiful sounds I'd sing them to You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我讚美祢（創造一切都是為了我）",
+          "b": "Lord I praise You (You created it all and all for me)"
+        },
+        {
+          "a": "我讚美祢（雖然死了卻從死裡復活）",
+          "b": "Lord I praise You (You were dead, and now you're back to life)"
+        },
+        {
+          "a": "我讚美祢（聽見萬民都揚聲高唱）",
+          "b": "Lord I praise You (all the people singing in loud voice)"
+        },
+        {
+          "a": "哈利路亞 哈利路亞 阿門",
+          "b": "Hallelujah hallelujah, Amen"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "我讚美祢（創造一切都是為了我）",
+          "b": "Lord I praise You (You created it all and all for me)"
+        },
+        {
+          "a": "我讚美祢（雖然死了卻從死裡復活）",
+          "b": "Lord I praise You (You were dead, and now you're back to life)"
+        },
+        {
+          "a": "我讚美祢（聽見萬民都揚聲高唱）",
+          "b": "Lord I praise You (all the people singing in loud voice)"
+        },
+        {
+          "a": "哈利路亞 哈利路亞",
+          "b": "Hallelujah hallelujah"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "祢寶血為我而流",
+      "b": "Your Blood Shed for Me"
+    },
+    "tags": ["約書亞樂團", "相極了天堂"],
+    "arrangement": [5, 0, 1, 2, 6, 0, 1, 2, 3, 3, 2, 2, 7, 2, 4, 4, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=1UzjzdiiiyM"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：劉淑莉\n中譯英：王建玫",
+    "originalKey": "F",
+    "bpm": 64
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "在黑暗之中 我遇見祢",
+          "b": "In the darkness, I found You there"
+        },
+        {
+          "a": "照亮我的生命",
+          "b": "Lighting up my life so fair"
+        },
+        {
+          "a": "在絕望之中 祢尋見我",
+          "b": "In my despair, You came to me"
+        },
+        {
+          "a": "祢的手 擁抱我",
+          "b": "Held me close, set me free"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "我軟弱 我恐懼",
+          "b": "In my weakness and my fear"
+        },
+        {
+          "a": "全交在祢手裡",
+          "b": "I give it all, for You are near"
+        },
+        {
+          "a": "祢挪去 我羞愧",
+          "b": "You lift my shame, renew my soul"
+        },
+        {
+          "a": "更新我的生命",
+          "b": "With You, my life is whole"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祢寶血為我而流 使我得自由",
+          "b": "Your precious blood was shed for me, bringing freedom, setting me free"
+        },
+        {
+          "a": "何等偉大的愛 超乎萬有",
+          "b": "Oh, what a love so great, above all things"
+        },
+        {
+          "a": "我獻上我全所有 為祢而活",
+          "b": "To You my all, my life, I bring"
+        },
+        {
+          "a": "何等犧牲的愛 使我得拯救",
+          "b": "Such sacrifice that saves my soul, now I am whole"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "祢寶貴十架 為我付上代價",
+          "b": "Your precious cross, the price You paid"
+        },
+        {
+          "a": "是我得勝的力量",
+          "b": "Is the strength by which I'm saved"
+        },
+        {
+          "a": "天堂敞開 祢是榮耀君王",
+          "b": "Heaven opens, You're the King"
+        },
+        {
+          "a": "聖潔的羔羊 祢已勝過死亡",
+          "b": "Holy Lamb, You've conquered death's sting"
+        },
+        {
+          "a": "救贖計劃已成就",
+          "b": "Redemption's plan is now complete"
+        },
+        {
+          "a": "我全心仰望 永恆盼望",
+          "b": "In You, my hope, my heart's retreat"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "何等犧牲的愛 使我得拯救",
+          "b": "Such sacrifice that saves my soul, now I am whole"
+        }
+      ]
+    }
+  ]
+}

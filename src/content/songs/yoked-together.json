@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "同負一軛",
+      "b": "Yoked Together"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [5, 0, 1, 2, 6, 0, 1, 2, 6, 3, 3, 3, 3, 6, 1, 2, 4, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=EGMV2y4UE50"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：曹之懿、趙治德、曾晨恩、黃正安、陳珮瑜\n中譯英：王建玫",
+    "originalKey": "C",
+    "bpm": 128
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "高山又低谷",
+          "b": "Mountains and valleys"
+        },
+        {
+          "a": "枯骨成朽腐",
+          "b": "Bones were all consumed"
+        },
+        {
+          "a": "我抬頭看向",
+          "b": "Raised my head to seek"
+        },
+        {
+          "a": "那盼望的救主",
+          "b": "The Savior of the hope"
+        },
+        {
+          "a": "不看我自己",
+          "b": "Not to see myself"
+        },
+        {
+          "a": "不照我所想",
+          "b": "Not about my thought"
+        },
+        {
+          "a": "尋求祢旨意",
+          "b": "Seek Your will indeed"
+        },
+        {
+          "a": "全按著祢計畫",
+          "b": "All follow by Your plan"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "一直沒有察覺",
+          "b": "Never sensed or realized"
+        },
+        {
+          "a": "在我裡面比世界更大",
+          "b": "The One in me is bigger than the world"
+        },
+        {
+          "a": "萬有本於祂倚靠祂 都歸於祂",
+          "b": "For all is Him, depends on Him and belongs to Him"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祢已調度萬有",
+          "b": "You have planned everything"
+        },
+        {
+          "a": "在我還沒開口",
+          "b": "Before I have asked"
+        },
+        {
+          "a": "一切都出於祢",
+          "b": "Everything is from you"
+        },
+        {
+          "a": "我一生別無所求",
+          "b": "There's nothing more that I need"
+        },
+        {
+          "a": "不需要再等",
+          "b": "I don't have to wait"
+        },
+        {
+          "a": "就是此時此刻",
+          "b": "And now it's the time"
+        },
+        {
+          "a": "因祢在身旁",
+          "b": "You are here with me"
+        },
+        {
+          "a": "就是最完美的時刻",
+          "b": "This is the perfect timing now"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "祢背負我重擔",
+          "b": "You've carried my burden"
+        },
+        {
+          "a": "與我同負一軛",
+          "b": "Yoked together with me"
+        },
+        {
+          "a": "我放下自己",
+          "b": "I put down myself"
+        },
+        {
+          "a": "何等輕省",
+          "b": "What a relief"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "調度萬有",
+          "b": "You have planned everything"
+        },
+        {
+          "a": "在我還沒開口",
+          "b": "Before I have asked"
+        },
+        {
+          "a": "一切都出於祢",
+          "b": "Everything is from you"
+        },
+        {
+          "a": "我一生別無所求",
+          "b": "There's nothing more that I need"
+        },
+        {
+          "a": "不需要再等",
+          "b": "I don't have to wait"
+        },
+        {
+          "a": "就是此時此刻",
+          "b": "And now it's the time"
+        },
+        {
+          "a": "因祢在身旁",
+          "b": "You are here with me"
+        },
+        {
+          "a": "就是最完美的時刻",
+          "b": "This is the perfect timing now"
+        }
+      ]
+    }
+  ]
+}

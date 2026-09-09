@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我要愛慕祢",
+      "b": "I Adore You"
+    },
+    "tags": ["KUA"],
+    "arrangement": [3, 0, 0, 1, 0, 1, 1, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=2IJbuIeyQog"
+      }
+    ],
+    "author": "詞／曲：長澤崇史（Takafumi Nagasawa）\n中文翻譯：黃川寧"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "耶穌 我要愛慕祢",
+          "b": "Jesus, I adore You"
+        },
+        {
+          "a": "我要愛慕祢",
+          "b": "I adore You"
+        },
+        {
+          "a": "傾倒我的生命",
+          "b": "I pour my life for You"
+        },
+        {
+          "a": "祢是 我唯一所求",
+          "b": "You are all that I need"
+        },
+        {
+          "a": "讓我心單單渴慕祢",
+          "b": "Let You be all that I yearn"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我心滿溢 我心滿溢",
+          "b": "My heart is full, my heart is filled"
+        },
+        {
+          "a": "對祢的愛和思念無止盡",
+          "b": "With love and desire for You till eternity"
+        },
+        {
+          "a": "讓我走向祢的身旁貼近祢",
+          "b": "Draw me near to Your side"
+        },
+        {
+          "a": "主啊 我渴慕尋求祢",
+          "b": "O Lord, I long for You"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "讓我走向祢的身旁貼近祢",
+          "b": "Draw me near to Your side"
+        },
+        {
+          "a": "主啊 我渴慕尋求祢",
+          "b": "O Lord, I long for You"
+        }
+      ]
+    }
+  ]
+}

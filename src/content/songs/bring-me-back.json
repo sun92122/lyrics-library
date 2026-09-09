@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "找到我",
+      "b": "Bring Me Back"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [5, 0, 1, 2, 1, 3, 6, 3, 1, 1, 4, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=5hkbct1UPK8"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲 洪德耀、陳州邦、褚治軒、璽恩 SiEnVanessa",
+    "originalKey": "F",
+    "bpm": 68
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "看著我自己 如此的渺小",
+          "b": "Now I see myself, insignificant"
+        },
+        {
+          "a": "拿把尺在生命中 不斷的測量",
+          "b": "Hold my life in scrutiny, can I measure up?"
+        },
+        {
+          "a": "但祢對我說 祢愛我已足夠",
+          "b": "Yet You speak to me, Your love is enough for me"
+        },
+        {
+          "a": "放下一切 我願跟祢走",
+          "b": "Lay it all down, I follow you along"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "耶穌 因祢的寶血使我得自由",
+          "b": "Jesus, by Your blood You set this captive free"
+        },
+        {
+          "a": "耶穌 因祢釘痕的雙手拯救我",
+          "b": "Jesus, by Your pierced hands You have delivered me"
+        },
+        {
+          "a": "耶穌 跨越了時空",
+          "b": "Jesus, stepping through the time"
+        },
+        {
+          "a": "找到我 找到我 在祢懷中",
+          "b": "You found me, You found me, right in Your arms"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "祢每字每句 煉淨我生命",
+          "b": "Every word You speak, purifies my life"
+        },
+        {
+          "a": "祢氣息 祢的聲音 牽引著我心",
+          "b": "By Your breath, with Your voice, Lord, You lead me on"
+        },
+        {
+          "a": "我已經決定 一生跟隨祢",
+          "b": "I have made my mind to follow you along"
+        },
+        {
+          "a": "失去祢 活著沒有意義",
+          "b": "You're the meaning, the reason that I live"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "過去不再束縛我 祢的盼望賦予我",
+          "b": "My past no longer binds me, Your hope it now defines me"
+        },
+        {
+          "a": "Oh 生命能力湧流",
+          "b": "Oh, it is Your life, overflow"
+        },
+        {
+          "a": "如今活著不再是我 基督在我裡面活",
+          "b": "It's no longer I who's living, but Christ who lives within me"
+        },
+        {
+          "a": "Oh  祢是我的所有",
+          "b": "Oh, all I have is from You"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "找到我 找到我 在祢懷中",
+          "b": "You found me, You found me, right in Your arms"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,330 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "因為祢真好",
+      "b": "You Are Good"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [6, 0, 1, 4, 2, 3, 5, 5, 2, 1, 10],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=-CYEa79YLlw"
+      }
+    ],
+    "author": "約書亞樂團\n詞、曲 Brian Johnson, Jeremy Riddle",
+    "originalKey": "A",
+    "bpm": 140
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我站在山頂上  大聲呼喊宣告",
+          "b": "I want to scream it out, from every mountain top",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            },
+            {
+              "index": 8,
+              "chord": "A"
+            }
+          ]
+        },
+        {
+          "a": "祢良善無止盡  永遠不會停息",
+          "b": "Your goodness knows no bounds, Your goodness never stops",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "D"
+            },
+            {
+              "index": 8,
+              "chord": "D"
+            }
+          ]
+        },
+        {
+          "a": "祢慈愛隨著我  充滿我的生命",
+          "b": "Your mercy follows me, Your kindness fills my life",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "F#m"
+            },
+            {
+              "index": 11,
+              "chord": "G#m"
+            }
+          ]
+        },
+        {
+          "a": "祢愛讓我驚奇",
+          "b": "Your love amazes me",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            },
+            {
+              "index": 5,
+              "chord": "E"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "And I Sing 因爲祢真好",
+          "b": "And I sing because You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            }
+          ]
+        },
+        {
+          "a": "And I Dance 因爲祢真好",
+          "b": "And I dance because You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            }
+          ]
+        },
+        {
+          "a": "And I Shout 因爲祢真好",
+          "b": "And I shout because You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "D"
+            }
+          ]
+        },
+        {
+          "a": "祢真好 祢真好",
+          "b": "You are good, good to me",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "D"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "And I Sing 因爲祢真好",
+          "b": "And I sing because You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            }
+          ]
+        },
+        {
+          "a": "And I Dance 因爲祢真好",
+          "b": "And I dance because You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            }
+          ]
+        },
+        {
+          "a": "And I Shout 因爲祢真好",
+          "b": "And I shout because You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "D"
+            }
+          ]
+        },
+        {
+          "a": "祢對我真好",
+          "b": "You are good to me",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "D"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "$C3",
+      "lines": [
+        {
+          "a": "And I Sing 因爲祢真好",
+          "b": "And I sing because You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            }
+          ]
+        },
+        {
+          "a": "And I Dance 因爲祢真好",
+          "b": "And I dance because You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            }
+          ]
+        },
+        {
+          "a": "And I Shout 因爲祢真好",
+          "b": "And I shout because You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "D"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "再沒有任何人 能夠與祢相比",
+          "b": "Nothing and no one comes, anywhere close to You",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            },
+            {
+              "index": 7,
+              "chord": "A"
+            }
+          ]
+        },
+        {
+          "a": "天地和深海洋 都顯明這真理",
+          "b": "The earth and oceans deep, only reflect this truth",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "D"
+            },
+            {
+              "index": 7,
+              "chord": "D"
+            }
+          ]
+        },
+        {
+          "a": "在黑暗的時刻 祢如明亮晨星",
+          "b": "And in my darkest night, You shine as bright as day",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "F#m"
+            },
+            {
+              "index": 10,
+              "chord": "G#m"
+            }
+          ]
+        },
+        {
+          "a": "祢愛讓我驚奇",
+          "b": "Your love amazes me",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            },
+            {
+              "index": 5,
+              "chord": "E"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我全心宣告 讓世界知道",
+          "b": "With a cry of praise my heart will proclaim",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "Bm7"
+            },
+            {
+              "index": 6,
+              "chord": "D"
+            }
+          ]
+        },
+        {
+          "a": "祢真好 祢真好",
+          "b": "You are good You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            }
+          ]
+        },
+        {
+          "a": "晴天或雨天 我都要讚美",
+          "b": "In the Sun or rain my life celebrates",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "Bm7"
+            },
+            {
+              "index": 6,
+              "chord": "D"
+            }
+          ]
+        },
+        {
+          "a": "祢真好 祢真好",
+          "b": "You are good You are good",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            },
+            {
+              "index": 4,
+              "chord": "E"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

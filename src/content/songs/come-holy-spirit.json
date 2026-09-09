@@ -1,0 +1,93 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "聖靈請祢來充滿我心",
+      "b": "Come Holy Spirit"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [3, 0, 0, 1, 0, 1, 1, 4, 1, 1, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=AjrW81YEUd0"
+      }
+    ],
+    "author": "約書亞樂團\n詞／曲：Caroline Tjen\n中譯詞：City Harvest Church",
+    "originalKey": "G",
+    "bpm": 67
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "聖靈請祢來充滿我心",
+          "b": "Come Holy Spirit, fall on me now"
+        },
+        {
+          "a": "我需要祢恩膏 充滿我靈",
+          "b": "I need Your anointing, come in Your power"
+        },
+        {
+          "a": "聖靈啊我好愛祢",
+          "b": "I love You Holy Spirit"
+        },
+        {
+          "a": "我的靈讓祢牽引",
+          "b": "You're captivating my soul"
+        },
+        {
+          "a": "而每一天我要更深愛祢",
+          "b": "And everyday I grow to love You more"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我要追求祢主",
+          "b": "I'm reaching for Your heart"
+        },
+        {
+          "a": "我將生命獻給祢",
+          "b": "You hold my life into Your hands"
+        },
+        {
+          "a": "牽引我更親近祢",
+          "b": "Drawing me closer to You"
+        },
+        {
+          "a": "祢大能更新我靈",
+          "b": "I feel Your power renew"
+        },
+        {
+          "a": "無人能與祢相比",
+          "b": "Nothing compares to this place"
+        },
+        {
+          "a": "主我仰望祢的榮面",
+          "b": "Where I can see You face to face"
+        },
+        {
+          "a": "我敬拜祢在靈與真理裡",
+          "b": "I worship You in spirit and in truth"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "我敬拜祢在靈與真理裡",
+          "b": "I worship You in spirit and in truth"
+        }
+      ]
+    }
+  ]
+}

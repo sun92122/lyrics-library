@@ -15,67 +15,6 @@ import {
 } from "@/constants/setting";
 import { FLOW_NAMES, FLOW_ALIASES } from "@/constants/flow";
 
-// import iconv from "iconv-lite";
-
-/**
- * 檢查字元是否能被 CP950 正確編碼
- */
-// function isInCp950(char: string): boolean {
-//   const buf = iconv.encode(char, "cp950");
-//   // 若字元不在 CP950 內，iconv-lite 預設會替換為 '?' (0x3F)
-//   // 透過解碼比對，若不相等則代表遺失/不在編碼表中
-//   return iconv.decode(buf, "cp950") === char;
-// }
-
-/**
- * 將文字轉為相容 CP950 的 RTF 內容，缺字自動轉為 Unicode (\uN?)
- */
-// function stringToRtfWithUnicode(str: string): string {
-//   let result = "";
-
-//   // 使用 for...of 按 Unicode Code Point 迭代，確保 Emoji 等代理對字元不被切斷
-//   for (const char of str) {
-//     // 1. RTF 保留字元跳脫
-//     if (char === "\\" || char === "{" || char === "}") {
-//       result += `\\${char}`;
-//       continue;
-//     }
-
-//     // 2. 基本 ASCII 可見字元與空格直接輸出
-//     const codePoint = char.codePointAt(0)!;
-//     if (codePoint >= 32 && codePoint <= 126) {
-//       result += char;
-//       continue;
-//     }
-
-//     // 3. 換行符號處理（可選）
-//     if (char === "\n") {
-//       result += "\\par\n";
-//       continue;
-//     }
-
-//     // 4. 判斷是否屬於 CP950
-//     if (isInCp950(char)) {
-//       const buf = iconv.encode(char, "cp950");
-//       for (const byte of buf) {
-//         result += `\\\'${byte.toString(16).padStart(2, "0")}`;
-//       }
-//     } else {
-//       // 5. 不在 CP950 內，轉為 Unicode (\uN?)
-//       // char.length 可能為 1 (BMP 字元) 或 2 (Surrogate Pair)
-//       for (let i = 0; i < char.length; i++) {
-//         const codeUnit = char.charCodeAt(i);
-//         // 轉為 16-bit 有號整數 (-32768 ~ 32767)
-//         const signedCode = codeUnit > 32767 ? codeUnit - 65536 : codeUnit;
-//         // 接上 '?' 作為 \uc1 的替代字元
-//         result += `\\u${signedCode}?`;
-//       }
-//     }
-//   }
-
-//   return result;
-// }
-
 export function escapeRtfUnicode(text: string): string {
   let result = "";
 

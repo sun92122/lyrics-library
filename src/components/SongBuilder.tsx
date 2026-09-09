@@ -257,7 +257,11 @@ export const SongBuilder: React.FC = () => {
             setId(e.target.value.replace(/[\s,]+/g, "-").toLowerCase());
             setIdError(null);
           }}
-          placeholder="song-id"
+          placeholder={
+            meta.title.b
+              ? meta.title.b.replace(/[\s,]+/g, "-").toLowerCase()
+              : "song-id"
+          }
           className="text-right w-[50%] rounded-lg p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
         .json
@@ -394,8 +398,8 @@ export const SongBuilder: React.FC = () => {
                 setMeta((prev) => ({ ...prev, author: e.target.value }))
               }
               placeholder="作詞：John Newton"
-              rows={2}
-              className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              rows={3}
+              className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
             />
           </Field>
           <Field className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -468,7 +472,7 @@ export const SongBuilder: React.FC = () => {
               onChange={(e) => setRawLyrics(e.target.value)}
               placeholder="在此輸入原始歌詞，支援段落標記 [Verse 1]、[Chorus] 等"
               rows={10}
-              className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
             />
           </Field>
 
@@ -483,7 +487,7 @@ export const SongBuilder: React.FC = () => {
               }
               placeholder="在此輸入歌曲備註"
               rows={1}
-              className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
             />
           </Field>
 

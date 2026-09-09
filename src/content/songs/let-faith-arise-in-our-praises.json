@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "讚美中信心不斷升起",
+      "b": "Let Faith Arise In Our Praises"
+    },
+    "tags": ["讚美之泉", "讚美中信心不斷升起"],
+    "arrangement": [3, 0, 1, 1, 1, 2, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=yFQn424qMKg"
+      }
+    ],
+    "ccli": "7196185",
+    "author": "讚美之泉\n詞、曲：游智婷",
+    "originalKey": "C",
+    "bpm": 70
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我的口 要不停讚美",
+          "b": "With my lips, I'll sing Your praises"
+        },
+        {
+          "a": "我的手 要不停高舉",
+          "b": "With my hands, I'll lift up Your name"
+        },
+        {
+          "a": "因祢應許 是我的信心",
+          "b": "For Your promises raise up my faith"
+        },
+        {
+          "a": "每個困難中 我經歷神蹟",
+          "b": "In my troubled times, Your miracles come"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "讚美中 信心不斷升起",
+          "b": "In our praise, faith is ever rising"
+        },
+        {
+          "a": "淚水中 我依然高聲唱",
+          "b": "Through our tears, we choose to sing our song"
+        },
+        {
+          "a": "祢的信實 上達穹蒼",
+          "b": "You are faithful until the end"
+        },
+        {
+          "a": "祢的應許 從不落空",
+          "b": "and Your promises never fail"
+        },
+        {
+          "a": "讚美中 信心不斷升起",
+          "b": "In our praise, faith is ever rising"
+        },
+        {
+          "a": "淚水中 我依然高聲唱",
+          "b": "We will sing the anthem of our faith"
+        },
+        {
+          "a": "縱然前路迷茫 我心失望",
+          "b": "Even when we are lost, or discouraged"
+        },
+        {
+          "a": "祢的話是燈 照耀前方",
+          "b": "Your word is a light, guiding our way"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "縱然前路迷茫 我心失望",
+          "b": "Even when we are lost, or discouraged"
+        },
+        {
+          "a": "祢的話是燈 照耀前方",
+          "b": "Your word is a light, guiding our way"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "避難所",
+      "b": "Refuge"
+    },
+    "tags": ["KUA"],
+    "arrangement": [4, 0, 5, 0, 1, 2, 5, 0, 1, 2, 5, 2, 5, 3],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=4PdlHqKbhJ8"
+      }
+    ],
+    "author": "詞／曲：Sun Ho、Mark Kwan"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我向祢唱首愛的歌",
+          "b": "I sing a love song to You Load"
+        },
+        {
+          "a": "每一天  每一夜",
+          "b": "Every day, every night"
+        },
+        {
+          "a": "宣揚祢恩典與憐憫",
+          "b": "Tell of Your goodness and mercy"
+        },
+        {
+          "a": "讓世界知道祢拯救我",
+          "b": "Tell the world how You rescued me"
+        },
+        {
+          "a": "擦去我羞愧過去",
+          "b": "Picked me up from sin and shame"
+        },
+        {
+          "a": "賜給我新生命",
+          "b": "Your breath gives me new life"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "主我永遠不離開祢",
+          "b": "Where can I go from Your presence"
+        },
+        {
+          "a": "唯有祢是我避難所",
+          "b": "Under Your wings I take refuge"
+        },
+        {
+          "a": "祢的聖靈居住在我心",
+          "b": "Your Spirit lives within my heart"
+        },
+        {
+          "a": "一生要緊緊跟隨祢",
+          "b": "I know, we'll never be apart"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "每一天 我要更多親近祢",
+          "b": "Every day I draw closer to You Load"
+        },
+        {
+          "a": "渴望能見祢面",
+          "b": "I long to see Your face"
+        },
+        {
+          "a": "依偎在祢懷裡",
+          "b": "And hide in Your embrace"
+        },
+        {
+          "a": "我一生 永不離開祢同在",
+          "b": "All my life, dwelling in Your Holy place"
+        },
+        {
+          "a": "我心因祢改變",
+          "b": "My heart o Load, You've changed"
+        },
+        {
+          "a": "我不再像從前",
+          "b": "I'll never be the same"
+        },
+        {
+          "a": "我不再像從前",
+          "b": "I'll never be the same"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "不再像從前",
+          "b": "Never be the same"
+        },
+        {
+          "a": "因祢改變我",
+          "b": "You've changed me"
+        },
+        {
+          "a": "我不再像從前",
+          "b": "I'll never be the same"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "祢愛不變",
+      "b": "One Thing Remains"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [5, 0, 1, 6, 0, 1, 2, 1, 6, 3, 1, 4, 2, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=gaVjMKCP7kI"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：Brian Johnson, Jeremy Riddle & Christa Black-Gifford",
+    "originalKey": "F",
+    "bpm": 152
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "超過我所面對的高山",
+          "b": "Higher than the mountains that I face"
+        },
+        {
+          "a": "勝過死亡陰間的挑戰",
+          "b": "Stronger than the power of the grave"
+        },
+        {
+          "a": "跨過所有變動和艱難",
+          "b": "Constant in the trial and the change"
+        },
+        {
+          "a": "祢愛不變 存到永遠",
+          "b": "One thing remains, One thing remains"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祢愛不失敗 永不放棄",
+          "b": "Your love never fails, it never gives up"
+        },
+        {
+          "a": "永遠不會離開",
+          "b": "it never runs out on me"
+        },
+        {
+          "a": "祢愛不失敗 永不放棄",
+          "b": "Your love never fails, it never gives up"
+        },
+        {
+          "a": "永遠不會離開",
+          "b": "it never runs out on me"
+        },
+        {
+          "a": "祢愛不失敗 永不放棄",
+          "b": "Your love never fails, it never gives up"
+        },
+        {
+          "a": "永遠不會離開",
+          "b": "it never runs out on me"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "祢的愛一直都在追趕著我",
+          "b": "'Cause on and on, and on, and on it goes"
+        },
+        {
+          "a": "滲透我靈魂超過所想所求",
+          "b": "It overwhelms and satisfies my soul"
+        },
+        {
+          "a": "我永遠不再害怕孤單承受",
+          "b": "And I'll never, ever, have to be afraid"
+        },
+        {
+          "a": "祢愛不變 存到永遠",
+          "b": "One thing remains, One thing remains"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "或生或死 我深知我都",
+          "b": "In death, In life, I'm confident and"
+        },
+        {
+          "a": "隱藏在祢愛的大能中",
+          "b": "Covered by, the power of Your great love"
+        },
+        {
+          "a": "我得赦免 再沒有任何事",
+          "b": "My debt is paid, there's nothing that"
+        },
+        {
+          "a": "能讓我與祢愛隔絕",
+          "b": "Can separate my heart from Your great love"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "祢的愛追趕著我",
+          "b": "Your love goes on and on"
+        },
+        {
+          "a": "祢的愛追趕著我",
+          "b": "Your love goes on and on"
+        },
+        {
+          "a": "祢的愛追趕著我",
+          "b": "Your love goes on and on"
+        },
+        {
+          "a": "祢的愛追趕著我",
+          "b": "Your love goes on and on"
+        }
+      ]
+    }
+  ]
+}

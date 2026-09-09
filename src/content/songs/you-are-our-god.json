@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我們的神",
+      "b": "You Are Our God"
+    },
+    "tags": ["讚美之泉", "讚美中信心不斷升起"],
+    "arrangement": [5, 0, 1, 6, 2, 1, 3, 3, 1, 6, 1, 4, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=kvrRtRe9AoU"
+      }
+    ],
+    "ccli": "7196186",
+    "bpm": 66,
+    "originalKey": "G",
+    "author": "讚美之泉\n詞：鄭懋柔 Tiffany M. Cheng、游智婷 Sandy Yu／曲：游智婷 Sandy Yu"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "諸天述說 天父的榮耀",
+          "b": "The heavens declare Your glory"
+        },
+        {
+          "a": "穹蒼傳揚 奇妙的作為",
+          "b": "The skies proclaim, the work of Your hands"
+        },
+        {
+          "a": "張開雙手 萬物得飽足",
+          "b": "With open hands, You satisfy us"
+        },
+        {
+          "a": "萬口承認 祢是我們的神",
+          "b": "All will confess, You're the almighty God"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我們的神 坐在寶座上",
+          "b": "You are our God, seated on the throne"
+        },
+        {
+          "a": "聖殿充滿榮耀 萬民敬拜",
+          "b": "Robed in glory, and power We worship You"
+        },
+        {
+          "a": "全能的神 我們尊崇祢",
+          "b": "Almighty God, we exalt Your name"
+        },
+        {
+          "a": "聖潔榮耀 尊貴 能力",
+          "b": "All the honor, and power, and praise"
+        },
+        {
+          "a": "都歸於祢",
+          "b": "Belongs to You"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "張開雙手 萬物得飽足",
+          "b": "With open hands, You satisfy us"
+        },
+        {
+          "a": "萬口承認 祢是我們的神",
+          "b": "All will confess, You're the almighty God"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "祢說話 命立就立",
+          "b": "When You spoke, it came to be"
+        },
+        {
+          "a": "祢吹氣 就得生命",
+          "b": "By Your word, You breathed new life"
+        },
+        {
+          "a": "萬物齊唱 哈利路亞",
+          "b": "All creatures sing hallelujah"
+        },
+        {
+          "a": "聖哉 聖哉 聖哉",
+          "b": "Holy, holy, holy!"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "聖潔榮耀 尊貴 能力",
+          "b": "All the honor, and power, and praise"
+        },
+        {
+          "a": "都歸於祢",
+          "b": "Belongs to You"
+        }
+      ]
+    }
+  ]
+}

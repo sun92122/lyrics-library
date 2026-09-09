@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "只為祢國祢名",
+      "b": "Here's my life for your kingdom"
+    },
+    "tags": ["TC真道教會", "沙崙玫瑰教會"],
+    "arrangement": [5, 0, 1, 2, 6, 1, 2, 2, 7, 2, 3, 3, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=HDnHB-aY1ZA"
+      }
+    ],
+    "author": "詞曲、授權翻譯｜ 沙崙玫瑰教會\n中譯｜真道教會、吳孟橋、廖文華",
+    "originalKey": "F",
+    "bpm": 64
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "祢創造了我的生命",
+          "b": "The Author of my life"
+        },
+        {
+          "a": "為我眾罪釘十架",
+          "b": "Was Crucified for my sins"
+        },
+        {
+          "a": "祢的犧牲完全救贖我",
+          "b": "Your sacrifice has saved me"
+        },
+        {
+          "a": "使我生命美麗",
+          "b": "And made me beautiful"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "聽見祢呼召的聲音",
+          "b": "I listen to Your voice calling me"
+        },
+        {
+          "a": "願成為祢的器皿",
+          "b": "To become Your instrument"
+        },
+        {
+          "a": "我願降服 用我全人全心",
+          "b": "I surrender my spirit, soul and body"
+        },
+        {
+          "a": "差遣我 我在這裡",
+          "b": "Use me, Lord"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "世上所有金銀珍寶",
+          "b": "Gold, silver and jewels"
+        },
+        {
+          "a": "和這世界所提供的美好",
+          "b": "Any pleasure this world has to offer"
+        },
+        {
+          "a": "我願放下 只為要跟隨祢",
+          "b": "I forsake them all for You"
+        },
+        {
+          "a": "回應祢榮耀呼召",
+          "b": "To follow Your calling"
+        },
+        {
+          "a": "直到那日 天地廢去",
+          "b": "Until the earth has perished"
+        },
+        {
+          "a": "我的生命呼吸將要停息",
+          "b": "And my breath has ceased"
+        },
+        {
+          "a": "跟隨我主何等榮耀歡喜",
+          "b": "Following You is the most glorious"
+        },
+        {
+          "a": "我獻上自己 只為祢國祢名",
+          "b": "Here's my life for Your kingdom"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "跟隨我主何等榮耀歡喜",
+          "b": "Following You is the most glorious"
+        },
+        {
+          "a": "我獻上自己 只為祢國祢名",
+          "b": "Here's my life for Your kingdom"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "我獻上自己 只為祢國祢名",
+          "b": "Here's my life for Your kingdom"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "敞開心 不停讚美",
+      "b": "Endless Praise"
+    },
+    "tags": ["生命河靈糧堂"],
+    "arrangement": [3, 0, 1, 0, 1, 1, 1, 2, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=EXW8DgkjqUs"
+      }
+    ],
+    "author": "生命河靈糧堂\n詞曲：施弘美 Tiffany Wang",
+    "originalKey": "G",
+    "bpm": 138
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我走到神的祭壇",
+          "b": "I come into Your temple"
+        },
+        {
+          "a": "到我最喜樂的神那裡",
+          "b": "Joy abounding in Your presence"
+        },
+        {
+          "a": "神啊  我的神",
+          "b": "Lord, You are my God"
+        },
+        {
+          "a": "我要唱詩讚美祢",
+          "b": "I will glorify Your name"
+        },
+        {
+          "a": "祢的慈愛高及諸天",
+          "b": "Love that reaches to the heavens"
+        },
+        {
+          "a": "祢的信實上達穹蒼",
+          "b": "Faithfulness beyond all measure"
+        },
+        {
+          "a": "祢的救恩 將我安置在高處",
+          "b": "Your salvation sets me firm on hight ground"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我向祢敞開心  毫無保留",
+          "b": "I give my heart to You, oh through and through"
+        },
+        {
+          "a": "照我本相來到祢面前",
+          "b": "Lord, just as I am, I come to You"
+        },
+        {
+          "a": "回轉成為小孩樣式",
+          "b": "Turning back to childlikeness"
+        },
+        {
+          "a": "呼喊  阿爸父  我愛祢",
+          "b": "Abba, Father, how I love You"
+        },
+        {
+          "a": "我向祢敞開心  毫無保留",
+          "b": "I give my heart to You, oh through and through"
+        },
+        {
+          "a": "將榮耀頌讚都歸給祢",
+          "b": "All my praise and honor just for You"
+        },
+        {
+          "a": "在祢面前歡喜快樂",
+          "b": "I'm rejoicing in Your presence"
+        },
+        {
+          "a": "不停讚美",
+          "b": "In endless praise"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "在祢面前歡喜快樂",
+          "b": "I'm rejoicing in Your presence"
+        },
+        {
+          "a": "不停讚美",
+          "b": "In endless praise"
+        }
+      ]
+    }
+  ]
+}

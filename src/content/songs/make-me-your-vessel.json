@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "成為祢的器皿",
+      "b": "Make Me Your Vessel"
+    },
+    "tags": ["The Hope"],
+    "arrangement": [5, 0, 1, 2, 6, 1, 2, 6, 3, 3, 2, 4, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=sumsH3r5USM"
+      }
+    ],
+    "bpm": 70,
+    "originalKey": "G",
+    "author": "The Hope\n詞／曲：田宇庭"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "主  我來到祢座前",
+          "b": "Lord, I come before Your throne"
+        },
+        {
+          "a": "全心  向祢獻上我所有",
+          "b": "I offer everything to You"
+        },
+        {
+          "a": "毫無保留的將我自己 獻給祢",
+          "b": "With all I am, I give myself to You"
+        },
+        {
+          "a": "渴望  祢來充滿我的心",
+          "b": "I long for You come and fill my heart"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "主 我來到祢座前",
+          "b": "Lord, I come before Your throne"
+        },
+        {
+          "a": "獻上 我這一生僅所有",
+          "b": "I give all that I have in my life"
+        },
+        {
+          "a": "願祢悅納我的生命 獻上活祭",
+          "b": "May You be pleased with my living sacrifice"
+        },
+        {
+          "a": "渴慕祢  擁有我全人全心",
+          "b": "I long for You to have all of me"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "求祢 來使用我",
+          "b": "Lord, use my life"
+        },
+        {
+          "a": "讓我 用我生命敬拜祢",
+          "b": "Let me worship You with all my life"
+        },
+        {
+          "a": "榮耀祢 成為祢的器皿",
+          "b": "Glorify You, make me Your vessel"
+        },
+        {
+          "a": "我願 這一生都",
+          "b": "I hope in all my days"
+        },
+        {
+          "a": "為祢 歌唱到永遠",
+          "b": "I'll sing for You forevermore"
+        },
+        {
+          "a": "榮耀祢 直到看見 祢的名被高舉",
+          "b": "Glorify You, until I see Your name lifted high"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我向祢 獻上我心",
+          "b": "I offer my heart to You"
+        },
+        {
+          "a": "只唯一 渴慕祢",
+          "b": "I long only for You"
+        },
+        {
+          "a": "主耶穌 我屬於祢",
+          "b": "Lord Jesus, I belong to You"
+        },
+        {
+          "a": "我的心 只願更多有祢",
+          "b": "My heart desires nothing but more of You"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "獻上自己 成為祢的器皿",
+          "b": "Make me Your vessel"
+        }
+      ]
+    }
+  ]
+}

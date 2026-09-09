@@ -20,7 +20,9 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
         counts.set(tag, (counts.get(tag) || 0) + 1);
       });
     });
-    return Array.from(counts.entries()).sort((a, b) => b[1] - a[1]);
+    return Array.from(counts.entries())
+      .sort((a, b) => b[1] - a[1])
+      .filter((tag) => tag[1] > 1); // Only include tags with more than one song
   }, [docs]);
 
   // Initialize MiniSearch instance with CJK-friendly tokenizer

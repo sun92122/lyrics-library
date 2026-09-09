@@ -1,0 +1,69 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "深不見底的愛",
+      "b": "Endless Love"
+    },
+    "tags": ["讚美之泉", "聽見這世代的呼喚"],
+    "arrangement": [2, 0, 1, 3, 0, 1, 1, 6],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=H4MeSR_ilyY"
+      }
+    ],
+    "author": "讚美之泉\n詞、曲：余盈盈 Sarah Yu",
+    "ccli": "7176793",
+    "bpm": 67,
+    "originalKey": "G"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "聖經裡面說 天父何等愛我",
+          "b": "When I read Your word, I see how much You love"
+        },
+        {
+          "a": "不管做對做錯 愛我一樣多",
+          "b": "Through the highs and lows, You love me just the same"
+        },
+        {
+          "a": "認識祢之後 不再為自己活",
+          "b": "With this in my heart, I'll live for You alone"
+        },
+        {
+          "a": "願聖靈幫助我 能經歷祢更多",
+          "b": "Holy Spirit, help me, I need Your presence more"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "深不見底的愛 沒有別處能找到",
+          "b": "This is Your endless love, How wide and deep and long"
+        },
+        {
+          "a": "按祢形象造我 深深認識我",
+          "b": "Formed me in Your image, You know my every thought"
+        },
+        {
+          "a": "我每一根頭髮 天父祢都細數過",
+          "b": "You know each part of me, You have counted every hair"
+        },
+        {
+          "a": "恩典如繁星一樣多",
+          "b": "Your grace is as vast as the stars"
+        }
+      ]
+    }
+  ]
+}

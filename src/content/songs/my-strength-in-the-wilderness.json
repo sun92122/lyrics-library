@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "曠野中唯一的力量",
+      "b": "My Strength In The Wilderness"
+    },
+    "tags": ["讚美之泉", "讚美中信心不斷升起"],
+    "arrangement": [4, 0, 1, 5, 0, 1, 1, 2, 1, 3, 3, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=1hViPloUb9o"
+      }
+    ],
+    "ccli": "7196184",
+    "author": "詞、曲：曾祥怡 Grace Tseng"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "祢是愛我的天父",
+          "b": "Father, how You love me"
+        },
+        {
+          "a": "絕望中 祢仍然不停地運行",
+          "b": "When I'm in despair, I know You are working"
+        },
+        {
+          "a": "祢不願我停留黑暗中",
+          "b": "You pulled me out of the darkest place"
+        },
+        {
+          "a": "不停追尋我 直到我得自由",
+          "b": "And You chased my heart, until You set me free"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祢是我曠野中唯一的力量",
+          "b": "Oh Father, You're my strength in the wilderness"
+        },
+        {
+          "a": "患難中的安慰 黑暗中的盼望",
+          "b": "Light in the darkness, and a lamp unto my feet"
+        },
+        {
+          "a": "我呼求的日子 祢必拯救我",
+          "b": "When I cry out to You, You will rescue me"
+        },
+        {
+          "a": "信實的天父 我依靠祢",
+          "b": "Faithful Father, I will trust in You"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "阿爸父 我是尊貴的兒女",
+          "b": "Abba, You call me a child of God"
+        },
+        {
+          "a": "祢教我如何用權柄爭戰",
+          "b": "You taught me, how to fight with authority"
+        },
+        {
+          "a": "阿爸父 祢用笑臉幫助我",
+          "b": "Abba, You are smiling upon me"
+        },
+        {
+          "a": "化所有的咒詛為祝福",
+          "b": "No longer cursed, I'm Your blessed child"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "我呼求的日子 祢必拯救我",
+          "b": "When I cry out to You, You will rescue me"
+        },
+        {
+          "a": "信實的天父 我依靠祢",
+          "b": "Faithful Father, I will trust in You"
+        }
+      ]
+    }
+  ]
+}

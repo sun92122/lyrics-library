@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "安靜",
+      "b": "Still"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [
+      5, 0, 1, 3, 1, 2, 2, 6, 3, 1, 1, 2, 2, 7, 4, 6, 4, 6, 1, 2, 2
+    ],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=V3iB3JQyBDs"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：Reuben Morgan / 4.5Music",
+    "originalKey": "A"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "藏我在 翅膀蔭下",
+          "b": "Hide me now under Your wings"
+        },
+        {
+          "a": "遮蓋我 在祢大能手中",
+          "b": "Cover me within Your mighty hand"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "當大海翻騰波濤洶湧",
+          "b": "When the oceans rise and thunders roar"
+        },
+        {
+          "a": "我與祢展翅暴風上空",
+          "b": "I will soar with You above the storm"
+        },
+        {
+          "a": "父祢仍作王在洪水中",
+          "b": "Father You are King over the flood"
+        },
+        {
+          "a": "我要安靜知祢是神",
+          "b": "I will be still and know You are God"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "我要安靜知祢是神",
+          "b": "I will be still and know You are God"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "我靈安息 在基督裡",
+          "b": "Find rest my soul in Christ alone"
+        },
+        {
+          "a": "祢大能 使我安然信靠",
+          "b": "Know His power in quietness and trust"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "即使有風暴 要將我吞沒",
+          "b": "Even if swallowed by the rough seas"
+        },
+        {
+          "a": "耶穌祢永遠 不放開祢的手",
+          "b": "Jesus's hands will never let me go"
+        },
+        {
+          "a": "祢說不要怕 風浪中繼續 看著我",
+          "b": "And Jesus says, \"Don't be afraid\""
+        },
+        {
+          "a": "所以我剛強 在祢的愛中",
+          "b": "So I'm not afraid anymore"
+        },
+        {
+          "a": "憑信心勝過 直到看見突破",
+          "b": "I step forward by faith or I row by faith"
+        },
+        {
+          "a": "因為我生命 這艘船是屬 主耶穌",
+          "b": "Because this life is Yours"
+        }
+      ]
+    }
+  ]
+}

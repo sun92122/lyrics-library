@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我心喜樂滿溢",
+      "b": "Bahagiaku Penuh"
+    },
+    "tags": ["沙崙玫瑰教會", "TC真道教會"],
+    "arrangement": [3, 0, 1, 0, 1, 1, 4, 1, 1, 2, 2, 5, 1, 1, 2, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=1ENz9LHkp-0"
+      }
+    ],
+    "author": "詞曲、授權翻譯｜ 沙崙玫瑰教會\n中譯｜真道教會、陳志豪、林恩竹",
+    "originalKey": "A",
+    "bpm": 69
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我渴望 住在祢的殿中",
+          "b": "I long to dwell in Your temple"
+        },
+        {
+          "a": "沉浸享受在祢恩典裡",
+          "b": "Taking delight in Your presence"
+        },
+        {
+          "a": "在祢同在裡 我心喜樂滿溢",
+          "b": "In Your presence, my joy is overflowing"
+        },
+        {
+          "a": "主耶穌 是我唯一渴慕",
+          "b": "My Jesus, You're the One I long for"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我主我王 永遠要敬拜祢",
+          "b": "To worship You, my God and my King"
+        },
+        {
+          "a": "讚美耶穌 我的靈魂摯愛是祢",
+          "b": "To praise You, Jesus, the lover of my soul"
+        },
+        {
+          "a": "我願跟隨祢 一生都不偏離",
+          "b": "To follow You all the days of my life"
+        },
+        {
+          "a": "在祢同在裡 我心喜樂滿溢",
+          "b": "In Your presence, my joy is overflowing"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "在祢同在裡 我心喜樂滿溢",
+          "b": "In Your presence, my joy is overflowing"
+        }
+      ]
+    }
+  ]
+}

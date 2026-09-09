@@ -1,0 +1,238 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "何等榮美的名",
+      "b": "What A Beautiful Name"
+    },
+    "tags": ["KUA", "Hillsong", "約書亞樂團"],
+    "arrangement": [9, 0, 1, 2, 3, 4, 5, 6, 7, 6, 8, 8, 13],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=E3J7yHn-V2w"
+      },
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=epZYVDNPEPk"
+      }
+    ],
+    "ccli": "7068424",
+    "author": "詞／曲：Ben Fielding & Brooke Ligertwood\n中文翻譯：Hillsong Official Translation",
+    "originalKey": "D",
+    "bpm": 68
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "祢就是太初神的道",
+          "b": "You were the Word at the beginning"
+        },
+        {
+          "a": "至高主與神同在",
+          "b": "One with God the Load Most High"
+        },
+        {
+          "a": "在造物中隱藏祢榮耀",
+          "b": "Your hidden glory in creation"
+        },
+        {
+          "a": "今顯明在基督裡",
+          "b": "Now revealed in You our Christ"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "這是何等榮美的名",
+          "b": "What a beautiful name it is"
+        },
+        {
+          "a": "這是何等榮美的名",
+          "b": "What a beautiful name it is"
+        },
+        {
+          "a": "我王耶穌基督聖名",
+          "b": "The name of Jesus Christ my King"
+        },
+        {
+          "a": "這是何等榮美的名",
+          "b": "What a beautiful name it is"
+        },
+        {
+          "a": "無一事物相比",
+          "b": "Nothing compares to this"
+        },
+        {
+          "a": "這是何等榮美的名 耶穌的聖名",
+          "b": "What a beautiful name it is, the name of Jesus"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "為了與我們同享天堂",
+          "b": "You didn't want heaven without us"
+        },
+        {
+          "a": "祢帶著天國降臨",
+          "b": "So Jesus, You brought heaven down"
+        },
+        {
+          "a": "我罪雖重 但祢愛更深",
+          "b": "My sin was great, Your love was greater"
+        },
+        {
+          "a": "我們永遠不分離",
+          "b": "What could separate us now"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "這是何等奇妙的名",
+          "b": "What a wonderful name it is"
+        },
+        {
+          "a": "這是何等奇妙的名",
+          "b": "What a wonderful name it is"
+        },
+        {
+          "a": "我王耶穌基督聖名",
+          "b": "The name of Jesus Christ my King"
+        },
+        {
+          "a": "這是何等奇妙的名",
+          "b": "What a wonderful name it is"
+        },
+        {
+          "a": "無一事物相比",
+          "b": "Nothing compares to this"
+        },
+        {
+          "a": "這是何等奇妙的名 耶穌的聖名",
+          "b": "What a wonderful name it is, the name of Jesus"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "這是何等奇妙的名 耶穌的聖名",
+          "b": "What a wonderful name it is, the name of Jesus"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "死困不住祢 幔子已挪去",
+          "b": "Death could not hold You, the veil tore before You"
+        },
+        {
+          "a": "罪和陰間屈服於祢",
+          "b": "You silenced the boast of sin and grave"
+        },
+        {
+          "a": "與天堂歡慶 祢榮耀顯明",
+          "b": "The heavens are roaring the praise of Your glory"
+        },
+        {
+          "a": "死裡復活祢得勝利",
+          "b": "For You are raised to life again"
+        },
+        {
+          "a": "祢無所匹敵 祢無人相比",
+          "b": "You have no rival, You have no equal"
+        },
+        {
+          "a": "耶穌掌權直到永遠",
+          "b": "Now and forever, God, You reign"
+        },
+        {
+          "a": "國度屬於祢 榮耀屬於祢",
+          "b": "Yours is the Kingdom, Yours is the glory"
+        },
+        {
+          "a": "超乎一切我主聖名",
+          "b": "Yours is the name above all names"
+        }
+      ]
+    },
+    {
+      "name": "$C3",
+      "lines": [
+        {
+          "a": "這是何等大能的名",
+          "b": "What a powerful name it is"
+        },
+        {
+          "a": "這是何等大能的名",
+          "b": "What a powerful name it is"
+        },
+        {
+          "a": "我王耶穌基督聖名",
+          "b": "The name of Jesus Christ my King"
+        },
+        {
+          "a": "這是何等大能的名",
+          "b": "What a powerful name it is"
+        },
+        {
+          "a": "無一事物相比",
+          "b": "Nothing can stand against"
+        },
+        {
+          "a": "這是何等大能的名 耶穌的聖名",
+          "b": "What a powerful name it is, the name of Jesus"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "祢無所匹敵 祢無人相比",
+          "b": "You have no rival, You have no equal"
+        },
+        {
+          "a": "耶穌掌權直到永遠",
+          "b": "Now and forever, God, You reign"
+        },
+        {
+          "a": "國度屬於祢 榮耀屬於祢",
+          "b": "Yours is the Kingdom, Yours is the glory"
+        },
+        {
+          "a": "超乎一切我主聖名",
+          "b": "Yours is the name above all names"
+        }
+      ]
+    },
+
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "這是何等大能的名 耶穌的聖名",
+          "b": "What a powerful name it is, the name of Jesus"
+        }
+      ]
+    }
+  ]
+}

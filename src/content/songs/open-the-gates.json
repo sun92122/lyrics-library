@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "打開天窗",
+      "b": "Open the Gates"
+    },
+    "tags": ["讚美之泉", "從早晨到夜晚"],
+    "arrangement": [5, 0, 1, 6, 2, 1, 6, 7, 3, 3, 3, 4, 3, 4, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=PXEcI0CuRXg"
+      }
+    ],
+    "ccli": "7125335",
+    "author": "讚美之泉\n詞、曲：游智婷 Sandy Yu"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "願我 我的禱告 如香陳列在祢面前",
+          "b": "Let my praises arise as an incense, burning for You"
+        },
+        {
+          "a": "沒有黑暗勢力 可以搖動我的信心",
+          "b": "There's no power on earth, nothing can shake my faith in You"
+        },
+        {
+          "a": "願我 我的敬拜 到祢面前 蒙祢悅納",
+          "b": "Let my worship arise as a pleasing sacrifice"
+        },
+        {
+          "a": "天使天軍屈膝 俯伏敬拜 在祢寶座前",
+          "b": "Let all angels and saints bow before You at Your throne"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "打開天窗 打開天窗",
+          "b": "Open the gates of heaven, I pray"
+        },
+        {
+          "a": "願我的禱告打開天窗",
+          "b": "Lord, hear my cries and open the gates"
+        },
+        {
+          "a": "願祢充滿 祢的榮耀",
+          "b": "I want to see, see Your face"
+        },
+        {
+          "a": "祢的同在 在這地",
+          "b": "Let Your glory fill this place"
+        },
+        {
+          "a": "打開天窗 打開天窗",
+          "b": "Open the gates of heaven, I pray"
+        },
+        {
+          "a": "願我的敬拜打開天窗",
+          "b": "Load, hear my cries and open the gates"
+        },
+        {
+          "a": "我們只要祢的榮耀",
+          "b": "I want to see, see Your face"
+        },
+        {
+          "a": "祢的同在 在這地",
+          "b": "Let Your glory fill this place"
+        },
+        {
+          "a": "在這地",
+          "b": "Fill this place"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "願我 我的敬拜 到祢面前 蒙祢悅納",
+          "b": "Let my worship arise as a pleasing sacrifice"
+        },
+        {
+          "a": "天使天軍屈膝 俯伏敬拜 在祢寶座前",
+          "b": "Let all angels and saints bow before You at Your throne"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "願我的禱告如香",
+          "b": "Let prayer, like incense, arise"
+        },
+        {
+          "a": "願我的禱告如香",
+          "b": "Let prayer, like incense, arise"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "獻在祢面前",
+          "b": "every day and night"
+        }
+      ]
+    }
+  ]
+}

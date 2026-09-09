@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我願降服",
+      "b": "Here I Bow"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [4, 0, 2, 1, 2, 3, 3, 2, 2, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=nqzyStRrxz8"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：Jenn Johnson, Matt Redman, Jonas Myrin, Brian Johnson, Seth Mosely\n中譯詞：褚治軒",
+    "originalKey": "G",
+    "bpm": 72
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我能去哪 除了祢施恩座前",
+          "b": "Where would I run, but to the throne of mercy"
+        },
+        {
+          "a": "我降服於 祢十架的恩典",
+          "b": "Where would I kneel, but at cross of grace"
+        },
+        {
+          "a": "何等的愛 祢大能手扶持我",
+          "b": "How great the love how strong the hand that holds us"
+        },
+        {
+          "a": "太榮美 何等榮美",
+          "b": "Beautiful, so beautiful"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "榮耀君王 祢的鞭傷能醫治",
+          "b": "There is a King who bore the scars of healing"
+        },
+        {
+          "a": "神的兒子 彰顯恩典真實",
+          "b": "There is a Son who came in grace and truth"
+        },
+        {
+          "a": "何等的愛 帶我進入祢恩慈",
+          "b": "How great the love that carries us to kindness"
+        },
+        {
+          "a": "真美好 祢真美好",
+          "b": "Wonderful, You're wonderful"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我願降服 高舉祢名",
+          "b": "So here I bow to lift You high"
+        },
+        {
+          "a": "耶穌 祢得榮耀",
+          "b": "Jesus be glorified"
+        },
+        {
+          "a": "我所有和我生命",
+          "b": "In all things for all my life"
+        },
+        {
+          "a": "我屬祢 永遠屬祢",
+          "b": "I am Yours, forever Yours"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "此時此地 願祢升起",
+          "b": "God here and now be lifted high"
+        },
+        {
+          "a": "祢得榮耀 就在這裡",
+          "b": "Right here and now be glorified"
+        },
+        {
+          "a": "從天堂到地極",
+          "b": "God of Heaven and Earth"
+        },
+        {
+          "a": "神祢贖回我生命",
+          "b": "God who brought me back to life"
+        },
+        {
+          "a": "我屬祢 永遠屬祢",
+          "b": "I am Yours, forever Yours"
+        }
+      ]
+    }
+  ]
+}

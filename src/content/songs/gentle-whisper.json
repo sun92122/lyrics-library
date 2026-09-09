@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "微小的聲音",
+      "b": "Gentle Whisper"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [5, 0, 1, 2, 3, 6, 1, 2, 3, 7, 3, 3, 4, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=6WCNR4fx5TI"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：周巽光、璽恩、曹之懿、湯國維、鄭牧德\n中譯英：王建玫",
+    "originalKey": "C"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我想聽祢聲音 渴望貼近祢的心",
+          "b": "I long to hear Your voice, to draw in close and know Your heart"
+        },
+        {
+          "a": "我在尋找有種平靜 在祢聲音裡",
+          "b": "I'm searching for that quiet peace found where You are"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "我以為我需要 一個偉大的經歷",
+          "b": "I thought I had to see a mighty wonder from the skies"
+        },
+        {
+          "a": "祢卻輕聲向我訴說 孩子我愛你",
+          "b": "But You spoke gently to my soul: “Child, you are Mine”"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "定睛於祢天父 來到祢的身邊",
+          "b": "I lift my eyes to You, Lord, and come before Your throne"
+        },
+        {
+          "a": "讓我專心聆聽 我與祢面對面",
+          "b": "Help me be still and listen — just You and me alone"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "側耳傾聽 主祢微小聲音",
+          "b": "I will lean in, to hear Your whisper near"
+        },
+        {
+          "a": "在祢腳前安靜 祢的話語是生命",
+          "b": "At Your feet I rest, Your Word brings life and clears my fear"
+        },
+        {
+          "a": "祢靈讓我甦醒 我渴慕祢",
+          "b": "Spirit, breathe new life in me — I long for Thee"
+        },
+        {
+          "a": "沉浸在祢懷裡 我靈安息",
+          "b": "Wrapped within Your arms of peace, my soul finds ease"
+        },
+        {
+          "a": "我安靜敬畏祢",
+          "b": "In awe, I bow before Thee"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "沉浸在祢懷裡 我靈安息",
+          "b": "Wrapped within Your arms of peace, my soul finds ease"
+        },
+        {
+          "a": "我安靜敬畏祢",
+          "b": "In awe, I bow before Thee"
+        }
+      ]
+    }
+  ]
+}

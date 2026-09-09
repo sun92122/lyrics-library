@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "從早晨到夜晚",
+      "b": "Morning to Night"
+    },
+    "tags": ["讚美之泉", "從早晨到夜晚"],
+    "arrangement": [4, 0, 5, 1, 2, 5, 2, 3, 3, 5, 2, 2, 2, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=QvfB1-FpfWk"
+      }
+    ],
+    "ccli": "7125332",
+    "author": "讚美之泉\n詞：鄭懋柔\n曲：游智婷",
+    "originalKey": "F",
+    "bpm": 69
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "早晨我睜開眼睛",
+          "b": "Morning, I open my eyes"
+        },
+        {
+          "a": "渴望聆聽祢聲音",
+          "b": "My Lord, I long for Your voice"
+        },
+        {
+          "a": "心中思想祢的好",
+          "b": "Counting Your goodness for me"
+        },
+        {
+          "a": "更多與祢來親近",
+          "b": "Draw near to You alone"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "夜晚我仍要歌唱",
+          "b": "I sing with stars in the sky"
+        },
+        {
+          "a": "向祢闡明我心意",
+          "b": "To You, my heart opens wide"
+        },
+        {
+          "a": "敬拜化成一首歌",
+          "b": "Bringing my love in a song"
+        },
+        {
+          "a": "單單要唱給祢聽",
+          "b": "Worship to You alone"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "從早晨到夜晚 從曠野到高山",
+          "b": "From the morning through the night, from the valley to the heights"
+        },
+        {
+          "a": "親愛主 我要稱頌祢美名",
+          "b": "Forever, I will lift Your name on high"
+        },
+        {
+          "a": "從早晨到夜晚 祢愛永不止息",
+          "b": "From the morning through the night, Your love for me carries on"
+        },
+        {
+          "a": "親愛主 一生緊緊跟隨祢",
+          "b": "Forever, I will follow after You"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我的主 我愛祢",
+          "b": "I will sing of Your love"
+        },
+        {
+          "a": "我要誇祢的愛無止盡",
+          "b": "I will sing of Your unending love"
+        },
+        {
+          "a": "我的主 我愛祢",
+          "b": "I will sing of Your love"
+        },
+        {
+          "a": "我要誇祢的愛無止盡",
+          "b": "I will sing of Your unending love"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "詩篇63篇",
+      "b": "Mazmur 63"
+    },
+    "tags": ["沙崙玫瑰教會", "TC真道教會"],
+    "arrangement": [4, 0, 1, 5, 0, 1, 1, 6, 1, 1, 2, 6, 3, 3, 3, 3, 3, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=dX7ybZ-k20o"
+      }
+    ],
+    "author": "詞曲、授權翻譯｜ 沙崙玫瑰教會\n中文翻譯｜真道教會、林恩竹",
+    "originalKey": "G"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "主阿祢是我心所渴慕",
+          "b": "O God, You're the longing of my heart"
+        },
+        {
+          "a": "我的靈渴想切慕祢主",
+          "b": "My soul thirsts for You"
+        },
+        {
+          "a": "在這乾旱疲乏 無水之地",
+          "b": "Like this dry and parched land with no water"
+        },
+        {
+          "a": "我等候 切切尋求祢",
+          "b": "Earnestly I wait for You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我在聖所曾如此瞻仰祢",
+          "b": "I have seen You in Your sanctuary"
+        },
+        {
+          "a": "為要見祢能力榮耀 喔耶穌",
+          "b": "I stand in awe of Your glory, Jesus"
+        },
+        {
+          "a": "因祢豐盛慈愛 比生命寶貴",
+          "b": "For Your love is better than life"
+        },
+        {
+          "a": "我的嘴唇要不停讚美",
+          "b": "How my lips will praise You"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "因祢豐盛慈愛 比生命寶貴",
+          "b": "For Your love is better than life"
+        },
+        {
+          "a": "我的嘴唇要不停讚美",
+          "b": "How my lips will praise You"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "我要不停的讚美",
+          "b": "I will keep praising You"
+        },
+        {
+          "a": "我要不停的讚美",
+          "b": "I will keep praising You"
+        },
+        {
+          "a": "我要不停的讚美",
+          "b": "I will keep praising You"
+        },
+        {
+          "a": "我要不停的讚美",
+          "b": "I will keep praising You"
+        }
+      ]
+    }
+  ]
+}

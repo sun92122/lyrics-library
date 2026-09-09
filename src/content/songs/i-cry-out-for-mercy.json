@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "呼求你憐憫",
+      "b": "I Cry Out for Mercy"
+    },
+    "tags": [
+      "生命河靈糧堂"
+    ],
+    "arrangement": [
+      3,
+      0,
+      1,
+      0,
+      1,
+      5,
+      1,
+      5,
+      1,
+      2,
+      7
+    ],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=uFXU-K_UIJU"
+      }
+    ],
+    "author": "生命河靈糧堂\n詞曲：施弘美 Tiffany Wang",
+    "bpm": 80,
+    "originalKey": "Bb"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "祢知道我的軟弱",
+          "b": "You Know my every weakness"
+        },
+        {
+          "a": "祢用聖靈的大能來堅固我",
+          "b": "So Your Holy Spirit comes to strengthen me"
+        },
+        {
+          "a": "祢的恩惠和慈愛為我預備",
+          "b": "Your grace and loving kindness wait here for me"
+        },
+        {
+          "a": "祢信實極其廣大",
+          "b": "How great Your faithfulness, Lord"
+        },
+        {
+          "a": "祢的憐憫不至斷絕 滿有恩典",
+          "b": "And Your mercy never fails, Your grace overflows"
+        },
+        {
+          "a": "我尋求祢 仰望祢的榮面",
+          "b": "I seek to look upon Your glorious face"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我呼求祢憐憫",
+          "b": "I cry out for mercy"
+        },
+        {
+          "a": "我呼求祢恩典",
+          "b": "I cry out for grace, O Lord"
+        },
+        {
+          "a": "我抓住祢應許 堅定倚靠祢",
+          "b": "Your mercy has triumphed over Your judgment"
+        },
+        {
+          "a": "憐憫原是向審判誇勝",
+          "b": "I stand upon Your promises, Lord"
+        },
+        {
+          "a": "我呼求祢憐憫",
+          "b": "I cry out for mercy"
+        },
+        {
+          "a": "我呼求祢恩典",
+          "b": "I cry out for grace, O Lord"
+        },
+        {
+          "a": "祢同在不離開 聖靈扶持我",
+          "b": "For You're my salvation, You'll never leave me"
+        },
+        {
+          "a": "祢是我拯救",
+          "b": "Your Spirit sustains"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "祢同在不離開 聖靈扶持我",
+          "b": "For You're my salvation, You'll never leave me"
+        },
+        {
+          "a": "祢是我拯救",
+          "b": "Your Spirit sustains"
+        }
+      ]
+    }
+  ]
+}

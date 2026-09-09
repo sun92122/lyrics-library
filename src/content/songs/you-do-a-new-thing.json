@@ -1,0 +1,85 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "新的事將要成就",
+      "b": "You Do a New Thing"
+    },
+    "tags": ["讚美之泉", "新的事將要成就"],
+    "arrangement": [1, 2, 0, 1, 3, 0, 1, 1, 1, 6],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=kszbPoctPbo"
+      }
+    ],
+    "author": "讚美之泉\n詞：游智婷 Sandy Yu\n曲：陳麒安 Andy Chen",
+    "ccli": "7125286",
+    "bpm": 168,
+    "originalKey": "F"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "祢是做新事的神",
+          "b": "You do amazing new things"
+        },
+        {
+          "a": "我要向祢唱新歌",
+          "b": "I sing a new song to You"
+        },
+        {
+          "a": "恩典憐憫每天都是新的",
+          "b": "Mercy and grace fall on me every day"
+        },
+        {
+          "a": "新酒新皮袋每天要賜下",
+          "b": "New wine and skins, new joy, new ways"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "新的事 新的事將要成就",
+          "b": "In our lives, in our lives, You do a new thing"
+        },
+        {
+          "a": "新的恩膏 新的恩寵",
+          "b": "New anointing, favor unending"
+        },
+        {
+          "a": "我們要 我們要唱新歌",
+          "b": "Lord, we will, Lord, we will sing a new song"
+        },
+        {
+          "a": "稱讚我們神為高",
+          "b": "Lifting up Your name on high"
+        },
+        {
+          "a": "新的事 新的事將要成就",
+          "b": "In our lives, in our lives, You do a new thing"
+        },
+        {
+          "a": "新的恩典 新的盼望",
+          "b": "Grace and mercy, hopeful morning"
+        },
+        {
+          "a": "我們要 我們要唱新歌",
+          "b": "Lord, we will, Lord, we will sing a new song"
+        },
+        {
+          "a": "充滿神的榮耀",
+          "b": "Filled with Your glory"
+        }
+      ]
+    }
+  ]
+}

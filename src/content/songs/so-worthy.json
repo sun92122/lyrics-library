@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "全然配得",
+      "b": "So Worthy"
+    },
+    "tags": ["Gateway", "約書亞樂團"],
+    "arrangement": [2, 0, 0, 1, 1, 1, 1, 0, 0, 4, 0, 4, 0, 0],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=ZcbYo2VVfbY"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：Phil King\n英譯詞：吳芳儀、周巽光"
+  },
+  "sections": [
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祢全然配得",
+          "b": "You are so worthy"
+        },
+        {
+          "a": "祢全然配得",
+          "b": "You are so worthy"
+        },
+        {
+          "a": "祢全然配得",
+          "b": "You are so worthy"
+        },
+        {
+          "a": "主耶穌",
+          "b": "Jesus Christ"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "一切榮耀 一切尊貴",
+          "b": "All the glory all the honor"
+        },
+        {
+          "a": "單單歸於祢 我王",
+          "b": "We will give to You our King"
+        },
+        {
+          "a": "全然獻上 所有敬拜",
+          "b": "Our devotion and our worship"
+        },
+        {
+          "a": "單單歸於祢 我王",
+          "b": "We will give to You our King"
+        }
+      ]
+    }
+  ]
+}

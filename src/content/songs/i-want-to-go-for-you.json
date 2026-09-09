@@ -1,0 +1,139 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我願為祢去",
+      "b": "I Want To Go For You"
+    },
+    "tags": ["小羊詩歌", "我願意"],
+    "arrangement": [5, 0, 1, 2, 0, 1, 2, 3, 2, 1, 4],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=_yv4ksPKRZM"
+      }
+    ],
+    "author": "小羊詩歌\n詞、曲：林婉容 / 中文歌詞：倪兆康",
+    "bpm": 75,
+    "originalKey": "D"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "用聖靈與火為我施洗",
+          "b": "May Your Spirit come like a fire"
+        },
+        {
+          "a": "讓我充滿天上的能力",
+          "b": "Grant me power from places higher"
+        },
+        {
+          "a": "讓聖火燒盡邪情和私慾",
+          "b": "And consume my every stray desire"
+        },
+        {
+          "a": "因為我願為祢去",
+          "b": "For I want to go for You"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "成為我的異象 榮耀救主",
+          "b": "Show Your glory in a revelation"
+        },
+        {
+          "a": "讓萬國的榮華盡都失色",
+          "b": "That outshines the splendor of the nations"
+        },
+        {
+          "a": "賜我勇敢的心一無畏懼",
+          "b": "Give me boldness without hesitation"
+        },
+        {
+          "a": "因為我願為祢去",
+          "b": "For I want to go for You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "釘痕手引我前行",
+          "b": "May I learn to think Your thoughts"
+        },
+        {
+          "a": "我只願合祢心意",
+          "b": "And be led by Your own hands"
+        },
+        {
+          "a": "看萬事為損失 受苦為小事",
+          "b": "May I suffer with joy and count all things loss"
+        },
+        {
+          "a": "靠祢的恩典站立",
+          "b": "And by Your grace may I stand"
+        },
+        {
+          "a": "釘痕手引我前行",
+          "b": "May I learn to think Your thoughts"
+        },
+        {
+          "a": "我只願合祢心意",
+          "b": "And be led by Your own hands"
+        },
+        {
+          "a": "看萬事為損失 受苦為小事",
+          "b": "May I suffer with joy and count all things loss"
+        },
+        {
+          "a": "靠祢的恩典站立",
+          "b": "And by Your grace may I stand"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "神聖的愛 融化我",
+          "b": "Lord, melt my heart with Your love"
+        },
+        {
+          "a": "神聖的火 熬煉我",
+          "b": "Refine my soul with Your fire"
+        },
+        {
+          "a": "神聖的使命 佔有我",
+          "b": "With every mission, Lord send me"
+        },
+        {
+          "a": "神聖的靈 引領我",
+          "b": "And Spirit, lead, be my guide"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "賜我勇敢的心一無畏懼",
+          "b": "Give me boldness without hesitation"
+        },
+        {
+          "a": "因為我願為祢去",
+          "b": "For I want to go for You"
+        }
+      ]
+    }
+  ]
+}

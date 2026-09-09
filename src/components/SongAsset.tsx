@@ -36,6 +36,12 @@ const getAssetIcon = (type: string) => {
 const getYoutubeEmbedUrl = (url: string) => {
   const urlObj = new URL(url);
   const videoId = urlObj.searchParams.get("v");
+  const startTime = urlObj.searchParams.get("t");
+  if (startTime) {
+    return videoId
+      ? `https://www.youtube.com/embed/${videoId}?start=${startTime}`
+      : url;
+  }
   return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
 };
 

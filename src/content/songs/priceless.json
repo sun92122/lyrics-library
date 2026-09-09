@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "無價至寶",
+      "b": "Priceless"
+    },
+    "tags": ["約書亞樂團", "大衛帳幕的榮耀"],
+    "arrangement": [5, 0, 1, 2, 6, 1, 3, 2, 6, 3, 2, 4, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=foIAGgs8wOU"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：Andre Hermanto\n中譯詞：高安妮",
+    "originalKey": "Bb",
+    "bpm": 65
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我的名字 刻劃在祢心中",
+          "b": "You carved my name, deep inside Your heart"
+        },
+        {
+          "a": "我的臉孔 深映在祢眼中",
+          "b": "Within Your sight, my face is painted on"
+        },
+        {
+          "a": "不是因為 我勢力才能",
+          "b": "It's not because, my power or talent"
+        },
+        {
+          "a": "乃是因著 祢奇妙寬容恩典",
+          "b": "But it's because, Your miraculous grace"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "雖然有時 我會跌倒軟弱",
+          "b": "Although at times, I will crumble and fall"
+        },
+        {
+          "a": "祢卻一直 包容不放棄我",
+          "b": "But till the end, You refused to give me up"
+        },
+        {
+          "a": "用祢慈愛 緊緊的擁抱",
+          "b": "You hug me tight, with Your gracious love"
+        },
+        {
+          "a": "我讚美祢 寶貴奇妙大愛",
+          "b": "I praise You Lord, for Your priceless wondrous love"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "唯有祢配得 所有的讚美",
+          "b": "Only You're worthy, of all of our praise"
+        },
+        {
+          "a": "一切尊貴榮耀",
+          "b": "All the honour, glory"
+        },
+        {
+          "a": "主祢的十架 是無價至寶",
+          "b": "The cross that Lord You, bear for us is priceless"
+        },
+        {
+          "a": "祢是我尊貴的主耶穌",
+          "b": "You are my almighty Lord Jesus"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "唯有祢配得 所有的讚美",
+          "b": "Only You're worthy, of all of our praise"
+        },
+        {
+          "a": "一切尊貴榮耀",
+          "b": "All the honour, glory"
+        },
+        {
+          "a": "主祢的十架 是無價至寶",
+          "b": "The cross that Lord You, bear for us is priceless"
+        },
+        {
+          "a": "祢是我尊貴的主",
+          "b": "You are my almighty Lord"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "祢是我尊貴的主耶穌",
+          "b": "You are my almighty Lord Jesus"
+        }
+      ]
+    }
+  ]
+}
