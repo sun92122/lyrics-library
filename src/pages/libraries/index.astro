@@ -1,15 +1,20 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
-import { BookOpen, Tag, ArrowRight, PlusCircle, Layers } from 'lucide-react';
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { BookOpen, Tag, ArrowRight, PlusCircle, Layers } from "lucide-react";
 
-const libraries = await getCollection('libraries');
+const libraries = await getCollection("libraries");
 ---
 
-<Layout title="子歌曲庫總覽 - Lyrics Library" description="靜態子歌曲庫總覽，收錄各類主題詩歌選集與敬拜手冊">
+<Layout
+  title="子歌曲庫總覽 - Lyrics Library"
+  description="靜態子歌曲庫總覽，收錄各類主題詩歌選集與敬拜手冊"
+>
   <div class="space-y-8">
     <!-- Header -->
-    <div class="flex flex-wrap items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm">
+    <div
+      class="flex flex-wrap items-center justify-between gap-4 bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm"
+    >
       <div class="space-y-1">
         <div class="flex items-center gap-2">
           <BookOpen className="w-6 h-6 text-indigo-600" />
@@ -18,7 +23,7 @@ const libraries = await getCollection('libraries');
           </h1>
         </div>
         <p class="text-sm text-slate-500">
-          適合長期維護的詩歌選集、詩歌本與主題歌庫，全站純靜態 SSG 預渲染
+          長期維護的詩歌選集、詩歌本與主題歌庫
         </p>
       </div>
 
@@ -54,7 +59,10 @@ const libraries = await getCollection('libraries');
 
                 <span class="inline-flex items-center gap-1 px-3 py-1 rounded-xl bg-indigo-50 text-indigo-700 text-xs font-semibold">
                   <Layers className="w-3.5 h-3.5" />
-                  <span>{lib.data.songIds.length} 首</span>
+                  <span>
+                    {lib.data.songs.filter((s) => s.id && s.id !== "").length}{" "}
+                    首
+                  </span>
                 </span>
               </div>
 

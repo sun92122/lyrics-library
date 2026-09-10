@@ -1,7 +1,7 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
-import { LibraryExporter } from '@/components/LibraryExporter';
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+// import { LibraryExporter } from "@/components/LibraryExporter";
 import {
   BookOpen,
   ArrowLeft,
@@ -9,21 +9,41 @@ import {
   Music,
   ArrowRight,
   User,
-  Clock,
+  Metronome,
   Layers,
-} from 'lucide-react';
+} from "lucide-react";
+import type { LibraryWithId, SongWithId } from "@/content.config";
 
 export async function getStaticPaths() {
-  const libraryEntries = await getCollection('libraries');
-  const songEntries = await getCollection('songs');
+  const libraryEntries = await getCollection("libraries");
+  const songEntries = await getCollection("songs");
 
-  const songMap = new Map(songEntries.map((s) => [s.id, { id: s.id, ...s.data }]));
+  const songMap = new Map(
+    songEntries.map((s) => [s.id, { id: s.id, ...s.data }]),
+  );
 
   return libraryEntries.map((lib) => {
     // Resolve ordered songs
-    const songs = lib.data.songIds
-      .map((id) => songMap.get(id))
-      .filter((s): s is NonNullable<typeof s> => s !== undefined);
+    let songIndex = 1;
+    const songs = lib.data.songs.map((song) => {
+      if (song.id) {
+        const songData = songMap.get(song.id);
+        if (songData) {
+          return { type: "song", content: songData, index: songIndex++ };
+        }
+        return {};
+      }
+      switch (song.type) {
+        case "separator":
+          return { type: "separator" };
+        case "note":
+          return { type: "note", content: song?.content || "" };
+        case "header":
+          return { type: "header", content: song?.content || "" };
+        default:
+          return {};
+      }
+    });
 
     return {
       params: { id: lib.id },
@@ -36,10 +56,13 @@ export async function getStaticPaths() {
 }
 
 const { library, songs } = Astro.props;
-const pageTitle = `${library.meta.title.a}${library.meta.title.b ? ` (${library.meta.title.b})` : ''} - 歌曲庫 - Lyrics Library`;
+const pageTitle = `${library.meta.title.a}${library.meta.title.b ? ` (${library.meta.title.b})` : ""} - 歌曲庫 - Lyrics Library`;
 ---
 
-<Layout title={pageTitle} description={library.meta.description || '精選子歌曲庫'}>
+<Layout
+  title={pageTitle}
+  description={library.meta.description || "精選歌曲庫"}
+>
   <div class="space-y-8">
     <!-- Breadcrumbs -->
     <div>
@@ -53,15 +76,21 @@ const pageTitle = `${library.meta.title.a}${library.meta.title.b ? ` (${library.
     </div>
 
     <!-- Library Header & Metadata -->
-    <div class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
+    <div
+      class="bg-white p-6 sm:p-8 rounded-3xl border border-slate-200/80 shadow-sm space-y-6"
+    >
       <div class="flex flex-wrap items-start justify-between gap-4">
         <div class="space-y-2 max-w-2xl">
-          <div class="flex items-center gap-2 text-indigo-600 font-semibold text-xs uppercase tracking-wider">
+          <div
+            class="flex items-center gap-2 text-indigo-600 font-semibold text-xs uppercase tracking-wider"
+          >
             <BookOpen className="w-4 h-4" />
-            <span>精選子歌曲庫</span>
+            <span>精選歌曲庫</span>
           </div>
 
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+          <h1
+            class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight"
+          >
             {library.meta.title.a}
           </h1>
 
@@ -83,12 +112,16 @@ const pageTitle = `${library.meta.title.a}${library.meta.title.b ? ` (${library.
         </div>
 
         <div class="flex flex-col items-end gap-3">
-          <div class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-2xl bg-indigo-50 text-indigo-700 text-sm font-bold border border-indigo-100">
+          <div
+            class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-2xl bg-indigo-50 text-indigo-700 text-sm font-bold border border-indigo-100"
+          >
             <Layers className="w-4 h-4" />
-            <span>共收錄 {songs.length} 首詩歌</span>
+            <span
+              >共收錄 {songs.filter((s) => s.type === "song").length} 首詩歌</span
+            >
           </div>
 
-          <LibraryExporter client:load library={library} songs={songs} />
+          <!-- <LibraryExporter client:load library={library} songs={songs.filter((s) => typeof s.content === )} /> -->
         </div>
       </div>
 
@@ -96,7 +129,9 @@ const pageTitle = `${library.meta.title.a}${library.meta.title.b ? ` (${library.
       {
         library.meta.tags && library.meta.tags.length > 0 && (
           <div class="flex flex-wrap items-center gap-1.5 pt-4 border-t border-slate-100">
-            <span class="text-xs text-slate-400 font-medium mr-1">分類標籤：</span>
+            <span class="text-xs text-slate-400 font-medium mr-1">
+              分類標籤：
+            </span>
             {library.meta.tags.map((tag) => (
               <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-lg bg-slate-100 text-slate-600 text-xs font-medium">
                 <Tag className="w-3 h-3 text-slate-400" />
@@ -117,55 +152,84 @@ const pageTitle = `${library.meta.title.a}${library.meta.title.b ? ` (${library.
         </h2>
       </div>
 
-      <div class="bg-white rounded-3xl border border-slate-200/80 shadow-sm divide-y divide-slate-100 overflow-hidden">
+      <div
+        class="bg-white rounded-3xl border border-slate-200/80 shadow-sm divide-y divide-slate-100 overflow-hidden"
+      >
         {
-          songs.map((song, index) => (
-            <a
-              href={`/songs/${song.id}`}
-              class="flex flex-wrap items-center justify-between gap-4 p-5 hover:bg-slate-50/80 transition-all group"
-            >
-              <div class="flex items-center gap-4 min-w-[200px]">
-                <span class="w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-indigo-600 group-hover:text-white text-slate-500 font-mono text-sm font-bold flex items-center justify-center transition-colors">
-                  {index + 1}
-                </span>
-
-                <div>
-                  <div class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-base">
-                    {song.meta.title.a}
+          songs.map((s, index) => {
+            if (!s.content) {
+              return;
+            }
+            switch (s.type) {
+              case "separator":
+                return (
+                  <div class="px-5 py-3 text-sm text-slate-400 font-medium bg-slate-50">
+                    分隔線
                   </div>
-                  {song.meta.title.b && (
-                    <div class="text-xs text-slate-400 font-normal">
-                      {song.meta.title.b}
+                );
+              case "note":
+                return (
+                  <div class="px-5 py-3 text-sm text-slate-600 font-medium bg-slate-50">
+                    {s.content}
+                  </div>
+                );
+              case "header":
+                return (
+                  <div class="px-5 py-3 text-lg text-slate-800 font-bold bg-slate-50">
+                    {s.content}
+                  </div>
+                );
+              case "song":
+                const song = s.content as SongWithId;
+                return (
+                  <a
+                    href={`/songs/${song.id}`}
+                    class="flex flex-wrap items-center justify-between gap-4 p-5 hover:bg-slate-50/80 transition-all group"
+                  >
+                    <div class="flex items-center gap-4 min-w-[200px]">
+                      <span class="w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-indigo-600 group-hover:text-white text-slate-500 font-mono text-sm font-bold flex items-center justify-center transition-colors">
+                        {s.index || <Music className="w-4 h-4" />}
+                      </span>
+
+                      <div>
+                        <div class="font-bold text-slate-900 group-hover:text-indigo-600 transition-colors text-base">
+                          {song.meta.title.a}
+                        </div>
+                        {song.meta.title.b && (
+                          <div class="text-xs text-slate-400 font-normal">
+                            {song.meta.title.b}
+                          </div>
+                        )}
+                      </div>
                     </div>
-                  )}
-                </div>
-              </div>
 
-              <div class="flex flex-wrap items-center gap-4 text-xs text-slate-500">
-                {song.meta.author && (
-                  <div class="flex items-center gap-1">
-                    <User className="w-3.5 h-3.5 text-slate-400" />
-                    <span>{song.meta.author}</span>
-                  </div>
-                )}
+                    <div class="flex flex-wrap items-center gap-4 text-xs text-slate-500">
+                      {song.meta.author && (
+                        <div class="flex items-center gap-1">
+                          <User className="w-3.5 h-3.5 text-slate-400" />
+                          <span>{song.meta.author}</span>
+                        </div>
+                      )}
 
-                {song.meta.bpm && (
-                  <div class="flex items-center gap-1">
-                    <Clock className="w-3.5 h-3.5 text-slate-400" />
-                    <span>{song.meta.bpm} BPM</span>
-                  </div>
-                )}
+                      {song.meta.bpm && (
+                        <div class="flex items-center gap-1">
+                          <Metronome className="w-3.5 h-3.5 text-slate-400" />
+                          <span>{song.meta.bpm} BPM</span>
+                        </div>
+                      )}
 
-                <div class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200/60 font-mono font-medium">
-                  原調: {song.meta.originalKey || '—'}
-                </div>
+                      <div class="px-2.5 py-1 rounded-lg bg-amber-50 text-amber-800 border border-amber-200/60 font-mono font-medium">
+                        原調: {song.meta.originalKey || "—"}
+                      </div>
 
-                <span class="flex items-center gap-1 font-semibold text-indigo-600 group-hover:translate-x-0.5 transition-transform pl-2">
-                  瀏覽和弦 <ArrowRight className="w-3.5 h-3.5" />
-                </span>
-              </div>
-            </a>
-          ))
+                      <span class="flex items-center gap-1 font-semibold text-indigo-600 group-hover:translate-x-0.5 transition-transform pl-2">
+                        瀏覽 <ArrowRight className="w-3.5 h-3.5" />
+                      </span>
+                    </div>
+                  </a>
+                );
+            }
+          })
         }
       </div>
     </div>

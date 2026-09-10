@@ -219,8 +219,8 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
                 </div>
 
                 {song.author && (
-                  <div className="text-xs text-slate-500 truncate">
-                    作者：{song.author}
+                  <div className="text-xs text-slate-500 truncate line-clamp-2 whitespace-pre-line">
+                    {song.author}
                   </div>
                 )}
 

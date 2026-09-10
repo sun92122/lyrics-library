@@ -47,7 +47,6 @@ export const songSchema = z.object({
 });
 
 export const librarySchema = z.object({
-  id: z.string(),
   meta: z.object({
     title: z.object({
       a: z.string(),
@@ -56,7 +55,13 @@ export const librarySchema = z.object({
     description: z.string().optional(),
     tags: z.array(z.string()).default([]),
   }),
-  songIds: z.array(z.string()),
+  songs: z.array(
+    z.object({
+      type: z.enum(["song", "separator", "note", "header"]).optional(),
+      id: z.string().optional(),
+      content: z.string().optional(),
+    }),
+  ),
 });
 
 import { glob, file } from "astro/loaders";
@@ -90,3 +95,4 @@ export type SongAsset = z.infer<typeof songAssetSchema>;
 export type SongData = z.infer<typeof songSchema>;
 export type SongWithId = SongData & { id: string };
 export type LibraryData = z.infer<typeof librarySchema>;
+export type LibraryWithId = LibraryData & { id: string };

@@ -1,0 +1,68 @@
+{
+  "meta": {
+    "title": {
+      "a": "竹靈青崇2026Q3歌庫"
+    },
+    "description": "",
+    "tags": ["新竹靈糧堂", "青崇", "青少年崇拜", "HCBOLC"]
+  },
+  "songs": [
+    {
+      "type": "header",
+      "content": "#邀請"
+    },
+    {
+      "type": "note",
+      "content": "邀請會眾專注於神！來吧，一起來到神的面前，在神的聖山、進入至聖所、到祂面前敬拜祂"
+    },
+    { "id": "light-of-our-lives" },
+    { "id": "god-is-with-us-now" },
+    { "id": "open-heaven" },
+    { "id": "no-one-compares-with-you" },
+    { "id": "nothing-is-impossible" },
+    { "id": "my-heart-will-praise-you-lord" },
+    { "id": "all-by-your-grace" },
+    { "id": "one-way" },
+    { "id": "all-you-gates-lift-up-your-heads" },
+    { "id": "we-sing-praises-to-the-lord-yahweh" },
+    { "type": "separator" },
+    {
+      "type": "header",
+      "content": "#宣告與讚美"
+    },
+    {
+      "type": "note",
+      "content": "以神的所是為先(Who God is)，明確地、肯定地、堅定地的宣告與讚美神"
+    },
+    { "id": "you-are-our-god" },
+    { "id": "what-a-beautiful-name" },
+    { "id": "you-are-good" },
+    { "id": "my-strength-in-the-wilderness" },
+    { "id": "one-thing-remains" },
+    { "id": "i-adore-you" },
+    { "id": "it-is-well" },
+    { "id": "open-the-gates" },
+    { "type": "separator" },
+    {
+      "type": "header",
+      "content": "#宣告與讚美"
+    },
+    {
+      "type": "note",
+      "content": "以神的所是為先(Who God is)，明確地、肯定地、堅定地的宣告與讚美神"
+    },
+
+    { "id": "follow-your-will" },
+    { "id": "come-holy-spirit" },
+    { "id": "make-me-your-vessel" },
+    { "id": "your-blood-shed-for-me" },
+    { "id": "my-joy-is-overflowing" },
+    { "id": "here-i-bow" },
+    { "id": "gentle-whisper" },
+    { "id": "still" },
+    { "id": "who-else" },
+    { "id": "so-worthy" },
+    { "id": "priceless" },
+    { "id": "refuge" }
+  ]
+}

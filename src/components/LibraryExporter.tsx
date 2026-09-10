@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import type { SongData, LibraryData } from "@/content.config";
+import type { SongData, LibraryWithId } from "@/content.config";
 import { formatLyricsText } from "@/utils/lyricsFormatter";
 import { Copy, Check, Download } from "lucide-react";
 
 export interface LibraryExporterProps {
-  library: LibraryData;
+  library: LibraryWithId;
   songs: SongData[];
 }
 
