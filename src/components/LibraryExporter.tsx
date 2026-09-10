@@ -1,20 +1,25 @@
-import React, { useState } from 'react';
-import type { SongData, LibraryData } from '@/content/config';
-import { formatLyricsText } from '@/utils/lyricsFormatter';
-import { Copy, Check, Download } from 'lucide-react';
+import React, { useState } from "react";
+import type { SongData, LibraryData } from "@/content.config";
+import { formatLyricsText } from "@/utils/lyricsFormatter";
+import { Copy, Check, Download } from "lucide-react";
 
 export interface LibraryExporterProps {
   library: LibraryData;
   songs: SongData[];
 }
 
-export const LibraryExporter: React.FC<LibraryExporterProps> = ({ library, songs }) => {
+export const LibraryExporter: React.FC<LibraryExporterProps> = ({
+  library,
+  songs,
+}) => {
   const [copied, setCopied] = useState(false);
 
   const generateFullText = (): string => {
     const lines: string[] = [];
     lines.push(`========================================`);
-    lines.push(`歌庫：${library.meta.title.a}${library.meta.title.b ? ` (${library.meta.title.b})` : ''}`);
+    lines.push(
+      `歌庫：${library.meta.title.a}${library.meta.title.b ? ` (${library.meta.title.b})` : ""}`,
+    );
     if (library.meta.description) {
       lines.push(`簡介：${library.meta.description}`);
     }
@@ -23,22 +28,24 @@ export const LibraryExporter: React.FC<LibraryExporterProps> = ({ library, songs
 
     songs.forEach((song, index) => {
       lines.push(`----------------------------------------`);
-      lines.push(`[${index + 1}] ${song.meta.title.a}${song.meta.title.b ? ` / ${song.meta.title.b}` : ''}`);
+      lines.push(
+        `[${index + 1}] ${song.meta.title.a}${song.meta.title.b ? ` / ${song.meta.title.b}` : ""}`,
+      );
       if (song.meta.author) lines.push(`詞曲：${song.meta.author}`);
       if (song.meta.originalKey) lines.push(`原調：${song.meta.originalKey}`);
       lines.push(`----------------------------------------`);
 
       const text = formatLyricsText(song, {
-        languageMode: 'both',
-        layoutMode: 'segmented',
+        languageMode: "both",
+        layoutMode: "segmented",
         includeTitle: false,
       });
 
       lines.push(text);
-      lines.push('\n');
+      lines.push("\n");
     });
 
-    return lines.join('\n').trim();
+    return lines.join("\n").trim();
   };
 
   const handleCopy = async () => {
@@ -47,15 +54,17 @@ export const LibraryExporter: React.FC<LibraryExporterProps> = ({ library, songs
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(fullText);
       } else {
-        const textArea = document.createElement('textarea');
+        const textArea = document.createElement("textarea");
         textArea.value = fullText;
-        textArea.style.position = 'fixed';
-        textArea.style.opacity = '0';
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
         try {
-          (document as unknown as { execCommand: (cmd: string) => boolean }).execCommand('copy');
+          (
+            document as unknown as { execCommand: (cmd: string) => boolean }
+          ).execCommand("copy");
         } catch {
           // ignore
         }
@@ -64,15 +73,15 @@ export const LibraryExporter: React.FC<LibraryExporterProps> = ({ library, songs
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy full library lyrics: ', err);
+      console.error("Failed to copy full library lyrics: ", err);
     }
   };
 
   const handleDownload = () => {
     const fullText = generateFullText();
-    const blob = new Blob([fullText], { type: 'text/plain;charset=utf-8' });
+    const blob = new Blob([fullText], { type: "text/plain;charset=utf-8" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `${library.id}-lyrics.txt`;
     document.body.appendChild(a);
@@ -88,8 +97,8 @@ export const LibraryExporter: React.FC<LibraryExporterProps> = ({ library, songs
         onClick={handleCopy}
         className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-medium transition-all shadow-sm ${
           copied
-            ? 'bg-emerald-600 text-white'
-            : 'bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 active:scale-95'
+            ? "bg-emerald-600 text-white"
+            : "bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 active:scale-95"
         }`}
       >
         {copied ? (

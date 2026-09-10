@@ -4,7 +4,15 @@ import {
   getProFormat,
   getProFile,
 } from "@/utils/propresenterFormatter";
-import { Checkbox, Field, Label } from "@headlessui/react";
+import {
+  Checkbox,
+  Field,
+  Label,
+  Disclosure,
+  DisclosureButton,
+  DisclosurePanel,
+} from "@headlessui/react";
+import { ChevronDown } from "lucide-react";
 import { CheckIcon } from "@heroicons/react/16/solid";
 import { useState } from "react";
 
@@ -94,128 +102,6 @@ export const LyricsModalOptions: React.FC<LyricsModalOptionsProps> = ({
           </span>
         </Label>
       </Field>
-      <p className="text-sm text-gray-400">添加空白幻燈片的選項</p>
-      <div className="flex flex-col gap-3 pl-4">
-        <Field className="flex items-start gap-2 cursor-pointer">
-          <Checkbox
-            checked={options.addBlankSlideBeforeTitle ?? true}
-            onChange={(value) =>
-              handleOptionChange("addBlankSlideBeforeTitle", value)
-            }
-            className={checkboxClassName}
-          >
-            <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
-          </Checkbox>
-          <Label>
-            在標題前添加空白幻燈片
-            <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
-              Add a blank slide before the title.
-            </span>
-          </Label>
-        </Field>
-        <Field className="flex items-start gap-2 cursor-pointer">
-          <Checkbox
-            checked={options.addBlankSlideAfterTitle ?? true}
-            onChange={(value) =>
-              handleOptionChange("addBlankSlideAfterTitle", value)
-            }
-            className={checkboxClassName}
-          >
-            <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
-          </Checkbox>
-          <Label>
-            在標題後添加空白幻燈片
-            <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
-              Add a blank slide after the title.
-            </span>
-          </Label>
-        </Field>
-        <Field className="flex items-start gap-2 cursor-pointer">
-          <Checkbox
-            checked={options.addBlankSlideAfterEnding ?? true}
-            onChange={(value) =>
-              handleOptionChange("addBlankSlideAfterEnding", value)
-            }
-            className={checkboxClassName}
-          >
-            <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
-          </Checkbox>
-          <Label>
-            在結尾後添加空白幻燈片
-            <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
-              Add a blank slide after the ending.
-            </span>
-          </Label>
-        </Field>
-        <Field className="flex items-start gap-2 cursor-pointer">
-          <Checkbox
-            checked={options.addBlankSlideDuringIntro ?? false}
-            onChange={(value) =>
-              handleOptionChange("addBlankSlideDuringIntro", value)
-            }
-            className={checkboxClassName}
-          >
-            <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
-          </Checkbox>
-          <Label>
-            在前奏添加空白幻燈片
-            <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
-              Add a blank slide during the intro.
-            </span>
-          </Label>
-        </Field>
-        <Field className="flex items-start gap-2 cursor-pointer">
-          <Checkbox
-            checked={options.addBlankSlideDuringInterlude ?? true}
-            onChange={(value) =>
-              handleOptionChange("addBlankSlideDuringInterlude", value)
-            }
-            className={checkboxClassName}
-          >
-            <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
-          </Checkbox>
-          <Label>
-            在間奏添加空白幻燈片
-            <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
-              Add a blank slide during the interlude.
-            </span>
-          </Label>
-        </Field>
-        <Field className="flex items-start gap-2 cursor-pointer">
-          <Checkbox
-            checked={options.addBlankSlideDuringWorship ?? true}
-            onChange={(value) =>
-              handleOptionChange("addBlankSlideDuringWorship", value)
-            }
-            className={checkboxClassName}
-          >
-            <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
-          </Checkbox>
-          <Label>
-            在自由敬拜添加空白幻燈片
-            <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
-              Add a blank slide during the worship.
-            </span>
-          </Label>
-        </Field>
-        <Field className="flex items-start gap-2 cursor-pointer">
-          <Checkbox
-            checked={options.addBlankSlideDuringPrayer ?? true}
-            onChange={(value) =>
-              handleOptionChange("addBlankSlideDuringPrayer", value)
-            }
-            className={checkboxClassName}
-          >
-            <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
-          </Checkbox>
-          <Label>
-            在禱告添加空白幻燈片
-            <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
-              Add a blank slide during the prayer.
-            </span>
-          </Label>
-        </Field>
-      </div>
       <Field className="flex items-start gap-2 cursor-pointer">
         <Checkbox
           checked={options.includeLanguage2 ?? true}
@@ -228,6 +114,22 @@ export const LyricsModalOptions: React.FC<LyricsModalOptionsProps> = ({
           包含次要語言<span className="text-xs text-gray-400">（如果有）</span>
           <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
             Include Language 2.
+          </span>
+        </Label>
+      </Field>
+      <Field className="flex items-start gap-2 cursor-pointer">
+        <Checkbox
+          checked={options.twoLinesPerSlide ?? false}
+          onChange={(value) => handleOptionChange("twoLinesPerSlide", value)}
+          className={checkboxClassName}
+        >
+          <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+        </Checkbox>
+        <Label>
+          每張投影片兩行歌詞
+          <span className="text-xs text-red-500/50">（實驗中，需搭配合適的主題）</span>
+          <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+            Two lines of lyrics per slide.
           </span>
         </Label>
       </Field>
@@ -246,6 +148,135 @@ export const LyricsModalOptions: React.FC<LyricsModalOptionsProps> = ({
           </span>
         </Label>
       </Field>
+      <Disclosure>
+        <DisclosureButton className="p-2 group flex items-center gap-2 cursor-pointer">
+          <p>添加空白幻燈片的選項</p>
+          <ChevronDown className="w-4 h-4 text-gray-400 group-data-[open]:rotate-180" />
+        </DisclosureButton>
+        <DisclosurePanel>
+          <div className="flex flex-col gap-3 pl-4">
+            <Field className="flex items-start gap-2 cursor-pointer">
+              <Checkbox
+                checked={options.addBlankSlideBeforeTitle ?? true}
+                onChange={(value) =>
+                  handleOptionChange("addBlankSlideBeforeTitle", value)
+                }
+                className={checkboxClassName}
+              >
+                <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+              </Checkbox>
+              <Label>
+                在標題前添加空白幻燈片
+                <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+                  Add a blank slide before the title.
+                </span>
+              </Label>
+            </Field>
+            <Field className="flex items-start gap-2 cursor-pointer">
+              <Checkbox
+                checked={options.addBlankSlideAfterTitle ?? true}
+                onChange={(value) =>
+                  handleOptionChange("addBlankSlideAfterTitle", value)
+                }
+                className={checkboxClassName}
+              >
+                <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+              </Checkbox>
+              <Label>
+                在標題後添加空白幻燈片
+                <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+                  Add a blank slide after the title.
+                </span>
+              </Label>
+            </Field>
+            <Field className="flex items-start gap-2 cursor-pointer">
+              <Checkbox
+                checked={options.addBlankSlideAfterEnding ?? true}
+                onChange={(value) =>
+                  handleOptionChange("addBlankSlideAfterEnding", value)
+                }
+                className={checkboxClassName}
+              >
+                <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+              </Checkbox>
+              <Label>
+                在結尾後添加空白幻燈片
+                <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+                  Add a blank slide after the ending.
+                </span>
+              </Label>
+            </Field>
+            <Field className="flex items-start gap-2 cursor-pointer">
+              <Checkbox
+                checked={options.addBlankSlideDuringIntro ?? false}
+                onChange={(value) =>
+                  handleOptionChange("addBlankSlideDuringIntro", value)
+                }
+                className={checkboxClassName}
+              >
+                <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+              </Checkbox>
+              <Label>
+                在前奏添加空白幻燈片
+                <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+                  Add a blank slide during the intro.
+                </span>
+              </Label>
+            </Field>
+            <Field className="flex items-start gap-2 cursor-pointer">
+              <Checkbox
+                checked={options.addBlankSlideDuringInterlude ?? true}
+                onChange={(value) =>
+                  handleOptionChange("addBlankSlideDuringInterlude", value)
+                }
+                className={checkboxClassName}
+              >
+                <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+              </Checkbox>
+              <Label>
+                在間奏添加空白幻燈片
+                <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+                  Add a blank slide during the interlude.
+                </span>
+              </Label>
+            </Field>
+            <Field className="flex items-start gap-2 cursor-pointer">
+              <Checkbox
+                checked={options.addBlankSlideDuringWorship ?? true}
+                onChange={(value) =>
+                  handleOptionChange("addBlankSlideDuringWorship", value)
+                }
+                className={checkboxClassName}
+              >
+                <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+              </Checkbox>
+              <Label>
+                在自由敬拜添加空白幻燈片
+                <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+                  Add a blank slide during the worship.
+                </span>
+              </Label>
+            </Field>
+            <Field className="flex items-start gap-2 cursor-pointer">
+              <Checkbox
+                checked={options.addBlankSlideDuringPrayer ?? true}
+                onChange={(value) =>
+                  handleOptionChange("addBlankSlideDuringPrayer", value)
+                }
+                className={checkboxClassName}
+              >
+                <CheckIcon className="hidden size-4 fill-white group-data-[checked]:block" />
+              </Checkbox>
+              <Label>
+                在禱告添加空白幻燈片
+                <span className="block text-gray-400 text-sm/3 ml-0.5 whitespace-wrap">
+                  Add a blank slide during the prayer.
+                </span>
+              </Label>
+            </Field>
+          </div>
+        </DisclosurePanel>
+      </Disclosure>
     </div>
   );
 };

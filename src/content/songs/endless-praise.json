@@ -9,7 +9,7 @@
       "b": "Endless Praise"
     },
     "tags": ["生命河靈糧堂"],
-    "arrangement": [3, 0, 1, 0, 1, 1, 1, 2, 2, 7],
+    "arrangement": [4, 0, 1, 0, 1, 1, 1, 2, 2, 3, 8],
     "assets": [
       {
         "type": "youtube",
@@ -99,6 +99,15 @@
           "a": "在祢面前歡喜快樂",
           "b": "I'm rejoicing in Your presence"
         },
+        {
+          "a": "不停讚美",
+          "b": "In endless praise"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
         {
           "a": "不停讚美",
           "b": "In endless praise"

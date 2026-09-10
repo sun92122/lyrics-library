@@ -1,4 +1,4 @@
-import type { SongData, LineItem } from "@/content/config";
+import type { SongData, LineItem } from "@/content.config";
 
 import ProFileProcessor, { generateUUID } from "propresenter-js";
 import {
@@ -61,13 +61,17 @@ export interface ProOptions {
   includeTitleSlide?: boolean;
   addBlankSlideBeforeTitle?: boolean;
   addBlankSlideAfterTitle?: boolean;
-  addBlankSlideDuringIntro?: boolean;
   addBlankSlideDuringInterlude?: boolean;
   addBlankSlideDuringWorship?: boolean;
   addBlankSlideDuringPrayer?: boolean;
   addBlankSlideAfterEnding?: boolean;
   includeLanguage2?: boolean;
   includeAuthor?: boolean;
+
+  // default is false
+  addBlankSlideDuringIntro?: boolean;
+  twoLinesPerSlide?: boolean;
+
   flowMapping?: string; // name of flow mapping, default is "Magical"
 
   // template for export, if not provided, use default template
@@ -226,6 +230,7 @@ export function getProFormat(
   const options_addBlankSlideAfterEnding =
     options.addBlankSlideAfterEnding ?? true;
   const options_flowMapping = options.flowMapping ?? "Magical";
+  const options_twoLinesPerSlide = options.twoLinesPerSlide ?? false;
 
   // Implementation for formatting song data into ProPresenter format
   const flowMap = FLOW_NAMES[options_flowMapping] || FLOW_NAMES["Magical"];
@@ -288,13 +293,32 @@ export function getProFormat(
     const sectionUuid = generateUUID();
     groupKV.set(currentSectionIndex, sectionUuid);
     const slideUuids: string[] = [];
-    for (const line of section.lines) {
-      const slideUuid = generateUUID();
-      slideUuids.push(slideUuid);
-      slides.push({
-        uuid: slideUuid,
-        elements: getProFormatSlideElements(line, options),
-      });
+    if (options_twoLinesPerSlide) {
+      for (let i = 0; i < section.lines.length; i += 2) {
+        const newLine: LineItem = {
+          a:
+            section.lines[i].a +
+            (section.lines[i + 1] ? "\n" + section.lines[i + 1].a : ""),
+          b:
+            section.lines[i].b +
+            (section.lines[i + 1] ? "\n" + section.lines[i + 1].b : ""),
+        };
+        const slideUuid = generateUUID();
+        slideUuids.push(slideUuid);
+        slides.push({
+          uuid: slideUuid,
+          elements: getProFormatSlideElements(newLine, options),
+        });
+      }
+    } else {
+      for (const line of section.lines) {
+        const slideUuid = generateUUID();
+        slideUuids.push(slideUuid);
+        slides.push({
+          uuid: slideUuid,
+          elements: getProFormatSlideElements(line, options),
+        });
+      }
     }
     const groupName =
       section.name in flowMap

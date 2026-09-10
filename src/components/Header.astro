@@ -1,0 +1,45 @@
+---
+import "../styles/global.css";
+import { Music } from "lucide-react";
+---
+
+<header
+  class="sticky top-0 z-40 bg-white/80 backdrop-blur-md border-b border-slate-200/80"
+>
+  <div
+    class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between"
+  >
+    <a
+      href="/"
+      class="flex items-center gap-2 font-bold text-lg text-slate-900 hover:text-indigo-600 transition-colors"
+    >
+      <Music className="w-5 h-5 text-indigo-600" />
+      <span>Lyrics Library</span>
+    </a>
+
+    <nav
+      class="flex items-center gap-4 sm:gap-6 text-sm font-medium text-slate-600"
+    >
+      <a href="/" class="hover:text-indigo-600 transition-colors">詩歌總覽</a>
+      <a href="/libraries" class="hover:text-indigo-600 transition-colors"
+        >瀏覽歌庫</a
+      >
+      <div class="h-4 w-px bg-slate-200 hidden sm:block"></div>
+      <a
+        href="/tools/playlist-builder"
+        class="hover:text-indigo-600 transition-colors hidden sm:inline-block"
+        >產生歌單</a
+      >
+      <a
+        href="/tools/library-builder"
+        class="hover:text-indigo-600 transition-colors hidden sm:inline-block"
+        >建構歌庫</a
+      >
+      <a
+        href="/tools/song-builder"
+        class="hover:text-indigo-600 transition-colors hidden sm:inline-block"
+        >建立歌詞檔案</a
+      >
+    </nav>
+  </div>
+</header>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import type { SongAsset as SongAssetType } from "@/content/config";
+import type { SongAsset as SongAssetType } from "@/content.config";
 import {
   FileText,
   FileSpreadsheet,

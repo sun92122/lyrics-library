@@ -1,5 +1,5 @@
 import React, { useState, useMemo, useEffect } from "react";
-import type { SongData, LineItem } from "@/content/config";
+import type { SongData, LineItem } from "@/content.config";
 import {
   FLOW_STYLE,
   EX_FLOWS,

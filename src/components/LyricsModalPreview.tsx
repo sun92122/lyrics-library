@@ -116,7 +116,14 @@ const LyricsModalPreviewSlide: React.FC<{ slide: Slide }> = ({ slide }) => {
           <div
             key={contentId}
             id={contentId}
-            className="absolute inline-block overflow-hidden float-start"
+            className={
+              "absolute inline-block !overflow-visible float-start *:!overflow-clip *:line-clamp-1" +
+              ` *:z-[${999 - index}]` +
+              // Lang1 second line
+              " even:*:odd:mb-[-284px] even:*:odd:mt-[97px]" +
+              // Lang2 second line
+              " even:*:even:mt-[187px]"
+            }
             style={{
               width: width + "px",
               height: height + "px",
@@ -125,7 +132,6 @@ const LyricsModalPreviewSlide: React.FC<{ slide: Slide }> = ({ slide }) => {
               alignContent: ["flex-start", "center", "flex-end"][
                 element?.align ?? 1
               ],
-              zIndex: 999 - index,
             }}
           />
         );

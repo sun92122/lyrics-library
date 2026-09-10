@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import type { SongData } from "@/content/config";
+import type { SongData } from "@/content.config";
 import { LyricsViewer } from "./LyricsViewer";
 import { flow } from "@/stores/settings";
 

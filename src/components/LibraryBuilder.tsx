@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import type { SongWithId } from '@/content/config';
+import React, { useState, useMemo } from "react";
+import type { SongWithId } from "@/content.config";
 import {
   Search,
   Trash2,
@@ -14,22 +14,24 @@ import {
   Layers,
   AlertCircle,
   FileCode,
-} from 'lucide-react';
+} from "lucide-react";
 
 export interface LibraryBuilderProps {
   availableSongs: SongWithId[];
 }
 
-export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }) => {
-  const [searchQuery, setSearchQuery] = useState('');
+export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
+  availableSongs,
+}) => {
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
 
   // Form State
-  const [libraryId, setLibraryId] = useState('new-library');
-  const [titleA, setTitleA] = useState('');
-  const [titleB, setTitleB] = useState('');
-  const [description, setDescription] = useState('');
-  const [tagsInput, setTagsInput] = useState('敬拜, 詩歌');
+  const [libraryId, setLibraryId] = useState("new-library");
+  const [titleA, setTitleA] = useState("");
+  const [titleB, setTitleB] = useState("");
+  const [description, setDescription] = useState("");
+  const [tagsInput, setTagsInput] = useState("敬拜, 詩歌");
   const [selectedSongIds, setSelectedSongIds] = useState<string[]>([]);
 
   const [copied, setCopied] = useState(false);
@@ -86,8 +88,8 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
   };
 
   // Reorder
-  const moveSong = (index: number, direction: 'up' | 'down') => {
-    const newIndex = direction === 'up' ? index - 1 : index + 1;
+  const moveSong = (index: number, direction: "up" | "down") => {
+    const newIndex = direction === "up" ? index - 1 : index + 1;
     if (newIndex < 0 || newIndex >= selectedSongIds.length) return;
     const nextList = [...selectedSongIds];
     const temp = nextList[index];
@@ -109,10 +111,10 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
       .filter(Boolean);
 
     return {
-      id: libraryId.trim() || 'my-library',
+      id: libraryId.trim() || "my-library",
       meta: {
         title: {
-          a: titleA.trim() || '未命名歌庫',
+          a: titleA.trim() || "未命名歌庫",
           ...(titleB.trim() ? { b: titleB.trim() } : {}),
         },
         ...(description.trim() ? { description: description.trim() } : {}),
@@ -127,7 +129,9 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
   }, [generatedJson]);
 
   // Validation
-  const isValid = Boolean(libraryId.trim() && titleA.trim() && selectedSongIds.length > 0);
+  const isValid = Boolean(
+    libraryId.trim() && titleA.trim() && selectedSongIds.length > 0,
+  );
 
   // Copy JSON
   const handleCopyJson = async () => {
@@ -135,15 +139,17 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
       if (navigator.clipboard && window.isSecureContext) {
         await navigator.clipboard.writeText(jsonString);
       } else {
-        const textArea = document.createElement('textarea');
+        const textArea = document.createElement("textarea");
         textArea.value = jsonString;
-        textArea.style.position = 'fixed';
-        textArea.style.opacity = '0';
+        textArea.style.position = "fixed";
+        textArea.style.opacity = "0";
         document.body.appendChild(textArea);
         textArea.focus();
         textArea.select();
         try {
-          (document as unknown as { execCommand: (cmd: string) => boolean }).execCommand('copy');
+          (
+            document as unknown as { execCommand: (cmd: string) => boolean }
+          ).execCommand("copy");
         } catch {
           // ignore
         }
@@ -152,16 +158,18 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
-      console.error('Failed to copy: ', err);
+      console.error("Failed to copy: ", err);
     }
   };
 
   // Download JSON file
   const handleDownloadJson = () => {
-    const fileName = `${libraryId.trim() || 'library'}.json`;
-    const blob = new Blob([jsonString], { type: 'application/json;charset=utf-8' });
+    const fileName = `${libraryId.trim() || "library"}.json`;
+    const blob = new Blob([jsonString], {
+      type: "application/json;charset=utf-8",
+    });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = fileName;
     document.body.appendChild(a);
@@ -183,7 +191,12 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
             靜態子歌曲庫產生器 (Library Builder)
           </h1>
           <p className="text-sm text-slate-300 leading-relaxed">
-            挑選曲目並調整排序，輸入歌庫中英資訊後，一鍵下載符合 Schema 規範的 JSON 檔案，直接放入專案 <code className="text-amber-300 font-mono text-xs">src/content/libraries/</code> 目錄即可發起 GitHub PR！
+            挑選曲目並調整排序，輸入歌庫中英資訊後，一鍵下載符合 Schema 規範的
+            JSON 檔案，直接放入專案{" "}
+            <code className="text-amber-300 font-mono text-xs">
+              src/content/libraries/
+            </code>{" "}
+            目錄即可發起 GitHub PR！
           </p>
         </div>
 
@@ -193,8 +206,8 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
             onClick={handleCopyJson}
             className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all shadow-sm ${
               copied
-                ? 'bg-emerald-600 text-white'
-                : 'bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 active:scale-95'
+                ? "bg-emerald-600 text-white"
+                : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 active:scale-95"
             }`}
           >
             {copied ? (
@@ -216,12 +229,12 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
             disabled={!isValid}
             className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all shadow-md active:scale-95 ${
               isValid
-                ? 'bg-indigo-600 hover:bg-indigo-500 text-white'
-                : 'bg-slate-700 text-slate-400 cursor-not-allowed opacity-60'
+                ? "bg-indigo-600 hover:bg-indigo-500 text-white"
+                : "bg-slate-700 text-slate-400 cursor-not-allowed opacity-60"
             }`}
           >
             <Download className="w-4 h-4" />
-            <span>下載 {libraryId || 'library'}.json</span>
+            <span>下載 {libraryId || "library"}.json</span>
           </button>
         </div>
       </div>
@@ -275,8 +288,8 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
                 onClick={() => setSelectedTag(null)}
                 className={`px-2.5 py-0.5 rounded-lg text-xs font-medium ${
                   selectedTag === null
-                    ? 'bg-indigo-600 text-white'
-                    : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                    ? "bg-indigo-600 text-white"
+                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                 }`}
               >
                 全部
@@ -285,11 +298,13 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
                 <button
                   key={tag}
                   type="button"
-                  onClick={() => setSelectedTag(selectedTag === tag ? null : tag)}
+                  onClick={() =>
+                    setSelectedTag(selectedTag === tag ? null : tag)
+                  }
                   className={`px-2.5 py-0.5 rounded-lg text-xs font-medium ${
                     selectedTag === tag
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
+                      ? "bg-indigo-600 text-white"
+                      : "bg-slate-100 text-slate-600 hover:bg-slate-200"
                   }`}
                 >
                   {tag}
@@ -308,8 +323,8 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
                   onClick={() => toggleSong(song.id)}
                   className={`flex items-center justify-between p-3.5 rounded-2xl border cursor-pointer transition-all select-none ${
                     isSelected
-                      ? 'bg-indigo-50/60 border-indigo-200 text-indigo-950'
-                      : 'bg-white hover:bg-slate-50 border-slate-200 text-slate-800'
+                      ? "bg-indigo-50/60 border-indigo-200 text-indigo-950"
+                      : "bg-white hover:bg-slate-50 border-slate-200 text-slate-800"
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -347,7 +362,9 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
         <div className="lg:col-span-6 space-y-6">
           {/* Metadata Form */}
           <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
-            <h2 className="text-lg font-bold text-slate-900">歌庫設定與中英資訊</h2>
+            <h2 className="text-lg font-bold text-slate-900">
+              歌庫設定與中英資訊
+            </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -437,7 +454,7 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
                 className="inline-flex items-center gap-1 text-xs text-indigo-600 hover:text-indigo-800 font-medium"
               >
                 <FileCode className="w-3.5 h-3.5" />
-                <span>{showJsonPreview ? '隱藏 JSON' : '檢視 JSON'}</span>
+                <span>{showJsonPreview ? "隱藏 JSON" : "檢視 JSON"}</span>
               </button>
             </div>
 
@@ -469,7 +486,7 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
                       <div className="flex items-center gap-1">
                         <button
                           type="button"
-                          onClick={() => moveSong(index, 'up')}
+                          onClick={() => moveSong(index, "up")}
                           disabled={index === 0}
                           className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200 disabled:opacity-30 transition-colors"
                           title="上移"
@@ -479,7 +496,7 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
 
                         <button
                           type="button"
-                          onClick={() => moveSong(index, 'down')}
+                          onClick={() => moveSong(index, "down")}
                           disabled={index === selectedSongIds.length - 1}
                           className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200 disabled:opacity-30 transition-colors"
                           title="下移"
@@ -510,7 +527,9 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({ availableSongs }
             {!isValid && (
               <div className="flex items-center gap-2 p-3 bg-amber-50 rounded-xl text-amber-800 text-xs border border-amber-200/60">
                 <AlertCircle className="w-4 h-4 flex-shrink-0 text-amber-600" />
-                <span>請確保輸入歌庫 ID、中文歌庫名稱，並至少勾選收錄 1 首歌曲。</span>
+                <span>
+                  請確保輸入歌庫 ID、中文歌庫名稱，並至少勾選收錄 1 首歌曲。
+                </span>
               </div>
             )}
 

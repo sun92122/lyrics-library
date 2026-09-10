@@ -23,4 +23,7 @@ export default defineConfig({
       }),
     ],
   },
+  markdown: {
+    remarkPlugins: [["remark-github-blockquote-alert", {}]],
+  },
 });

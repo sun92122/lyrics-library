@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { SongData, LineItem } from "@/content/config";
+import type { SongData, LineItem } from "@/content.config";
 import {
   type ProOptions,
   type ProFormat,
@@ -72,13 +72,13 @@ export const LyricsModal: React.FC<LyricsModalProps> = ({ song }) => {
           <DialogPanel className="flex w-full max-w-6xl flex-col overflow-hidden rounded-xl bg-white shadow-lg">
             <div className="flex w-full min-h-[50vh] max-h-[90vh] overflow-hidden max-md:overflow-y-scroll thin-scrollbar flex-col md:flex-row divide-y md:divide-y-0 md:divide-x divide-gray-200">
               <div className="max-md:flex-shrink-0 w-full md:w-1/2 min-w-0 overflow-x-hidden overflow-y-auto thin-scrollbar">
-                <div className="sticky top-0 text-lg font-bold mb-4 py-2 max-md:pb-1 pl-8 md:pl-2 md:border-b border-gray-300 text-gray-700/80 bg-white/80 backdrop-blur-sm">
+                <div className="sticky top-0 text-lg font-bold mb-4 py-2 max-md:pb-1 pl-8 md:pl-2 md:border-b border-gray-300 text-gray-700/80 bg-white/80 backdrop-blur-sm z-[1000]">
                   選項
                 </div>
                 <LyricsModalOptions options={options} setOptions={setOptions} />
               </div>
               <div className="max-md:flex-shrink-0 w-full md:w-1/2 min-w-0 overflow-x-hidden">
-                <div className="sticky top-0 text-lg font-bold mb-4 py-2 max-md:pb-1 pl-8 md:pl-2 md:border-b border-gray-300 text-gray-700/80 bg-white/80 backdrop-blur-sm">
+                <div className="sticky top-0 text-lg font-bold mb-4 py-2 max-md:pb-1 pl-8 md:pl-2 md:border-b border-gray-300 text-gray-700/80 bg-white/80 backdrop-blur-sm z-[1000]">
                   預覽
                 </div>
                 <div className="px-2 w-fit mx-auto overflow-y-auto thin-scrollbar">

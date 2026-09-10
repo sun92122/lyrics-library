@@ -7,7 +7,7 @@ import {
   getFlowName,
   type FlowMapping,
 } from "@/constants/flow";
-import type { SongData, SectionItem } from "@/content/config";
+import type { SongData, SectionItem } from "@/content.config";
 import {
   Fieldset,
   Input,

@@ -1,4 +1,4 @@
-import type { SongData, SectionItem } from "@/content/config";
+import type { SongData, SectionItem } from "@/content.config";
 import { getFlowName } from "@/constants/flow";
 
 export type LanguageMode = "a" | "b" | "both";

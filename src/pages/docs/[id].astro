@@ -1,0 +1,48 @@
+---
+import { render, getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { ArrowLeft, Music } from "lucide-react";
+
+export async function getStaticPaths() {
+  const docsEntries = await getCollection("post");
+  return docsEntries.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+const docEntries = await getCollection("post");
+
+const { entry } = Astro.props;
+
+const { Content } = await render(entry);
+const title = entry.data?.title ?? "";
+const description =
+  entry?.data?.description ?? "現代化靜態詩歌歌詞與敬拜管理平台";
+---
+
+<Layout title={`${title} - Lyrics Library Docs`} description={description}>
+  <div class="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">
+    <div
+      class="lg:col-span-3 bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4"
+    >
+      <article class="markdown-body">
+        <Content />
+      </article>
+    </div>
+    <div class="lg:col-span-1 space-y-3 mt-4">
+      <span class="text-md font-bold text-slate-800">其他說明文件</span>
+      {
+        docEntries.map((doc) => (
+          <a
+            href={`/docs/${doc.id}`}
+            class="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors"
+          >
+            {/* <Music className="w-4 h-4" /> */}
+            <span>{doc.data.title}</span>
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</Layout>

@@ -1,4 +1,5 @@
-import { defineCollection, z } from "astro:content";
+import { defineCollection } from "astro:content";
+import { z } from "astro/zod";
 
 export const chordItemSchema = z.object({
   index: z.number().int().min(0),
@@ -58,15 +59,28 @@ export const librarySchema = z.object({
   songIds: z.array(z.string()),
 });
 
+import { glob, file } from "astro/loaders";
+
+const post = defineCollection({
+  loader: glob({ base: "src/content/docs", pattern: "**/*.md" }),
+  schema: z.object({
+    title: z.string().default("說明文件"),
+    description: z.string().optional(),
+    pubDate: z.coerce.date().optional(),
+    updatedDate: z.coerce.date().optional(),
+  }),
+});
+
 export const collections = {
   songs: defineCollection({
-    type: "data",
+    loader: glob({ base: "src/content/songs", pattern: "**/*.json" }),
     schema: songSchema,
   }),
   libraries: defineCollection({
-    type: "data",
+    loader: glob({ base: "src/content/libraries", pattern: "**/*.json" }),
     schema: librarySchema,
   }),
+  post,
 };
 
 export type ChordItem = z.infer<typeof chordItemSchema>;

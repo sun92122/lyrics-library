@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import type { SongWithId } from "@/content/config";
+import type { SongWithId } from "@/content.config";
 import {
   FLOW_STYLE,
   FLOW_ALIASES,

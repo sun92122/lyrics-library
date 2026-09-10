@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useEffect } from "react";
-import type { SongWithId } from "@/content/config";
+import * as ContextMenu from "@radix-ui/react-context-menu";
+import type { SongWithId } from "@/content.config";
 import { CHROMATIC_SCALE } from "@/constants/keys";
 import {
   FLOW_STYLE,
@@ -29,6 +30,7 @@ import {
   Layers,
   FileText,
 } from "lucide-react";
+import { Button } from "@headlessui/react";
 
 export interface PlaylistBuilderProps {
   availableSongs: SongWithId[];
@@ -138,6 +140,34 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
   const removeFlowTagAt = (itemIndex: number, tagIndex: number) => {
     const it = items[itemIndex];
     const nextFlow = (it.flow || []).filter((_, i) => i !== tagIndex);
+    updateItem(itemIndex, { flow: nextFlow });
+  };
+
+  const moveFlowTag = (
+    itemIndex: number,
+    tagIndex: number,
+    direction: "left" | "right",
+  ) => {
+    const it = items[itemIndex];
+    const currentFlow = it.flow || [];
+    const targetIndex = direction === "left" ? tagIndex - 1 : tagIndex + 1;
+    if (targetIndex < 0 || targetIndex >= currentFlow.length) return;
+    const nextFlow = [...currentFlow];
+    const temp = nextFlow[tagIndex];
+    nextFlow[tagIndex] = nextFlow[targetIndex];
+    nextFlow[targetIndex] = temp;
+    updateItem(itemIndex, { flow: nextFlow });
+  };
+
+  const changeFlowTag = (
+    itemIndex: number,
+    tagIndex: number,
+    newTag: number,
+  ) => {
+    const it = items[itemIndex];
+    const currentFlow = it.flow || [];
+    const nextFlow = [...currentFlow];
+    nextFlow[tagIndex] = newTag;
     updateItem(itemIndex, { flow: nextFlow });
   };
 
@@ -673,47 +703,132 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                             EX_FLOWS.length
                                         ] || "?";
                                 return (
-                                  <div
-                                    className="mt-1 inline-block text-wrap items-center"
-                                    key={tIndex}
-                                  >
-                                    <span
-                                      className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
-                                      style={{
-                                        backgroundColor:
-                                          (FLOW_STYLE[
-                                            tag as keyof FlowMapping
-                                          ] ?? FLOW_STYLE["default"]) + "22",
-                                        color:
-                                          FLOW_STYLE[
-                                            tag as keyof FlowMapping
-                                          ] ?? FLOW_STYLE["default"],
-                                        borderColor:
-                                          (FLOW_STYLE[
-                                            tag as keyof FlowMapping
-                                          ] ?? FLOW_STYLE["default"]) + "44",
-                                      }}
-                                    >
-                                      {getFlowName(tag)}
-                                      <button
-                                        type="button"
-                                        onClick={() =>
-                                          removeFlowTagAt(index, tIndex)
-                                        }
-                                        className="hover:text-rose-600 transition-colors ml-0.5 select-none"
+                                  <ContextMenu.Root key={`flow-${tIndex}`}>
+                                    <ContextMenu.Trigger asChild>
+                                      <div
+                                        className="mt-1 inline-block text-wrap items-center"
+                                        key={tIndex}
                                       >
-                                        ×
-                                      </button>
-                                    </span>
-                                    {tIndex < flow.length - 1 && (
-                                      <>
-                                        <span style={{ fontSize: 0 }}> </span>
-                                        <span className="text-slate-300 text-xs select-none mx-1">
-                                          ➔
+                                        <span
+                                          className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
+                                          style={{
+                                            backgroundColor:
+                                              (FLOW_STYLE[
+                                                tag as keyof FlowMapping
+                                              ] ?? FLOW_STYLE["default"]) +
+                                              "22",
+                                            color:
+                                              FLOW_STYLE[
+                                                tag as keyof FlowMapping
+                                              ] ?? FLOW_STYLE["default"],
+                                            borderColor:
+                                              (FLOW_STYLE[
+                                                tag as keyof FlowMapping
+                                              ] ?? FLOW_STYLE["default"]) +
+                                              "44",
+                                          }}
+                                        >
+                                          {getFlowName(tag)}
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              removeFlowTagAt(index, tIndex)
+                                            }
+                                            className="hover:text-rose-600 transition-colors ml-0.5 select-none"
+                                          >
+                                            ×
+                                          </button>
                                         </span>
-                                      </>
-                                    )}
-                                  </div>
+                                        {tIndex < flow.length - 1 && (
+                                          <>
+                                            <span style={{ fontSize: 0 }}>
+                                              {" "}
+                                            </span>
+                                            <span className="text-slate-300 text-xs select-none mx-1">
+                                              ➔
+                                            </span>
+                                          </>
+                                        )}
+                                      </div>
+                                    </ContextMenu.Trigger>
+                                    <ContextMenu.Content className="bg-white rounded-lg shadow-md border border-slate-200 py-1.5 w-24 z-50">
+                                      {/* 左移、右移、更換 */}
+                                      <ContextMenu.Item
+                                        onClick={() =>
+                                          moveFlowTag(index, tIndex, "left")
+                                        }
+                                        className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                      >
+                                        左移
+                                      </ContextMenu.Item>
+                                      <ContextMenu.Item
+                                        onClick={() =>
+                                          moveFlowTag(index, tIndex, "right")
+                                        }
+                                        className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                      >
+                                        右移
+                                      </ContextMenu.Item>
+                                      <ContextMenu.Separator className="my-1 h-px bg-slate-200" />
+                                      {song?.sections.map(
+                                        (preset, presetIndex) => {
+                                          const tag = getFlowName(preset.name);
+                                          return (
+                                            <ContextMenu.Item
+                                              key={`change-${presetIndex}`}
+                                              onClick={() =>
+                                                changeFlowTag(
+                                                  index,
+                                                  tIndex,
+                                                  presetIndex,
+                                                )
+                                              }
+                                              className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                            >
+                                              {tag}
+                                            </ContextMenu.Item>
+                                          );
+                                        },
+                                      )}
+                                      <ContextMenu.Separator className="my-1 h-px bg-slate-200" />
+                                      {EX_FLOWS.map((preset, presetIndex) => {
+                                        const tag = getFlowName(preset);
+                                        return (
+                                          <ContextMenu.Item
+                                            key={`change-ex-${presetIndex}`}
+                                            onClick={() =>
+                                              changeFlowTag(
+                                                index,
+                                                tIndex,
+                                                presetIndex +
+                                                  (song?.sections.length || 0),
+                                              )
+                                            }
+                                            className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                          >
+                                            {tag}
+                                          </ContextMenu.Item>
+                                        );
+                                      })}
+                                      {customFlowTags.map((tag, tagIndex) => (
+                                        <ContextMenu.Item
+                                          key={`change-custom-${tagIndex}`}
+                                          onClick={() =>
+                                            changeFlowTag(
+                                              index,
+                                              tIndex,
+                                              tagIndex +
+                                                (song?.sections.length || 0) +
+                                                EX_FLOWS.length,
+                                            )
+                                          }
+                                          className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                        >
+                                          {tag}
+                                        </ContextMenu.Item>
+                                      ))}
+                                    </ContextMenu.Content>
+                                  </ContextMenu.Root>
                                 );
                               })}
                             </div>
@@ -730,6 +845,19 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                         ) : (
                           <div className="text-[11px] text-slate-400 italic">
                             尚未設定流程（點選上方標籤即可依序加入流程）
+                            <Button
+                              onClick={() => {
+                                const defaultFlow =
+                                  song?.meta.arrangement ||
+                                  song?.sections.map((_, i) => i) ||
+                                  [];
+
+                                updateItem(index, { flow: defaultFlow });
+                              }}
+                              className="ml-1 text-[11px] text-indigo-600 hover:text-indigo-800 font-medium transition-colors"
+                            >
+                              或導入預設流程
+                            </Button>
                           </div>
                         )}
                       </div>
