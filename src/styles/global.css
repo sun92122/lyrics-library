@@ -25,4 +25,10 @@
   ol {
     list-style: revert;
   }
+
+  img {
+    max-width: 400px;
+    height: auto;
+    margin: 0 auto;
+  }
 }
