@@ -289,9 +289,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
           </h1>
           <p className="text-sm text-slate-300 leading-relaxed">
             挑選詩歌、自訂個別調性、排定段落流程（e.g., V1 ➔ C ➔ V2 ➔ C ➔
-            Tag）與司琴備註
-            <br />
-            所有資料直接壓縮於分享網址中，無需註冊或資料庫即可隨發隨用！
+            Tag）與樂手備註。所有資料直接壓縮於分享網址中，無需註冊或資料庫即可隨發隨用！
           </p>
         </div>
 
@@ -337,7 +335,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
             ) : (
               <>
                 <Share2 className="w-4 h-4" />
-                <span>複製歌單短網址</span>
+                <span>　複製歌單網址</span>
               </>
             )}
           </button>
@@ -450,10 +448,14 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                <label
+                  className="block text-xs font-semibold text-slate-600 mb-1"
+                  htmlFor="title"
+                >
                   活動 / 聚會名稱 (Title)
                 </label>
                 <input
+                  id="title"
                   type="text"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -463,12 +465,16 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">
+                <label
+                  className="block text-xs font-semibold text-slate-600 mb-1"
+                  htmlFor="date"
+                >
                   日期 (Date)
                 </label>
                 <div className="relative">
                   <Calendar className="w-4 h-4 text-slate-400 absolute left-3 top-2.5 pointer-events-none" />
                   <input
+                    id="date"
                     type="date"
                     value={date}
                     onChange={(e) => setDate(e.target.value)}
@@ -596,7 +602,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                             onChange={(e) =>
                               updateItem(index, { note: e.target.value })
                             }
-                            placeholder="備註（例: 開頭由鋼琴引導由弱漸強）..."
+                            placeholder="備註（樂手備註、升 key、間奏長度等）..."
                             className="w-full px-2.5 py-1 bg-white border border-slate-200 rounded-lg text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500"
                           />
                         </div>
@@ -889,7 +895,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
         onClose={() => setShowLyricsModal(false)}
         className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
       >
-        <DialogPanel className="max-m-md max-h-screen overflow-auto p-6 bg-white rounded-lg shadow-lg">
+        <DialogPanel className="max-m-md max-h-[calc(100vh-4rem)] overflow-auto p-6 bg-white rounded-lg shadow-lg">
           <DialogTitle className="text-lg font-medium text-gray-900">
             歌詞預覽
           </DialogTitle>

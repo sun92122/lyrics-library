@@ -182,10 +182,10 @@ const pageTitle = `${library.meta.title.a}${library.meta.title.b ? ` (${library.
                 return (
                   <a
                     href={`/songs/${song.id}`}
-                    class="flex flex-wrap items-center justify-between gap-4 p-5 hover:bg-slate-50/80 transition-all group"
+                    class="flex items-center justify-between gap-4 p-5 hover:bg-slate-50/80 transition-all group max-sm:flex-col max-sm:items-start max-sm:gap-2"
                   >
                     <div class="flex items-center gap-4 min-w-[200px]">
-                      <span class="w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-indigo-600 group-hover:text-white text-slate-500 font-mono text-sm font-bold flex items-center justify-center transition-colors">
+                      <span class="shrink-0 w-8 h-8 rounded-xl bg-slate-100 group-hover:bg-indigo-600 group-hover:text-white text-slate-500 font-mono text-sm font-bold flex items-center justify-center transition-colors">
                         {s.index || <Music className="w-4 h-4" />}
                       </span>
 
@@ -198,17 +198,18 @@ const pageTitle = `${library.meta.title.a}${library.meta.title.b ? ` (${library.
                             {song.meta.title.b}
                           </div>
                         )}
+                        {song.meta.author && (
+                          <div class="flex items-center gap-1 *:text-xs text-slate-400 font-normal mt-2">
+                            <User className="w-3.5 h-3.5 text-slate-400 self-start" />
+                            <span class="whitespace-pre-line">
+                              {song.meta.author}
+                            </span>
+                          </div>
+                        )}
                       </div>
                     </div>
 
-                    <div class="flex flex-wrap items-center gap-4 text-xs text-slate-500">
-                      {song.meta.author && (
-                        <div class="flex items-center gap-1">
-                          <User className="w-3.5 h-3.5 text-slate-400" />
-                          <span>{song.meta.author}</span>
-                        </div>
-                      )}
-
+                    <div class="shrink-0 flex flex-wrap items-center gap-4 text-xs text-slate-500 self-end">
                       {song.meta.bpm && (
                         <div class="flex items-center gap-1">
                           <Metronome className="w-3.5 h-3.5 text-slate-400" />

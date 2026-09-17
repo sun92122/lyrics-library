@@ -52,9 +52,9 @@ export function formatPlaylistOutline(
   >,
 ): string {
   const lines: string[] = [];
-  lines.push(`🎵 敬拜歌單：${payload.t || "主日敬拜"}`);
+  lines.push(`🎵 ${payload.t || "主日敬拜"}`);
   if (payload.d) {
-    lines.push(`📅 日期：${payload.d}`);
+    lines.push(`📅 ${payload.d}`);
   }
   lines.push("────────────────────────");
 
@@ -63,8 +63,8 @@ export function formatPlaylistOutline(
     const title = song ? song.titleA : item.id;
     const keyInfo = item.k
       ? `[調性: ${item.k}]`
-      : song?.originalKey
-        ? `[原調: ${song.originalKey}]`
+      // : song?.originalKey
+      //   ? `[原調: ${song.originalKey}]`
         : "";
 
     lines.push(`${index + 1}. ${title} ${keyInfo}`);

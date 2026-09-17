@@ -59,11 +59,16 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
 
         try {
           const { t, d, s } = decoded || {};
-          document.title = t ? `${t} - Lyrics Library` : "敬拜歌單 - Lyrics Library";
-          document.querySelector('meta[name="description"]')?.setAttribute(
-            "content",
-            (d ? `歌單日期：${d}` : "") + `，共收錄 ${s?.length || 0} 首詩歌流程。`,
-          );
+          document.title = t
+            ? `${t} - Lyrics Library`
+            : "敬拜歌單 - Lyrics Library";
+          document
+            .querySelector('meta[name="description"]')
+            ?.setAttribute(
+              "content",
+              (d ? `歌單日期：${d}` : "") +
+                `，共收錄 ${s?.length || 0} 首詩歌流程。`,
+            );
         } catch (error) {
           console.error("Failed to update meta description: ", error);
         }
@@ -404,7 +409,7 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                   <MessageSquare className="w-3.5 h-3.5 text-indigo-500 flex-shrink-0 mt-0.5" />
                   <div>
                     <span className="font-semibold text-slate-900">
-                      司琴/敬拜備註：
+                      樂手/敬拜備註：
                     </span>
                     <span className="text-slate-600 ml-1">{item.note}</span>
                   </div>

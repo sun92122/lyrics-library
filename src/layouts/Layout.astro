@@ -13,6 +13,7 @@ const { title, description = "現代化靜態詩歌歌詞與敬拜管理平台" 
 <!doctype html>
 <html
   lang="zh-Hant"
+  class="scroll-smooth h-screen overflow-y-auto"
   style="scrollbar-width: none; scrollbar-color: rgba(148,163,184,0.5) transparent;"
 >
   <head>
@@ -39,9 +40,7 @@ const { title, description = "現代化靜態詩歌歌詞與敬拜管理平台" 
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />
   </head>
-  <body
-    class="min-h-screen h-screen overflow-y-auto bg-slate-50 text-slate-900 flex flex-col font-sans"
-  >
+  <body class="min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
     <!-- Navbar -->
     <Header />
 
