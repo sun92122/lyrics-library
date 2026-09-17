@@ -11,7 +11,10 @@ const { title, description = "現代化靜態詩歌歌詞與敬拜管理平台" 
 ---
 
 <!doctype html>
-<html lang="zh-Hant">
+<html
+  lang="zh-Hant"
+  style="scrollbar-width: none; scrollbar-color: rgba(148,163,184,0.5) transparent;"
+>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -37,16 +40,13 @@ const { title, description = "現代化靜態詩歌歌詞與敬拜管理平台" 
     <meta name="robots" content="noindex, nofollow" />
   </head>
   <body
-    class="min-h-screen h-screen overflow-y-clip bg-slate-50 text-slate-900 flex flex-col font-sans"
+    class="min-h-screen h-screen overflow-y-auto bg-slate-50 text-slate-900 flex flex-col font-sans"
   >
     <!-- Navbar -->
     <Header />
 
     <!-- Main Content -->
-    <main
-      class="flex-1 w-full h-full overflow-y-auto"
-      style="scrollbar-width: none; scrollbar-color: rgba(148,163,184,0.5) transparent;"
-    >
+    <main class="flex-1 w-full h-full mt-16">
       <div class="min-h-full max-w-6xl w-full mx-auto px-4 sm:px-6 py-8">
         <slot />
       </div>
