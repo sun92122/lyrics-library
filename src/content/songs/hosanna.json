@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "和散那",
+      "b": "Hosanna"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [4, 0, 1, 5, 2, 1, 5, 3, 5, 1, 1, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=8MNo2swpz44"
+      }
+    ],
+    "author": "詞、曲 Brooke Fraser\n中譯詞 City Harvest Church"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我看見榮耀君王",
+          "b": "I see the King of glory"
+        },
+        {
+          "a": "駕著雲彩而降臨",
+          "b": "Coming on the clouds with fire"
+        },
+        {
+          "a": "全地震動 全地震動",
+          "b": "The whole earth shakes"
+        },
+        {
+          "a": "主你用慈愛憐憫",
+          "b": "I see His love and mercy"
+        },
+        {
+          "a": "將我罪完全洗淨",
+          "b": "Washing over all our sin"
+        },
+        {
+          "a": "萬民歌唱 萬民歌唱",
+          "b": "The people sing"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "和撒那 和撒那",
+          "b": "Hosanna Hosanna"
+        },
+        {
+          "a": "和撒那歸至高神",
+          "b": "Hosanna in the highest"
+        },
+        {
+          "a": "和撒那 和撒那",
+          "b": "Hosanna Hosanna"
+        },
+        {
+          "a": "和撒那歸至高神",
+          "b": "Hosanna in the highest"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "我看見全新世代",
+          "b": "I see a generation"
+        },
+        {
+          "a": "興起要得著這地",
+          "b": "Rising up to take their place"
+        },
+        {
+          "a": "放下自己 放下自己",
+          "b": "With selfless faith"
+        },
+        {
+          "a": "我看見復興來臨",
+          "b": "I see a near revival"
+        },
+        {
+          "a": "全因禱告尋求你",
+          "b": "Stirring as we pray and seek"
+        },
+        {
+          "a": "我們屈膝 我們屈膝",
+          "b": "We're on our knees"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "求醫治潔淨我心",
+          "b": "Heal my heart and make it clean"
+        },
+        {
+          "a": "開啟我雙眼看見你心意",
+          "b": "Open up my eyes to the things unseen"
+        },
+        {
+          "a": "教我如何能愛你的百姓",
+          "b": "Show me how to love like You have loved me"
+        },
+        {
+          "a": "我要能觸摸你心",
+          "b": "Break my heart for what breaks Yours"
+        },
+        {
+          "a": "我所做一切全為你旨意",
+          "b": "Everything I am for Your Kingdom's cause"
+        },
+        {
+          "a": "一生追求你直到天地廢去",
+          "b": "As I walk from earth into eternity"
+        }
+      ]
+    }
+  ]
+}
