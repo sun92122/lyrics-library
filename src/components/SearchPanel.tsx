@@ -45,9 +45,9 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
         prefix: true,
         fuzzy: 0.2,
         boost: {
-          titleA: 4,
+          titleA: 5,
           titleB: 3,
-          tags: 2.5,
+          tags: 2,
           author: 2,
           lyricsA: 1,
           lyricsB: 1,

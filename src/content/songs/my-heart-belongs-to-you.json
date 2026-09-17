@@ -1,0 +1,100 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我心屬於祢",
+      "b": "My Heart Belongs To You"
+    },
+    "tags": [],
+    "arrangement": [3, 0, 1, 4, 0, 1, 4, 1, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=7Us34cUu_ic"
+      },
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=qJ1bqBNnbXA"
+      }
+    ],
+    "author": "詞／曲：Robert & Lea Sutanto\n中譯詞：Trad. Chi"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我來到祢面前",
+          "b": "I come to You my Lord"
+        },
+        {
+          "a": "全心向祢稱謝 耶穌",
+          "b": "Thank You with all my heart Jesus"
+        },
+        {
+          "a": "祢是如此愛我",
+          "b": "You love me so so much"
+        },
+        {
+          "a": "我單單屬於祢",
+          "b": "I belong to You alone"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "主我在這裡 獻上我的心",
+          "b": "O Lord here I am to offer You my heart"
+        },
+        {
+          "a": "生命的一切 完全獻給祢",
+          "b": "Everything in life I dedicate to you"
+        },
+        {
+          "a": "因為我並沒有 財寶和金銀",
+          "b": "Nothing is better than worship You alone"
+        },
+        {
+          "a": "能夠獻給祢 唯有我的心",
+          "b": "I offer You my heart I give You all my life"
+        },
+        {
+          "a": "我唯一禱告 唯一的呼求",
+          "b": "The only prayer I pray, the only cry I cry"
+        },
+        {
+          "a": "是祢能悅納我 獻上的全所有",
+          "b": "Is that You're please with me accept my offering"
+        },
+        {
+          "a": "願我這一生 成為祢器皿",
+          "b": "May my life be a vessel to be used"
+        },
+        {
+          "a": "能完成祢旨意",
+          "b": "To accomplish Your will"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "願我這一生 成為祢器皿",
+          "b": "May my life be a vessel to be used"
+        },
+        {
+          "a": "能完成祢旨意",
+          "b": "To accomplish Your will"
+        }
+      ]
+    }
+  ]
+}
