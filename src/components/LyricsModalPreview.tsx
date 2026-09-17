@@ -84,58 +84,60 @@ function uint8ArrayToString(uint8Array: Uint8Array): string {
 }
 const LyricsModalPreviewSlide: React.FC<{ slide: Slide }> = ({ slide }) => {
   return (
-    <div className="relative w-[1920px] h-[1080px] bg-black overflow-hidden slide-preview origin-center font-bold">
-      {slide.elements.map((element, index) => {
-        const contentId = slide.uuid + "-" + index;
-        const doc = new RTFJS.Document(
-          stringToArrayBuffer(
-            element.textRtf
-              ? uint8ArrayToString(element.textRtf)
-              : `{\\rtf1\\ansi\\ansicpg950{\\fonttbl\\f0\\fswiss Helvetica;}
+    <div className="slide-preview-frame">
+      <div className="relative w-[1920px] h-[1080px] bg-black overflow-hidden slide-preview origin-top-left font-bold">
+        {slide.elements.map((element, index) => {
+          const contentId = slide.uuid + "-" + index;
+          const doc = new RTFJS.Document(
+            stringToArrayBuffer(
+              element.textRtf
+                ? uint8ArrayToString(element.textRtf)
+                : `{\\rtf1\\ansi\\ansicpg950{\\fonttbl\\f0\\fswiss Helvetica;}
             {\\colortbl;\\red255\\green255\\blue255;\\red255\\green255\\blue255;}
             \\pard \\f0\\fs24\\cf2 }`,
-          ),
-          {},
-        );
+            ),
+            {},
+          );
 
-        doc.render().then((html) => {
-          if (!document.getElementById(contentId)) {
-            return;
-          }
-          document.getElementById(contentId)!.innerHTML = html
-            .map((el) => el.outerHTML)
-            .join("");
-        });
-
-        const height = element?.bounds?.height || 1080;
-        const width = element?.bounds?.width || 1920;
-        const left = element?.bounds?.x || 0;
-        const top = element?.bounds?.y || 0;
-
-        return (
-          <div
-            key={contentId}
-            id={contentId}
-            className={
-              "absolute inline-block !overflow-visible float-start *:!overflow-clip *:line-clamp-1" +
-              ` *:z-[${999 - index}]` +
-              // Lang1 second line
-              " even:*:odd:mb-[-284px] even:*:odd:mt-[97px]" +
-              // Lang2 second line
-              " even:*:even:mt-[187px]"
+          doc.render().then((html) => {
+            if (!document.getElementById(contentId)) {
+              return;
             }
-            style={{
-              width: width + "px",
-              height: height + "px",
-              left: left + "px",
-              top: top + "px",
-              alignContent: ["flex-start", "center", "flex-end"][
-                element?.align ?? 1
-              ],
-            }}
-          />
-        );
-      })}
+            document.getElementById(contentId)!.innerHTML = html
+              .map((el) => el.outerHTML)
+              .join("");
+          });
+
+          const height = element?.bounds?.height || 1080;
+          const width = element?.bounds?.width || 1920;
+          const left = element?.bounds?.x || 0;
+          const top = element?.bounds?.y || 0;
+
+          return (
+            <div
+              key={contentId}
+              id={contentId}
+              className={
+                "absolute inline-block !overflow-visible float-start *:!overflow-clip *:line-clamp-1" +
+                ` *:z-[${999 - index}]` +
+                // Lang1 second line
+                " even:*:odd:mb-[-284px] even:*:odd:mt-[97px]" +
+                // Lang2 second line
+                " even:*:even:mt-[187px]"
+              }
+              style={{
+                width: width + "px",
+                height: height + "px",
+                left: left + "px",
+                top: top + "px",
+                alignContent: ["flex-start", "center", "flex-end"][
+                  element?.align ?? 1
+                ],
+              }}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

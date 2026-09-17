@@ -9,11 +9,20 @@
   }
 }
 
-.slide-preview {
-  zoom: calc(calc(100vw - 6rem) / 1920px);
+.slide-preview-frame {
+  --slide-preview-scale: calc(calc(100vw - 6rem) / 1920);
+  width: calc(1920px * var(--slide-preview-scale));
+  height: calc(1080px * var(--slide-preview-scale));
+  overflow: hidden;
+
   @media (min-width: 768px) {
-    zoom: calc(16rem / 1920px);
+    --slide-preview-scale: calc(16rem / 1920);
   }
+}
+
+.slide-preview {
+  transform: scale(var(--slide-preview-scale));
+  transform-origin: top left;
 }
 
 .thin-scrollbar {
