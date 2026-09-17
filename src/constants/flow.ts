@@ -148,6 +148,21 @@ export const FLOW_ALIASES: Record<string, string> = {
   结尾: "$E",
   间奏: "$Inter",
   标题: "$Title",
+  // ??
+  verse1: "$V1",
+  verse2: "$V2",
+  verse3: "$V3",
+  verse4: "$V4",
+  verse5: "$V5",
+  verse6: "$V6",
+  chorus1: "$C1",
+  chorus2: "$C2",
+  chorus3: "$C3",
+  chorus4: "$C4",
+  bridge1: "$B1",
+  bridge2: "$B2",
+  bridge3: "$B3",
+  PreChorus: "$PC",
 } as const;
 
 export const FLOW_NAMES: Record<string, FlowMapping> = {

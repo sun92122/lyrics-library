@@ -1,4 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import CodeMirror from "@uiw/react-codemirror";
+import { EditorState } from "@codemirror/state";
+import { EditorView } from "@codemirror/view";
 import * as ContextMenu from "@radix-ui/react-context-menu";
 import {
   FLOW_STYLE,
@@ -19,8 +22,14 @@ import {
   Field,
   Switch,
 } from "@headlessui/react";
-import { Sparkles } from "lucide-react";
+import { Sparkles, Undo2, Redo2 } from "lucide-react";
 import { LyricsViewer } from "@/components/LyricsViewer";
+import {
+  customHighlight,
+  replacePronounsAndSelect,
+  undoAction,
+  redoAction,
+} from "@/utils/simpleEditor";
 
 function matchFlowAlias(line: string): {
   isValid: boolean;
@@ -143,7 +152,7 @@ function parseLyricsText(
     }
 
     if (!currentSection) {
-      currentSection = { name: "Verse 1", lines: [] };
+      currentSection = { name: "Unknown", lines: [] };
     }
 
     if (isBilingual) {
@@ -194,6 +203,11 @@ export const SongBuilder: React.FC = () => {
   const [tagsInput, setTagsInput] = useState<string>("");
   const [sections, setSections] = useState<SectionItem[]>([]);
   const [rawLyrics, setRawLyrics] = useState("");
+
+  const editorViewRef = useRef<EditorView | null>(null);
+  const handleReplace = () => {
+    replacePronounsAndSelect(editorViewRef.current);
+  };
 
   useEffect(() => {
     const parsedSections = parseLyricsText(rawLyrics, isBilingual);
@@ -463,18 +477,81 @@ export const SongBuilder: React.FC = () => {
             </Field>
           </Field>
 
-          <Field className="flex flex-col gap-2">
-            <Label className="text-sm font-medium text-slate-700">
-              原始歌詞
-            </Label>
-            <Textarea
+          <div className="flex flex-col gap-2">
+            <div className="text-sm font-medium text-slate-700 w-full flex items-center">
+              <span className="shrink-0">原始歌詞</span>
+              <span className="shrink-0 ml-2 text-xs text-slate-400">
+                支持部分編輯器快捷鍵
+              </span>
+              <div className="ml-2 w-full justify-between flex items-center">
+                <>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      const trimmed = rawLyrics
+                        .split("\n")
+                        .map((line) => line.trim().replaceAll(/\s+/g, " "))
+                        .join("\n");
+                      setRawLyrics(trimmed);
+                    }}
+                    className="ml-2 px-2 py-0.5 bg-gray-600 text-white rounded-lg text-xs font-medium hover:bg-gray-700 transition-colors"
+                  >
+                    Trim
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={handleReplace}
+                    className="ml-2 px-2 py-0.5 bg-gray-600 text-white rounded-lg text-xs font-medium hover:bg-gray-700 transition-colors"
+                  >
+                    亻➔礻
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => undoAction(editorViewRef.current)}
+                    className="ml-4 px-2 py-0.5 text-gray-700 rounded-lg text-xs font-medium hover:text-gray-900 transition-colors"
+                  >
+                    <Undo2 className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => redoAction(editorViewRef.current)}
+                    className="ml-2 px-2 py-0.5 text-gray-700 rounded-lg text-xs font-medium hover:text-gray-900 transition-colors"
+                  >
+                    <Redo2 className="w-4 h-4" />
+                  </Button>
+                </>
+                <Button
+                  type="button"
+                  onClick={() => setRawLyrics("")}
+                  disabled={!rawLyrics}
+                  className={`ml-auto px-2 py-0.5 bg-red-600 text-white rounded-lg text-xs font-medium hover:bg-red-700 transition-colors ${!rawLyrics ? "opacity-50 cursor-not-allowed" : ""}`}
+                >
+                  清空
+                </Button>
+              </div>
+            </div>
+            <CodeMirror
+              className="w-full rounded-lg border border-slate-300 p-3 cm-custom"
+              placeholder="在此輸入原始歌詞，支援段落標記 [V1]、[C] 等"
+              height="300px"
               value={rawLyrics}
-              onChange={(e) => setRawLyrics(e.target.value)}
-              placeholder="在此輸入原始歌詞，支援段落標記 [Verse 1]、[Chorus] 等"
-              rows={10}
-              className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-y"
+              onChange={(value) => setRawLyrics(value)}
+              indentWithTab={false}
+              basicSetup={{
+                lineNumbers: false,
+                foldGutter: false,
+                highlightActiveLineGutter: false,
+                highlightActiveLine: false,
+              }}
+              extensions={[
+                customHighlight,
+                EditorState.allowMultipleSelections.of(true),
+              ]}
+              onCreateEditor={(view) => {
+                editorViewRef.current = view;
+              }}
             />
-          </Field>
+          </div>
 
           <Field className="flex flex-col gap-2">
             <Label className="text-sm font-medium text-slate-700">
