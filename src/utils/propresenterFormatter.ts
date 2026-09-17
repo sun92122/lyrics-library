@@ -110,7 +110,7 @@ function textToRtf(text: string, format: slideElementOptions): Uint8Array {
 \\pard\\pardeftab1680\\pardirnatural${q}\\partightenfactor0
 
 \\f0\\fs${format.fontSize ? format.fontSize * 2 : 96} \\cf2 \\CocoaLigature0 `;
-  const rtfFooter = " }";
+  const rtfFooter = "}";
 
   // text -> unicode escape -> RTF
   const encodedText = escapeRtfUnicode(text);
