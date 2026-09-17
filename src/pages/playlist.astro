@@ -1,14 +1,17 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
-import { PlaylistViewer } from '@/components/PlaylistViewer';
-import { ArrowLeft } from 'lucide-react';
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { PlaylistViewer } from "@/components/PlaylistViewer";
+import { ArrowLeft } from "lucide-react";
 
-const songEntries = await getCollection('songs');
-const availableSongs = songEntries.map((entry) => ({ id: entry.id, ...entry.data }));
+const songEntries = await getCollection("songs");
+const availableSongs = songEntries.map((entry) => ({
+  id: entry.id,
+  ...entry.data,
+}));
 ---
 
-<Layout title="活動敬拜歌單 - Lyrics Library" description="解析 URL 參數即時呈現敬拜流程，支援跳轉單曲調性頁面">
+<Layout title="敬拜歌單 - Lyrics Library" description="">
   <div class="space-y-6">
     <div>
       <a

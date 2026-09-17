@@ -157,15 +157,13 @@ const pageTitle = `${library.meta.title.a}${library.meta.title.b ? ` (${library.
       >
         {
           songs.map((s, index) => {
-            if (!s.content) {
+            if (!s.content && s.type !== "separator") {
               return;
             }
             switch (s.type) {
               case "separator":
                 return (
-                  <div class="px-5 py-3 text-sm text-slate-400 font-medium bg-slate-50">
-                    分隔線
-                  </div>
+                  <div class="h-px bg-slate-100 !border-t-2 !border-black/20" />
                 );
               case "note":
                 return (

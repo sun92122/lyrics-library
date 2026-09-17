@@ -75,6 +75,17 @@ export const LyricsModal: React.FC<LyricsModalProps> = ({ song }) => {
                 <div className="sticky top-0 text-lg font-bold mb-4 py-2 max-md:pb-1 pl-8 md:pl-2 md:border-b border-gray-300 text-gray-700/80 bg-white/80 backdrop-blur-sm z-[1000]">
                   選項
                 </div>
+                <span className="block text-lg text-red-600/80 px-4 py-1">
+                  必讀：使用此功能請閱讀{" "}
+                  <a
+                    href="/docs/prop"
+                    className="text-blue-600 hover:underline"
+                    target="_blank"
+                  >
+                    .pro 輸出說明
+                  </a>
+                  ，以便正確使用。
+                </span>
                 <LyricsModalOptions options={options} setOptions={setOptions} />
               </div>
               <div className="max-md:flex-shrink-0 w-full md:w-1/2 min-w-0 overflow-x-hidden">

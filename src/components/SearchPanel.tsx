@@ -254,7 +254,7 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
                   )}
                 </div>
                 <span className="flex items-center gap-1 font-medium text-indigo-600 group-hover:translate-x-0.5 transition-transform">
-                  查看歌詞與和弦 <ArrowRight className="w-3 h-3" />
+                  查看 <ArrowRight className="w-3 h-3" />
                 </span>
               </div>
             </a>

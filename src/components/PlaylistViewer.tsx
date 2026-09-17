@@ -56,6 +56,17 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
         const encoded = hash.slice(6);
         const decoded = decodePlaylist(encoded);
         setPayload(decoded);
+
+        try {
+          const { t, d, s } = decoded || {};
+          document.title = t ? `${t} - Lyrics Library` : "敬拜歌單 - Lyrics Library";
+          document.querySelector('meta[name="description"]')?.setAttribute(
+            "content",
+            (d ? `歌單日期：${d}` : "") + `，共收錄 ${s?.length || 0} 首詩歌流程。`,
+          );
+        } catch (error) {
+          console.error("Failed to update meta description: ", error);
+        }
       } else {
         setPayload(null);
       }

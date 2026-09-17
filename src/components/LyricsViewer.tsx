@@ -313,6 +313,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
                   semitoneOffset={semitoneOffset}
                 />
               ))}
+              <div style={{ fontSize: 0 }}>{"\n"}</div>
             </div>
           </div>
         ))}
@@ -353,47 +354,52 @@ const RenderLine: React.FC<RenderLineProps> = ({
     <div className="flex flex-col space-y-1">
       {/* Primary Line with Anchored Chords */}
       <div className="flex flex-wrap items-end leading-none select-text">
-        {Array.from({ length: totalSlots }).map((_, index) => {
-          const char = primaryChars[index] ?? "";
-          const chord = chordMap.get(index);
-          const isTrailingSpacer = index >= primaryChars.length;
+        {showChords ? (
+          Array.from({ length: totalSlots }).map((_, index) => {
+            const char = primaryChars[index] ?? "";
+            const chord = chordMap.get(index);
+            const isTrailingSpacer = index >= primaryChars.length;
 
-          return (
-            <div
-              key={index}
-              className={`inline-flex flex-col items-start justify-end flex-shrink-0 ${
-                isTrailingSpacer ? "min-w-[2.2rem]" : ""
-              }`}
-            >
-              {/* Chord Slot */}
-              {showChords && (
-                <div className="h-5 flex items-center pr-1 min-w-[1ch]">
-                  {chord ? (
-                    <span className="font-mono text-sm font-bold text-amber-600 hover:text-amber-700 bg-amber-50/80 px-1 py-0.5 rounded leading-none">
-                      {chord}
-                    </span>
-                  ) : (
-                    <span className="invisible text-xs select-none leading-none">
-                      _
-                    </span>
-                  )}
+            return (
+              <div
+                key={index}
+                className={`inline-flex flex-col items-start justify-end flex-shrink-0 ${
+                  isTrailingSpacer ? "min-w-[2.2rem]" : ""
+                }`}
+              >
+                {/* Chord Slot */}
+                {
+                  <div className="h-5 flex items-center pr-1 min-w-[1ch]">
+                    {chord ? (
+                      <span className="font-mono text-sm font-bold text-amber-600 hover:text-amber-700 bg-amber-50/80 px-1 py-0.5 rounded leading-none">
+                        {chord}
+                      </span>
+                    ) : (
+                      <span className="invisible text-xs select-none leading-none">
+                        _
+                      </span>
+                    )}
+                  </div>
+                }
+
+                {/* Character Slot */}
+                <div className="text-slate-800 text-lg md:text-xl font-normal leading-relaxed whitespace-pre">
+                  {char ||
+                    (isTrailingSpacer ? (
+                      <span className="inline-block w-4">&nbsp;</span>
+                    ) : (
+                      ""
+                    ))}
                 </div>
-              )}
-
-              {/* Character Slot */}
-              <div className="text-slate-800 text-lg md:text-xl font-normal leading-relaxed whitespace-pre">
-                {char ||
-                  (isTrailingSpacer ? (
-                    <span className="inline-block w-4">&nbsp;</span>
-                  ) : (
-                    ""
-                  ))}
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        ) : (
+          <div className="text-slate-800 text-lg md:text-xl font-normal leading-relaxed whitespace-pre">
+            {line.a}
+          </div>
+        )}
       </div>
-
       {/* Secondary Language Subtitle (if enabled) */}
       {languageMode === "both" && line.b && (
         <div className="text-slate-500 text-sm md:text-base font-normal leading-normal pt-0.5 whitespace-pre-line">

@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import type { SongWithId } from "@/content.config";
+import type { SongWithId, LibraryData } from "@/content.config";
 import {
   Search,
   Trash2,
@@ -15,9 +15,16 @@ import {
   AlertCircle,
   FileCode,
 } from "lucide-react";
+import { Input } from "@headlessui/react";
 
 export interface LibraryBuilderProps {
   availableSongs: SongWithId[];
+}
+
+interface LibrarySong {
+  type?: "song" | "separator" | "note" | "header";
+  id?: string;
+  content?: string;
 }
 
 export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
@@ -31,8 +38,9 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
   const [titleA, setTitleA] = useState("");
   const [titleB, setTitleB] = useState("");
   const [description, setDescription] = useState("");
-  const [tagsInput, setTagsInput] = useState("敬拜, 詩歌");
-  const [selectedSongIds, setSelectedSongIds] = useState<string[]>([]);
+  const [tagsInput, setTagsInput] = useState("");
+  const [selectedSongItems, setSelectedSongItems] = useState<LibrarySong[]>([]);
+  const [editingItemIndexs, setEditingItemIndex] = useState<number[]>([]);
 
   const [copied, setCopied] = useState(false);
   const [showJsonPreview, setShowJsonPreview] = useState(false);
@@ -44,8 +52,13 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
 
   // Extract all unique tags
   const allTags = useMemo(() => {
+    const newTags = new Set<string>();
     const tags = new Set<string>();
-    availableSongs.forEach((s) => s.meta.tags.forEach((t) => tags.add(t)));
+    availableSongs.forEach((s) =>
+      s.meta.tags.forEach((t) => {
+        newTags.has(t) ? tags.add(t) : newTags.add(t);
+      }),
+    );
     return Array.from(tags);
   }, [availableSongs]);
 
@@ -68,39 +81,59 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
 
   // Toggle selection
   const toggleSong = (id: string) => {
-    if (selectedSongIds.includes(id)) {
-      setSelectedSongIds(selectedSongIds.filter((sid) => sid !== id));
+    if (selectedSongItems.some((it) => it.id === id)) {
+      setSelectedSongItems(selectedSongItems.filter((it) => it.id !== id));
     } else {
-      setSelectedSongIds([...selectedSongIds, id]);
+      setSelectedSongItems([...selectedSongItems, { id }]);
     }
+  };
+
+  // Get song index in selectedSongItems
+  const getSongIndex = (id: string) => {
+    // skip non-song items
+    let index = 1;
+    for (const item of selectedSongItems) {
+      if (item.id === id) {
+        return index;
+      }
+      if (item.id) {
+        index++;
+      }
+    }
+    return 0;
   };
 
   // Select all visible
   const selectAllVisible = () => {
-    const newIds = new Set(selectedSongIds);
-    filteredCatalog.forEach((s) => newIds.add(s.id));
-    setSelectedSongIds(Array.from(newIds));
+    const newIds = new Set(selectedSongItems);
+    filteredCatalog.forEach((s) => newIds.add({ id: s.id }));
+    setSelectedSongItems(Array.from(newIds));
   };
 
   // Deselect all
   const clearSelection = () => {
-    setSelectedSongIds([]);
+    setSelectedSongItems([]);
   };
 
   // Reorder
   const moveSong = (index: number, direction: "up" | "down") => {
     const newIndex = direction === "up" ? index - 1 : index + 1;
-    if (newIndex < 0 || newIndex >= selectedSongIds.length) return;
-    const nextList = [...selectedSongIds];
+    if (newIndex < 0 || newIndex >= selectedSongItems.length) return;
+    const nextList = [...selectedSongItems];
     const temp = nextList[index];
     nextList[index] = nextList[newIndex];
     nextList[newIndex] = temp;
-    setSelectedSongIds(nextList);
+    setSelectedSongItems(nextList);
   };
 
   // Remove single song
   const removeSong = (id: string) => {
-    setSelectedSongIds(selectedSongIds.filter((sid) => sid !== id));
+    setSelectedSongItems(selectedSongItems.filter((it) => it.id !== id));
+  };
+
+  // Remove single item by index
+  const removeItemByIndex = (index: number) => {
+    setSelectedSongItems(selectedSongItems.filter((_, i) => i !== index));
   };
 
   // Build JSON object
@@ -120,9 +153,9 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
         ...(description.trim() ? { description: description.trim() } : {}),
         tags: parsedTags,
       },
-      songIds: selectedSongIds,
+      songs: selectedSongItems,
     };
-  }, [libraryId, titleA, titleB, description, tagsInput, selectedSongIds]);
+  }, [libraryId, titleA, titleB, description, tagsInput, selectedSongItems]);
 
   const jsonString = useMemo(() => {
     return JSON.stringify(generatedJson, null, 2);
@@ -130,7 +163,7 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
 
   // Validation
   const isValid = Boolean(
-    libraryId.trim() && titleA.trim() && selectedSongIds.length > 0,
+    libraryId.trim() && titleA.trim() && selectedSongItems.length > 0,
   );
 
   // Copy JSON
@@ -178,6 +211,39 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
     URL.revokeObjectURL(url);
   };
 
+  const ItemEditComponents = (index: number) => (
+    <div className="flex items-center gap-1">
+      <button
+        type="button"
+        onClick={() => moveSong(index, "up")}
+        disabled={index === 0}
+        className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200 disabled:opacity-30 transition-colors"
+        title="上移"
+      >
+        <ArrowUp className="w-4 h-4" />
+      </button>
+
+      <button
+        type="button"
+        onClick={() => moveSong(index, "down")}
+        disabled={index === selectedSongItems.length - 1}
+        className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200 disabled:opacity-30 transition-colors"
+        title="下移"
+      >
+        <ArrowDown className="w-4 h-4" />
+      </button>
+
+      <button
+        type="button"
+        onClick={() => removeItemByIndex(index)}
+        className="p-1 rounded text-rose-500 hover:text-rose-700 hover:bg-rose-50 transition-colors ml-1"
+        title="自歌庫移除"
+      >
+        <Trash2 className="w-4 h-4" />
+      </button>
+    </div>
+  );
+
   return (
     <div className="space-y-8">
       {/* Top Banner Guide */}
@@ -188,7 +254,7 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
             <span>維護者視覺化工具</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
-            靜態子歌曲庫產生器 (Library Builder)
+            歌曲庫產生器 (Library Builder)
           </h1>
           <p className="text-sm text-slate-300 leading-relaxed">
             挑選曲目並調整排序，輸入歌庫中英資訊後，一鍵下載符合 Schema 規範的
@@ -204,10 +270,15 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
           <button
             type="button"
             onClick={handleCopyJson}
+            disabled={!isValid}
             className={`flex items-center gap-1.5 px-4 py-2.5 rounded-xl text-xs font-semibold transition-all shadow-sm ${
               copied
                 ? "bg-emerald-600 text-white"
                 : "bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 active:scale-95"
+            } ${
+              isValid
+                ? ""
+                : "bg-slate-700 text-slate-400 cursor-not-allowed opacity-60"
             }`}
           >
             {copied ? (
@@ -246,7 +317,7 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-bold text-slate-900 flex items-center gap-2">
               <Layers className="w-5 h-5 text-indigo-600" />
-              <span>挑選曲目庫 ({availableSongs.length})</span>
+              <span>挑選歌曲 ({availableSongs.length})</span>
             </h2>
 
             <div className="flex items-center gap-2 text-xs">
@@ -316,7 +387,9 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
           {/* Song list with checkboxes */}
           <div className="space-y-2 max-h-[520px] overflow-y-auto pr-1">
             {filteredCatalog.map((song) => {
-              const isSelected = selectedSongIds.includes(song.id);
+              const isSelected = selectedSongItems.some(
+                (it) => it.id === song.id,
+              );
               return (
                 <div
                   key={song.id}
@@ -388,7 +461,7 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
                   type="text"
                   value={tagsInput}
                   onChange={(e) => setTagsInput(e.target.value)}
-                  placeholder="例: 聖詩, 禮拜, 青年"
+                  placeholder="例: 敬拜, 詩歌, 聖誕"
                   className="w-full px-3.5 py-2 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600"
                 />
               </div>
@@ -441,7 +514,8 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-base font-bold text-slate-900">
-                  收錄歌曲與排序 ({selectedSongIds.length})
+                  收錄歌曲與排序 (
+                  {selectedSongItems.filter((it) => it.id).length})
                 </h3>
                 <p className="text-xs text-slate-400">
                   點擊上下箭頭調整歌庫中曲目的排列先後順序
@@ -458,22 +532,82 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
               </button>
             </div>
 
-            {selectedSongIds.length > 0 ? (
+            {selectedSongItems.length > 0 && (
               <div className="space-y-2 max-h-[380px] overflow-y-auto pr-1">
-                {selectedSongIds.map((id, index) => {
-                  const song = songMap.get(id);
+                {selectedSongItems.map((item, index) => {
+                  if (item.type === "separator") {
+                    return (
+                      <div
+                        key={`separator-${index}`}
+                        className="flex items-center gap-3 my-6"
+                      >
+                        <div className="h-px flex-1 bg-gray-200"></div>
+
+                        <span className="shrink-0 text-sm font-medium text-gray-500">
+                          分隔線
+                        </span>
+
+                        <div className="h-px flex-1 bg-gray-200"></div>
+
+                        <div className="shrink-0 flex items-center mr-3">
+                          {ItemEditComponents(index)}
+                        </div>
+                      </div>
+                    );
+                  } else if (item.type === "header") {
+                    return (
+                      <div
+                        key={`header-${index}`}
+                        className="flex items-center justify-between px-3"
+                      >
+                        <Input
+                          value={item.content || ""}
+                          onChange={(e) => {
+                            const newItems = [...selectedSongItems];
+                            newItems[index].content = e.target.value;
+                            setSelectedSongItems(newItems);
+                          }}
+                          placeholder="請輸入標題內容..."
+                          className="w-full py-2 bg-transparent text-md ring-0 focus:outline-none placeholder:text-gray-400 placeholder:italic font-bold"
+                        />
+
+                        {ItemEditComponents(index)}
+                      </div>
+                    );
+                  } else if (item.type === "note") {
+                    return (
+                      <div
+                        key={`note-${index}`}
+                        className="flex items-center justify-between px-3"
+                      >
+                        <Input
+                          value={item.content || ""}
+                          onChange={(e) => {
+                            const newItems = [...selectedSongItems];
+                            newItems[index].content = e.target.value;
+                            setSelectedSongItems(newItems);
+                          }}
+                          placeholder="請輸入備註內容..."
+                          className="w-full py-2 bg-transparent text-md ring-0 focus:outline-none placeholder:text-gray-400 placeholder:italic placeholder:text-sm"
+                        />
+                        {ItemEditComponents(index)}
+                      </div>
+                    );
+                  }
+                  if (!item.id) return null; // Skip if no ID
+                  const song = songMap.get(item.id);
                   return (
                     <div
-                      key={id}
+                      key={item.id}
                       className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200/80 text-sm"
                     >
                       <div className="flex items-center gap-3">
                         <span className="w-6 h-6 rounded-lg bg-indigo-100 text-indigo-700 font-mono text-xs font-bold flex items-center justify-center">
-                          {index + 1}
+                          {getSongIndex(item.id)}
                         </span>
                         <div>
                           <div className="font-semibold text-slate-900">
-                            {song ? song.meta.title.a : id}
+                            {song ? song.meta.title.a : item.id}
                           </div>
                           {song && song.meta.title.b && (
                             <div className="text-[11px] text-slate-400">
@@ -483,45 +617,61 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1">
-                        <button
-                          type="button"
-                          onClick={() => moveSong(index, "up")}
-                          disabled={index === 0}
-                          className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200 disabled:opacity-30 transition-colors"
-                          title="上移"
-                        >
-                          <ArrowUp className="w-4 h-4" />
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => moveSong(index, "down")}
-                          disabled={index === selectedSongIds.length - 1}
-                          className="p-1 rounded text-slate-500 hover:text-slate-900 hover:bg-slate-200 disabled:opacity-30 transition-colors"
-                          title="下移"
-                        >
-                          <ArrowDown className="w-4 h-4" />
-                        </button>
-
-                        <button
-                          type="button"
-                          onClick={() => removeSong(id)}
-                          className="p-1 rounded text-rose-500 hover:text-rose-700 hover:bg-rose-50 transition-colors ml-1"
-                          title="自歌庫移除"
-                        >
-                          <Trash2 className="w-4 h-4" />
-                        </button>
-                      </div>
+                      {ItemEditComponents(index)}
                     </div>
                   );
                 })}
               </div>
-            ) : (
+            )}
+            {!selectedSongItems.some((it) => it.id) && (
               <div className="p-8 text-center bg-slate-50 rounded-2xl border border-dashed border-slate-200 text-slate-400 text-sm">
-                請由左側勾選歌曲以加入此歌庫
+                請由歌曲列表勾選歌曲以加入此歌庫
               </div>
             )}
+            <div className="flex items-center justify-between p-3 bg-slate-50 rounded-2xl border border-slate-200/80 border-dashed text-sm">
+              {/* add separator, title, description */}
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelectedSongItems([
+                      ...selectedSongItems,
+                      { type: "separator" },
+                    ])
+                  }
+                  className="px-2 py-1 bg-slate-100 text-slate-700 rounded hover:bg-slate-200 text-xs font-medium transition-colors"
+                >
+                  分隔線
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelectedSongItems([
+                      ...selectedSongItems,
+                      { type: "header", content: "" },
+                    ])
+                  }
+                  className="px-2 py-1 bg-slate-100 text-slate-700 rounded hover:bg-slate-200 text-xs font-medium transition-colors"
+                >
+                  標題
+                </button>
+                <button
+                  type="button"
+                  onClick={() =>
+                    setSelectedSongItems([
+                      ...selectedSongItems,
+                      { type: "note", content: "" },
+                    ])
+                  }
+                  className="px-2 py-1 bg-slate-100 text-slate-700 rounded hover:bg-slate-200 text-xs font-medium transition-colors"
+                >
+                  備註
+                </button>
+              </div>
+              <span className="text-xs text-slate-400">
+                加入分隔線、標題或備註以整理歌庫內容
+              </span>
+            </div>
 
             {/* Validation warnings */}
             {!isValid && (

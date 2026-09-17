@@ -1,5 +1,12 @@
 import React, { useState, useMemo, useEffect } from "react";
 import * as ContextMenu from "@radix-ui/react-context-menu";
+import {
+  Dialog,
+  DialogPanel,
+  DialogTitle,
+  Description,
+} from "@headlessui/react";
+
 import type { SongWithId } from "@/content.config";
 import { CHROMATIC_SCALE } from "@/constants/keys";
 import {
@@ -84,6 +91,13 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
       return matchesQuery;
     });
   }, [availableSongs, searchQuery]);
+
+  // Get lang1 lyrics for a song
+  const getSongLyrics = (song: SongWithId) => {
+    return song.sections
+      .flatMap((section) => section.lines.map((line) => line.a).concat([""]))
+      .join("\n");
+  };
 
   // Add song to playlist
   const addSong = (song: SongWithId) => {
@@ -182,6 +196,9 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
   }, [title, date, items]);
 
   const shareUrl = `${origin}/playlist#data=${encodedData}`;
+  const [previewLyrics, setPreviewLyrics] = useState<string | null>(null);
+  const [previewSong, setPreviewSong] = useState<string | null>(null);
+  const [showLyricsModal, setShowLyricsModal] = useState(false);
 
   // Copy share URL
   const handleCopyLink = async () => {
@@ -375,18 +392,22 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                 key={song.id}
                 className="flex items-center justify-between p-3 rounded-2xl border border-slate-200 hover:border-indigo-200 hover:bg-slate-50 transition-all group"
               >
-                <div className="space-y-0.5">
+                <div
+                  className="space-y-0.5"
+                  onClick={() => {
+                    setPreviewSong(song.meta.title.a);
+                    setPreviewLyrics(getSongLyrics(song));
+                    setShowLyricsModal(true);
+                  }}
+                >
                   <div className="flex flex-row gap-2 items-baseline">
                     <div className="font-semibold text-sm text-slate-900">
                       {song.meta.title.a}
                     </div>
-                    <div className="text-xs text-slate-400">
-                      {song.meta.title.b || song.id}
-                    </div>
                   </div>
                   <div className="flex flex-row gap-2 items-baseline">
                     {song.meta.author && (
-                      <div className="text-[11px] text-slate-400">
+                      <div className="text-[11px] text-slate-400 line-clamp-3 whitespace-pre-line">
                         {song.meta.author}
                       </div>
                     )}
@@ -394,17 +415,6 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                 </div>
 
                 <div className="flex items-center gap-2">
-                  {song.meta.originalKey && (
-                    <span className="font-mono text-xs px-2 py-0.5 bg-slate-100 rounded text-slate-600 font-semibold">
-                      {song.meta.originalKey}
-                    </span>
-                  )}
-                  {song.meta.bpm && (
-                    <span className="font-mono text-xs px-2 py-0.5 bg-slate-100 rounded text-slate-600 font-semibold">
-                      {song.meta.bpm} BPM
-                    </span>
-                  )}
-
                   {items.some((it) => it.id === song.id) ? (
                     <button
                       type="button"
@@ -873,6 +883,29 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
           </div>
         </div>
       </div>
+      {/* 歌詞預覽 */}
+      <Dialog
+        open={showLyricsModal}
+        onClose={() => setShowLyricsModal(false)}
+        className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      >
+        <DialogPanel className="max-m-md max-h-screen overflow-auto p-6 bg-white rounded-lg shadow-lg">
+          <DialogTitle className="text-lg font-medium text-gray-900">
+            歌詞預覽
+          </DialogTitle>
+          {previewSong && (
+            <Description>
+              <span className="text-sm text-gray-600">{previewSong}</span>
+            </Description>
+          )}
+
+          <div className="mt-2">
+            <p className="text-sm text-gray-500 whitespace-pre-line">
+              {previewLyrics}
+            </p>
+          </div>
+        </DialogPanel>
+      </Dialog>
     </div>
   );
 };
