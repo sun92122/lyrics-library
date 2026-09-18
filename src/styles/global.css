@@ -10,13 +10,13 @@
 }
 
 .slide-preview-frame {
-  --slide-preview-scale: calc(calc(100vw - 6rem) / 1920);
+  --slide-preview-scale: calc(calc(100vw - 6rem) / 1920px);
   width: calc(1920px * var(--slide-preview-scale));
   height: calc(1080px * var(--slide-preview-scale));
   overflow: hidden;
 
   @media (min-width: 768px) {
-    --slide-preview-scale: calc(16rem / 1920);
+    --slide-preview-scale: calc(16rem / 1920px);
   }
 }
 
