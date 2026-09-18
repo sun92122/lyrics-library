@@ -628,7 +628,7 @@ export const SongBuilder: React.FC = () => {
                               return { ...prev, assets: newAssets };
                             })
                           }
-                          className="w-full !rounded-lg border border-slate-300 h-[46px] text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 *:block"
+                          className="w-full !rounded-lg border border-slate-300 bg-slate-50 h-[46px] px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         >
                           <option value="youtube">YouTube</option>
                           <option value="other">其他連結</option>
