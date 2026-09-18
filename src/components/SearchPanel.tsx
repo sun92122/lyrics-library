@@ -25,6 +25,10 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
       .filter((tag) => tag[1] > 1); // Only include tags with more than one song
   }, [docs]);
 
+  const segmenter = new Intl.Segmenter("zh", { granularity: "word" });
+  const normalizeTerm = (term: string) => {
+    return term.replace(/[祢妳]/g, "你").replace(/[祂牠]/g, "他");
+  };
   // Initialize MiniSearch instance with CJK-friendly tokenizer
   const miniSearch = useMemo(() => {
     const ms = new MiniSearch<SearchDoc>({
@@ -39,7 +43,12 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
         "author",
       ],
       tokenize: (text: string) => {
-        return text.toLowerCase().match(/[\p{L}\p{N}]+|\p{Script=Han}/gu) || [];
+        return Array.from(segmenter.segment(text.toLowerCase()))
+          .filter((seg) => seg.isWordLike)
+          .map((seg) => seg.segment);
+      },
+      processTerm: (term: string) => {
+        return normalizeTerm(term);
       },
       searchOptions: {
         prefix: true,
