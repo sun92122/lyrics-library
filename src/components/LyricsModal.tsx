@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import type { SongData, LineItem } from "@/content.config";
+import type { SongData } from "@/content.config";
 import {
   type ProOptions,
   type ProFormat,
@@ -12,14 +12,26 @@ import { Dialog, DialogPanel, DialogTitle } from "@headlessui/react";
 import { LyricsModalOptions } from "@/components/LyricsModalOptions";
 import { LyricsModalPreview } from "@/components/LyricsModalPreview";
 
-import { proPresenterExportModalOpen, flow } from "@/stores/settings";
+import {
+  proPresenterExportModalOpen,
+  flow,
+  currentSong,
+} from "@/stores/settings";
 import { useStore } from "@nanostores/react";
 
 interface LyricsModalProps {
-  song: SongData;
+  song?: SongData;
 }
 
-export const LyricsModal: React.FC<LyricsModalProps> = ({ song }) => {
+export const LyricsModal: React.FC<LyricsModalProps> = ({ song: songProp }) => {
+  const song =
+    songProp ||
+    useStore(currentSong) ||
+    ({
+      meta: { title: { a: "Unknown" }, languages: { a: "中文" }, tags: [] },
+      sections: [],
+    } as SongData);
+
   const isOpen = useStore(proPresenterExportModalOpen);
   const currentFlow = useStore(flow);
   const [options, setOptions] = useState<ProOptions>({});
@@ -57,8 +69,13 @@ export const LyricsModal: React.FC<LyricsModalProps> = ({ song }) => {
   };
 
   useEffect(() => {
+    if (!song || !song.meta.title.a || !song.sections.length) return;
     handleGenerateProFormat(); // Generate ProFormat on initial render
   }, [song, currentFlow, options]);
+
+  if (!song || !isOpen) {
+    return null; // or some fallback UI
+  }
 
   // two columns: left for options, right for preview, with small screen is top for options, bottom for preview
   // options: <LyricsModalOptions options={options} setOptions={setOptions} />

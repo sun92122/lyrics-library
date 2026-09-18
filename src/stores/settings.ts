@@ -2,6 +2,7 @@ import { persistentAtom } from "@nanostores/persistent";
 import { atom } from "nanostores";
 import LZString from "lz-string";
 
+import type { SongData } from "@/content.config";
 import {
   EXPORT_OPTIONS_DEFAULT,
   EXPORT_TEMPLATE_DEFAULT,
@@ -46,3 +47,4 @@ export const songExportTemplate = persistentAtom(
 
 export const proPresenterExportModalOpen = atom(false);
 export const flow = atom<number[] | undefined>(undefined);
+export const currentSong = atom<SongData | null>(null);

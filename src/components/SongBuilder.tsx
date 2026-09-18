@@ -30,6 +30,11 @@ import {
   undoAction,
   redoAction,
 } from "@/utils/simpleEditor";
+import {
+  proPresenterExportModalOpen,
+  currentSong,
+  flow,
+} from "@/stores/settings";
 
 function matchFlowAlias(line: string): {
   isValid: boolean;
@@ -189,8 +194,20 @@ function parseLyricsText(
   return sections;
 }
 
+function getYoutubeVideoUrl(url: string): string | null {
+  const yturl = new URL(url);
+  const videoId =
+    yturl.searchParams.get("v") ||
+    yturl.pathname.split("/").pop()?.slice(0, 11);
+  if (!videoId) return null;
+
+  const t = yturl.searchParams.get("t");
+
+  return `https://www.youtube.com/watch?v=${videoId}` + (t ? `&t=${t}` : "");
+}
+
 export const SongBuilder: React.FC = () => {
-  const [isBilingual, setIsBilingual] = useState(true);
+  const [isBilingual, setIsBilingual] = useState(false);
   const [id, setId] = useState("");
   const [idError, setIdError] = useState<string | null>(null);
   const [meta, setMeta] = useState<SongData["meta"]>({
@@ -478,12 +495,14 @@ export const SongBuilder: React.FC = () => {
           </Field>
 
           <div className="flex flex-col gap-2">
-            <div className="text-sm font-medium text-slate-700 w-full flex items-center">
-              <span className="shrink-0">原始歌詞</span>
-              <span className="shrink-0 ml-2 text-xs text-slate-400">
-                支持部分編輯器快捷鍵
+            <div className="text-sm font-medium text-slate-700 w-full flex items-start max-sm:flex-col">
+              <span className="shrink-0">
+                原始歌詞
+                <span className="ml-2 text-xs text-slate-400">
+                  支持部分編輯器快捷鍵
+                </span>
               </span>
-              <div className="ml-2 w-full justify-between flex items-center">
+              <div className="ml-2 w-full justify-between flex items-center max-sm:mt-2">
                 <>
                   <Button
                     type="button"
@@ -616,23 +635,25 @@ export const SongBuilder: React.FC = () => {
                         <Label className="text-sm font-medium text-slate-700">
                           類型
                         </Label>
-                        <Select
-                          value={asset.type}
-                          onChange={(e) =>
-                            setMeta((prev) => {
-                              const newAssets = [...(prev.assets || [])];
-                              newAssets[index] = {
-                                ...newAssets[index],
-                                type: e.target.value as any,
-                              };
-                              return { ...prev, assets: newAssets };
-                            })
-                          }
-                          className="w-full !rounded-lg border border-slate-300 bg-slate-50 h-[46px] px-3 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                        >
-                          <option value="youtube">YouTube</option>
-                          <option value="other">其他連結</option>
-                        </Select>
+                        <div className="w-full !rounded-lg border border-slate-300 h-[46px]">
+                          <Select
+                            value={asset.type}
+                            onChange={(e) =>
+                              setMeta((prev) => {
+                                const newAssets = [...(prev.assets || [])];
+                                newAssets[index] = {
+                                  ...newAssets[index],
+                                  type: e.target.value as any,
+                                };
+                                return { ...prev, assets: newAssets };
+                              })
+                            }
+                            className="w-full h-full bg-transparent text-sm pl-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-0"
+                          >
+                            <option value="youtube">YouTube</option>
+                            <option value="other">其他連結</option>
+                          </Select>
+                        </div>
                       </Field>
                     </Field>
                     <Field>
@@ -648,6 +669,21 @@ export const SongBuilder: React.FC = () => {
                             return { ...prev, assets: newAssets };
                           })
                         }
+                        onBlur={(e) => {
+                          if (asset.type === "youtube") {
+                            const validUrl = getYoutubeVideoUrl(e.target.value);
+                            if (validUrl) {
+                              setMeta((prev) => {
+                                const newAssets = [...(prev.assets || [])];
+                                newAssets[index] = {
+                                  ...newAssets[index],
+                                  url: validUrl,
+                                };
+                                return { ...prev, assets: newAssets };
+                              });
+                            }
+                          }
+                        }}
                         placeholder="https://www.youtube.com/watch?v=example"
                         className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
@@ -944,7 +980,21 @@ export const SongBuilder: React.FC = () => {
             </div>
           </div>
           <div className="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
-            <h2 className="text-lg font-bold text-slate-900">歌詞預覽</h2>
+            <div className="flex items-center justify-between">
+              <h2 className="text-lg font-bold text-slate-900">歌詞預覽</h2>
+              <Button
+                type="button"
+                onClick={() => {
+                  currentSong.set({ meta, sections });
+                  flow.set(meta.arrangement || []);
+                  proPresenterExportModalOpen.set(true);
+                }}
+                className="flex items-center px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm bg-amber-500 hover:bg-amber-600 text-amber-100 active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                disabled={sections.length === 0 || !meta.title.a}
+              >
+                ProPresenter
+              </Button>
+            </div>
             {/* Render parsed sections */}
             {sections.length > 0 ? (
               <LyricsViewer

@@ -66,8 +66,14 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
       section.lines.some((line) => line.chords && line.chords.length > 0),
     ),
   );
-  const flow =
-    currentFlow && currentFlow.length > 0 ? currentFlow : song.meta.arrangement;
+  const flow = useMemo(() => {
+    return currentFlow && currentFlow.length > 0
+      ? currentFlow
+      : song.meta.arrangement;
+  }, [currentFlow, song.meta.arrangement]);
+  const isDefaultFlow = useMemo(() => {
+    return !customFlow || customFlow.length === 0;
+  }, [customFlow]);
 
   const handleCopy = async () => {
     const text = formatLyricsText(song, {
@@ -108,7 +114,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
       {/* Controls Bar */}
       {!readonly && (
         <div className="mt-2 flex flex-wrap items-center justify-between gap-1 bg-white rounded-2xl border border-slate-200/80 shadow-sm">
-          <div className="flex flex-wrap items-center justify-between gap-3 p-3">
+          <div className="flex flex-wrap w-full items-center justify-between gap-3 p-3">
             {/* Left: Language & Layout Toggles */}
             <div className="flex flex-wrap items-center gap-2">
               {/* Language Switcher */}
@@ -221,7 +227,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
           {flow && flow.length > 0 && (
             <div className="space-y-1.5 p-4 pt-2 border-t border-slate-100">
               <div className="text-xs font-semibold text-slate-500">
-                {customFlow && customFlow.length > 0 ? "歌序" : "預設歌序"}
+                {isDefaultFlow ? "歌序" : "預設歌序"}
               </div>
               <div className="inline-block items-center !mt-0">
                 {flow.map((tagIndex, tIndex) => {

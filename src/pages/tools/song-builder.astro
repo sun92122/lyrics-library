@@ -3,6 +3,7 @@ import Layout from "@/layouts/Layout.astro";
 import { ArrowLeft } from "lucide-react";
 
 import { SongBuilder } from "@/components/SongBuilder";
+import { LyricsModal } from "@/components/LyricsModal";
 ---
 
 <Layout
@@ -21,5 +22,8 @@ import { SongBuilder } from "@/components/SongBuilder";
     </div>
 
     <SongBuilder client:load />
+
+    <!-- Modal Preview -->
+    <LyricsModal client:only />
   </div>
 </Layout>
