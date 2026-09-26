@@ -1,0 +1,142 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "高聲唱",
+      "b": "Turn it up"
+    },
+    "tags": [],
+    "arrangement": [6, 0, 1, 2, 3, 1, 2, 2, 7, 4, 5, 2, 2, 10],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=d4Gk89VACzA"
+      }
+    ],
+    "author": "詞曲：Planetshakers"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "高舉祢 主祢在這裡",
+          "b": "You are here as we lift You up"
+        },
+        {
+          "a": "在讚美中被高舉",
+          "b": "You are riding on our praise"
+        },
+        {
+          "a": "祢掌權 統管全世界",
+          "b": "Be enthroned over everything"
+        },
+        {
+          "a": "高坐讚美寶座前",
+          "b": "You are seated in our praise"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "我能夠遇見祢 即將成就一切",
+          "b": "This is prophetic I can feel it in the air"
+        },
+        {
+          "a": "祢改變環境 當我們高聲讚美",
+          "b": "We lift our praise and You change the atmosphere"
+        },
+        {
+          "a": "現在 我們敞開心門大聲地唱 我自由",
+          "b": "With hearts open now everybody singing out - I am free"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "高聲唱 讚美嘹亮",
+          "b": "Turn it up this sound of praise"
+        },
+        {
+          "a": "超越各方 所有的聲響",
+          "b": "Make it louder than any other"
+        },
+        {
+          "a": "高舉祢 宣告祢名",
+          "b": "Lift Him up and shout His name"
+        },
+        {
+          "a": "超乎萬民",
+          "b": "Over all"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "我讚美 就經歷改變",
+          "b": "As we praise, I can feel the change"
+        },
+        {
+          "a": "當祢的同在降臨",
+          "b": "As Your presence now invades"
+        },
+        {
+          "a": "我聽見 祢斷開鎖鏈",
+          "b": "Hear the sound of the broken chains"
+        },
+        {
+          "a": "釋放我們得自由",
+          "b": "Prison doors are giving way"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "讚美升起 恩雨降臨",
+          "b": "Our praise goes up, Your rain comes down"
+        },
+        {
+          "a": "讚美升起 恩雨降臨",
+          "b": "Our praise goes up, Your rain comes down"
+        },
+        {
+          "a": "讚美升起 恩雨降臨",
+          "b": "Our praise goes up, Your rain comes down"
+        },
+        {
+          "a": "讚美升起 恩雨降臨",
+          "b": "Our praise goes up, Your rain comes down"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "讚美歡呼 普天歡慶",
+          "b": "With shouts of praise we celebrate"
+        },
+        {
+          "a": "榮耀君王已降臨",
+          "b": "King of glory enter in"
+        },
+        {
+          "a": "在讚美中被高舉 喔主",
+          "b": "You are riding on our praise, Oh Lord"
+        }
+      ]
+    }
+  ]
+}

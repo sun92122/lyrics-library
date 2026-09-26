@@ -1,0 +1,103 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "凡事都有可能",
+      "b": "Nothing Is Impossible"
+    },
+    "tags": ["約書亞樂團", "愛贏了"],
+    "arrangement": [2, 2, 2, 3, 0, 1, 4, 0, 1, 4, 2, 2, 1, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=uJvTyVdq1iQ"
+      }
+    ],
+    "author": "詞曲：Joth Hunt\n中譯詞：City Harvest Church"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我活著不是憑眼見",
+          "b": "I'm not gonna live by what I see"
+        },
+        {
+          "a": "我活著不是憑感覺",
+          "b": "I'm not gonna live by what I feel"
+        },
+        {
+          "a": "我深知主祢與我同在",
+          "b": "Deep down I know that You're here with me"
+        },
+        {
+          "a": "在祢絕沒有難成的事",
+          "b": "I know that You can do anything"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "有祢我能成就一切",
+          "b": "Through You, I can do anything"
+        },
+        {
+          "a": "能成就一切",
+          "b": "I can do all things"
+        },
+        {
+          "a": "因祢賜我力量",
+          "b": "Cause it's You who gives me strength"
+        },
+        {
+          "a": "凡事都有可能",
+          "b": "Nothing Is impossible"
+        },
+        {
+          "a": "有祢瞎眼能看見",
+          "b": "Through You, blind eyes are opened"
+        },
+        {
+          "a": "生命能改變",
+          "b": "Strongholds are broken"
+        },
+        {
+          "a": "我憑信心而活",
+          "b": "I am living by faith"
+        },
+        {
+          "a": "凡事都有可能",
+          "b": "Nothing Is impossible"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我相信 我相信",
+          "b": "I believe, I believe"
+        },
+        {
+          "a": "我相信 我相信 耶穌",
+          "b": "I believe, I believe in You"
+        },
+        {
+          "a": "我相信 我相信",
+          "b": "I believe, I believe"
+        },
+        {
+          "a": "我相信 我相信 耶穌",
+          "b": "I believe, I believe in You"
+        }
+      ]
+    }
+  ]
+}

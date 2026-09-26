@@ -1,11 +1,11 @@
 {
   "meta": {
     "title": {
-      "a": "竹靈青崇2026Q3歌庫"
+      "a": "竹靈青崇2026Q4歌庫"
     },
     "description": "",
     "tags": ["新竹靈糧堂", "青崇", "青少年崇拜", "HCBOLC"],
-    "date": "2026-09-01"
+    "date": "2026-10-01"
   },
   "songs": [
     {
@@ -26,6 +26,10 @@
     { "id": "one-way" },
     { "id": "all-you-gates-lift-up-your-heads" },
     { "id": "we-sing-praises-to-the-lord-yahweh" },
+    { "id": "stand-together-we-r-one" },
+    { "id": "washed" },
+    { "id": "nothing-is-impossible-2" },
+    { "id": "turn-it-up" },
     { "type": "separator" },
     {
       "type": "header",
@@ -50,7 +54,7 @@
     },
     {
       "type": "note",
-      "content": "以神的所是為先(Who God is)，明確地、肯定地、堅定地的宣告與讚美神"
+      "content": "與神深刻、真實的相遇在敬拜之中，也回應神對我們的愛；讓我們與神之間的關係緊密連結在一起"
     },
 
     { "id": "follow-your-will" },

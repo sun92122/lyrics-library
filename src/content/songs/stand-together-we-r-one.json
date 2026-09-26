@@ -1,0 +1,191 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "杖劍 We R One",
+      "b": "Stand Together We R One"
+    },
+    "tags": ["約書亞樂團", "We R One"],
+    "arrangement": [5, 0, 1, 2, 1, 2, 3, 4, 2, 3, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=my82Ze9yOjg"
+      }
+    ],
+    "author": "詞曲：周巽光、璽恩、曹之懿、陳州邦、謝思穎 、馬永蒂、湯國維\n中譯英：王建玫"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "讚美是我的武器",
+          "b": "Praise is the weapon I wield"
+        },
+        {
+          "a": "感謝就釋放神蹟",
+          "b": "Thanks bring signs and wonders"
+        },
+        {
+          "a": "神的軍隊在前進",
+          "b": "God's army is marching on"
+        },
+        {
+          "a": "跨越世代我們宣告",
+          "b": "Through every age, we now declare"
+        },
+        {
+          "a": "神的國 降臨在 這土地",
+          "b": "Let Your Kingdom come upon this land"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "杖釋放智慧權柄",
+          "b": "Staff brings wisdom and command"
+        },
+        {
+          "a": "劍啟動扭轉契機",
+          "b": "Sword can turn the tide at hand"
+        },
+        {
+          "a": "爭戰靠兩代合力",
+          "b": "Two ages fight as one"
+        },
+        {
+          "a": "同心就能擊潰仇敵",
+          "b": "Joined as one, we crush the foe"
+        },
+        {
+          "a": "來高舉 主耶穌 聖名",
+          "b": "Come lift up the name of Jesus Christ"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "We R One"
+        },
+        {
+          "a": "我們同心合意 如父子聖靈",
+          "b": "In one accord - The Father, Son and Spirit, One"
+        },
+        {
+          "a": "We R One"
+        },
+        {
+          "a": "我們都轉向 天父的心",
+          "b": "We all turn our hearts, To our Father's heart"
+        },
+        {
+          "a": "我們謙卑 回轉 尋求祢旨意",
+          "b": "We humble ourselves, Turn back and seek Your will"
+        },
+        {
+          "a": "讓咒詛 都離開 祢應許之地",
+          "b": "Let every curse now depart, From Your promised land"
+        },
+        {
+          "a": "We R One"
+        },
+        {
+          "a": "我們彼此對齊 都放下自己",
+          "b": "Aligned as one, We all lay ourselves down"
+        },
+        {
+          "a": "We R One"
+        },
+        {
+          "a": "我們都參與這 榮耀戰役",
+          "b": "We all take part, In this glorious fight"
+        },
+        {
+          "a": "協同作戰 專注 聽主號令",
+          "b": "We fight as one, Focused on the Lord's command"
+        },
+        {
+          "a": "杖劍合併 宣告 祢國度降臨",
+          "b": "Staff and sword unite, we declare, Let Your Kingdom come"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "Stand together, We R One"
+        },
+        {
+          "a": "杖劍合併, We R One",
+          "b": "Staff and sword, now We R One!"
+        },
+        {
+          "a": "Stand together, We R One"
+        },
+        {
+          "a": "HEY HEY HEY HEY"
+        },
+        {
+          "a": "Stand together, We R One"
+        },
+        {
+          "a": "兩代合一, We R One",
+          "b": "Two as one, now We R One"
+        },
+        {
+          "a": "Stand together, We R One"
+        },
+        {
+          "a": "HEY HEY HEY HEY"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "放下驕傲 以謙卑束腰",
+          "b": "Drop your pride; let a humble heart be your guide"
+        },
+        {
+          "a": "彼此轉向 不要再內耗",
+          "b": "Turn to each other; leave all the strife behind"
+        },
+        {
+          "a": "耐心傳承 為父的心不倚老賣老",
+          "b": "Fathers, pass the torch with patience—lay your pride aside"
+        },
+        {
+          "a": "順服聆聽 年輕人不搞叛逆那套",
+          "b": "Young ones, hear and follow—do not turn or rebel inside"
+        },
+        {
+          "a": "Army of God 得著這世代為主燃燒",
+          "b": "Army of God, win this age; for the Lord we burn bright"
+        },
+        {
+          "a": "十指緊扣 向天國標竿我們奔跑",
+          "b": "Hand in hand, toward the Kingdom mark, we run with all our might"
+        },
+        {
+          "a": "復興時刻 杖與劍一路直搗",
+          "b": "Revival now—staff and sword break through the enemy line"
+        },
+        {
+          "a": "我們同心 向這地齊心宣告",
+          "b": "Heart to heart, across this land, we rise and testify"
+        }
+      ]
+    }
+  ]
+}

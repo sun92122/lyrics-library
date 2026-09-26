@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "耶穌唯有祢",
+      "b": "Jesus It Is You"
+    },
+    "tags": ["約書亞樂團", "The Hope", "KUA"],
+    "arrangement": [6, 0, 1, 2, 7, 3, 4, 2, 2, 5, 8, 2, 2],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=pMdmAxDCUw4"
+      },
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=MI-i5FMg9c4"
+      }
+    ],
+    "author": "曲／詞：Ben Manusama\n中譯詞：蕭郁芸",
+    "originalKey": "G"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "誰讓太陽升起",
+          "b": "Who makes the sun rise"
+        },
+        {
+          "a": "照耀這地 帶來全新生命",
+          "b": "And bring the earth new life in every beam"
+        },
+        {
+          "a": "耶穌唯有祢",
+          "b": "Jesus it is You"
+        },
+        {
+          "a": "誰讓星空降臨",
+          "b": "Who turns the day to night"
+        },
+        {
+          "a": "看我安然進入甜美夢境",
+          "b": "And watches me as I begin to dream"
+        },
+        {
+          "a": "耶穌唯有祢",
+          "b": "Jesus it is You"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "誰供應我豐富生命",
+          "b": "Who brings me food for my table"
+        },
+        {
+          "a": "誰看顧了我所需",
+          "b": "Who cares for all of my needs"
+        },
+        {
+          "a": "誰會與我同行",
+          "b": "Who walks the road with me"
+        },
+        {
+          "a": "伴我成長渡過一切經歷",
+          "b": "Has grown with me through all that I have been"
+        },
+        {
+          "a": "耶穌唯有祢",
+          "b": "Jesus it is You"
+        },
+        {
+          "a": "耶穌唯有祢",
+          "b": "Jesus it is You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我高舉雙手 揚聲歌唱",
+          "b": "So I lift my hands and I bring my song"
+        },
+        {
+          "a": "一生年日 一生成敗 一切所有",
+          "b": "All of my days, all of my rights, all of my wrongs"
+        },
+        {
+          "a": "將我的生命 完全獻上",
+          "b": "I offer my life, here and beyond"
+        },
+        {
+          "a": "唯有祢配得 耶穌唯有祢",
+          "b": "To the one thing true, Jesus it is You"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "誰看見我傷痛",
+          "b": "Who sees my brokenness"
+        },
+        {
+          "a": "在軟弱無助時扶持著我",
+          "b": "And carries me when I am frail and weak"
+        },
+        {
+          "a": "耶穌唯有祢",
+          "b": "Jesus it is You"
+        },
+        {
+          "a": "誰平靜了風浪",
+          "b": "Who tells the storm to rest"
+        },
+        {
+          "a": "在絶望恐懼時與我同在",
+          "b": "When I am overwhelmed and cannot speak"
+        },
+        {
+          "a": "耶穌唯有祢",
+          "b": "Jesus it is You"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "誰擔當了我的罪孽",
+          "b": "Who wears my guilt on His shoulders"
+        },
+        {
+          "a": "誰呵護著我的心",
+          "b": "Who holds my heart in His hands"
+        },
+        {
+          "a": "誰將我的恐懼",
+          "b": "Who takes my thoughts and fears"
+        },
+        {
+          "a": "所有意念釘在十字架上",
+          "b": "And hangs them on the arms of calvary"
+        },
+        {
+          "a": "耶穌唯有祢",
+          "b": "Jesus it is You"
+        },
+        {
+          "a": "耶穌唯有祢",
+          "b": "Jesus it is You"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "唯有祢配得 耶穌唯有祢",
+          "b": "To the one thing true, Jesus it is You"
+        }
+      ]
+    }
+  ]
+}

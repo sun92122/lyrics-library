@@ -1,0 +1,184 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "潔淨",
+      "b": "WASHED"
+    },
+    "tags": ["We R One"],
+    "arrangement": [
+      5, 1, 0, 1, 2, 1, 1, 7, 3, 3, 3, 1, 1, 3, 3, 3, 3, 4, 4, 4, 7, 1, 1, 9
+    ],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=BKb_mMkstSw"
+      }
+    ],
+    "ccli": "7263433",
+    "author": "詞／曲：Joshua Holiday, Mitch Wong, Joe L Barnes, Steven Furtick\n中譯詞：馮康恬 Audrey Feng"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "潔淨",
+          "b": "I'm clean"
+        },
+        {
+          "a": "罪曾侵蝕我",
+          "b": "Sin was stained on me"
+        },
+        {
+          "a": "羞愧籠罩我",
+          "b": "Shame was running deep"
+        },
+        {
+          "a": "但祢愛傾倒各各他",
+          "b": "But love was spilled on Calvary"
+        },
+        {
+          "a": "喔哈利路亞",
+          "b": "Oh hallelujah"
+        },
+        {
+          "a": "潔淨",
+          "b": "I'm clean"
+        },
+        {
+          "a": "多不可思議",
+          "b": "God how can it be"
+        },
+        {
+          "a": "拯救我恢復我",
+          "b": "I'm ransomed and redeemed"
+        },
+        {
+          "a": "我站立因祢的勝利",
+          "b": "Standing in Your victory"
+        },
+        {
+          "a": "喔哈利路亞",
+          "b": "Oh hallelujah"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "寶血已洗淨我了",
+          "b": "I've been washed in the water"
+        },
+        {
+          "a": "水洗淨我",
+          "b": "Washed in the blood"
+        },
+        {
+          "a": "我是新造的",
+          "b": "I'm as good as new"
+        },
+        {
+          "a": "喔哈利路亞",
+          "b": "Oh hallelujah"
+        },
+        {
+          "a": "寶血已洗淨我了",
+          "b": "I've been washed in the water"
+        },
+        {
+          "a": "水洗淨我",
+          "b": "Washed in the blood"
+        },
+        {
+          "a": "因為祢所做",
+          "b": "All because of You"
+        },
+        {
+          "a": "喔哈利路亞",
+          "b": "Oh hallelujah"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "潔淨",
+          "b": "I'm clean"
+        },
+        {
+          "a": "不是靠自己",
+          "b": "Not what I have done"
+        },
+        {
+          "a": "祢為我捨生命",
+          "b": "But what you've done for me"
+        },
+        {
+          "a": "為我上十架全還清",
+          "b": "You paid it all up on that tree"
+        },
+        {
+          "a": "喔哈利路亞",
+          "b": "Oh hallelujah"
+        },
+        {
+          "a": "潔淨",
+          "b": "I'm clean"
+        },
+        {
+          "a": "祢愛完全得勝",
+          "b": "Your love has overcome"
+        },
+        {
+          "a": "祢憐憫已掌權",
+          "b": "Your mercy is supreme"
+        },
+        {
+          "a": "我跳舞因祢的勝利",
+          "b": "I'm dancing in Your victory"
+        },
+        {
+          "a": "喔哈利路亞",
+          "b": "Oh hallelujah"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "祢已拿走我羞愧",
+          "b": "You took away my shame"
+        },
+        {
+          "a": "全都釘在十字架",
+          "b": "And You nailed it to the cross"
+        },
+        {
+          "a": "帶我逃離了死亡",
+          "b": "Got me running out the grave"
+        },
+        {
+          "a": "哈利路亞我獻上",
+          "b": "Hallelujah here I come"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "哈利路亞我獻上",
+          "b": "Hallelujah here I come"
+        }
+      ]
+    }
+  ]
+}

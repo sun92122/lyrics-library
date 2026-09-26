@@ -54,6 +54,7 @@ export const librarySchema = z.object({
     }),
     description: z.string().optional(),
     tags: z.array(z.string()).default([]),
+    date: z.coerce.date().optional(),
   }),
   songs: z.array(
     z.object({
