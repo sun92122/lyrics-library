@@ -87,7 +87,9 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
 
   // Filter & search results computation
   const filteredResults = useMemo(() => {
-    let resultList: SearchDoc[] = docs;
+    let resultList: SearchDoc[] = docs.sort((a, b) =>
+      a.titleA.localeCompare(b.titleA),
+    );
 
     const trimmedQuery = query.trim();
     if (trimmedQuery) {
