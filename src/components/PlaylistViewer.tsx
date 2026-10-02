@@ -269,7 +269,9 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
         </div>
 
         <div className="flex items-center justify-between text-xs text-slate-500 pt-4 border-t border-slate-100">
-          <span>共收錄 {payload.s.length} 首詩歌流程</span>
+          <span>
+            共收錄 {payload.s.filter((item) => !item.t).length} 首詩歌流程
+          </span>
           <span className="text-slate-400">
             點擊曲目直接開啟即時調性歌詞與和弦
           </span>
@@ -279,6 +281,33 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
       {/* Playlist Timeline Items */}
       <div className="space-y-4">
         {payload.s.map((item, index) => {
+          if (item.t === "H") {
+            return (
+              <div
+                key={`${item.id}-${index}`}
+                className="text-lg font-bold text-slate-900 py-2 px-4 bg-transparent border-b border-slate-200/80 rounded-xl"
+              >
+                {item.note || "標題"}
+              </div>
+            );
+          } else if (item.t === "D") {
+            return (
+              <div
+                key={`${item.id}-${index}`}
+                className="text-sm text-slate-700 py-2 px-4 bg-transparent text-ellipsis whitespace-pre-wrap"
+              >
+                {item.note || "說明"}
+              </div>
+            );
+          } else if (item.t === "S") {
+            return (
+              <div
+                key={`${item.id}-${index}`}
+                className="h-0.5 border-collapse border-t border-slate-400/80 shadow-sm"
+              ></div>
+            );
+          }
+
           const song = songMap.get(item.id);
           const customKey = item.k || song?.meta.originalKey || "C";
           const originalKey = song?.meta.originalKey || customKey;

@@ -2,6 +2,7 @@ import LZString from "lz-string";
 
 export interface PlaylistItem {
   id: string; // 歌曲 ID
+  t?: "H" | "D" | "S" | null; // H: header, D: description, S: separator, null: normal song
   k?: string; // 自訂使用調性 (例: "A")
   flow?: number[]; // 段落自訂排程 (例: [0, 1, 2, 1, 3] 對應到 sections 的索引)
   note?: string; // 敬拜備註 (例: "開頭鋼琴引導由弱漸強")
@@ -59,25 +60,35 @@ export function formatPlaylistOutline(
   lines.push("────────────────────────");
 
   payload.s.forEach((item, index) => {
+    if (item.t === "H") {
+      lines.push(`\n\n# ${item.note || ""}`);
+      return;
+    } else if (item.t === "D") {
+      lines.push(`> ${item.note?.split("\n").join("\n> ") || ""}`);
+      return;
+    } else if (item.t === "S") {
+      lines.push("\n────────────");
+      return;
+    }
+
     const song = songMap.get(item.id);
     const title = song ? song.titleA : item.id;
     const keyInfo = item.k
       ? `[調性: ${item.k}]`
-      // : song?.originalKey
-      //   ? `[原調: ${song.originalKey}]`
-        : "";
+      : // : song?.originalKey
+        //   ? `[原調: ${song.originalKey}]`
+        "";
 
-    lines.push(`${index + 1}. ${title} ${keyInfo}`);
+    lines.push(`- ${title} ${keyInfo}`);
 
     if (item.flow && item.flow.length > 0) {
-      lines.push(`   ▸ 流程：${item.flow.join(" ➔ ")}`);
+      lines.push(`   > 流程：${item.flow.join(" ➔ ")}`);
     }
 
     if (item.note) {
-      lines.push(`   ▸ 備註：${item.note}`);
+      lines.push(`   > 備註：${item.note}`);
     }
   });
 
-  lines.push("────────────────────────");
   return lines.join("\n").trim();
 }
