@@ -1,0 +1,278 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "勇敢走出去",
+      "b": "Stepping Out"
+    },
+    "tags": ["讚美之泉", "最珍貴的角落"],
+    "arrangement": [3, 1, 4, 0, 1, 1, 1, 1, 1, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=w43QIZ79YbY"
+      }
+    ],
+    "author": "讚美之泉\n詞 / 曲：鄭耀華 Frank Cheng",
+    "originalKey": "E",
+    "bpm": 74,
+    "ccli": "4925138"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我並不完美 也並不特別",
+          "b": "I'm not perfect, I'm not special",
+          "chords": [
+            {
+              "index": 2,
+              "chord": "E"
+            },
+            {
+              "index": 4,
+              "chord": "B/D#"
+            },
+            {
+              "index": 8,
+              "chord": "C#m"
+            },
+            {
+              "index": 10,
+              "chord": "E/B"
+            }
+          ]
+        },
+        {
+          "a": "而祢卻是為我捨棄生命的主",
+          "b": "But You are the God who gave Your life for me",
+          "chords": [
+            {
+              "index": 1,
+              "chord": "A"
+            },
+            {
+              "index": 4,
+              "chord": "E/G#"
+            },
+            {
+              "index": 8,
+              "chord": "F#m"
+            },
+            {
+              "index": 11,
+              "chord": "B"
+            }
+          ]
+        },
+        {
+          "a": "我時常軟弱 有時會迷惑",
+          "b": "I am often weak, and sometimes I have doubts",
+          "chords": [
+            {
+              "index": 2,
+              "chord": "E"
+            },
+            {
+              "index": 4,
+              "chord": "B/D#"
+            },
+            {
+              "index": 8,
+              "chord": "C#m"
+            },
+            {
+              "index": 10,
+              "chord": "E/B"
+            }
+          ]
+        },
+        {
+          "a": "但祢是道路真理和生命",
+          "b": "But You are the way, the truth, and the life",
+          "chords": [
+            {
+              "index": 1,
+              "chord": "A"
+            },
+            {
+              "index": 3,
+              "chord": "B"
+            },
+            {
+              "index": 8,
+              "chord": "E"
+            },
+            {
+              "index": 10,
+              "chord": "A/B"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "主祢要往哪裡走 我就跟祢走",
+          "b": "Lord, wherever You go, I will follow You",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "B"
+            },
+            {
+              "index": 2,
+              "chord": "E"
+            },
+            {
+              "index": 6,
+              "chord": "B/D#"
+            },
+            {
+              "index": 10,
+              "chord": "C#m"
+            },
+            {
+              "index": 12,
+              "chord": "E/B"
+            }
+          ]
+        },
+        {
+          "a": "領我走到世界盡頭 一生不再回頭",
+          "b": "Lead me to the ends of the earth, never turning back",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "A"
+            },
+            {
+              "index": 4,
+              "chord": "E/G#"
+            },
+            {
+              "index": 10,
+              "chord": "F#m"
+            },
+            {
+              "index": 14,
+              "chord": "B"
+            }
+          ]
+        },
+        {
+          "a": "讓世界聽到我們敬拜 我們的禱告",
+          "b": "Let the world hear our worship and our prayers",
+          "chords": [
+            {
+              "index": 2,
+              "chord": "E"
+            },
+            {
+              "index": 6,
+              "chord": "B/D#"
+            },
+            {
+              "index": 10,
+              "chord": "C#m"
+            },
+            {
+              "index": 14,
+              "chord": "D/B"
+            }
+          ]
+        },
+        {
+          "a": "讓復興從我們開始 將主愛帶到人群中",
+          "b": "Let revival start with us, bringing Your love to the crowds",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "E"
+            },
+            {
+              "index": 1,
+              "chord": "A"
+            },
+            {
+              "index": 5,
+              "chord": "E/G#"
+            },
+            {
+              "index": 10,
+              "chord": "F#m"
+            },
+            {
+              "index": 13,
+              "chord": "B"
+            },
+            {
+              "index": 16,
+              "chord": "E"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "縱然有許多的問題 我也不放棄",
+          "b": "Though there may be many troubles, I will not give up",
+          "chords": [
+            {
+              "index": 2,
+              "chord": "E"
+            },
+            {
+              "index": 6,
+              "chord": "B/D#"
+            },
+            {
+              "index": 9,
+              "chord": "C#m"
+            },
+            {
+              "index": 13,
+              "chord": "E/B"
+            }
+          ]
+        },
+        {
+          "a": "祢大能賜給我勇氣 我會勇敢走出去",
+          "b": "Your great power gives me courage, and I will step out with boldness",
+          "chords": [
+            {
+              "index": 1,
+              "chord": "A"
+            },
+            {
+              "index": 5,
+              "chord": "E/G#"
+            },
+            {
+              "index": 10,
+              "chord": "F#m"
+            },
+            {
+              "index": 12,
+              "chord": "B"
+            },
+            {
+              "index": 15,
+              "chord": "E"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "傾倒我全所有",
+      "b": "Pour Out My All"
+    },
+    "tags": ["約書亞樂團", "大衛帳幕的榮耀"],
+    "arrangement": [6, 0, 1, 2, 6, 0, 1, 3, 4, 4, 8, 5, 10],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=gjQ56VB8Rs4"
+      },
+      {
+        "type": "other",
+        "name": "PDF",
+        "url": "https://drive.google.com/file/d/1CzKjWYh9wyvpmIIsVR-md-jSgRf1R-qV/view?usp=sharing"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：林忠竑, 中壢靈糧堂青牧\n中譯英：宋怡萌",
+    "bpm": 62,
+    "originalKey": "Ab"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我渴望與祢更靠近",
+          "b": "I long to draw closer to You"
+        },
+        {
+          "a": "我的氣息 都屬於祢",
+          "b": "My every breath belongs to You"
+        },
+        {
+          "a": "祢良善純全的旨意",
+          "b": "Your good and perfect will"
+        },
+        {
+          "a": "吸引著我 體貼祢心意",
+          "b": "Calls me to You, to know Your heart"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "祢那 溫柔無法測透的愛",
+          "b": "Your love, so gentle unfathomable"
+        },
+        {
+          "a": "陪伴著我 永遠不離開",
+          "b": "Always with me, Your love never leaves"
+        },
+        {
+          "a": "我願 成為祢可用的器皿",
+          "b": "I choose to be a vessel in Your hands"
+        },
+        {
+          "a": "因我相信 祢揀選了我",
+          "b": "Because I believe You have chosen me"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "傾倒我全所有 一生願為祢而活",
+          "b": "Pour out all I am for You, I will live this life for You"
+        },
+        {
+          "a": "這世界不能夠 阻擋祢旨意成就",
+          "b": "Nothing in this world can stand against Your will from being done"
+        },
+        {
+          "a": "祢大能的雙手 必緊緊牽引著我",
+          "b": "Your mighty hands are my guide, closely leading me along"
+        },
+        {
+          "a": "祢牽引著我",
+          "b": "You lead me on"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "傾倒我全所有 一生願為祢而活",
+          "b": "Pour out all I am for You, I will live this life for You"
+        },
+        {
+          "a": "這世界不能夠 阻擋祢旨意成就",
+          "b": "Nothing in this world can stand against Your will from being done"
+        },
+        {
+          "a": "祢大能的雙手 必緊緊牽引著我",
+          "b": "Your mighty hands are my guide, closely leading me along"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "傾倒我全所有 願祢成就 願祢成就",
+          "b": "Pour out all I am for You, Your will be done, Your will be done"
+        },
+        {
+          "a": "傾倒我全所有 願祢成就 願祢成就",
+          "b": "Pour out all I am for You, Your will be done, Your will be done"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "傾倒我全所有 一生願為祢而活",
+          "b": "Pour out all I am for You, I will live this life for You"
+        },
+        {
+          "a": "這世界不能夠 阻擋祢旨意成就",
+          "b": "Nothing in this world can stand against Your will from being done"
+        },
+        {
+          "a": "祢大能的雙手 必緊緊牽引著我",
+          "b": "Your mighty hands are my guide, closely leading me along"
+        },
+        {
+          "a": "一生願為祢而活",
+          "b": "I will live this life for You"
+        }
+      ]
+    }
+  ]
+}

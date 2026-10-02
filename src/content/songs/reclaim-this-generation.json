@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "奪回這世代",
+      "b": "Reclaim This Generation"
+    },
+    "tags": ["火把音樂", "葡萄樹計畫"],
+    "arrangement": [2, 4, 0, 1, 2, 3, 5, 0, 1, 2, 3, 3, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=Ffb1YlNp_5w"
+      }
+    ],
+    "author": "火把音樂\n詞／曲：胡斯漢、劉思捷"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "起初 神創造天地",
+          "b": "The Word at the beginning"
+        },
+        {
+          "a": "從無到有 看一切為美好",
+          "b": "From nothingness created everything"
+        },
+        {
+          "a": "伊甸 祢我的樂園",
+          "b": "Eden, our paradise"
+        },
+        {
+          "a": "如此的美妙",
+          "b": "Blissful and serene"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "謊言 偷竊了生命",
+          "b": "One lie led to the fall"
+        },
+        {
+          "a": "從有到無 將一切都毀壞",
+          "b": "And life was stolen by a shameless thief"
+        },
+        {
+          "a": "罪惡 追趕著我",
+          "b": "Then sin ruled over me"
+        },
+        {
+          "a": "直到祢的到來",
+          "b": "Till You came and set me free"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "十字架 祢犧牲的救贖",
+          "b": "On the Cross You gave Your life for me"
+        },
+        {
+          "a": "復活主 我重新得盼望",
+          "b": "Empty tomb - my hope is now renewed"
+        },
+        {
+          "a": "懇求主 使用我 奪回這世代",
+          "b": "In Your name we reclaim this generation"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我宣告",
+          "b": "As we sing"
+        },
+        {
+          "a": "黑暗的變光明 凋零的要盛開",
+          "b": "Darkness is turned to light, the withered is brought to life"
+        },
+        {
+          "a": "黯淡的成為璀璨",
+          "b": "The colorless, now shining bright"
+        },
+        {
+          "a": "我用信心看見 祢國降臨",
+          "b": "As we shout and declare Your victory"
+        },
+        {
+          "a": "軟弱的得剛強 綑綁的得自由",
+          "b": "The powerless now made strong, the prisoners now set free"
+        },
+        {
+          "a": "微小的終必發達",
+          "b": "The hopeless ones now dance and sing"
+        },
+        {
+          "a": "祢同在 帶領我 奪回這世代",
+          "b": "In Your name we reclaim this generation"
+        }
+      ]
+    }
+  ]
+}

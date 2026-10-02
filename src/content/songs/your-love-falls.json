@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "祢愛降臨",
+      "b": "Your Love Falls"
+    },
+    "tags": ["Jesus Fashion"],
+    "arrangement": [5, 0, 1, 0, 1, 6, 2, 2, 2, 1, 3, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0cdlJePxiyA"
+      }
+    ],
+    "author": "詞：Fio 楊千葵，Jenny 洪麗惠\n曲：Matt 蔡岡廷"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "主祢是光明 照在黑暗裡",
+          "b": "Lord You are the light, changing darkest nights"
+        },
+        {
+          "a": "全因祢憐憫 顯明祢旨意",
+          "b": "You've shown us Your heart, all through Your mercy"
+        },
+        {
+          "a": "主賜我生命 恩典與真理",
+          "b": "Grace and truth You gave, a brand new life to me"
+        },
+        {
+          "a": "成為神兒女 活出祢心意",
+          "b": "I'm now a child of God, and for Your will I'll live"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祢的愛降臨",
+          "b": "It's Your love, I see"
+        },
+        {
+          "a": "犧牲自己 拯救我生命",
+          "b": "You gave Your life away just for me"
+        },
+        {
+          "a": "榮耀君王 尊貴羔羊",
+          "b": "My glorious king, yet lamb of God"
+        },
+        {
+          "a": "不惜代價全獻上",
+          "b": "You paid the price for my sins"
+        },
+        {
+          "a": "我救主降臨",
+          "b": "Lord, please come to me"
+        },
+        {
+          "a": "將生命氣息 吹入我心靈",
+          "b": "My savior, teach my spirit, How You'd breathe"
+        },
+        {
+          "a": "進入祢愛裡 永恆的同在裡",
+          "b": "In Your presence, Lord, let Your love cover me"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "哈利路亞 聖潔羔羊",
+          "b": "HalleluYah, holy lamb of God"
+        },
+        {
+          "a": "全地讚美 歸我王",
+          "b": "Let all earth praise to my king"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "我救主降臨",
+          "b": "Lord, please come to me"
+        },
+        {
+          "a": "將生命氣息 吹入我心靈",
+          "b": "My savior, teach my spirit, How You'd breathe"
+        },
+        {
+          "a": "進入祢愛裡 永恆的同在裡",
+          "b": "In Your presence, Lord, let Your love cover me"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "進入祢愛裡 永恆的同在裡",
+          "b": "In Your presence, Lord, let Your love cover me"
+        }
+      ]
+    }
+  ]
+}

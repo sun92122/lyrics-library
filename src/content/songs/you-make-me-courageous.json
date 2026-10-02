@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "祢使我勇敢",
+      "b": "You Make Me Courageous"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [6, 0, 1, 0, 1, 2, 7, 0, 1, 2, 4, 5, 2, 3],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=dCF3RyClugc"
+      },
+      {
+        "type": "other",
+        "name": "PDF",
+        "url": "https://drive.google.com/file/d/1bEF3MiK5Vm55ghF7tptNzTOk099kdUIP/view?usp=sharing"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：劉淑莉、蔡依純、曾晨恩、謝思穎\n中譯英：熊乃恩",
+    "originalKey": "A",
+    "bpm": 68
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "沒有懲罰 沒有重擔",
+          "b": "No punishment, no more burden"
+        },
+        {
+          "a": "因我活在祢愛裡",
+          "b": "As it's Your love I live in"
+        },
+        {
+          "a": "可以坦然面對自己",
+          "b": "I can face myself honestly"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "我的恐懼 我的軟弱",
+          "b": "All of my fear, all my weakness"
+        },
+        {
+          "a": "全都交在祢手中",
+          "b": "I surrender to You, Lord"
+        },
+        {
+          "a": "I am not alone"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祢會為我撐傘 是我的安全感",
+          "b": "You will be my shelter, always my protector"
+        },
+        {
+          "a": "輕看一切困難 盼望未來",
+          "b": "All my hardships falter looking forward"
+        },
+        {
+          "a": "自由踏出步伐 釋放我的情感",
+          "b": "Freely take that step out, to let out emotions"
+        },
+        {
+          "a": "祢使我勇敢",
+          "b": "You make me courageous"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "祢使我勇敢",
+          "b": "You make me courageous"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "不再為明天憂慮 將與美好事相遇",
+          "b": "No worries for tomorrow, good things will surely follow"
+        },
+        {
+          "a": "萬事都互相效力 我已經得著能力",
+          "b": "All things working together, I have been given power"
+        }
+      ]
+    },
+    {
+      "name": "$B1",
+      "lines": [
+        {
+          "a": "不再為明天憂慮 將與美好事相遇",
+          "b": "No worries for tomorrow, good things will surely follow"
+        },
+        {
+          "a": "萬事互相效力 我已得著能力",
+          "b": "All things working together, I have been given power"
+        }
+      ]
+    }
+  ]
+}

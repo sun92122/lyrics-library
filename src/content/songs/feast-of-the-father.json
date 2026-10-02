@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "父的筵席",
+      "b": "Feast of the Father"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [
+      6, 0, 1, 2, 2, 0, 1, 2, 2, 3, 4, 3, 4, 2, 2, 3, 4, 3, 4, 3, 4, 5
+    ],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=Og3P2nhn3yU"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：江庭宜、曹之懿、曾晨恩、蔣孟平"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我們是神的兒女",
+          "b": "We are the children of God"
+        },
+        {
+          "a": "不活在恐懼裡",
+          "b": "No longer live in fear"
+        },
+        {
+          "a": "我們不孤單",
+          "b": "We are never alone"
+        },
+        {
+          "a": "因為有祢在這裡",
+          "b": "Because You are always here"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "真理已戰勝謊言",
+          "b": "Your truth has conquered all lies"
+        },
+        {
+          "a": "我們已得著自由",
+          "b": "Freedom has won for us"
+        },
+        {
+          "a": "因著信而稱義",
+          "b": "Justified by our faith"
+        },
+        {
+          "a": "靠耶穌得生命",
+          "b": "In Jesus Christ we've got lives"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "父已預備筵席",
+          "b": "Our Father's prepared a feast"
+        },
+        {
+          "a": "等著祂兒女",
+          "b": "For his daughters and sons"
+        },
+        {
+          "a": "父為我們預備筵席",
+          "b": "He has prepared a feast for us"
+        },
+        {
+          "a": "等著祂兒女回到懷裡",
+          "b": "Waiting for us, to come back to Him"
+        }
+      ]
+    },
+    {
+      "name": "$B1",
+      "lines": [
+        {
+          "a": "我的被造有祢的心意",
+          "b": "We were created all by Your will"
+        },
+        {
+          "a": "祢對我的愛永無止盡",
+          "b": "Your love for us which has no end"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "我的被造有祢的心意",
+          "b": "We were created all by Your will"
+        },
+        {
+          "a": "祢的愛無止盡",
+          "b": "Your love will never end"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "祢的愛無止盡",
+          "b": "Your love will never end"
+        }
+      ]
+    }
+  ]
+}

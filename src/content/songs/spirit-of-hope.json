@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "盼望聖靈",
+      "b": "Spirit of Hope"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [4, 0, 1, 2, 5, 0, 1, 2, 3, 3, 1, 2],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=KrF2or1RqKs"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：Ivan Handojo\n中譯詞：林岱華"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "將我 眼目 聚焦於祢 喔 耶穌",
+          "b": "I set my eyes upon Your feet, O Jesus"
+        },
+        {
+          "a": "將我 全心 來回應祢的愛",
+          "b": "I set my heart responding to Your love"
+        },
+        {
+          "a": "放下恐懼 我全人降服於祢",
+          "b": "I cast my fear and surrender all to You"
+        },
+        {
+          "a": "我王 我敬拜祢",
+          "b": "Lord, here I worship You"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "主我渴慕祢同在",
+          "b": "Oh, how I need Your presence, Lord"
+        },
+        {
+          "a": "主我渴慕祢同在",
+          "b": "How I need Your presence, Lord"
+        },
+        {
+          "a": "盼望聖靈 使我更加靠近祢",
+          "b": "Spirit of hope, draw me closer to You, Lord"
+        },
+        {
+          "a": "生命活泉 湧流進入我心",
+          "b": "Spirit of life, flowing into my heart"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "主我渴慕祢同在",
+          "b": "Oh, how I need Your presence, Lord"
+        },
+        {
+          "a": "主我渴慕祢同在",
+          "b": "How I need Your presence, Lord"
+        },
+        {
+          "a": "盼望聖靈 使我更加靠近祢",
+          "b": "Spirit of hope, draw me closer to You, Lord"
+        },
+        {
+          "a": "生命活泉 湧流進入我心",
+          "b": "Spirit of life, flowing into my heart"
+        },
+        {
+          "a": "當我敬拜祢",
+          "b": "As I worship You"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "從我心深處 呼求祢",
+          "b": "Let this be a cry from my heart"
+        },
+        {
+          "a": "傾倒我全心全意讚美",
+          "b": "Pouring out as sacrifice of praise"
+        },
+        {
+          "a": "從我心深處 我敬拜祢",
+          "b": "Oh, let this be a worship from my heart"
+        },
+        {
+          "a": "全然降服祢",
+          "b": "In my surrender"
+        },
+        {
+          "a": "向祢唱出 愛的旋律",
+          "b": "Let this be a sweet song to You"
+        },
+        {
+          "a": "毫無保留 全然屬於祢",
+          "b": "Let this be the most that I can give"
+        },
+        {
+          "a": "從我心深處 我敬拜祢",
+          "b": "Oh, let this be a worship from my heart"
+        },
+        {
+          "a": "主唯有祢",
+          "b": "For You my King"
+        }
+      ]
+    }
+  ]
+}

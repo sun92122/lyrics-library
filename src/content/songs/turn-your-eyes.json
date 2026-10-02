@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "轉眼仰望",
+      "b": "Turn Your Eyes"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [7, 0, 8, 1, 2, 3, 4, 8, 2, 3, 4, 5, 9, 4, 5, 6, 0],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=_zHsYP0ZsXQ"
+      },
+      {
+        "type": "other",
+        "name": "PDF",
+        "url": "https://drive.google.com/file/d/13Y9D2hJsVZYmaAUmcmc1anYggqfKscVj/view?usp=sharing"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：Helen H. Lemmel (Public Domain)、周巽光、謝思穎、許書珩\n中譯英：王建玫"
+  },
+  "sections": [
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "當轉眼仰望耶穌",
+          "b": "Turn your eyes upon Jesus"
+        },
+        {
+          "a": "定睛在祂奇妙慈容",
+          "b": "Look full in His wonderful face"
+        },
+        {
+          "a": "在救主榮耀恩典大光中",
+          "b": "And the things of earth will grow strangely dim"
+        },
+        {
+          "a": "世上事必然變為虛空",
+          "b": "In the light of His glory and grace"
+        }
+      ]
+    },
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我的心無助徬徨",
+          "b": "All my heart is lost and torn"
+        },
+        {
+          "a": "已用盡所有方法",
+          "b": "I have tried out every way"
+        },
+        {
+          "a": "但我聽見救主耶穌 來到我的身旁",
+          "b": "But I hear my Savior Jesus coming right by my side"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "我躲在人群中間",
+          "b": "Hiding deep inside the crowd"
+        },
+        {
+          "a": "只想掩飾我不潔",
+          "b": "Trying hard to hide my shame"
+        },
+        {
+          "a": "祢醫治的恩典引導我來到祢面前",
+          "b": "Your healing grace is leading me to call upon Your name"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "呼喚我的名 吸引我靠近",
+          "b": "Calling out my name, drawing me so close"
+        },
+        {
+          "a": "我需要祢大能 滲透我身體",
+          "b": "I need Your great mighty power, flowing through my veins"
+        },
+        {
+          "a": "沉浸祢愛裡 我心就堅定",
+          "b": "Soaking in Your love, my heart is secure"
+        },
+        {
+          "a": "我呼求祢掌權 在我的生命",
+          "b": "I cry out for You to reign in my life today"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "使我甦醒轉眼仰望 祢熾熱的眼睛",
+          "b": "Waken my heart to look upon You, Your blazing eyes of deep love"
+        },
+        {
+          "a": "像光穿透我靈 挪走所有恐懼",
+          "b": "Piercing my spirit right through, taking away all my fear Jesus"
+        },
+        {
+          "a": "祢的愛恢復我心",
+          "b": "Your love restores my heart"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "凝視著我向我吹氣 如雨滋潤我生命",
+          "b": "As You gaze at me, breathing Your life, just like the rain on my dry soul"
+        },
+        {
+          "a": "醫治我的疾病 使我全然更新",
+          "b": "Healing every single pain, making me completely whole Jesus"
+        },
+        {
+          "a": "祢的愛永無止盡",
+          "b": "Your love will never end"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "醫治我的疾病 使我全然更新",
+          "b": "Healing every single pain, making me completely whole Jesus"
+        },
+        {
+          "a": "祢的愛永無止盡",
+          "b": "Your love will never end"
+        }
+      ]
+    }
+  ]
+}

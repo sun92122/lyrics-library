@@ -1,0 +1,150 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "最後晚餐",
+      "b": "The Last Supper"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [7, 0, 1, 2, 8, 3, 4, 2, 5, 6, 10, 6, 11],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=cGTBPl4QqeA"
+      },
+      {
+        "type": "other",
+        "name": "PDF",
+        "url": "https://drive.google.com/file/d/1Xzr0dz6OBffivtckXdOTQ_vFRe_g7C3p/view?usp=sharing"
+      }
+    ],
+    "author": "約書亞樂團\n詞曲：周巽光、璽恩、許書珩、鄭牧德\n中譯英：王建玫",
+    "originalKey": "Bb",
+    "bpm": 53
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我帶著忐忑的心 在這最後宴席",
+          "b": "I come with a trembling heart to the final supper"
+        },
+        {
+          "a": "貼近桌前沈默的祢",
+          "b": "Drawing close to You, my silent Lord"
+        },
+        {
+          "a": "祢突然向我靠近 俯身為我屈膝",
+          "b": "Suddenly You draw so near, bending down on Your knees"
+        },
+        {
+          "a": "將我的雙腳都洗淨",
+          "b": "Washing every stain from both my feet"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "祢謙卑 代替了所有不配",
+          "b": "Humble King, taking all my worthlessness Bow down,"
+        },
+        {
+          "a": "降服 使我們 在愛中緊緊跟隨",
+          "b": "Lord we will, follow closely in Your love"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "祢竟為我 破碎祢的身體",
+          "b": "Just for my sake, broken in love for me"
+        },
+        {
+          "a": "讓我能與祢 共享復活生命",
+          "b": "So that I can now share in eternity"
+        },
+        {
+          "a": "祢的寶血 湧流奇妙恩典",
+          "b": "Your precious blood, flows with a wondrous grace"
+        },
+        {
+          "a": "除去羞愧 為我洗淨 所有罪",
+          "b": "Wash away shame, making me clean from all sin"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "我帶著敬畏的心 與祢一同坐席",
+          "b": "I come with a rev'rent heart ,sitting down here with You"
+        },
+        {
+          "a": "等候領受聽祢聲音",
+          "b": "Waiting to receive and hear Your voice"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "十架上 祢替代我的虧欠",
+          "b": "On the cross, You have paid for all my debts"
+        },
+        {
+          "a": "祢餅 祢的杯 是我救贖恩典",
+          "b": "Your bread, and Your cup, are my sweet saving grace"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "祢所立的新約 宣告恩典禧年",
+          "b": "Covenant that You made, sounds the great jubilee"
+        },
+        {
+          "a": "我不再被控告和定罪",
+          "b": "I am no longer condemned or shamed"
+        },
+        {
+          "a": "基督在我裡面 這是我信心宣言",
+          "b": "Christ is living in me, this is my declaration"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "祢的身體 甘心為我破碎",
+          "b": "Lord, Your body, gladly broken for me"
+        },
+        {
+          "a": "我何等感謝 祢愛將我贖回",
+          "b": "Oh, how I thank You, Your love has ransomed me"
+        },
+        {
+          "a": "祢的寶血 甘心為我預備",
+          "b": "Your precious blood, gladly poured out for me"
+        },
+        {
+          "a": "使我坦然無懼來到 祢面前",
+          "b": "So I can come without a fear to Your throne"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "唯獨倚靠祢",
+      "b": "My Trust is in You"
+    },
+    "tags": ["火把音樂", "葡萄樹計畫"],
+    "arrangement": [7, 0, 1, 2, 8, 1, 2, 3, 4, 5, 2, 6],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=v87OLg_YUmo"
+      }
+    ],
+    "author": "火把音樂\n詞／曲：林以樂、黃元貞、劉思捷"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "若非祢流出寶血贖回我",
+          "b": "Redemption by Your precious blood flowing"
+        },
+        {
+          "a": "我怎能有機會重新來過",
+          "b": "The chance of new beginning possible"
+        },
+        {
+          "a": "看見我所有罪惡和軟弱",
+          "b": "My sins and my weaknesses You see all"
+        },
+        {
+          "a": "祢卻用完全的愛接納我",
+          "b": "Yet with perfect love You take all of me"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "雖然我曾有失信遠離過",
+          "b": "Once I was lost but I was found again"
+        },
+        {
+          "a": "但祢信實仍緊緊抓住我",
+          "b": "Faithful You are, and never let me go"
+        },
+        {
+          "a": "學會放手不再靠自己活",
+          "b": "I learn to live not by might nor by power"
+        },
+        {
+          "a": "只誇耀祢一切為我所做",
+          "b": "And give all glory, all praises to You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "唯獨倚靠祢 唯獨倚靠祢",
+          "b": "My trust is in You My trust is in You"
+        },
+        {
+          "a": "無價的寶血 映出真實的我",
+          "b": "Jesus' precious blood reflecting my true self"
+        },
+        {
+          "a": "多麼不等價的替換",
+          "b": "The most unfair exchange of all"
+        },
+        {
+          "a": "唯獨倚靠祢 唯獨倚靠祢",
+          "b": "My trust is in You My trust is in You"
+        },
+        {
+          "a": "成就永恆 堅定不移的約",
+          "b": "The covenant Promise is now fulfilled"
+        },
+        {
+          "a": "天涯海角祢把我尋回 耶穌",
+          "b": "To the ends of the earth You found me, Jesus"
+        }
+      ]
+    },
+    {
+      "name": "$B1",
+      "lines": [
+        {
+          "a": "因祢的寶血 恩典的寶血",
+          "b": "Oh through Your blood shed, amazing grace shown"
+        },
+        {
+          "a": "修補一切 再次立約",
+          "b": "God reconciled us to Himself"
+        },
+        {
+          "a": "因祢的寶血 犧牲的寶血",
+          "b": "Oh through Your blood shed, sacrificed for us"
+        },
+        {
+          "a": "坦然無懼 到祢面前",
+          "b": "Boldly I come before the throne"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "因祢的寶血 恩典的寶血",
+          "b": "Oh through Your blood shed, amazing grace shown"
+        },
+        {
+          "a": "修補一切 再次立約",
+          "b": "God reconciled us to Himself"
+        },
+        {
+          "a": "因祢的寶血 犧牲的寶血",
+          "b": "Oh through Your blood shed, sacrificed for us"
+        },
+        {
+          "a": "坦然無懼 到祢面前",
+          "b": "Boldly I come before the throne"
+        },
+        {
+          "a": "無瑕疵的愛 來到破碎的我 面前",
+          "b": "The perfect love has come to pursue the broken me"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "唯獨倚靠祢 唯獨倚靠祢",
+          "b": "My trust is in You My trust is in You"
+        },
+        {
+          "a": "無價的寶血 映出真實的我",
+          "b": "Jesus' precious blood reflecting my true self"
+        },
+        {
+          "a": "多麼不等價的替換",
+          "b": "The most unfair exchange of all"
+        },
+        {
+          "a": "唯獨倚靠祢 唯獨倚靠祢",
+          "b": "My trust is in You My trust is in You"
+        },
+        {
+          "a": "成就永恆 堅定不移的約",
+          "b": "The covenant Promise is now fulfilled"
+        },
+        {
+          "a": "天涯海角祢把我尋回",
+          "b": "To the ends of the earth You found me"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "天涯海角祢把我尋回 耶穌",
+          "b": "To the ends of the earth You found me, Jesus"
+        }
+      ]
+    }
+  ]
+}
