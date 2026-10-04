@@ -14,8 +14,9 @@ Lyrics Library 生成的檔案與 ProPresenter 略有不同，請依照以下步
 
 > [!WARNING]
 > 請不要替代 ProPresenter 偵測到的任何字體
+> ![](./img/prop-2.png)
 >
-> 調整字體請[使用主題](/theme)或參見 [變更字體](#變更字體)
+> 調整字體請 [使用主題](/docs/theme) 或參見 [變更字體](#變更字體)
 
 ## 變更字體
 
@@ -24,7 +25,7 @@ Lyrics Library 生成的檔案與 ProPresenter 略有不同，請依照以下步
 ![變更字體](./img/prop-0.png)
 
 > [!NOTE]
-> 如果你的輸出包含複數行或文字框（雙語、雙行等），強烈建議你 [使用主題](/theme)
+> 如果你的輸出包含複數行或文字框（雙語、雙行等），強烈建議你 [使用主題](/docs/theme)
 
 ## 舞台螢幕（Stage）
 
