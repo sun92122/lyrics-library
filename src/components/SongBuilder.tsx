@@ -260,7 +260,7 @@ export const SongBuilder: React.FC = () => {
     }
     const currentId =
       id ||
-      (meta.title.b && meta.title.b.replace(/[\s,]+/g, "-").toLowerCase());
+      (meta.title.b && meta.title.b.replace(/[\s,'-]+/g, "-").toLowerCase());
     if (!id) {
       setId(currentId || "");
     }
@@ -285,12 +285,12 @@ export const SongBuilder: React.FC = () => {
         <Input
           value={id}
           onChange={(e) => {
-            setId(e.target.value.replace(/[\s,]+/g, "-").toLowerCase());
+            setId(e.target.value.replace(/[\s,'-]+/g, "-").toLowerCase());
             setIdError(null);
           }}
           placeholder={
             meta.title.b
-              ? meta.title.b.replace(/[\s,]+/g, "-").toLowerCase()
+              ? meta.title.b.replace(/[\s,'-]+/g, "-").toLowerCase()
               : "song-id"
           }
           className="text-right w-[50%] rounded-lg p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -523,6 +523,23 @@ export const SongBuilder: React.FC = () => {
                     className="ml-2 px-2 py-0.5 bg-gray-600 text-white rounded-lg text-xs font-medium hover:bg-gray-700 transition-colors"
                   >
                     亻➔礻
+                  </Button>
+                  <Button
+                    type="button"
+                    onClick={() => {
+                      const replaced = rawLyrics
+                        .split("\n")
+                        .map((line) =>
+                          line
+                            .replaceAll(/[’‘`‛ʼʻʽ＇]/g, "'")
+                            .replace(/\p{P}+\s*$/gu, ""),
+                        )
+                        .join("\n");
+                      setRawLyrics(replaced);
+                    }}
+                    className="ml-2 px-2 py-0.5 bg-gray-600 text-white rounded-lg text-xs font-medium hover:bg-gray-700 transition-colors"
+                  >
+                    Replace
                   </Button>
                   <Button
                     type="button"
