@@ -1,0 +1,104 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "如祢",
+      "b": "Like You"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [4, 0, 1, 2, 5, 1, 2, 5, 3, 2, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=kMOg8x7ptz4"
+      }
+    ],
+    "author": "約書亞樂團\n詞／曲：趙治德、璽恩、楊蒨時\n英譯詞：宋怡萌"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "站立在祢座前",
+          "b": "Standing before Your throne"
+        },
+        {
+          "a": "站立在 祢信實面前",
+          "b": "Standing before Your faithfulness"
+        },
+        {
+          "a": "祢雙手領我 走出曠野",
+          "b": "You lead me out from the wilderness"
+        },
+        {
+          "a": "看見祢為我所預備",
+          "b": "I see what You've prepared for me"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "光照在黑暗裡 使臉上帕子都挪去",
+          "b": "Light shining in the dark, lifting the veil off from my face"
+        },
+        {
+          "a": "祢話語如鏡 煉淨我心",
+          "b": "Your Word's a mirror, cleansing my heart"
+        },
+        {
+          "a": "榮上加榮 因祢聖靈",
+          "b": "Glory to glory by Your Spirit"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我要貼近 貼近祢心跳的聲音",
+          "b": "I will draw near, draw near to hear Your heartbeat"
+        },
+        {
+          "a": "思緒如祢 步伐如祢 更靠近祢",
+          "b": "To think like You, to walk like You, closer to You"
+        },
+        {
+          "a": "活出 像祢 豐盛的生命",
+          "b": "To live as You, abundant life"
+        },
+        {
+          "a": "我要領受 祢起初對我的心意",
+          "b": "I will receive, your will towards me from the start"
+        },
+        {
+          "a": "我心渴望 榮耀如祢 聖潔如祢",
+          "b": "I long to be glorious like you, holy like you"
+        },
+        {
+          "a": "基督 耶穌 我全屬於祢",
+          "b": "Jesus Christ, I belong to You"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我心 坦然無懼 敬拜祢 跟隨祢",
+          "b": "Boldly, with all of my heart, worship You, follow You"
+        },
+        {
+          "a": "永恆 在祢手裡 我放下 自己",
+          "b": "You hold eternity, I lay down my life"
+        }
+      ]
+    }
+  ]
+}

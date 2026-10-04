@@ -1,0 +1,150 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我們呼求",
+      "b": "We Cry Out"
+    },
+    "tags": ["讚美之泉", "永遠尊貴"],
+    "arrangement": [4, 0, 1, 2, 1, 5, 1, 3, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=CigLPfxQ7Sc"
+      }
+    ],
+    "ccli": "4920188",
+    "author": "讚美之泉\n詞：游智婷／曲：曾祥怡",
+    "originalKey": "A"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "主 我們同心在祢面前",
+          "b": "We come together in unity"
+        },
+        {
+          "a": "以禱告尋求祢面",
+          "b": "To seek Your face as we pray"
+        },
+        {
+          "a": "我們轉離所有的惡行",
+          "b": "We turn away from our sinful ways"
+        },
+        {
+          "a": "定意單單跟隨祢",
+          "b": "We're called to walk in Your ways"
+        },
+        {
+          "a": "主 我們是屬祢的子民",
+          "b": "We are the people called by Your name"
+        },
+        {
+          "a": "求賜下父神的心",
+          "b": "Give us Your heart as we pray"
+        },
+        {
+          "a": "我們要回轉向祢 父神",
+          "b": "Send us revival, forgive our sins"
+        },
+        {
+          "a": "也要看見復興",
+          "b": "Lord, let Your kingdom come"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我們呼求祢 阿爸父",
+          "b": "We come together in unity"
+        },
+        {
+          "a": "設立祢寶座在這地",
+          "b": "To seek Your face as we pray"
+        },
+        {
+          "a": "祢必睜眼看 側耳垂聽",
+          "b": "We turn away from our sinful ways"
+        },
+        {
+          "a": "奉主名的呼求",
+          "b": "We're called to walk in Your ways"
+        },
+        {
+          "a": "萬民都要來敬拜祢",
+          "b": "Father this nation belongs to You"
+        },
+        {
+          "a": "榮耀高舉祢的聖名",
+          "b": "Pour out Your spirit, we pray"
+        },
+        {
+          "a": "復興這地 全能的君王",
+          "b": "Send us Your mercy and heal our land"
+        },
+        {
+          "a": "我們歡迎祢",
+          "b": "Lord let Your glory fall"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "主 我們同心在祢面前",
+          "b": "Oh Abba we cry out to You"
+        },
+        {
+          "a": "以禱告尋求祢面",
+          "b": "Restore Your throne upon this land"
+        },
+        {
+          "a": "我們轉離所有的惡行",
+          "b": "Open Your eyes, and hear our cries"
+        },
+        {
+          "a": "定意單單跟隨祢",
+          "b": "Forgive us Lord, we pray"
+        },
+        {
+          "a": "主 我們國家是屬於祢",
+          "b": "All nations bow before Your throne"
+        },
+        {
+          "a": "求祢來掌管全地",
+          "b": "To lift Your name above all names"
+        },
+        {
+          "a": "願祢來憐憫 醫治這地",
+          "b": "Come and reign, Almighty King"
+        },
+        {
+          "a": "榮耀再次降臨",
+          "b": "Meet us in this place"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "復興這地 全能的君王",
+          "b": "Send us Your mercy and heal our land"
+        },
+        {
+          "a": "我們歡迎祢",
+          "b": "Lord let Your glory fall"
+        }
+      ]
+    }
+  ]
+}

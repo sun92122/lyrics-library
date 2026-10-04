@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "每一天我需要祢",
+      "b": "I Need You"
+    },
+    "tags": ["讚美之泉", "我要看見"],
+    "arrangement": [4, 0, 0, 1, 1, 2, 5, 1, 2, 2, 2, 3],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=aCrjhEkNcpc"
+      }
+    ],
+    "author": "讚美之泉\n詞、曲：曾祥怡",
+    "ccli": "7084405",
+    "originalKey": "C"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "讓我坦然無懼來到施恩座前",
+          "b": "Your throne of grace draws me to come and seek Your face"
+        },
+        {
+          "a": "用心靈誠實尋求祢",
+          "b": "In truth and spirit I worship You"
+        },
+        {
+          "a": "親愛的天父 我何等地需要祢",
+          "b": "My dearest Father, oh, how much I need Your grace"
+        },
+        {
+          "a": "需要更多祢的同在 在我生命",
+          "b": "Oh, how I need more of You in my life"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "每一天 我需要祢 祢話語如甘霖",
+          "b": "I need You, Your living word like honey on my lips"
+        },
+        {
+          "a": "每時刻 我需要祢 聖靈如雨降臨",
+          "b": "I need You, Your spirit come and fall on me like rain"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "這是我的禱告",
+          "b": "This is my one desire"
+        },
+        {
+          "a": "願我生命單單歸榮耀給祢 耶穌",
+          "b": "That I may live my life for Your glory and Your fame"
+        },
+        {
+          "a": "這是我的呼求",
+          "b": "This is my only cry"
+        },
+        {
+          "a": "每天都更愛祢 永不失去起初愛祢的心",
+          "b": "That I can live each day falling more and more in love with You alone"
+        }
+      ]
+    },
+    {
+      "name": "$O",
+      "lines": [
+        {
+          "a": "每一天 每一刻",
+          "b": "Everyday, every moment"
+        },
+        {
+          "a": "我要更多 愛祢",
+          "b": "I want to love You more"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,132 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "寶貴十架",
+      "b": "Precious Cross"
+    },
+    "tags": ["讚美之泉", "寶貴十架"],
+    "arrangement": [6, 0, 1, 2, 7, 0, 1, 2, 2, 4, 5],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0YJZUyVOQVY"
+      }
+    ],
+    "author": "讚美之泉\n詞：曾祥怡、游智婷／曲：曾祥怡",
+    "ccli": "4702485",
+    "originalKey": "A"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "主耶穌 我感謝祢",
+          "b": "Thank You Lord, You died for me"
+        },
+        {
+          "a": "祢的身體 為我而捨",
+          "b": "With love, You gave Your life for me"
+        },
+        {
+          "a": "帶我出黑暗 進入光明國度",
+          "b": "Brought me from darkness into the world of light"
+        },
+        {
+          "a": "使我再次能看見",
+          "b": "Opened my eyes to see"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "主耶穌 我感謝祢",
+          "b": "Praise You Lord, Your love for me"
+        },
+        {
+          "a": "祢的寶血 為我而流",
+          "b": "Your blood of grace flows over me"
+        },
+        {
+          "a": "寶貴十架上 醫治恩典湧流",
+          "b": "Your tender mercy pours down from Calvary"
+        },
+        {
+          "a": "使我完全得自由",
+          "b": "Your love has set me so free"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "寶貴十架的大能 賜我生命",
+          "b": "The precious cross, by its pow'r I am set free"
+        },
+        {
+          "a": "主耶穌 我俯伏敬拜祢",
+          "b": "With my all, I worship at Your feet"
+        },
+        {
+          "a": "寶貴十架的救恩 是祢所立的約",
+          "b": "Your saving grace, so secure in this promise of old"
+        },
+        {
+          "a": "祢的愛永遠不會改變",
+          "b": "It's Your love unchanging for me"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "寶貴十架的救恩 是祢所立的約",
+          "b": "Your saving grace, so secure in this promise of old"
+        },
+        {
+          "a": "祢的愛永遠不會改變",
+          "b": "It's Your love unchanging for me"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "寶貴十架的大能 賜我生命",
+          "b": "The precious cross, by its pow'r I am set free"
+        },
+        {
+          "a": "主耶穌 我俯伏敬拜祢",
+          "b": "With my all, I worship at Your feet"
+        },
+        {
+          "a": "寶貴十架的救恩 是祢所立的約",
+          "b": "Your saving grace, so secure in this promise of old"
+        }
+      ]
+    },
+    {
+      "name": "$O",
+      "lines": [
+        {
+          "a": "祢的愛 不改變",
+          "b": "It's Your love unchanging"
+        },
+        {
+          "a": "祢的愛永遠不改變",
+          "b": "It's Your love unchanging for me"
+        }
+      ]
+    }
+  ]
+}

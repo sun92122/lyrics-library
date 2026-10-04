@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "恩典之洋（即使我仍會軟弱）",
+      "b": "Oceans (Where Feet May Fail)"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [4, 0, 1, 2, 1, 5, 3, 3, 3, 3, 1, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=bVB96gB9c_E"
+      }
+    ],
+    "author": "詞／曲：Joel Houston, Matt Crocker, Salomon Lighthelm\n中譯詞：周巽光、李曉茹"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "祢在水面上呼喚著我",
+          "b": "You call me out upon the waters"
+        },
+        {
+          "a": "跨入未知 深怕失落",
+          "b": "The great unknown, where feet may fail"
+        },
+        {
+          "a": "在奧秘中當我尋見祢",
+          "b": "And there I find You in the mystery"
+        },
+        {
+          "a": "在深海裡 我仍站立",
+          "b": "In oceans deep, my faith will stand"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我全心呼求祢聖名",
+          "b": "I will call upon Your name"
+        },
+        {
+          "a": "我的眼單單仰望祢",
+          "b": "And keep my eyes above the waves"
+        },
+        {
+          "a": "大海翻騰 我卻安息 在祢懷裡",
+          "b": "When oceans rise, my soul will rest in Your embrace"
+        },
+        {
+          "a": "因祢屬我 而我屬祢",
+          "b": "For I am Yours, You are mine"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "水深之處 祢恩典湧流",
+          "b": "Your grace abounds in deepest waters"
+        },
+        {
+          "a": "祢手掌權 牽引著我",
+          "b": "Your sovereign hand will be my guide"
+        },
+        {
+          "a": "就在我深陷恐懼軟弱",
+          "b": "Where feet may fail and fear surrounds me"
+        },
+        {
+          "a": "祢永不失手 扶持著我",
+          "b": "You've never failed and You won't start now"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "聖靈引領 使我信心沒有界線",
+          "b": "Spirit lead me where my trust is without borders"
+        },
+        {
+          "a": "讓我能行走在水面",
+          "b": "Let me walk upon the waters"
+        },
+        {
+          "a": "呼召我快跑跟隨",
+          "b": "Wherever You would call me"
+        },
+        {
+          "a": "祢牽引我 讓我更深與祢同行",
+          "b": "Take me deeper than my feet could ever wander"
+        },
+        {
+          "a": "使我信心更加堅定",
+          "b": "And my faith will be made stronger"
+        },
+        {
+          "a": "在我救主同在裡",
+          "b": "In the presence of my Savior"
+        }
+      ]
+    }
+  ]
+}

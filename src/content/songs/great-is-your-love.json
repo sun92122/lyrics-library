@@ -1,0 +1,150 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "十架的愛",
+      "b": "Great Is Your Love"
+    },
+    "tags": ["讚美之泉", "將天敞開"],
+    "arrangement": [4, 0, 1, 5, 2, 2, 3, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=dfVQ2nbrPnM"
+      }
+    ],
+    "ccli": "6400503",
+    "originalKey": "D",
+    "author": "讚美之泉\n詞、曲：曾祥怡"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "謙卑的君王 榮耀的君王",
+          "b": "Jesus, humble King, Jesus, glorious King"
+        },
+        {
+          "a": "祢甘心卑微順服",
+          "b": "You gave up Your life for me"
+        },
+        {
+          "a": "捨命在十架上",
+          "b": "By dying on the Cross"
+        },
+        {
+          "a": "謙卑的君王 榮耀的君王",
+          "b": "Jesus, humble King, Jesus, glorious King"
+        },
+        {
+          "a": "我得醫治 因祢鞭傷",
+          "b": "By Your stripes I am healed"
+        },
+        {
+          "a": "無盡恩典 我心感恩",
+          "b": "I am thankful for Your grace"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "十架的愛 何等奇妙",
+          "b": "Great is Your love poured out for me"
+        },
+        {
+          "a": "超乎我所求所想",
+          "b": "More than words can ever say"
+        },
+        {
+          "a": "洗淨我罪 脫離污穢",
+          "b": "Washed away my sins and my shame"
+        },
+        {
+          "a": "穿上公義潔白衣裳",
+          "b": "You gave me garments of praise"
+        },
+        {
+          "a": "十架的愛 何等奇妙",
+          "b": "Great is Your love poured out for me"
+        },
+        {
+          "a": "我生命從此不再一樣",
+          "b": "Lord, my life never will be the same"
+        },
+        {
+          "a": "帶我重回天父懷抱",
+          "b": "I'm coming home into Your arms"
+        },
+        {
+          "a": "在永恆裡我不停歌唱",
+          "b": "Forever I will sing Your praise"
+        },
+        {
+          "a": "十架的愛",
+          "b": "Great is Your love"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "十架的愛 何等奇妙",
+          "b": "Great is Your love poured out for me"
+        },
+        {
+          "a": "超乎我所求所想",
+          "b": "More than words can ever say"
+        },
+        {
+          "a": "洗淨我罪 脫離污穢",
+          "b": "Washed away my sins and my shame"
+        },
+        {
+          "a": "穿上公義潔白衣裳",
+          "b": "You gave me garments of praise"
+        },
+        {
+          "a": "十架的愛 何等奇妙",
+          "b": "Great is Your love poured out for me"
+        },
+        {
+          "a": "我生命從此不再一樣",
+          "b": "Lord, my life never will be the same"
+        },
+        {
+          "a": "帶我重回天父懷抱",
+          "b": "I'm coming home into Your arms"
+        },
+        {
+          "a": "在永恆裡我不停歌唱",
+          "b": "Forever I will sing Your praise"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "帶我重回天父懷抱",
+          "b": "I'm coming home into Your arms"
+        },
+        {
+          "a": "在永恆裡我不停歌唱",
+          "b": "Forever I will sing Your praise"
+        },
+        {
+          "a": "十架的愛",
+          "b": "Great is Your love"
+        }
+      ]
+    }
+  ]
+}

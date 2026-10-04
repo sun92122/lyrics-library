@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "能不能",
+      "b": "Let Me Stay"
+    },
+    "tags": ["讚美之泉"],
+    "arrangement": [3, 0, 0, 1, 1, 2, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=AW6aFoCCaIg"
+      }
+    ],
+    "author": "讚美之泉\n詞：鄭懋柔／曲：游智婷",
+    "originalKey": "F",
+    "ccli": "7125297"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我屬於祢 祢是我永遠的福分",
+          "b": "Lord, I am Yours, You are my portion evermore"
+        },
+        {
+          "a": "只想日夜在祢殿中獻上敬拜",
+          "b": "Every night and day, here in Your court, I worship"
+        },
+        {
+          "a": "定睛在祢的榮美 世上一切變暗淡",
+          "b": "Let me gaze upon Your face, all else will fade away"
+        },
+        {
+          "a": "除祢以外 我還能有誰",
+          "b": "There’s no one else for me but You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "能不能 就讓我留在祢的同在裡",
+          "b": "Let me stay, I want to stay right here in Your embrace"
+        },
+        {
+          "a": "能不能 賜我力量讓我更多愛祢",
+          "b": "Let me stay, give me the strength to love You more each day"
+        },
+        {
+          "a": "我哪都不想去 只想日夜在祢殿中",
+          "b": "There is no other place I would rather be than here, Lord"
+        },
+        {
+          "a": "獻上敬拜 全心全意來愛祢",
+          "b": "With all my heart, with all I am, I worship"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "獻上敬拜 全心全意來愛祢",
+          "b": "With all my heart, with all I am, I worship"
+        }
+      ]
+    }
+  ]
+}

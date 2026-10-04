@@ -1,0 +1,166 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我們獻上",
+      "b": "We Give"
+    },
+    "tags": ["約書亞樂團", "大衛帳幕的榮耀"],
+    "arrangement": [6, 0, 1, 7, 3, 2, 4, 4, 1, 5, 10],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=ET6roW3Ad8U"
+      }
+    ],
+    "author": "詞：陳世智、林美雅、文敏華、沈慧婉\n曲：陳世智"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "在祢的寶座前 天使聚集讚美",
+          "b": "Before Your throne, angels gather and praise"
+        },
+        {
+          "a": "榮耀 永遠屬於祢",
+          "b": "Glory belongs to You forever and ever"
+        },
+        {
+          "a": "萬國萬口萬邦 穿著潔白衣裳",
+          "b": "From every nation, tribe, tongue, and land, dressed in white robes"
+        },
+        {
+          "a": "我們前來 向主歌唱",
+          "b": "We come to sing to our Lord"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我們獻上全心的讚美",
+          "b": "We give our wholehearted praise"
+        },
+        {
+          "a": "歸於至高全能大君王",
+          "b": "To the highest and almighty King of kings"
+        },
+        {
+          "a": "我們的聲音 述說祢的榮耀",
+          "b": "Our voices declare Your glory"
+        },
+        {
+          "a": "祢的慈愛 直到永遠",
+          "b": "Your unfailing love endures forever"
+        },
+        {
+          "a": "我們獻上生命的敬拜",
+          "b": "We offer our lives in worship"
+        },
+        {
+          "a": "渴慕能夠更多親近祢",
+          "b": "Longing to draw closer to You"
+        },
+        {
+          "a": "蒙恩的兒女 歌頌祢的美好",
+          "b": "As Your blessed children, we sing of Your goodness"
+        },
+        {
+          "a": "歡迎祢的國度 降臨這土地",
+          "b": "We welcome Your kingdom to come to this land"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "我們獻上全心的讚美",
+          "b": "We give our wholehearted praise"
+        },
+        {
+          "a": "歸於至高全能大君王",
+          "b": "To the highest and almighty King of kings"
+        },
+        {
+          "a": "我們的聲音 述說祢的榮耀",
+          "b": "Our voices declare Your glory"
+        },
+        {
+          "a": "祢的慈愛 直到永遠",
+          "b": "Your unfailing love endures forever"
+        },
+        {
+          "a": "我們獻上生命的敬拜",
+          "b": "We offer our lives in worship"
+        },
+        {
+          "a": "渴慕能夠更多親近祢",
+          "b": "Longing to draw closer to You"
+        },
+        {
+          "a": "蒙恩的兒女 歌頌祢的美好",
+          "b": "As Your blessed children, we sing of Your goodness"
+        },
+        {
+          "a": "歡迎祢的國度",
+          "b": "We welcome Your kingdom to come"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "在祢的同在裡 我們揚聲敬拜",
+          "b": "In Your presence, we lift our voices in worship"
+        },
+        {
+          "a": "愛慕 頌讚不停息",
+          "b": "Our love and praises never cease"
+        },
+        {
+          "a": "昔在今在永在 萬世尊崇愛戴",
+          "b": "You were, You are, and You are to come, adored by all generations"
+        },
+        {
+          "a": "為要訴說 祢的愛",
+          "b": "All to declare Your great love"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "哈利路亞 哈利路亞",
+          "b": "Hallelujah, Hallelujah"
+        },
+        {
+          "a": "哈利路亞 榮耀都歸於祢",
+          "b": "Hallelujah, all glory belongs to You"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "蒙恩的兒女 歌頌祢的美好",
+          "b": "As Your blessed children, we sing of Your goodness"
+        },
+        {
+          "a": "歡迎祢的國度 降臨這土地",
+          "b": "We welcome Your kingdom to come to this land"
+        }
+      ]
+    }
+  ]
+}

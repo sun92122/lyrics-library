@@ -1,0 +1,83 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "重來的力量",
+      "b": "The Power To Start Over"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [3, 0, 1, 4, 0, 1, 1, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=7jac0ri7x3A"
+      }
+    ],
+    "author": "詞、曲：趙治德"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "關上門 關了燈 兩個人",
+          "b": "Door is closed, lights are off, two ppl in the room"
+        },
+        {
+          "a": "這一秒 祢看我的眼神",
+          "b": "At this second, You are looking at my eye's expression"
+        },
+        {
+          "a": "理智在狂奔 在無聲的討論",
+          "b": "Rational thoughts are rushing in, discussing without a sound"
+        },
+        {
+          "a": "當感覺已冰冷 心還能否忠誠",
+          "b": "When the feelings turn cold, can the heart still be loyal"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "不想就這麽放下 給我重來的力量",
+          "b": "Don't want to let go this easily, give me the power to start over"
+        },
+        {
+          "a": "不管傷多深 只要我們 還願意就可能",
+          "b": "No matter how deep the wound is, we still can if we are willing to"
+        },
+        {
+          "a": "帶著重來的渴望 坦然過去的悲傷",
+          "b": "With the desire to start over, be honest about the past sorrow"
+        },
+        {
+          "a": "每個懂愛的人 一定也懂得等",
+          "b": "Everyone who knows how to love must know how to wait"
+        },
+        {
+          "a": "等那值得的人",
+          "b": "For the one who is worth it"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "每個懂愛的人 一定也懂得等",
+          "b": "Everyone who knows how to love must know how to wait"
+        },
+        {
+          "a": "直到最愛的人",
+          "b": "for the one you love the most"
+        }
+      ]
+    }
+  ]
+}

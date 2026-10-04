@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "求充滿這地",
+      "b": "Come and Fill This Land"
+    },
+    "tags": ["約書亞樂團", "大衛帳幕的榮耀"],
+    "arrangement": [6, 0, 1, 2, 3, 7, 1, 2, 3, 4, 4, 2, 3, 5, 10],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=xj7daezGohs"
+      }
+    ],
+    "author": "詞 楊家寧\n曲 李宗唐"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "喔主 感謝祢創造這土地",
+          "b": "O Lord thank You for creating this land"
+        },
+        {
+          "a": "以永恆話語 賜下無限生命",
+          "b": "You have given her everlasting life by Your living word"
+        },
+        {
+          "a": "用恩典的馨香氣息 祝福這地",
+          "b": "You have blessed her with the fragrance of Your grace"
+        },
+        {
+          "a": "讓我們全心 跟隨祢帶領",
+          "b": "So that she may be committed to follow Your lead"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "喔主 感謝祢創造這土地",
+          "b": "O Lord thank You for creating this land"
+        },
+        {
+          "a": "以慈愛澆灌 以喜樂耕耘",
+          "b": "You have watered her with love, cultivated her with gladness"
+        },
+        {
+          "a": "用無數的白晝黑夜 孕育這地",
+          "b": "And nurtured her with numerous day and night"
+        },
+        {
+          "a": "順服的人情 感恩的心情",
+          "b": "Souls of obedience and hearts of gratitude"
+        },
+        {
+          "a": "現在都只願 以基督的心為心",
+          "b": "Now are determined to be the same as Christ's mind"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "主求祢充滿我們 來醫治這地",
+          "b": "Lord we ask You to fill us and heal this land"
+        },
+        {
+          "a": "痛苦疾病要過去 神蹟在運行",
+          "b": "Over pains and diseases, Your power is moving"
+        },
+        {
+          "a": "主求祢充滿我們 來轉化這地",
+          "b": "Lord we ask You to fill us and transform this land"
+        },
+        {
+          "a": "黑暗權勢要離去",
+          "b": "From us the power of darkness is leaving"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "主求祢充滿我們 來醫治這地",
+          "b": "Lord we ask You to fill us and heal this land"
+        },
+        {
+          "a": "全地看見祢榮耀 祢復興降臨",
+          "b": "All people will see Your glory and Your revival come"
+        },
+        {
+          "a": "主求祢充滿我們 來轉化這地",
+          "b": "Lord we ask You to fill us and transform this land"
+        },
+        {
+          "a": "全地尊榮祢聖名 為祢而站立",
+          "b": "All people will raise and hallow Your holy name"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "一生祝福 永不停息",
+          "b": "Your endless blessings are with us all our days"
+        },
+        {
+          "a": "世代因祢愛延續 呼求祢",
+          "b": "Your constant love will be called upon through ages"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "全地尊榮祢聖名 為祢而站立",
+          "b": "All people will raise and hallow Your holy name"
+        }
+      ]
+    }
+  ]
+}

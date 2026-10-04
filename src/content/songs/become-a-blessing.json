@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "成為祝福",
+      "b": "Become a Blessing"
+    },
+    "tags": ["約書亞樂團", "大衛帳幕的榮耀 10"],
+    "arrangement": [4, 0, 1, 2, 5, 1, 2, 5, 2, 3, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=K2bdSYim7uI"
+      }
+    ],
+    "author": "詞曲：羅嘉雁"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "祢呼召我 離開本地 我舒適的地方",
+          "b": "You called me to leave the place, where I am comfort"
+        },
+        {
+          "a": "心中會軟弱 雙腳會顫抖 但祢賜我力量",
+          "b": "I am weak inside, my feet will tremble, but You strengthen me"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "我的生命 獻上在這祭壇上",
+          "b": "I already offer my life to You"
+        },
+        {
+          "a": "預備自己 被祢擴張",
+          "b": "Prepare myself to be expand"
+        },
+        {
+          "a": "祢的帶領 總是超乎我想像",
+          "b": "You guiding is always beyond my thoughts"
+        },
+        {
+          "a": "我願順服 我願降服於祢",
+          "b": "I will obey, I will surrender to You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "成為祝福 我願意獻上我生命",
+          "b": "Be a blessing, I am willing to offer my life"
+        },
+        {
+          "a": "願祢滿足 我願意跟隨祢腳步",
+          "b": "To satisfy You, I am willing to follow You"
+        },
+        {
+          "a": "成為祝福 我要一生頌讚祢名",
+          "b": "Be a blessing, Forever I will praise Your name"
+        },
+        {
+          "a": "我願獻上所有 毫無保留",
+          "b": "I would like to offer all that I have"
+        },
+        {
+          "a": "讓那地因我順服而得福",
+          "b": "Let the land be blessed 'cause I obey You"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "我願獻上所有 毫無保留",
+          "b": "I would like to offer all that I have"
+        },
+        {
+          "a": "讓那地因我順服而得福",
+          "b": "Let the land be blessed 'cause I obey You"
+        }
+      ]
+    }
+  ]
+}

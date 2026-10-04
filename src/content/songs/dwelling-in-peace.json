@@ -1,0 +1,88 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我安然居住",
+      "b": "Dwelling In Peace"
+    },
+    "tags": ["約書亞樂團", "大衛帳幕的榮耀 10"],
+    "arrangement": [4, 0, 1, 2, 0, 1, 2, 5, 2, 3, 3, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=kNOuWvdPgiA"
+      }
+    ],
+    "author": "詞 鄭孆薇、楊麗珊\n曲 鄭孆薇"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我來到祢寶座 獻上我的禱告",
+          "b": "I come before Your throne and offer my prayers"
+        },
+        {
+          "a": "在這寧靜時刻我聽見祢的聲音",
+          "b": "I can hear Your voice in this quiet moment"
+        },
+        {
+          "a": "因為祢的愛 已經找到了我",
+          "b": "Because Your love has found me"
+        },
+        {
+          "a": "使我配得走進祢的同在裡",
+          "b": "So that I am worthy to be in Your presence"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "在這安靜時刻 祢聆聽我呼求",
+          "b": "You listen to my cry in this quiet moment"
+        },
+        {
+          "a": "享受在祢的榮耀聖潔中",
+          "b": "I am soaking in Your glory and holiness"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "求祢仰起臉 來光照我的心",
+          "b": "Lord please lift up Your face and light up my heart"
+        },
+        {
+          "a": "祢使我心 充滿了快樂",
+          "b": "You satisft my heart with joy"
+        },
+        {
+          "a": "主啊祢是 我全然信靠",
+          "b": "Lord I put my faith in You"
+        },
+        {
+          "a": "耶和華使我安然居住",
+          "b": "My Lord Jehovah makes me dwell in peace"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "耶和華使我安然居住",
+          "b": "My Lord Jehovah makes me dwell in peace"
+        }
+      ]
+    }
+  ]
+}
