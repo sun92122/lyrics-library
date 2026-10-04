@@ -532,7 +532,7 @@ export const SongBuilder: React.FC = () => {
                         .map((line) =>
                           line
                             .replaceAll(/[’‘`‛ʼʻʽ＇]/g, "'")
-                            .replace(/\p{P}+\s*$/gu, ""),
+                            .replace(/[.,!;:。，！、；：…—]+\s*$/g, ""),
                         )
                         .join("\n");
                       setRawLyrics(replaced);
