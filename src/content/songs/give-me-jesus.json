@@ -1,0 +1,145 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "只要耶穌",
+      "b": "Give me Jesus"
+    },
+    "tags": ["ANHOP", "UPPERROOM"],
+    "arrangement": [
+      5, 0, 1, 1, 2, 1, 1, 6, 3, 3, 3, 3, 3, 3, 4, 4, 1, 1, 3, 3, 3, 3, 4, 4, 4,
+      4, 1, 1, 1, 1, 3, 3, 3, 4, 4, 1, 1, 9
+    ],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=fevPQtIesMc"
+      }
+    ],
+    "author": "詞、曲：Oscar Gamboa, Gabriel Gamboa, Abbie Gamboa, Camaryn Avers\n中譯詞：毛彥嵐",
+    "ccli": "7183129"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "其他都不要 只要祢",
+          "b": "I don't want anything but You"
+        },
+        {
+          "a": "夢想成真也無法比",
+          "b": "You're more than every dream come true"
+        },
+        {
+          "a": "所有我曾以為我想要的",
+          "b": "All of the things I thought I wanted"
+        },
+        {
+          "a": "遠不及認識祢",
+          "b": "Don't come close to knowing You"
+        },
+        {
+          "a": "現在祢屬我 我屬祢",
+          "b": "Now that I'm Yours and You are mine"
+        },
+        {
+          "a": "愛是我已尋見的秘密",
+          "b": "Our love is the secret that I find"
+        },
+        {
+          "a": "我要花永恆之久享受喜悅",
+          "b": "I'll spend forever in the pleasure"
+        },
+        {
+          "a": "在祢的眼裡",
+          "b": "I found looking in Your eyes"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "只要耶穌",
+          "b": "Give me Jesus"
+        },
+        {
+          "a": "唯有耶穌",
+          "b": "Give me Jesus"
+        },
+        {
+          "a": "這世界全放棄",
+          "b": "You can have all this world"
+        },
+        {
+          "a": "我也不改心意",
+          "b": "You can have all this world"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "祢全然勝過金銀",
+          "b": "More than silver, more than gold"
+        },
+        {
+          "a": "祢是我擁有的至寶",
+          "b": "You are the treasure that I hold"
+        },
+        {
+          "a": "當我已嚐到祢的良善",
+          "b": "Now that I've tasted of Your goodness"
+        },
+        {
+          "a": "再無其他滿足我",
+          "b": "Nothing else will satisfy"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "其他人我都不要",
+          "b": "I don't want anyone else"
+        },
+        {
+          "a": "其他事我都不要",
+          "b": "I don't need anything else"
+        },
+        {
+          "a": "祢是我唯一",
+          "b": "You are my one thing"
+        },
+        {
+          "a": "完全只要祢",
+          "b": "You are my one thing"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "祢是我唯一",
+          "b": "You are my one thing"
+        },
+        {
+          "a": "完全只要祢",
+          "b": "You are my one thing"
+        },
+        {
+          "a": "祢是我唯一",
+          "b": "You are my one thing"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "主我仰望祢",
+      "b": "God I Look to You"
+    },
+    "tags": ["約書亞樂團", "Bethel Music"],
+    "arrangement": [4, 0, 5, 0, 5, 1, 2, 2, 5, 3, 6, 2, 5, 2, 2, 2, 5, 3, 2, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=Xxri5au7QPI"
+      }
+    ],
+    "author": "詞／曲：Jenn Johnson, Ian McIntosh\n中譯詞：堪薩斯市國際禱告殿 中文部"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "主我仰望祢 我全然信靠祢",
+          "b": "God, I look to You, I won't be overwhelmed"
+        },
+        {
+          "a": "賜我異象 能看見祢心意",
+          "b": "Give me vision, To see things like You do"
+        },
+        {
+          "a": "主我仰望祢 我幫助來自祢",
+          "b": "God, I look to You, You're where my help comes from"
+        },
+        {
+          "a": "賜我智慧 凡事都在祢手裡",
+          "b": "Give me wisdom, You know just what to do"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我的力量我愛祢",
+          "b": "I will love You, Lord, my strength"
+        },
+        {
+          "a": "我的盾牌我愛祢",
+          "b": "I will love You, Lord, my shield"
+        },
+        {
+          "a": "我的磐石我愛祢",
+          "b": "I will love You, Lord, my rock"
+        },
+        {
+          "a": "從永遠到永遠 我要愛祢主",
+          "b": "Forever, all my days, I will love You, God"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "哈利路亞神掌權",
+          "b": "Hallelujah, our God reigns"
+        },
+        {
+          "a": "哈利路亞神掌權",
+          "b": "Hallelujah, our God reigns"
+        },
+        {
+          "a": "哈利路亞神掌權",
+          "b": "Hallelujah, our God reigns"
+        },
+        {
+          "a": "從永遠到永遠 哈利路亞",
+          "b": "Forever, all my days, hallelujah"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "從永遠到永遠 哈利路亞",
+          "b": "Forever, all my days, hallelujah"
+        }
+      ]
+    }
+  ]
+}

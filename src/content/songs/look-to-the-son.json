@@ -1,0 +1,114 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "仰望神兒子",
+      "b": "Look To The Son"
+    },
+    "tags": ["約書亞樂團", "Hillsong"],
+    "arrangement": [5, 2, 3, 6, 0, 1, 2, 6, 4, 1, 2, 3, 6, 1, 1, 3, 3, 2, 3, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=vMQj8rrqEtc"
+      }
+    ],
+    "author": "詞曲：Matt Crocker, Joel Houston, Scott Ligertwood, Reuben Morgan & Marty Sampson\n中譯：Ewen Chow, James Liew, Victor Xue, Renee Deng, Grace Ho, Katy Chiu, Kenelm Chan & Daniel Chieng",
+    "ccli": "7068422"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "救恩 撕裂黑夜的沉寂",
+          "b": "Salvation, tearing through the dead of night"
+        },
+        {
+          "a": "看見神的國 在光速中迸發出色彩",
+          "b": "See the kingdom burst into colour at the speed of light"
+        },
+        {
+          "a": "自由 改變屬靈的空氣",
+          "b": "Freedom, shaking up the atmosphere"
+        },
+        {
+          "a": "當明光照耀 幽暗逝去 就不再環繞",
+          "b": "As the shadows fade into nothing as the day appears"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "從那高天之上 愛為我們降下",
+          "b": "Beyond the skies above, love reaching out for us"
+        },
+        {
+          "a": "永活永在君王 耶穌我神",
+          "b": "The Everlasting One, Jesus our God"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我仰望神兒子",
+          "b": "Oh we look to the Son"
+        },
+        {
+          "a": "注目在救主身上",
+          "b": "Set our eyes on our Saviour"
+        },
+        {
+          "a": "看見愛的形象",
+          "b": "See the image of love"
+        },
+        {
+          "a": "我永遠要讚美祂",
+          "b": "Sing His praises forever"
+        },
+        {
+          "a": "Oh 仰望神兒子",
+          "b": "Oh we look to the Son"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "Oh 仰望神兒子",
+          "b": "Oh we look to the Son"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "受造物 神的國就要臨到",
+          "b": "Creation, waking up to kingdom come"
+        },
+        {
+          "a": "看天國盼望像初昇的太陽閃亮",
+          "b": "See the hope of heaven shining like the rising sun"
+        },
+        {
+          "a": "現在永遠 從死亡中得釋放",
+          "b": "Now forever, lifted up from death to life"
+        },
+        {
+          "a": "愛一無所懼 勝過黑暗祂彰顯真光",
+          "b": "There's no fear in love and no darkness in His endless light"
+        }
+      ]
+    }
+  ]
+}

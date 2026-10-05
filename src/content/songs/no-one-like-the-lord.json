@@ -1,0 +1,108 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "誰能與主相比",
+      "b": "No One Like The Lord"
+    },
+    "tags": ["台南活水", "Bethel Music"],
+    "arrangement": [4, 0, 0, 1, 0, 5, 0, 1, 1, 2, 3, 2, 3, 1, 1, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=8londLAj46o"
+      }
+    ],
+    "author": "詞曲：Jonathan Stamper, Eniola Abioye, Aliyah Stamper, Nathan Carter, Lindy Cofer, Jenn Johnson\n中譯：台南活水教會"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "寶座上的那位 耶穌 聖哉",
+          "b": "There is One on the throne, Jesus, holy"
+        },
+        {
+          "a": "配得一切尊崇 讚美 和榮耀",
+          "b": "He is worthy of praise, honor and glory"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "神羔羊配得",
+          "b": "Worthy is the Lamb"
+        },
+        {
+          "a": "曾被殺復活坐在寶座",
+          "b": "Who was slain and seated on the throne"
+        },
+        {
+          "a": "無一人能能相比",
+          "b": "There's no one like the Lord"
+        },
+        {
+          "a": "眾長老活物跪拜",
+          "b": "Elders, creatures bow"
+        },
+        {
+          "a": "獻上讚美唯獨歸給祂",
+          "b": "Giving praise to Him and Him alone"
+        },
+        {
+          "a": "誰能與主相比",
+          "b": "There's no one like the Lord"
+        }
+      ]
+    },
+    {
+      "name": "$B1",
+      "lines": [
+        {
+          "a": "我們擁戴榮耀王",
+          "b": "We crown You King of glory"
+        },
+        {
+          "a": "我們擁戴榮耀王",
+          "b": "We crown You King of glory"
+        },
+        {
+          "a": "我們擁戴榮耀王",
+          "b": "We crown You King of glory"
+        },
+        {
+          "a": "耶穌 萬有之主",
+          "b": "We crown You Lord of all"
+        }
+      ]
+    },
+    {
+      "name": "$B2",
+      "lines": [
+        {
+          "a": "祢配得我們尊崇",
+          "b": "We crown You, You are worthy"
+        },
+        {
+          "a": "祢配得我們尊崇",
+          "b": "We crown You, You are worthy"
+        },
+        {
+          "a": "祢配得我們尊崇",
+          "b": "We crown You, You are worthy"
+        },
+        {
+          "a": "耶穌 萬有之主",
+          "b": "We crown You Lord of all"
+        }
+      ]
+    }
+  ]
+}

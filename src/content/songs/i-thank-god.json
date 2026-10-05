@@ -1,0 +1,218 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "感謝神",
+      "b": "I thank God"
+    },
+    "tags": ["台南活水", "UPPERROOM", "Maverick City Music"],
+    "arrangement": [8, 0, 1, 2, 9, 3, 4, 2, 9, 5, 5, 5, 5, 6, 6, 2],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=6Ep1LramZdU"
+      }
+    ],
+    "author": "詞／曲：Jesse Cline, Maryanne J George, Dante Bowe, Aaron Moses, Chuck Butler \n中譯詞：邵孟貞"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "在夜裡徘徊遊走",
+          "b": "Wandering into the night"
+        },
+        {
+          "a": "尋找處所躲藏",
+          "b": "Wanting a place to hide"
+        },
+        {
+          "a": "我靈疲倦 肉體衰退",
+          "b": "This weary soul, this bag of bones"
+        },
+        {
+          "a": "雖已用盡我全力",
+          "b": "And I tried with all my mind"
+        },
+        {
+          "a": "這場仗卻打不贏",
+          "b": "And I just can't win the fight"
+        },
+        {
+          "a": "逐漸的飄蕩 無處為家",
+          "b": "I'm slowly drifting, oh vagabond"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "當我走到路的盡頭",
+          "b": "And just when I ran out of road"
+        },
+        {
+          "a": "遇見了一位新面孔",
+          "b": "I met a man I didn't know"
+        },
+        {
+          "a": "祂告訴我 我並沒有孤單",
+          "b": "And he told me that I was not alone"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祂扶起我 脫離深淵",
+          "b": "He picked me up, He turned me around"
+        },
+        {
+          "a": "將我雙腳安置磐石上",
+          "b": "He placed my feet on solid ground"
+        },
+        {
+          "a": "我感謝我主 我的拯救者",
+          "b": "I thank the Master, I thank the Savior"
+        },
+        {
+          "a": "祂醫治我的心 給我新名",
+          "b": "Because He healed my heart, He changed my name"
+        },
+        {
+          "a": "永遠自由 煥然一新",
+          "b": "Forever free, I'm not the same"
+        },
+        {
+          "a": "我感謝我主 我的拯救者",
+          "b": "I thank the Master, I thank the Savior"
+        },
+        {
+          "a": "感謝神",
+          "b": "I thank God"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "無法否認我眼所見",
+          "b": "I cannot deny what I seen"
+        },
+        {
+          "a": "只能夠選擇相信",
+          "b": "Got no choice but to believe"
+        },
+        {
+          "a": "燒盡我懷疑",
+          "b": "My doubts are burning"
+        },
+        {
+          "a": "如風中的灰燼",
+          "b": "Like ashes in the wind"
+        },
+        {
+          "a": "與我老朋友告別",
+          "b": "So, so long to my old friends"
+        },
+        {
+          "a": "重擔 苦毒 再見",
+          "b": "Burden and bitter night"
+        },
+        {
+          "a": "現在離開這裡",
+          "b": "You can't just keep them moving"
+        },
+        {
+          "a": "我不再歡迎你",
+          "b": "No, you ain't welcome here"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "直到我走在黃金街路",
+          "b": "From now 'til I walk the streets of gold"
+        },
+        {
+          "a": "歌頌祢如何拯救我",
+          "b": "I'll sing of how you saved my soul"
+        },
+        {
+          "a": "迷失孩子已找到路回家",
+          "b": "This wayward son has found his way back home"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我不再屬於黑暗 我自由",
+          "b": "Hell lost another one, I am free"
+        },
+        {
+          "a": "我自由 我自由",
+          "b": "I am free, I am free"
+        },
+        {
+          "a": "我不再屬於黑暗 我自由",
+          "b": "Hell lost another one, I am free"
+        },
+        {
+          "a": "我自由 我自由",
+          "b": "I am free, I am free"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "祂扶起我 脫離深淵",
+          "b": "He picked me up, He turned me around"
+        },
+        {
+          "a": "將我雙腳安置磐石上",
+          "b": "He placed my feet on solid ground"
+        },
+        {
+          "a": "我感謝我主 我的拯救者",
+          "b": "I thank the Master, I thank the Savior"
+        },
+        {
+          "a": "祂醫治我的心 給我新名",
+          "b": "Because He healed my heart, He changed my name"
+        },
+        {
+          "a": "永遠自由 煥然一新",
+          "b": "Forever free, I'm not the same"
+        },
+        {
+          "a": "我感謝我主 我的拯救者",
+          "b": "I thank the Master, I thank the Savior"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "Get up, get up, get up"
+        },
+        {
+          "a": "Get up out of that grave"
+        }
+      ]
+    }
+  ]
+}

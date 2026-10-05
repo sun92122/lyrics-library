@@ -1,0 +1,127 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "不停讚美祢",
+      "b": "Won't Stop Praising"
+    },
+    "tags": ["讚美之泉", "深愛耶穌"],
+    "arrangement": [5, 0, 1, 6, 1, 2, 2, 7, 1, 3, 3, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=dhJCJcGojHA"
+      }
+    ],
+    "ccli": "7260777",
+    "author": "讚美之泉\n詞、曲：何俊傑",
+    "originalKey": "G"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "時時稱頌祢 向祢來歌唱",
+          "b": "Lord, we sing Your praise, time and time again"
+        },
+        {
+          "a": "因祢是拯救我們偉大的神",
+          "b": "For You've redeemed us, You're our saving grace"
+        },
+        {
+          "a": "我們尊崇祢 稱頌祢聖名",
+          "b": "Lord, we honor You, lift Your holy name"
+        },
+        {
+          "a": "口唱心和地 大聲地讚美祢",
+          "b": "With a joyful noise, we praise You night and day"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "不停讚美祢 大聲讚美祢",
+          "b": "Lift my praise to You, shout my praise to You"
+        },
+        {
+          "a": "唯有祢配得榮耀 尊貴 權柄",
+          "b": "You alone deserve all glory, power and praise"
+        },
+        {
+          "a": "天是屬於祢 地也屬於祢",
+          "b": "The heavens and the earth all belong to You"
+        },
+        {
+          "a": "一切所造之物 齊來讚美祢",
+          "b": "All creation joins to praise and worship You"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我讚美讚美 不停讚美",
+          "b": "I praise You, praise You, won't stop praising"
+        },
+        {
+          "a": "跳舞跳舞 不停跳舞",
+          "b": "Dancing, dancing, never ending"
+        },
+        {
+          "a": "高舉雙手 大聲讚美祢",
+          "b": "Lift my hands and give You all my praise"
+        },
+        {
+          "a": "我讚美讚美 不停讚美",
+          "b": "I praise You, praise You, won't stop praising"
+        },
+        {
+          "a": "跳舞跳舞 不停跳舞",
+          "b": "Dancing, dancing, never ending"
+        },
+        {
+          "a": "高舉雙手 大聲讚美祢",
+          "b": "Lift my hands and give You all my praise"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "天是屬於祢 地也屬於祢",
+          "b": "The heavens and the earth all belong to You"
+        },
+        {
+          "a": "一切所造之物 齊來讚美祢",
+          "b": "All creation joins to praise and worship You"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "我要讚美",
+          "b": "I will praise You"
+        },
+        {
+          "a": "不停讚美",
+          "b": "Never ending"
+        },
+        {
+          "a": "大聲讚美",
+          "b": "Praise it out loud"
+        }
+      ]
+    }
+  ]
+}
