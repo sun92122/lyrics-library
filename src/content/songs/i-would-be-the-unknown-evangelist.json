@@ -1,0 +1,189 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我願是無名的傳道者",
+      "b": "I would be the unknown evangelist"
+    },
+    "tags": ["TopWorship", "We R One"],
+    "arrangement": [7, 0, 1, 2, 4, 1, 2, 3, 3, 2, 6, 11],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=hkAndsm42lA"
+      }
+    ],
+    "author": "詞：新店⾏道會、邊雲波〈 獻給無名的傳道者〉\n曲：新店⾏道會",
+    "originalKey": "A",
+    "bpm": 75
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "沒有人留心 曠野如何變樹林",
+          "b": "No one noticed how the wasteland become woodland"
+        },
+        {
+          "a": "沒有人曉得 樹枝如何結花果",
+          "b": "No one knew just how branches brought forth fruit"
+        },
+        {
+          "a": "沒有人明白 沙漠為何盛開玫瑰",
+          "b": "No one understood why roses could bloom in the desert"
+        },
+        {
+          "a": "沒有人知道 荒地為何流出江河",
+          "b": "Or why rivers and streams flowed from barren ground"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "在那被人遺忘的地方 卻有佳美腳蹤",
+          "b": "In the long forgotten places there remain beautiful footsteps"
+        },
+        {
+          "a": "是因無名傳道者走過留下",
+          "b": "Traces of the unknown evangelists who left behind"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我願是 無聲無息的磐石",
+          "b": "I would be the silent hidden rock"
+        },
+        {
+          "a": "我願是 攻打前鋒的士兵",
+          "b": "I would be the vanguard strike force"
+        },
+        {
+          "a": "我願是 教會隱藏的基礎",
+          "b": "I would be the hidden foundation of the church"
+        },
+        {
+          "a": "我願是 沒有功章的英雄",
+          "b": "I would be the undecorated heroes"
+        },
+        {
+          "a": "多少不知名靈魂 得到了生命",
+          "b": "Countless nameless souls have found life"
+        },
+        {
+          "a": "這個時代的復興 是我們禱告的累積",
+          "b": "The revival of this age is the accumulation of our prayers"
+        },
+        {
+          "a": "我們仍然呼求祢的名",
+          "b": "We still call upon Your name"
+        },
+        {
+          "a": "我們仍然信靠祢的名",
+          "b": "We still trust in Your name"
+        },
+        {
+          "a": "我們仍然高舉祢的名",
+          "b": "We still lift high Your name"
+        },
+        {
+          "a": "永遠堅定",
+          "b": "Forever steadfast"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "不害怕 十架道路 越走越難",
+          "b": "I will not fear, though the cross grows harder each day"
+        },
+        {
+          "a": "跟隨神 不放棄的心志 越難越堅",
+          "b": "Following God, with a heart that will not turn away"
+        },
+        {
+          "a": "仍然忍耐到底 要把世路走完",
+          "b": "Still I endure, till the race of this life is done"
+        },
+        {
+          "a": "直到和救主面對面相見 榮耀那天",
+          "b": "Till face to face with my Savior, glory has come"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "沒有人回想 福音如何傳來這地",
+          "b": "No one remember how the gospel first came to this land"
+        },
+        {
+          "a": "沒有人追憶 神僕們得救的經歷",
+          "b": "No one recalls the saving grace that God's servants had"
+        },
+        {
+          "a": "做神的工作 會參雜著血淚苦心",
+          "b": "The ministry of God is suffused with tears and toil"
+        },
+        {
+          "a": "一代代聖徒 都出於那無聲獻祭",
+          "b": "Generation to generation - a silent sacrifice remains"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "我願是 無聲無息的磐石",
+          "b": "I would be the silent hidden rock"
+        },
+        {
+          "a": "我願是 攻打前鋒的士兵",
+          "b": "I would be the vanguard strike force"
+        },
+        {
+          "a": "我願是 教會隱藏的基礎",
+          "b": "I would be the hidden foundation of the church"
+        },
+        {
+          "a": "我願是 沒有功章的英雄",
+          "b": "I would be the undecorated heroes"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "我們仍然呼求祢的名",
+          "b": "We still call upon Your name"
+        },
+        {
+          "a": "我們仍然信靠祢的名",
+          "b": "We still trust in Your name"
+        },
+        {
+          "a": "我們仍然高舉祢的名",
+          "b": "We still lift high Your name"
+        },
+        {
+          "a": "永遠堅定",
+          "b": "Forever steadfast"
+        }
+      ]
+    }
+  ]
+}
