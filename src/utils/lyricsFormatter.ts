@@ -28,10 +28,10 @@ export function formatLyricsText(
       titleStr = `${song.meta.title.a} / ${song.meta.title.b}`;
     }
     blocks.push(titleStr);
-    if (song.meta.author) {
-      blocks.push(`詞曲：${song.meta.author}`);
-    }
-    blocks.push("");
+    // if (song.meta.author) {
+    //   blocks.push(`詞曲：${song.meta.author}`);
+    // }
+    // blocks.push("");
   }
 
   song.sections.forEach((section) => {
