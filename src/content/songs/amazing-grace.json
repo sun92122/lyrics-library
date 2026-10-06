@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "奇異恩典",
+      "b": "Amazing Grace"
+    },
+    "tags": ["讚美詩", "KUA"],
+    "arrangement": [5, 0, 1, 6, 2, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=HX8ZAcoasTE"
+      }
+    ],
+    "author": "詞：John Newton"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "奇異恩典 何等甘甜",
+          "b": "Amazing Grace, how sweet the sound"
+        },
+        {
+          "a": "我罪已得赦免",
+          "b": "That saved a wretch like me"
+        },
+        {
+          "a": "前我失喪 今被尋回",
+          "b": "I once was lost but now am found"
+        },
+        {
+          "a": "瞎眼今得看見",
+          "b": "Was blind, but now I see"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "如此恩典 使我敬畏",
+          "b": "'Twas Grace that taught my heart to fear"
+        },
+        {
+          "a": "使我心得安慰",
+          "b": "And Grace, my fears relieved"
+        },
+        {
+          "a": "初信之時 即蒙恩惠",
+          "b": "How precious did that Grace appear"
+        },
+        {
+          "a": "真是何等寶貴",
+          "b": "The hour I first believed"
+        }
+      ]
+    },
+    {
+      "name": "$V3",
+      "lines": [
+        {
+          "a": "將來禧年 聖徒歡聚",
+          "b": "When we've been here ten thousand years"
+        },
+        {
+          "a": "恩光愛誼千年",
+          "b": "Bright shining as the sun"
+        },
+        {
+          "a": "喜樂頌讚 在父座前",
+          "b": "We've no less days to sing God's praise"
+        },
+        {
+          "a": "深望那日快現",
+          "b": "Than when we've first begun"
+        }
+      ]
+    },
+    {
+      "name": "$V3",
+      "lines": [
+        {
+          "a": "經過許多危險網羅",
+          "b": "Through many dangers, toils and snares"
+        },
+        {
+          "a": "飽受人間苦楚",
+          "b": "I have already come"
+        },
+        {
+          "a": "此恩領我平安渡過",
+          "b": "'Tis Grace that brought me safe thus far"
+        },
+        {
+          "a": "祂日歸回天府",
+          "b": "And Grace will lead me home"
+        }
+      ]
+    },
+    {
+      "name": "$V4",
+      "lines": [
+        {
+          "a": "將來在天安居萬年",
+          "b": "When we've been here ten thousand years"
+        },
+        {
+          "a": "恩光如日普照",
+          "b": "Bright shining as the sun"
+        },
+        {
+          "a": "好像最初蒙恩景況",
+          "b": "We've no less days to sing God's praise"
+        },
+        {
+          "a": "讚美永不減少",
+          "b": "Than when we've first begun"
+        }
+      ]
+    }
+  ]
+}
