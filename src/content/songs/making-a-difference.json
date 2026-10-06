@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "改變世界",
+      "b": "Making A Difference"
+    },
+    "tags": ["城市豐收教會", "和撒那"],
+    "arrangement": [5, 0, 1, 6, 0, 1, 1, 2, 1, 1, 2, 1, 1, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=pikCzQ0oCDw"
+      }
+    ],
+    "author": "新加坡城市豐收教會\n詞：KOK YEW. TOH／曲：POH HENG. TEO",
+    "originalKey": "G"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "懇求主 祢看看我雙手",
+          "b": "Won't You Lord take a look at our hands"
+        },
+        {
+          "a": "一切我所有 甘心為祢用",
+          "b": "Everything we have, Use it for Your plan"
+        },
+        {
+          "a": "懇求主 祢看看我的心",
+          "b": "Won't You Lord take a look at our heart"
+        },
+        {
+          "a": "塑造煉淨我 將我分別為聖",
+          "b": "Mold it, refine it as You set us part"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我們要奔向祢的祭壇",
+          "b": "We want to run to the altar"
+        },
+        {
+          "a": "得著祢的火焰",
+          "b": "And catch the fire"
+        },
+        {
+          "a": "站在破口中",
+          "b": "To stand in the gap"
+        },
+        {
+          "a": "搶救那失喪的靈魂",
+          "b": "Between the living and the dead"
+        },
+        {
+          "a": "求主賜我憐憫的心",
+          "b": "Give us a heart of compassion"
+        },
+        {
+          "a": "為這迷失的人群",
+          "b": "For a world without vision"
+        },
+        {
+          "a": "我們要改變世界",
+          "b": "We will make a difference"
+        },
+        {
+          "a": "帶來盼望在這地",
+          "b": "Bringing hope to our land"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "回應祢的呼召",
+          "b": "We will answer the call"
+        },
+        {
+          "a": "建立無牆的教會",
+          "b": "To build this church without walls"
+        },
+        {
+          "a": "讓祢榮耀彰顯",
+          "b": "Let Your glory be shown"
+        },
+        {
+          "a": "賜下救恩給萬民 給萬民",
+          "b": "Bring salvation to the lost to the lost"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "我們要改變世界",
+          "b": "We will make a difference"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "帶來盼望在這地",
+          "b": "Bringing hope to our land"
+        }
+      ]
+    }
+  ]
+}
