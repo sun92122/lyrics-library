@@ -260,7 +260,12 @@ export const SongBuilder: React.FC = () => {
     }
     const currentId =
       id ||
-      (meta.title.b && meta.title.b.replace(/[\s,'-]+/g, "-").toLowerCase());
+      (meta.title.b &&
+        meta.title.b
+          .replace(/[\s,-]+/g, "-")
+          .replace(/[’‘`‛ʼʻʽ＇']/g, "")
+          .toLowerCase()) ||
+      "";
     if (!id) {
       setId(currentId || "");
     }
@@ -285,12 +290,20 @@ export const SongBuilder: React.FC = () => {
         <Input
           value={id}
           onChange={(e) => {
-            setId(e.target.value.replace(/[\s,'-]+/g, "-").toLowerCase());
+            setId(
+              e.target.value
+                .replace(/[\s,-]+/g, "-")
+                .replace(/[’‘`‛ʼʻʽ＇']/g, "")
+                .toLowerCase(),
+            );
             setIdError(null);
           }}
           placeholder={
             meta.title.b
-              ? meta.title.b.replace(/[\s,'-]+/g, "-").toLowerCase()
+              ? meta.title.b
+                  .replace(/[\s,-]+/g, "-")
+                  .replace(/[’‘`‛ʼʻʽ＇']/g, "")
+                  .toLowerCase()
               : "song-id"
           }
           className="text-right w-[50%] rounded-lg p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
@@ -364,6 +377,37 @@ export const SongBuilder: React.FC = () => {
                     title: { ...prev.title, a: e.target.value },
                   }))
                 }
+                onBlur={(e) => {
+                  const trimmed = e.target.value.trim();
+                  if (trimmed !== e.target.value) {
+                    setMeta((prev) => ({
+                      ...prev,
+                      title: { ...prev.title, a: trimmed },
+                    }));
+                  }
+                }}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+                    e.preventDefault();
+                    const cursorIndex = e.currentTarget.selectionStart;
+                    const cursorEndIndex = e.currentTarget.selectionEnd;
+                    if (!cursorIndex) return;
+
+                    const before = meta.title.a.slice(0, cursorIndex).trim();
+                    const after = meta.title.a
+                      .slice(cursorEndIndex || cursorIndex)
+                      .trim();
+
+                    setMeta((prev) => ({
+                      ...prev,
+                      title: {
+                        ...prev.title,
+                        a: before,
+                        b: (prev.title.b || "") + after,
+                      },
+                    }));
+                  }
+                }}
                 placeholder="奇異恩典"
                 className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -380,6 +424,15 @@ export const SongBuilder: React.FC = () => {
                     title: { ...prev.title, b: e.target.value },
                   }))
                 }
+                onBlur={(e) => {
+                  const trimmed = e.target.value.trim();
+                  if (trimmed !== e.target.value) {
+                    setMeta((prev) => ({
+                      ...prev,
+                      title: { ...prev.title, b: trimmed },
+                    }));
+                  }
+                }}
                 placeholder="Amazing Grace"
                 className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
