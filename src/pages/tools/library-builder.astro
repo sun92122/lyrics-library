@@ -1,14 +1,20 @@
 ---
-import { getCollection } from 'astro:content';
-import Layout from '@/layouts/Layout.astro';
-import { LibraryBuilder } from '@/components/LibraryBuilder';
-import { ArrowLeft } from 'lucide-react';
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import { LibraryBuilder } from "@/components/LibraryBuilder";
+import { ArrowLeft } from "lucide-react";
 
-const songEntries = await getCollection('songs');
-const availableSongs = songEntries.map((entry) => ({ id: entry.id, ...entry.data }));
+const songEntries = await getCollection("songs");
+const availableSongs = songEntries.map((entry) => ({
+  id: entry.id,
+  ...entry.data,
+}));
 ---
 
-<Layout title="子歌曲庫建構器 - Lyrics Library" description="視覺化挑選曲目、調整排序並匯出歌庫 JSON 檔案">
+<Layout
+  title="子歌曲庫建構器 - Lyrics Library"
+  description="視覺化挑選曲目、調整排序並匯出歌庫 JSON 檔案，支援拖曳歌曲庫 JSON 檔案匯入修改"
+>
   <div class="space-y-6">
     <div>
       <a

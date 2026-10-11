@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import type { SongWithId, LibraryData } from "@/content.config";
 import {
   Search,
@@ -14,6 +14,10 @@ import {
   Layers,
   AlertCircle,
   FileCode,
+  UploadCloud,
+  Upload,
+  CheckCircle2,
+  X,
 } from "lucide-react";
 import { Input } from "@headlessui/react";
 
@@ -25,6 +29,101 @@ interface LibrarySong {
   type?: "song" | "separator" | "note" | "header";
   id?: string;
   content?: string;
+}
+
+export type LibraryValidationResult =
+  | { success: true; data: LibraryData; rawId?: string }
+  | { success: false; error: string };
+
+export function validateLibraryData(raw: unknown): LibraryValidationResult {
+  if (typeof raw !== "object" || raw === null || Array.isArray(raw)) {
+    return { success: false, error: "檔案內容必須為 JSON 物件" };
+  }
+
+  const obj = raw as Record<string, any>;
+
+  if (obj.sections && Array.isArray(obj.sections)) {
+    return {
+      success: false,
+      error:
+        "此檔案為單曲歌詞檔案而非歌曲庫檔案，請至「歌詞檔案建立工具」進行編輯",
+    };
+  }
+
+  if (!obj.meta || typeof obj.meta !== "object" || Array.isArray(obj.meta)) {
+    return { success: false, error: "缺少歌庫中繼資料 (meta)" };
+  }
+
+  let titleObj = obj.meta.title;
+  if (typeof titleObj === "string") {
+    titleObj = { a: titleObj, b: "" };
+  }
+
+  if (
+    !titleObj ||
+    typeof titleObj !== "object" ||
+    Array.isArray(titleObj) ||
+    !titleObj.a ||
+    typeof titleObj.a !== "string" ||
+    !titleObj.a.trim()
+  ) {
+    return { success: false, error: "缺少歌庫名稱 (meta.title.a)" };
+  }
+
+  if (!obj.songs || !Array.isArray(obj.songs)) {
+    return { success: false, error: "缺少歌庫曲目清單 (songs)" };
+  }
+
+  for (let idx = 0; idx < obj.songs.length; idx++) {
+    const item = obj.songs[idx];
+    if (!item || typeof item !== "object" || Array.isArray(item)) {
+      return { success: false, error: `第 ${idx + 1} 個項目格式無效` };
+    }
+    const hasValidType = ["song", "separator", "note", "header"].includes(
+      item.type,
+    );
+    const hasId = typeof item.id === "string" && item.id.trim().length > 0;
+    if (!hasValidType && !hasId) {
+      return {
+        success: false,
+        error: `第 ${idx + 1} 個項目缺少有效的歌曲 ID 或項目類型 (type)`,
+      };
+    }
+  }
+
+  const normalizedSongs: LibrarySong[] = obj.songs.map((item: any) => {
+    const res: LibrarySong = {};
+    if (item.type) res.type = item.type;
+    if (typeof item.id === "string") res.id = item.id.trim();
+    if (typeof item.content === "string") res.content = item.content;
+    return res;
+  });
+
+  const parsedTags = Array.isArray(obj.meta.tags)
+    ? obj.meta.tags
+        .filter((t: any) => typeof t === "string" && t.trim())
+        .map((t: string) => t.trim())
+    : [];
+
+  const rawId = typeof obj.id === "string" ? obj.id.trim() : undefined;
+
+  return {
+    success: true,
+    rawId,
+    data: {
+      meta: {
+        title: {
+          a: titleObj.a.trim(),
+          b: typeof titleObj.b === "string" ? titleObj.b.trim() : "",
+        },
+        description:
+          typeof obj.meta.description === "string" ? obj.meta.description : "",
+        tags: parsedTags,
+        date: obj.meta.date ? new Date(obj.meta.date) : undefined,
+      },
+      songs: normalizedSongs,
+    },
+  };
 }
 
 export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
@@ -44,6 +143,159 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
 
   const [copied, setCopied] = useState(false);
   const [showJsonPreview, setShowJsonPreview] = useState(false);
+  const [isDragging, setIsDragging] = useState(false);
+  const [feedback, setFeedback] = useState<{
+    type: "success" | "error";
+    message: string;
+  } | null>(null);
+
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const dragCounterRef = useRef<number>(0);
+
+  const loadLibraryFile = (
+    data: LibraryData,
+    rawId?: string,
+    fileName?: string,
+  ) => {
+    const fileId = fileName ? fileName.replace(/\.[^/.]+$/, "") : "";
+    const nextId = rawId || fileId || "my-library";
+
+    setLibraryId(nextId);
+    setTitleA(data.meta.title.a || "");
+    setTitleB(data.meta.title.b || "");
+    setDescription(data.meta.description || "");
+    setTagsInput((data.meta.tags || []).join(", "));
+    setSelectedSongItems(data.songs || []);
+  };
+
+  const handleFile = async (file: File) => {
+    try {
+      const text = await file.text();
+      let json: unknown;
+      try {
+        json = JSON.parse(text);
+      } catch {
+        setFeedback({
+          type: "error",
+          message: `檔案「${file.name}」無法解析為 JSON 格式，請確認是否為正確的歌曲庫 JSON 檔案。`,
+        });
+        return;
+      }
+
+      const validation = validateLibraryData(json);
+      if (!validation.success) {
+        setFeedback({
+          type: "error",
+          message: `檔案「${file.name}」不是合法的歌曲庫檔案：${validation.error}`,
+        });
+        return;
+      }
+
+      loadLibraryFile(validation.data, validation.rawId, file.name);
+      setFeedback({
+        type: "success",
+        message: `已成功載入歌曲庫「${validation.data.meta.title.a}」內容（來源：${file.name}），已覆蓋當前內容！`,
+      });
+    } catch (err) {
+      setFeedback({
+        type: "error",
+        message: `讀取檔案「${file.name}」時發生錯誤：${err instanceof Error ? err.message : String(err)}`,
+      });
+    }
+  };
+
+  useEffect(() => {
+    let timer: NodeJS.Timeout | null = null;
+    if (feedback?.type === "success") {
+      timer = setTimeout(() => {
+        setFeedback(null);
+      }, 6000);
+    }
+    return () => {
+      if (timer) clearTimeout(timer);
+    };
+  }, [feedback]);
+
+  useEffect(() => {
+    const isFileDrag = (e: DragEvent) => {
+      if (!e.dataTransfer) return false;
+      return (
+        Array.from(e.dataTransfer.types).includes("Files") ||
+        e.dataTransfer.types.includes("application/x-moz-file")
+      );
+    };
+
+    const handleDragEnter = (e: DragEvent) => {
+      if (!isFileDrag(e)) return;
+      e.preventDefault();
+      dragCounterRef.current++;
+      setIsDragging(true);
+    };
+
+    const handleDragOver = (e: DragEvent) => {
+      if (!isFileDrag(e)) return;
+      e.preventDefault();
+      if (e.dataTransfer) {
+        e.dataTransfer.dropEffect = "copy";
+      }
+    };
+
+    const handleDragLeave = (e: DragEvent) => {
+      if (!isFileDrag(e)) return;
+      e.preventDefault();
+      dragCounterRef.current--;
+
+      const leftWindow =
+        !e.relatedTarget &&
+        (e.clientX <= 0 ||
+          e.clientY <= 0 ||
+          e.clientX >= window.innerWidth ||
+          e.clientY >= window.innerHeight);
+
+      if (dragCounterRef.current <= 0 || leftWindow) {
+        dragCounterRef.current = 0;
+        setIsDragging(false);
+      }
+    };
+
+    const handleDrop = (e: DragEvent) => {
+      if (!isFileDrag(e)) return;
+      e.preventDefault();
+      e.stopPropagation();
+      dragCounterRef.current = 0;
+      setIsDragging(false);
+
+      if (
+        e.dataTransfer &&
+        e.dataTransfer.files &&
+        e.dataTransfer.files.length > 0
+      ) {
+        const file = e.dataTransfer.files[0];
+        handleFile(file);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        dragCounterRef.current = 0;
+        setIsDragging(false);
+      }
+    };
+
+    window.addEventListener("dragenter", handleDragEnter, true);
+    window.addEventListener("dragover", handleDragOver, true);
+    window.addEventListener("dragleave", handleDragLeave, true);
+    window.addEventListener("drop", handleDrop, true);
+    window.addEventListener("keydown", handleKeyDown, true);
+
+    return () => {
+      window.removeEventListener("dragenter", handleDragEnter, true);
+      window.removeEventListener("dragover", handleDragOver, true);
+      window.removeEventListener("dragleave", handleDragLeave, true);
+      window.removeEventListener("drop", handleDrop, true);
+      window.removeEventListener("keydown", handleKeyDown, true);
+    };
+  }, []);
 
   // Map song ID to song data
   const songMap = useMemo(() => {
@@ -246,6 +498,29 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
 
   return (
     <div className="space-y-8">
+      {/* Drag & Drop Full-screen Overlay */}
+      {isDragging && (
+        <div className="fixed inset-0 z-[9999] bg-slate-900/70 backdrop-blur-sm flex flex-col items-center justify-center p-4 pointer-events-none select-none transition-opacity duration-150">
+          <div className="bg-white p-8 sm:p-10 rounded-3xl shadow-2xl border-4 border-dashed border-indigo-500 max-w-lg w-full text-center space-y-4 transform scale-105 transition-transform">
+            <div className="w-20 h-20 bg-indigo-50 text-indigo-600 rounded-3xl flex items-center justify-center mx-auto shadow-inner">
+              <UploadCloud className="w-10 h-10 animate-bounce" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
+                釋放以載入歌曲庫檔案
+              </h3>
+              <p className="text-sm text-slate-500">
+                支援合法的歌曲庫 JSON 檔案，載入後將覆蓋當前內容以供修改
+              </p>
+            </div>
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>自動填入歌庫名稱、曲目清單、分類標籤與排序</span>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Top Banner Guide */}
       <div className="bg-slate-900 text-white p-6 sm:p-8 rounded-3xl border border-slate-800 shadow-xl flex flex-wrap items-center justify-between gap-6">
         <div className="space-y-2 max-w-2xl">
@@ -257,8 +532,8 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
             歌曲庫產生器 (Library Builder)
           </h1>
           <p className="text-sm text-slate-300 leading-relaxed">
-            挑選曲目並調整排序，輸入歌庫中英資訊後，一鍵下載符合 Schema 規範的
-            JSON 檔案，直接放入專案{" "}
+            挑選曲目並調整排序，或直接拖曳歌曲庫 JSON 檔案載入編輯。一鍵下載符合
+            Schema 規範的 JSON 檔案，直接放入專案{" "}
             <code className="text-amber-300 font-mono text-xs">
               src/content/libraries/
             </code>{" "}
@@ -267,6 +542,28 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
         </div>
 
         <div className="flex flex-wrap items-center gap-3">
+          <input
+            type="file"
+            ref={fileInputRef}
+            accept=".json,application/json"
+            className="hidden"
+            onChange={(e) => {
+              const file = e.target.files?.[0];
+              if (file) {
+                handleFile(file);
+              }
+              e.target.value = "";
+            }}
+          />
+          <button
+            type="button"
+            onClick={() => fileInputRef.current?.click()}
+            className="flex items-center gap-1.5 px-4 py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-xl text-xs font-semibold border border-slate-700 transition-all shadow-sm active:scale-95"
+          >
+            <Upload className="w-4 h-4 text-indigo-400" />
+            <span>匯入歌庫 JSON</span>
+          </button>
+
           <button
             type="button"
             onClick={handleCopyJson}
@@ -309,6 +606,33 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
           </button>
         </div>
       </div>
+
+      {/* Feedback Banner */}
+      {feedback && (
+        <div
+          className={`p-4 rounded-2xl border flex items-center justify-between gap-3 transition-all ${
+            feedback.type === "success"
+              ? "bg-emerald-50 border-emerald-200 text-emerald-800"
+              : "bg-rose-50 border-rose-200 text-rose-800"
+          }`}
+        >
+          <div className="flex items-center gap-3">
+            {feedback.type === "success" ? (
+              <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
+            ) : (
+              <AlertCircle className="w-5 h-5 text-rose-600 shrink-0" />
+            )}
+            <span className="text-sm font-medium">{feedback.message}</span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setFeedback(null)}
+            className="text-slate-400 hover:text-slate-600 transition-colors p-1"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+      )}
 
       {/* Two-Column Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
