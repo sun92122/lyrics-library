@@ -1,5 +1,8 @@
 import React, { useState, useMemo, useEffect, useRef } from "react";
 import type { SongWithId, LibraryData } from "@/content.config";
+import * as prettier from "prettier/standalone";
+import parserBabel from "prettier/plugins/babel";
+import parserEstree from "prettier/plugins/estree";
 import {
   Search,
   Trash2,
@@ -409,8 +412,40 @@ export const LibraryBuilder: React.FC<LibraryBuilderProps> = ({
     };
   }, [libraryId, titleA, titleB, description, tagsInput, selectedSongItems]);
 
-  const jsonString = useMemo(() => {
-    return JSON.stringify(generatedJson, null, 2);
+  const [jsonString, setJsonString] = useState<string>("");
+  useEffect(() => {
+    let isMounted = true;
+
+    async function formatWithPrettier() {
+      if (!generatedJson) {
+        setJsonString("");
+        return;
+      }
+
+      try {
+        const raw = JSON.stringify(generatedJson);
+        const formatted = await prettier.format(raw, {
+          parser: "json",
+          plugins: [parserBabel, parserEstree],
+        });
+
+        if (isMounted) {
+          setJsonString(formatted);
+        }
+      } catch (error) {
+        console.error("Prettier formatting failed:", error);
+        // 若格式化失敗，退回原生排版
+        if (isMounted) {
+          setJsonString(JSON.stringify(generatedJson, null, 2));
+        }
+      }
+    }
+
+    formatWithPrettier();
+
+    return () => {
+      isMounted = false; // 清理函式，防止非同步競態條件（Race condition）
+    };
   }, [generatedJson]);
 
   // Validation

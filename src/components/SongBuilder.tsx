@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import CodeMirror from "@uiw/react-codemirror";
+import * as prettier from "prettier/standalone";
+import parserBabel from "prettier/plugins/babel";
+import parserEstree from "prettier/plugins/estree";
 import { EditorState } from "@codemirror/state";
 import { EditorView } from "@codemirror/view";
 import * as ContextMenu from "@radix-ui/react-context-menu";
@@ -262,8 +265,7 @@ export function convertSectionsToRawLyrics(
 }
 
 export type ValidationResult =
-  | { success: true; data: SongData }
-  | { success: false; error: string };
+  { success: true; data: SongData } | { success: false; error: string };
 
 export function validateSongData(raw: unknown): ValidationResult {
   if (typeof raw !== "object" || raw === null || Array.isArray(raw)) {
@@ -653,7 +655,7 @@ export const SongBuilder: React.FC = () => {
     }));
   }, [tagsInput]);
 
-  const handleDownloadJson = () => {
+  const handleDownloadJson = async () => {
     const songData: SongData = {
       meta,
       sections,
@@ -683,7 +685,18 @@ export const SongBuilder: React.FC = () => {
       setIdError(null);
     }
     const jsonStr = JSON.stringify(songData, null, 2);
-    const blob = new Blob([jsonStr], { type: "application/json" });
+    let formattedJsonStr = jsonStr;
+
+    try {
+      formattedJsonStr = await prettier.format(jsonStr, {
+        parser: "json",
+        plugins: [parserBabel, parserEstree],
+      });
+    } catch (err) {
+      console.warn("Prettier 格式化 JSON 失敗，將使用原始 JSON 字串", err);
+    }
+
+    const blob = new Blob([formattedJsonStr], { type: "application/json" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
