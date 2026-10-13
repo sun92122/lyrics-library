@@ -1,0 +1,244 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "讓家偉大",
+      "b": "Make Our Home Great"
+    },
+    "tags": ["約書亞樂團", "大衛帳幕的榮耀 11 溫柔聖靈"],
+    "arrangement": [12, 0, 1, 2, 13, 3, 4, 5, 6, 7, 8, 10, 11],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=vsrasKydqdI"
+      }
+    ],
+    "author": "約書亞樂團\n詞／曲：趙治德"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "走過生命風浪 駐足在祢的家",
+          "b": "Through every storm of life, we've learned to stand as one"
+        },
+        {
+          "a": "學會彼此轉向 學會放下",
+          "b": "Learned to live with love and grace, learned to embrace"
+        },
+        {
+          "a": "一同仰望祢的十架",
+          "b": "Under the power of the cross"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "是祢灌溉 是祢建造",
+          "b": "You called us to You and set us apart"
+        },
+        {
+          "a": "家中一磚一瓦",
+          "b": "You turned our lives around"
+        },
+        {
+          "a": "這是我歸屬的地方",
+          "b": "You built a home where we belong"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "我雖微小 祢卻偉大",
+          "b": "Not in our own strength, but by Your power"
+        },
+        {
+          "a": "有祢在家就沒有人 還需要懼怕",
+          "b": "In Your presence, there is no fear, we know that You are here"
+        },
+        {
+          "a": "是祢的愛 讓家偉大",
+          "b": "In Your love Lord, build this family"
+        },
+        {
+          "a": "祢榮耀發出光芒 唯有祢 是盼望",
+          "b": "Our hope will stand forever, as You shine, on our home"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "天父的心湧出 一條生命河流",
+          "b": "There's a river full of life, flowing from Your heart"
+        },
+        {
+          "a": "醫治破碎心靈 使我甦醒",
+          "b": "And every broken heart, You heal and restore"
+        },
+        {
+          "a": "興起我們照亮這地",
+          "b": "Lord shine Your light upon this land"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "是祢牧養 是祢打造 教會一磚一瓦",
+          "b": "A shepherd to us, building our homes, we are all living stones"
+        },
+        {
+          "a": "有祢同在就像天堂",
+          "b": "Lord build Your kingdom here on earth"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "我雖微小 祢卻偉大",
+          "b": "Not in our own strength, but by Your power"
+        },
+        {
+          "a": "無論旅程再困難 因祢我仍剛強",
+          "b": "You guide us through our darkest nights, we trust in Your great love"
+        },
+        {
+          "a": "是祢的愛 讓家偉大",
+          "b": "With Your love Lord, build this family"
+        },
+        {
+          "a": "世代同心建造",
+          "b": "Unite our generations"
+        },
+        {
+          "a": "我和你 神的家",
+          "b": "With one heart, for Your house"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "祢的話翻轉生命",
+          "b": "Your Word brings transformation"
+        },
+        {
+          "a": "聖靈使我們合一",
+          "b": "Spirit bring us together"
+        },
+        {
+          "a": "我屈膝 以謙卑回應",
+          "b": "Here we bow, humble ourselves and pray"
+        },
+        {
+          "a": "祢興起這個家庭",
+          "b": "As You raise up this family"
+        },
+        {
+          "a": "直到列國都轉向祢 轉向祢",
+          "b": "We'll see the nations turn to You - turn to You"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "我雖微小 祢卻偉大",
+          "b": "Not in our own strength, but by Your power"
+        },
+        {
+          "a": "有祢在家就沒有人 還需要懼怕",
+          "b": "In Your presence, there is no fear, we know that You are here"
+        },
+        {
+          "a": "是祢的愛 讓家偉大",
+          "b": "In Your love Lord, build this family"
+        },
+        {
+          "a": "祢榮耀發出光芒 唯有祢",
+          "b": "Our hope will stand forever, as You shine"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "我雖微小 祢卻偉大",
+          "b": "Not in our own strength, but by Your power"
+        },
+        {
+          "a": "無論旅程再困難 因祢我仍剛強",
+          "b": "You guide us through our darkest nights, we trust in Your great love"
+        },
+        {
+          "a": "是祢的愛 讓家偉大",
+          "b": "With Your love Lord, build this family"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "世代同心建造",
+          "b": "Unite our generations"
+        },
+        {
+          "a": "我們同心建造",
+          "b": "As we stand together"
+        },
+        {
+          "a": "世代同心建造",
+          "b": "Unite our generations"
+        },
+        {
+          "a": "我和你 神的家",
+          "b": "With one heart, for Your house"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "世代同心建造",
+          "b": "Unite our generations"
+        },
+        {
+          "a": "我們同心建造",
+          "b": "As we stand together"
+        },
+        {
+          "a": "世代同心建造 我和你",
+          "b": "Unite our generations, with one heart"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "神的家",
+          "b": "For Your house"
+        }
+      ]
+    }
+  ]
+}

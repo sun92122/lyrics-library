@@ -1,0 +1,94 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "一同齊聲宣揚",
+      "b": "Let's Proclaim (Merry Christmas Today)"
+    },
+    "tags": ["讚美之泉", "聖誕EP特輯"],
+    "arrangement": [],
+    "assets": [],
+    "author": "讚美之泉\n詞：游智婷／曲：陳麒安",
+    "ccli": "7166711",
+    "originalKey": "A"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "耶穌降生 普天同慶",
+          "b": "Heavens rejoice, Jesus was born"
+        },
+        {
+          "a": "兩千年前 為你為我",
+          "b": "long, long ago, for you and me"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "小小君王 在馬槽裡",
+          "b": "Baby, Jesus, in a manger"
+        },
+        {
+          "a": "天使天軍 報好消息",
+          "b": "Angels and saints tell of this day"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "讓我們一同齊聲宣揚",
+          "b": "So let us come and proclaim His name"
+        },
+        {
+          "a": "傳報大好的消息",
+          "b": "Spread Good News to all the earth"
+        },
+        {
+          "a": "耶穌降生在世上 使你我有盼望",
+          "b": "Jesus, born into this world, He came down to give us hope"
+        },
+        {
+          "a": "黑暗中充滿亮光",
+          "b": "In the dark, He is the light"
+        },
+        {
+          "a": "讓我們一同齊聲讚美",
+          "b": "So let us come and proclaim His name"
+        },
+        {
+          "a": "名叫平安的君王",
+          "b": "For He is the prince of peace"
+        },
+        {
+          "a": "耶穌降生在世上 一切再也不一樣",
+          "b": "Jesus, born into this world, we will never be the same"
+        },
+        {
+          "a": "So we say, \"Merry Christmas\" today"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "耶穌降生在世上 一切再也不一樣",
+          "b": "Jesus, born into this world, we will never be the same"
+        },
+        {
+          "a": "So we say, \"Merry Christmas\" today"
+        }
+      ]
+    }
+  ]
+}

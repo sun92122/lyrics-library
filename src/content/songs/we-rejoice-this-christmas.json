@@ -1,0 +1,95 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "我們歡慶聖誕",
+      "b": "We Rejoice This Christmas"
+    },
+    "tags": ["讚美之泉", "聖誕EP特輯"],
+    "arrangement": [],
+    "assets": [],
+    "originalKey": "G",
+    "author": "讚美之泉"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "有一個嬰孩為我們降生",
+          "b": "A baby boy has come, born for you and me"
+        },
+        {
+          "a": "寶貴神愛子降世為人",
+          "b": "God's beloved son came to this world"
+        },
+        {
+          "a": "祢的名字為和平的君王",
+          "b": "Your name shall always be Jesus, prince of peace"
+        },
+        {
+          "a": "以馬內利 如此靠近我們",
+          "b": "Emmanuel, You are so near to us"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "祢的名稱為奇妙策士 全能神",
+          "b": "Glorify, Your wonderful name. Mighty counselor"
+        },
+        {
+          "a": "以愛環繞我們",
+          "b": "Your love surrounds us all"
+        },
+        {
+          "a": "將平安賜給祢所愛的人",
+          "b": "and give eternal peace to those You love"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "我們歡慶聖誕",
+          "b": "We rejoice this Christmas"
+        },
+        {
+          "a": "神兒子為你我而來",
+          "b": "God's only Son came down for us"
+        },
+        {
+          "a": "以馬內利 神與我們同在",
+          "b": "Emmanuel, our God is with us"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我們敬拜耶穌",
+          "b": "We will worship Jesus"
+        },
+        {
+          "a": "祢是恩典 祢是救贖",
+          "b": "for You've redeemed us with Your love"
+        },
+        {
+          "a": "將盼望和平安賜下",
+          "b": "You poured out Your peace and Your hope"
+        },
+        {
+          "a": "愛我們不計較任何代價",
+          "b": "You gave everything for Your love for us"
+        }
+      ]
+    }
+  ]
+}
