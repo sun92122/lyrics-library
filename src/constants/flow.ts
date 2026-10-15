@@ -21,6 +21,8 @@ export interface FlowMapping {
   $E: string;
   $O: string;
   $Inter: string;
+  $Vamp: string;
+  $Turnaround: string;
   $Blank: string;
   $Title: string;
   $Prayer: string;
@@ -53,6 +55,8 @@ export const FLOW_STYLE: FlowMapping = {
   $E: "#998F1F",
   $O: "#7E7619",
   $Inter: "#24B34C",
+  $Vamp: "#24B34C",
+  $Turnaround: "#24B34C",
   $Blank: "#888888",
   $Title: "#888888",
   $Prayer: "#4338CA",
@@ -80,11 +84,14 @@ export const FLOW_ALIASES: Record<string, string> = {
   B3: "$B3",
   PC: "$PC",
   T: "$T",
+  Tag: "$T",
   I: "$I",
   E: "$E",
   O: "$O",
   Inter: "$Inter",
   Blank: "$Blank",
+  Vamp: "$Vamp",
+  Turnaround: "$Turnaround",
   Title: "$Title",
   // propresenter english
   verse: "$V",
@@ -184,11 +191,13 @@ export const FLOW_NAMES: Record<string, FlowMapping> = {
     $B2: "B2",
     $B3: "B3",
     $PC: "PC",
-    $T: "T",
-    $I: "I",
-    $E: "E",
-    $O: "O",
-    $Inter: "Inter",
+    $T: "Tag",
+    $I: "Intro",
+    $E: "Ending",
+    $O: "Outro",
+    $Inter: "Interlude",
+    $Vamp: "Vamp",
+    $Turnaround: "Turnaround",
     $Blank: "Blank",
     $Title: "Title",
     $Prayer: "禱告",
@@ -218,6 +227,8 @@ export const FLOW_NAMES: Record<string, FlowMapping> = {
     $E: "Ending",
     $O: "Outro",
     $Inter: "Interlude",
+    $Vamp: "Vamp",
+    $Turnaround: "Turnaround",
     $Blank: "Blank",
     $Title: "Title",
     $Prayer: "Prayer",
@@ -247,6 +258,8 @@ export const FLOW_NAMES: Record<string, FlowMapping> = {
     $E: "結尾",
     $O: "尾奏",
     $Inter: "間奏",
+    $Vamp: "即興伴奏",
+    $Turnaround: "轉折",
     $Blank: "空白",
     $Title: "標題",
     $Prayer: "禱告",
@@ -276,6 +289,8 @@ export const FLOW_NAMES: Record<string, FlowMapping> = {
     $E: "结尾",
     $O: "尾奏",
     $Inter: "间奏",
+    $Vamp: "即兴伴奏",
+    $Turnaround: "变调",
     $Blank: "空白",
     $Title: "标题",
     $Prayer: "禱告",

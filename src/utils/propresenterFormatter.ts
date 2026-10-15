@@ -439,29 +439,29 @@ export function getProFormat(
     });
     selectedArrangement = arrangementUuid;
   }
-  if (options_includeCurrentArrangement && flow) {
+  if (options_includeCurrentArrangement && flow && flow.length > 0) {
     const arrangementUuid = generateUUID();
     const arrangementGroupUuids: string[] = [];
-    if (flow && flow.length > 0) {
-      if (options_addBlankSlideBeforeTitle) {
-        arrangementGroupUuids.push(groupKV.get("blank"));
-      }
-      if (options_includeTitleSlide) {
-        arrangementGroupUuids.push(groupKV.get("title"));
-      }
-      if (options_addBlankSlideAfterTitle) {
-        arrangementGroupUuids.push(groupKV.get("blank_after_title"));
-      }
-      for (const flowIndex of flow) {
-        const groupUuid = groupKV.get(flowIndex);
-        if (groupUuid) {
-          arrangementGroupUuids.push(groupUuid);
-        }
-      }
-      if (options_addBlankSlideAfterEnding) {
-        arrangementGroupUuids.push(groupKV.get("blank_after_ending"));
+
+    if (options_addBlankSlideBeforeTitle) {
+      arrangementGroupUuids.push(groupKV.get("blank"));
+    }
+    if (options_includeTitleSlide) {
+      arrangementGroupUuids.push(groupKV.get("title"));
+    }
+    if (options_addBlankSlideAfterTitle) {
+      arrangementGroupUuids.push(groupKV.get("blank_after_title"));
+    }
+    for (const flowIndex of flow) {
+      const groupUuid = groupKV.get(flowIndex);
+      if (groupUuid) {
+        arrangementGroupUuids.push(groupUuid);
       }
     }
+    if (options_addBlankSlideAfterEnding) {
+      arrangementGroupUuids.push(groupKV.get("blank_after_ending"));
+    }
+
     arrangements.push({
       uuid: arrangementUuid,
       name: `Current`,
