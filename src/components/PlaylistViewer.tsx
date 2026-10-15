@@ -2,8 +2,6 @@ import React, { useState, useEffect, useMemo } from "react";
 import type { SongWithId } from "@/content.config";
 import {
   FLOW_STYLE,
-  FLOW_ALIASES,
-  FLOW_NAMES,
   EX_FLOWS,
   getFlowName,
   type FlowMapping,
@@ -25,7 +23,12 @@ import {
   Edit3,
   MessageSquare,
   FileText,
+  Download,
 } from "lucide-react";
+import {
+  PlaylistProModal,
+  type PlaylistSongItem,
+} from "@/components/PlaylistProModal";
 
 export interface PlaylistViewerProps {
   availableSongs: SongWithId[];
@@ -44,6 +47,22 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
   const songMap = useMemo(() => {
     return new Map(availableSongs.map((s) => [s.id, s]));
   }, [availableSongs]);
+
+  const [isProModalOpen, setIsProModalOpen] = useState(false);
+
+  // List of valid song items in the playlist
+  const playlistSongs = useMemo<PlaylistSongItem[]>(() => {
+    if (!payload || !payload.s) return [];
+    const list: PlaylistSongItem[] = [];
+    payload.s.forEach((item, index) => {
+      if (item.t) return;
+      const song = songMap.get(item.id);
+      if (song) {
+        list.push({ item, song, index });
+      }
+    });
+    return list;
+  }, [payload, songMap]);
 
   // Decode hash on mount and hashchange
   useEffect(() => {
@@ -265,6 +284,18 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                 </>
               )}
             </button>
+
+            {playlistSongs.length > 0 && (
+              <button
+                type="button"
+                onClick={() => setIsProModalOpen(true)}
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 transition-all border border-slate-200 shadow-sm active:scale-95"
+                title="下載此歌單所有詩歌的 ProPresenter 檔案"
+              >
+                <Download className="w-3.5 h-3.5 text-indigo-600" />
+                <span>下載 ProPresenter</span>
+              </button>
+            )}
           </div>
         </div>
 
@@ -448,6 +479,14 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
           );
         })}
       </div>
+
+      <PlaylistProModal
+        isOpen={isProModalOpen}
+        onClose={() => setIsProModalOpen(false)}
+        playlistTitle={payload.t || "敬拜歌單"}
+        playlistDate={payload.d}
+        songs={playlistSongs}
+      />
     </div>
   );
 };
