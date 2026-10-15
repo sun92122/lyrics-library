@@ -1,0 +1,116 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "世界真光",
+      "b": "Here I Am to Worship"
+    },
+    "tags": ["Hillsong", "撒拉弗敬拜團"],
+    "arrangement": [5, 0, 6, 1, 2, 1, 1, 3, 3, 3, 3, 1, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=7Q8dG9s-hAU"
+      },
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=6CKCThJB5w0"
+      }
+    ],
+    "author": "詞／曲：Tim Hughes\n撒拉弗敬拜團"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "世界真光 祢照亮黑暗世代",
+          "b": "Light of the world, You stepped down into darkness"
+        },
+        {
+          "a": "開我雙眼能看見",
+          "b": "Opened my eyes, let me see"
+        },
+        {
+          "a": "主祢榮美吸引我敬拜祢",
+          "b": "Beauty that made this heart adore You"
+        },
+        {
+          "a": "我願一生跟隨祢",
+          "b": "Hope of a life spent with You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "主我要來敬拜祢 屈膝向祢俯伏",
+          "b": "Here I am to worship, here I am to bow down"
+        },
+        {
+          "a": "我要揚聲說祢是我神",
+          "b": "Here I am to say that You're my God"
+        },
+        {
+          "a": "祢是全然美麗 祢是完全配得",
+          "b": "You're altogether lovely, altogether worthy"
+        },
+        {
+          "a": "祢是何等奇妙 我的主",
+          "b": "Altogether wonderful to me"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "永恆君王 我們高舉祢聖名",
+          "b": "King of all days, so highly exalted"
+        },
+        {
+          "a": "滿有尊榮在天上",
+          "b": "Glorious in heaven above"
+        },
+        {
+          "a": "謙卑來到祢所造的世界",
+          "b": "Humbly You came to the earth You created"
+        },
+        {
+          "a": "因愛與我們同行",
+          "b": "All for love's sake became poor"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我永不能知何代價",
+          "b": "I'll never know how much it cost"
+        },
+        {
+          "a": "祢為我罪釘在十架",
+          "b": "To see my sin upon that cross"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "Call upon the name of the Lord"
+        },
+        {
+          "a": "And be saved"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,140 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "跟隨祢心意",
+      "b": "Follow Your Heart"
+    },
+    "author": "The Hope\n詞／曲：劉蜚聲 Faye Liu\n英譯詞：基督城靈糧堂",
+    "originalKey": "F",
+    "bpm": 62,
+    "ccli": "",
+    "tags": ["The Hope"],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=SZnUKaSRqfA"
+      }
+    ],
+    "arrangement": [4, 0, 1, 5, 2, 1, 5, 3, 8],
+    "note": ""
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "我放下自己 來到祢座前",
+          "b": "I lay myself down, come before Your throne"
+        },
+        {
+          "a": "聖靈降下平靜我的心 在祢愛裡",
+          "b": "Holy Spirit, come and calm my heart, In Your love"
+        },
+        {
+          "a": "天父祢為我重新得生命",
+          "b": "Father, You breathe new life into me"
+        },
+        {
+          "a": "與自己分離 與我更靠近",
+          "b": "Leaving the old me behind"
+        },
+        {
+          "a": "相遇基督裡",
+          "b": "Drawing closer to You"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "我把自己全人交給祢",
+          "b": "I surrender all of me to You"
+        },
+        {
+          "a": "全心交給祢",
+          "b": "My whole heart to You"
+        },
+        {
+          "a": "獻上這心靈 誠實敬拜 在祢同在裡",
+          "b": "Offer up my spirit, worship in truth here in Your presence"
+        },
+        {
+          "a": "負擔和重擔都交給祢",
+          "b": "All my burdens I give to You"
+        },
+        {
+          "a": "在祢腳前哭泣",
+          "b": "Weeping at Your feet"
+        },
+        {
+          "a": "跟隨祢心意 我願意",
+          "b": "I'll follow Your heart - Yes, I will"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "天父祢同在 使我靈安息",
+          "b": "Father, Your presence brings rest to my soul"
+        },
+        {
+          "a": "心思和意念都屬於祢 傾聽祢聲音",
+          "b": "My mind and my thoughts belong to You, hear Your voice"
+        },
+        {
+          "a": "耶穌來親自帶領我生命",
+          "b": "Jesus, come and lead my life Yourself"
+        },
+        {
+          "a": "每個決定 每一個腳印",
+          "b": "Every choice I make, every step I take"
+        },
+        {
+          "a": "都在基督裡",
+          "b": "All in Christ alone"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "我把自己全人交給祢",
+          "b": "I surrender all of me to You"
+        },
+        {
+          "a": "全心交給祢",
+          "b": "My whole heart to You"
+        },
+        {
+          "a": "獻上這心靈 誠實敬拜 在祢同在裡",
+          "b": "Offer up my spirit, worship in truth here in Your presence"
+        },
+        {
+          "a": "負擔和重擔都交給祢",
+          "b": "All my burdens I give to You"
+        },
+        {
+          "a": "在祢腳前哭泣",
+          "b": "Weeping at Your feet"
+        },
+        {
+          "a": "祢的話語是 我生命",
+          "b": "Ev'ry word You speak is my life"
+        },
+        {
+          "a": "跟隨祢心意 我願意",
+          "b": "I'll follow Your heart - Yes, I will"
+        }
+      ]
+    }
+  ]
+}

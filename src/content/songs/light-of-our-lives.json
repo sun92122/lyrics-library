@@ -8,8 +8,11 @@
       "a": "生命真光",
       "b": "Light of Our Lives"
     },
+    "author": "詞／曲：長沢崇史\n中譯詞：孫瑞恩／周巽光",
+    "originalKey": "",
+    "bpm": 153,
+    "ccli": "",
     "tags": ["約書亞樂團", "點燃"],
-    "arrangement": [3, 0, 1, 4, 0, 1, 2, 4, 0, 1, 2, 5, 1, 1, 2, 7],
     "assets": [
       {
         "type": "youtube",
@@ -17,30 +20,36 @@
         "url": "https://www.youtube.com/watch?v=bgJnOIC7i2U"
       }
     ],
-    "author": "作詞/作曲：長沢崇史\n中譯詞：孫瑞恩/周巽光",
-    "bpm": 153
+    "arrangement": [3, 0, 1, 4, 0, 1, 2, 4, 0, 1, 2, 5, 1, 1, 2, 7],
+    "note": ""
   },
   "sections": [
     {
       "name": "$V",
       "lines": [
         {
-          "a": "祢的愛是永無止盡"
+          "a": "祢的愛是永無止盡",
+          "b": "Your love is never-ending"
         },
         {
-          "a": "主祢四面環繞我"
+          "a": "主祢四面環繞我",
+          "b": "Lord, You surround me"
         },
         {
-          "a": "祢的愛使我甦醒"
+          "a": "祢的愛使我甦醒",
+          "b": "Your love awakens me"
         },
         {
-          "a": "心中喜樂不住滿溢"
+          "a": "心中喜樂不住滿溢",
+          "b": "Joy overflows from my heart"
         },
         {
-          "a": "萬物都向祢呼喊"
+          "a": "萬物都向祢呼喊",
+          "b": "Creation cries out to You"
         },
         {
-          "a": "讓讚美充滿這地"
+          "a": "讓讚美充滿這地",
+          "b": "Let praises fill the land"
         }
       ]
     },
@@ -48,13 +57,16 @@
       "name": "$PC",
       "lines": [
         {
-          "a": "黑暗終究會過去"
+          "a": "黑暗終究會過去",
+          "b": "Darkness will finally pass"
         },
         {
-          "a": "為愛祢犧牲自己"
+          "a": "為愛祢犧牲自己",
+          "b": "Because of love, You sacrificed Yourself"
         },
         {
-          "a": "在祢真光中我得著生命"
+          "a": "在祢真光中我得著生命",
+          "b": "In Your true light I have new life"
         }
       ]
     },
@@ -62,19 +74,24 @@
       "name": "$C",
       "lines": [
         {
-          "a": "我伸出 大能雙手"
+          "a": "我伸出 大能雙手",
+          "b": "I reach out with powerful hands"
         },
         {
-          "a": "釋放祢屬天榮耀"
+          "a": "釋放祢屬天榮耀",
+          "b": "Releasing Your glory from heaven"
         },
         {
-          "a": "主是何等的奇妙"
+          "a": "主是何等的奇妙",
+          "b": "Lord, You are so amazing"
         },
         {
-          "a": "與祢同行何等美好"
+          "a": "與祢同行何等美好",
+          "b": "Walking with You is so wonderful"
         },
         {
-          "a": "讓生命真光照耀"
+          "a": "讓生命真光照耀",
+          "b": "Let the light of our lives shine"
         }
       ]
     }

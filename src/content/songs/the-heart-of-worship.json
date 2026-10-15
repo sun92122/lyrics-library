@@ -1,0 +1,87 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "敬拜的心",
+      "b": "The Heart Of Worship"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [3, 0, 1, 4, 0, 1, 2, 2, 2, 5, 1, 2, 2],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=3k1JbhnNdFs"
+      }
+    ],
+    "author": "約書亞樂團\n詞／曲：趙治德"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我獻上一顆敬拜的心",
+          "b": "I offer up a heart of worship"
+        },
+        {
+          "a": "指的就是我全所有",
+          "b": "I offer up my all"
+        },
+        {
+          "a": "每個呼吸每個決定都為了祢",
+          "b": "Every breath, every decision is for You"
+        },
+        {
+          "a": "直到祢再來那一天",
+          "b": "Till the day You come again"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "無論要付什麼代價",
+          "b": "No matter the price I have to pay"
+        },
+        {
+          "a": "祢說敬拜不可虛假",
+          "b": "You say that worship cannot be false"
+        },
+        {
+          "a": "只要祭物是來自我心靈 主祢就悅納",
+          "b": "If the sacrifice is from my spirit, You will accept it"
+        },
+        {
+          "a": "無論要付什麼代價",
+          "b": "No matter the price I have to pay"
+        },
+        {
+          "a": "當我再次說我愛祢",
+          "b": "When I say \"I love You\" once again"
+        },
+        {
+          "a": "我會真誠發自我內心",
+          "b": "I will say it from the depths of my heart"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "心與心 心與心 深淵與深淵響應",
+          "b": "Heart-to-heart, deep cries out to deep"
+        },
+        {
+          "a": "被火煉 被潔淨 按祢所是的敬拜祢",
+          "b": "Refined, cleansed, I worship You for who You are"
+        }
+      ]
+    }
+  ]
+}
