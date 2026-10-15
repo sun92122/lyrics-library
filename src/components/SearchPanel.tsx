@@ -10,6 +10,7 @@ export interface SearchPanelProps {
 export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
+  const [bilingualMode, setBilingualMode] = useState(0); // 0: All, 1: A and B, -1: A only
   const [docs, setDocs] = useState<SearchDoc[]>(initialDocs);
 
   // Extract all unique tags with song counts
@@ -104,12 +105,19 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
       resultList = resultList.filter((doc) => doc.tags.includes(selectedTag));
     }
 
+    if (bilingualMode === 1) {
+      resultList = resultList.filter((doc) => doc.lyricsA && doc.lyricsB);
+    } else if (bilingualMode === -1) {
+      resultList = resultList.filter((doc) => !doc.lyricsB);
+    }
+
     return resultList;
-  }, [query, selectedTag, docs, miniSearch]);
+  }, [query, selectedTag, docs, miniSearch, bilingualMode]);
 
   const clearFilters = () => {
     setQuery("");
     setSelectedTag(null);
+    setBilingualMode(0);
   };
 
   return (
@@ -157,6 +165,24 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
             全部 ({docs.length})
           </button>
 
+          <button
+            type="button"
+            onClick={() => {
+              setBilingualMode((prev) =>
+                prev === 0 ? 1 : prev === 1 ? -1 : 0,
+              );
+            }}
+            className={`px-3 py-1 rounded-xl text-xs font-medium transition-all ${
+              bilingualMode === 1
+                ? "bg-indigo-600 text-white shadow-sm font-semibold"
+                : bilingualMode === -1
+                  ? "bg-red-600 text-white shadow-sm font-semibold"
+                  : "bg-white text-slate-600 border border-slate-200 hover:bg-slate-50"
+            }`}
+          >
+            雙語歌詞
+          </button>
+
           {allTags.map(([tag, count]) => {
             const isSelected = selectedTag === tag;
             return (
@@ -184,7 +210,7 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
             );
           })}
 
-          {(query || selectedTag) && (
+          {(query || selectedTag || bilingualMode !== 0) && (
             <button
               type="button"
               onClick={clearFilters}
@@ -201,7 +227,7 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
         <div className="flex items-center gap-2">
           <Music className="w-5 h-5 text-indigo-600" />
           <h2 className="text-xl font-bold text-slate-900">
-            {query || selectedTag
+            {query || selectedTag || bilingualMode !== 0
               ? `搜尋結果 (${filteredResults.length})`
               : `詩歌庫總覽 (${filteredResults.length})`}
           </h2>
