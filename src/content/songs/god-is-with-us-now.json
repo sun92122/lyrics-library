@@ -8,32 +8,44 @@
       "a": "神正在這裡",
       "b": "God Is With Us Now"
     },
+    "author": "約書亞樂團\n詞曲：WALKER BEACH／中譯詞：周巽光",
+    "originalKey": "",
+    "ccli": "",
     "tags": ["約書亞樂團", "Gateway"],
-    "arrangement": [5, 0, 2, 6, 1, 2, 6, 3, 4, 2, 9],
     "assets": [
       {
         "type": "youtube",
         "name": "YouTube",
         "url": "https://www.youtube.com/watch?v=UYSkMY_Giko"
+      },
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=HFW8iLdn4e8"
       }
     ],
-    "author": "約書亞樂團"
+    "arrangement": [5, 0, 2, 6, 1, 2, 6, 3, 4, 2, 9],
+    "note": ""
   },
   "sections": [
     {
       "name": "$V1",
       "lines": [
         {
-          "a": "若有人渴慕真理 需要盼望和能力"
+          "a": "若有人渴慕真理 需要盼望和能力",
+          "b": "Everyone who longs for truth, needing hope and strength renewed"
         },
         {
-          "a": "來求告我救主的聖名"
+          "a": "來求告我救主的聖名",
+          "b": "Come and meet the Savior of the world"
         },
         {
-          "a": "若有人飢渴慕義 尋找真正的生命"
+          "a": "若有人飢渴慕義 尋找真正的生命",
+          "b": "Everyone who longs inside, desperate for the words of life"
         },
         {
-          "a": "來遇見你靈魂的救主"
+          "a": "來遇見你靈魂的救主",
+          "b": "Come and meet the Savior of your soul"
         }
       ]
     },
@@ -41,16 +53,20 @@
       "name": "$V2",
       "lines": [
         {
-          "a": "若有人在基督裡 死裡復活得生命"
+          "a": "若有人在基督裡 死裡復活得生命",
+          "b": "Everyone who lives in Christ, died to self and raised to life"
         },
         {
-          "a": "來讚美我救主的聖名"
+          "a": "來讚美我救主的聖名",
+          "b": "Come and praise the Savior of the world"
         },
         {
-          "a": "若有人忍耐到底 憑信勝過一切恐懼"
+          "a": "若有人忍耐到底 憑信勝過一切恐懼",
+          "b": "Everyone who perseveres, faith will overcome all fears"
         },
         {
-          "a": "來讚美我靈魂的救主"
+          "a": "來讚美我靈魂的救主",
+          "b": "Come and praise the Savior of your soul"
         }
       ]
     },
@@ -58,13 +74,16 @@
       "name": "$C",
       "lines": [
         {
-          "a": "神與我同行 祂愛降臨 掌管全地"
+          "a": "神與我同行 祂愛降臨 掌管全地",
+          "b": "God is with us now, His love rains down His love reigns now"
         },
         {
-          "a": "恩典和能力 祂愛降臨 掌管全地"
+          "a": "恩典和能力 祂愛降臨 掌管全地",
+          "b": "Saved by grace and power, His love reigns down His love reigns now"
         },
         {
-          "a": "神正在這裡"
+          "a": "神正在這裡",
+          "b": "God is with us now"
         }
       ]
     },
@@ -72,16 +91,20 @@
       "name": "$B",
       "lines": [
         {
-          "a": "再沒有事能拆散我們 神與我同行"
+          "a": "再沒有事能拆散我們 神與我同行",
+          "b": "Nothing can ever separate us, God is with us now"
         },
         {
-          "a": "再沒有事能奪走應許 神與我同行"
+          "a": "再沒有事能奪走應許 神與我同行",
+          "b": "Nothing can take His promise from us, God is with us now"
         },
         {
-          "a": "再沒有事能取代耶穌 神與我同行"
+          "a": "再沒有事能取代耶穌 神與我同行",
+          "b": "Nothing can take the place of Jesus, God is with us now"
         },
         {
-          "a": "不懼怕 不羞愧 得自由 與祂同行"
+          "a": "不懼怕 不羞愧 得自由 與祂同行",
+          "b": "No more shame, no more fear, we are free 'cause God is here"
         }
       ]
     },
@@ -89,10 +112,12 @@
       "name": "$C1",
       "lines": [
         {
-          "a": "神與我同行 祂愛降臨 掌管全地"
+          "a": "神與我同行 祂愛降臨 掌管全地",
+          "b": "God is with us now, His love rains down His love reigns now"
         },
         {
-          "a": "恩典和能力 祂愛降臨 掌管全地"
+          "a": "恩典和能力 祂愛降臨 掌管全地",
+          "b": "Saved by grace and power, His love reigns down His love reigns now"
         }
       ]
     }
