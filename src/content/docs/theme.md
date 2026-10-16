@@ -21,15 +21,17 @@ title: "使用主題"
 
 #### 單行主題（推薦）
 
-> [下載](/OneLine.pro)
+> [下載 - 單行主題](/OneLine.pro)
 
 #### 雙行／多行
 
-> [下載](/MutiLine.pro)
+> [下載 - 多行](/MutiLine.pro)
+>
+> [下載 - 多行（靠上）](/MutiLine-up.pro)
 
 #### 單一語言
 
-> [下載](/SingleLang.pro)
+> [下載 - 單一語言](/SingleLang.pro)
 
 ## 導入主題
 
