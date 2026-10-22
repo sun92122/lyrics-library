@@ -1,0 +1,77 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "恩典之路",
+      "b": "The Path Of Grace"
+    },
+    "tags": ["讚美之泉", "不要放棄，滿有能力"],
+    "arrangement": [3, 0, 1, 4, 0, 1, 1, 2, 7],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=mFmxiSiR0TE"
+      }
+    ],
+    "author": "讚美之泉\n詞曲：曾祥怡",
+    "originalKey": "F",
+    "ccli": "5482364"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "祢是我的主 引我走正義路",
+          "b": "Lord, You are my guide, the shepherd of my life"
+        },
+        {
+          "a": "高山或低谷 都是祢在保護",
+          "b": "Through the hills and valleys, You're always by my side"
+        },
+        {
+          "a": "萬人中唯獨 祢愛我認識我",
+          "b": "Calling me by name, You've chosen me with love"
+        },
+        {
+          "a": "永遠不變的應許 這一生 都是祝福",
+          "b": "Blessing me abundantly, Your promise will never change"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "一步又一步 這是恩典之路",
+          "b": "Every step we take, You lead us with Your grace"
+        },
+        {
+          "a": "祢愛 祢手 將我緊緊抓住",
+          "b": "Your love, Your hand will hold us close to You"
+        },
+        {
+          "a": "一步又一步 這是盼望之路",
+          "b": "Every step we take, You lead us with Your grace"
+        },
+        {
+          "a": "祢愛 祢手 牽引我走這人生路",
+          "b": "Your love, Your hand will guide us through the path of grace"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "祢愛 祢手 牽引我走這人生路",
+          "b": "Your love, Your hand will guide us through the path of grace"
+        }
+      ]
+    }
+  ]
+}

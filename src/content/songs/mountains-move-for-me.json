@@ -1,0 +1,90 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "大山為我挪開",
+      "b": "Mountains Move For Me"
+    },
+    "tags": ["讚美之泉", "I Believe"],
+    "arrangement": [4, 0, 1, 5, 0, 1, 5, 2, 2, 1, 3, 3],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=stHDtpn91fQ"
+      }
+    ],
+    "ccli": "7127194",
+    "author": "讚美之泉\n曲：游智婷／詞：林慶忠",
+    "originalKey": "E"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "雖然道路崎嶇 困難險阻",
+          "b": "Sometimes, in life, we face trials and storms"
+        },
+        {
+          "a": "但我心中知道 祢一直都在",
+          "b": "One thing I know for sure, You're always with me"
+        },
+        {
+          "a": "不能明白為何擔此重擔",
+          "b": "When I can barely stand, burdened with doubt"
+        },
+        {
+          "a": "但我始終相信 祢一直牽著我",
+          "b": "I will choose to believe You're always here with me"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "大山為我挪開 大海有路出來",
+          "b": "Mountains move for me, oceans part for me"
+        },
+        {
+          "a": "我要大聲宣告 耶穌 祢一直都在",
+          "b": "I'll declare it aloud, Jesus, You're always with me"
+        },
+        {
+          "a": "祢手上的釘痕 彰顯十架大愛",
+          "b": "Nailed on the cross for me, gave Your life for me"
+        },
+        {
+          "a": "我要大聲宣告 耶穌 祢一直都在",
+          "b": "I will shout it aloud, Jesus, You're always with me"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "祢的話讓我明白 祢愛我永不更改",
+          "b": "By Your words I understand, Your love never, ever fails"
+        },
+        {
+          "a": "祢保守我的心懷 緊握祢雙手不放開",
+          "b": "Jesus, You will guard my heart, I'll hold on to You all my life"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "我要大聲宣告 耶穌 祢一直都在",
+          "b": "I will shout it aloud, Jesus, You're always with me"
+        }
+      ]
+    }
+  ]
+}

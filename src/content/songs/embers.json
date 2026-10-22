@@ -1,0 +1,124 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "餘燼",
+      "b": "Embers"
+    },
+    "tags": ["約書亞樂團", "Hillsong"],
+    "arrangement": [5, 0, 1, 2, 3, 1, 2, 2, 8, 4, 4, 1, 1, 9],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=NDQVBDxSKtc"
+      }
+    ],
+    "author": "約書亞樂團\n詞、曲：Hannah Hobbs, Ben Tan"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "暗夜的火光 微弱盼望",
+          "b": "A spark in the night, a flame of hope"
+        },
+        {
+          "a": "如同祢的靈 在我身上",
+          "b": "The Spirit of God within my soul"
+        },
+        {
+          "a": "在我心中湧流 滲透我所有",
+          "b": "Alive within my heart, the life in my bones"
+        },
+        {
+          "a": "祢讓我仰望 定睛於祢",
+          "b": "You're lifting my eyes towards You Lord"
+        },
+        {
+          "a": "教導我心 更多貼近",
+          "b": "Teaching my heart to draw in close"
+        },
+        {
+          "a": "祢烈火焚燒的靈 盼望永不止息",
+          "b": "To the all consuming God, our great unending hope"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "餘燼因祢名而甦醒 死灰復燃的生命",
+          "b": "As ember fans into flame, I'm revived within Your Name"
+        },
+        {
+          "a": "祢聖靈正在運行 在我的裡面運行",
+          "b": "Your Spirit lives within me, Your Spirit lives within me"
+        },
+        {
+          "a": "祢烈火焚燒我心 讓天堂大光降臨",
+          "b": "This fire burns in my soul, let the light of heaven glow"
+        },
+        {
+          "a": "讓全地都看見祢 全地都看見祢",
+          "b": "For all the earth to see You, all the earth to see You"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "Whao"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "聖靈祢每天都帶領 發出真光引導我心",
+          "b": "Spirit You're leading me each day, casting a light to lead the way"
+        },
+        {
+          "a": "呼召我跟隨祢 來與祢同行",
+          "b": "My guide to stay the path, You call me onwards"
+        },
+        {
+          "a": "聖潔的火永遠掌權 祢榮耀充滿全世界",
+          "b": "Here in all holiness on earth, blazing forever glorious"
+        },
+        {
+          "a": "祢烈火焚燒的靈 盼望永不止息",
+          "b": "You're the all consuming God, our great unending hope"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "祢聖靈火焰 煉淨我一切",
+          "b": "For all of this life, Your Spirit ignites"
+        },
+        {
+          "a": "在地如在天 祢榮光彰顯",
+          "b": "A heavenly fire, untouched by the night"
+        },
+        {
+          "a": "打開我雙眼 復活到永遠",
+          "b": "You open our eyes, turn death into life"
+        },
+        {
+          "a": "祢真理掌權 祢超越一切",
+          "b": "Revealing all truth, there's no one like You"
+        }
+      ]
+    }
+  ]
+}

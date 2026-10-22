@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "君王就在這裡",
+      "b": "Worthy Is The King"
+    },
+    "tags": ["讚美之泉", "從早晨到夜晚"],
+    "arrangement": [
+      5, 0, 0, 1, 6, 0, 1, 1, 6, 2, 2, 1, 1, 3, 3, 2, 1, 4, 4, 0, 9
+    ],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=jDLENHsZCC0"
+      }
+    ],
+    "originalKey": "Bb",
+    "author": "讚美之泉\n詞曲：曾祥怡",
+    "ccli": "7125334"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "聖潔耶穌 祢寶座在這裡",
+          "b": "Jesus, my King, You're seated on the throne"
+        },
+        {
+          "a": "哈利路亞 祢榮耀在這裡",
+          "b": "Hallelujah, Your glory fills this place"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "君王就在這裡 我們歡然獻祭",
+          "b": "Sing, worthy is the King, we offer all our praise"
+        },
+        {
+          "a": "擁戴祢為王 榮耀都歸於祢",
+          "b": "Crown You Lord of lords, give glory to Your name"
+        },
+        {
+          "a": "君王就在這裡 大能彰顯這地",
+          "b": "Sing, worthy is the King, You're robed in majesty"
+        },
+        {
+          "a": "和散那歸於至高神主耶穌",
+          "b": "Hosanna unto the glorious King of kings"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "更多更多來高舉祢的名",
+          "b": "Higher and high'r, we lift Your holy name"
+        },
+        {
+          "a": "更多更多來呼喊祢的名",
+          "b": "Higher and high'r, we lift a shout of praise"
+        },
+        {
+          "a": "更多更多來承認祢是主",
+          "b": "Louder and louder, declare that You are Lord"
+        },
+        {
+          "a": "直到那日 我再見祢的面",
+          "b": "Until that day, I see You face to face"
+        }
+      ]
+    },
+    {
+      "name": "$B1",
+      "lines": [
+        {
+          "a": "更多更多來高舉祢的名",
+          "b": "Higher and high'r, we lift Your holy name"
+        },
+        {
+          "a": "更多更多來呼喊祢的名",
+          "b": "Higher and high'r, we lift a shout of praise"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "和散那歸於至高神主耶穌",
+          "b": "Hosanna unto the glorious King of kings"
+        }
+      ]
+    }
+  ]
+}

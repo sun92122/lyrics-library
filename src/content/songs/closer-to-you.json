@@ -1,0 +1,141 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "與祢更靠近",
+      "b": "Closer To You"
+    },
+    "tags": ["約書亞樂團", "大衛帳幕的榮耀 8 為著你的榮耀"],
+    "arrangement": [4, 0, 1, 5, 0, 3, 1, 2, 2, 5, 3, 1, 8],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=iz32XOGh27g"
+      }
+    ],
+    "author": "約書亞樂團\n詞／曲：趙治達",
+    "originalKey": "E"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "主祢是我的避難所",
+          "b": "Lord You are my refuge"
+        },
+        {
+          "a": "祢愛將我緊緊的擁抱",
+          "b": "Your love took a hold of me"
+        },
+        {
+          "a": "使我甦醒祢愛裡",
+          "b": "I am awaken in Your love"
+        },
+        {
+          "a": "我願成為祢的居所",
+          "b": "I long to be, Your dwelling place"
+        },
+        {
+          "a": "我要愛祢",
+          "b": "I commit to love You"
+        },
+        {
+          "a": "要永遠堅定的愛祢",
+          "b": "With firm determination to love You"
+        },
+        {
+          "a": "親近祢",
+          "b": "To come close to You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "主我願讓祢來擁有我的心",
+          "b": "Lord I long for You to come to overtake my heart"
+        },
+        {
+          "a": "不再用力堅持倚靠我自己",
+          "b": "No longer determined to rely on myself"
+        },
+        {
+          "a": "願祢每句話語",
+          "b": "Let Your every word"
+        },
+        {
+          "a": "都成為我命定",
+          "b": "Become my purpose"
+        },
+        {
+          "a": "改變我生命一步一步與祢更靠近",
+          "b": "To transform for my life step by step closer to You"
+        },
+        {
+          "a": "走進祢心意",
+          "b": "Walking into Your heart desire"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "沒有人能像祢",
+          "b": "There is none like You"
+        },
+        {
+          "a": "用愛滿足我心",
+          "b": "Your love satisfy my heart"
+        },
+        {
+          "a": "祢是我的唯一",
+          "b": "You are my all in all"
+        },
+        {
+          "a": "沒有人能像祢",
+          "b": "There is none like You"
+        },
+        {
+          "a": "用愛滿足我心",
+          "b": "Your love satisfy my heart"
+        },
+        {
+          "a": "祢是我的唯一",
+          "b": "You are my all in all"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "主我願讓祢來擁有我的心",
+          "b": "Lord I long for You to come to overtake my heart"
+        },
+        {
+          "a": "不再用力堅持倚靠我自己",
+          "b": "No longer determined to rely on myself"
+        },
+        {
+          "a": "願祢每句話語",
+          "b": "Let Your every word"
+        },
+        {
+          "a": "都成為我命定",
+          "b": "Become my purpose"
+        },
+        {
+          "a": "改變我生命一步一步與祢更靠近",
+          "b": "To transform for my life step by step closer to You"
+        }
+      ]
+    }
+  ]
+}
