@@ -977,6 +977,16 @@ export const SongBuilder: React.FC = () => {
               onChange={(e) =>
                 setMeta((prev) => ({ ...prev, author: e.target.value }))
               }
+              onBlur={(e) => {
+                const trimmed = e.target.value
+                  .split("\n")
+                  .map((line) => line.trim())
+                  .filter((line) => line !== "")
+                  .join("\n");
+                if (trimmed !== e.target.value) {
+                  setMeta((prev) => ({ ...prev, author: trimmed }));
+                }
+              }}
               placeholder="作詞：John Newton"
               rows={3}
               className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
