@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "languages": {
+      "a": "English",
+      "b": "中文"
+    },
+    "title": {
+      "a": "Power In the Blood",
+      "b": "寶血大權能"
+    },
+    "tags": ["讚美詩", "天韻合唱團", "Make My Life a Miracle"],
+    "arrangement": [6, 0, 4, 1, 4, 2, 4, 3, 4, 10],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=0GpWEX_HkWQ&t=290"
+      }
+    ],
+    "author": "Lewis E. Jones (1899)"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "Would you be free from the burden of sin?",
+          "b": "你願從你的罪擔釋放麼？"
+        },
+        {
+          "a": "There's power in the blood, power in the blood",
+          "b": "在主寶血內大有權能"
+        },
+        {
+          "a": "Would you o'er evil a victory win?",
+          "b": "你願勝過一切惡性情麼？"
+        },
+        {
+          "a": "There's wonderful power in the blood",
+          "b": "耶穌寶血大有權能"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "Would you be free from your passion and pride?",
+          "b": "你願從驕傲私慾釋放麼？"
+        },
+        {
+          "a": "There's power in the blood, power in the blood",
+          "b": "在主寶血內大有權能"
+        },
+        {
+          "a": "Come for a cleansing to Calvary's tide",
+          "b": "各各他血泉內潔淨罪過"
+        },
+        {
+          "a": "There's wonderful power in the blood",
+          "b": "耶穌寶血大有權能"
+        }
+      ]
+    },
+    {
+      "name": "$V3",
+      "lines": [
+        {
+          "a": "Would you be whiter, much whiter than snow?",
+          "b": "你願被潔淨比雪還白麼？"
+        },
+        {
+          "a": "There's power in the blood, power in the blood",
+          "b": "在主寶血內大有權能"
+        },
+        {
+          "a": "Sin-stains are lost in its life-giving flow",
+          "b": "這生命泉能潔淨你罪惡"
+        },
+        {
+          "a": "there's wonderful power in the blood",
+          "b": "耶穌寶血大有權能"
+        }
+      ]
+    },
+    {
+      "name": "$V4",
+      "lines": [
+        {
+          "a": "Would you do service for Jesus your King?",
+          "b": "你願為主你君王做工麼？"
+        },
+        {
+          "a": "There's power in the blood, power in the blood",
+          "b": "在主寶血內大有權能"
+        },
+        {
+          "a": "Would you live daily His praises to sing?",
+          "b": "你願日日唱得勝凱歌麼？"
+        },
+        {
+          "a": "There's wonderful power in the blood",
+          "b": "耶穌寶血大有權能"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "There is power, power, wonder-working power",
+          "b": "大有權能奇妙大權能"
+        },
+        {
+          "a": "In the blood of the Lamb",
+          "b": "在羔羊寶血內"
+        },
+        {
+          "a": "There is power, power, wonder-working power",
+          "b": "大有權能奇妙大權能"
+        },
+        {
+          "a": "In the precious blood of the Lamb",
+          "b": "在聖潔羔羊寶血內"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "And the blood has never lost it power"
+        },
+        {
+          "a": "No never, no never"
+        },
+        {
+          "a": "Jesus blood avails for sin forever"
+        },
+        {
+          "a": "And will never lose it’s power"
+        }
+      ]
+    }
+  ]
+}

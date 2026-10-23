@@ -1,0 +1,66 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "三一頌組曲",
+      "b": "Doxology"
+    },
+    "tags": ["讚美詩", "天韻合唱團"],
+    "arrangement": [2, 0, 3, 0, 3, 1, 1, 0, 6],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=HaWGmMVMv6k"
+      }
+    ],
+    "author": "天韻合唱團\n作詞：Thomas Ken／作曲：Jimmy Owens / Genevan Psalter\n修自多本聖詩／編曲：高煜洋"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "普天之下 萬國萬民",
+          "b": "Praise God, from whom all blessings flow"
+        },
+        {
+          "a": "齊聲讚美 父 子 聖靈",
+          "b": "Praise Him, all creatures here below"
+        },
+        {
+          "a": "三位一體 同榮同尊",
+          "b": "Praise Him above, ye heavenly host"
+        },
+        {
+          "a": "萬有之源 萬福之本",
+          "b": "Praise Father, Son, and Holy Ghost"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "讚美真神 萬福之根",
+          "b": "Praise God, from whom all blessings flow"
+        },
+        {
+          "a": "世上萬民讚美主恩",
+          "b": "Praise Him, all creatures here below"
+        },
+        {
+          "a": "天使天軍讚美主名",
+          "b": "Praise Him above, ye heavenly host"
+        },
+        {
+          "a": "讚美聖父 聖子 聖靈",
+          "b": "Praise Father, Son, and Holy Ghost"
+        }
+      ]
+    }
+  ]
+}

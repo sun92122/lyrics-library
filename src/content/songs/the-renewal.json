@@ -1,0 +1,98 @@
+{
+  "meta": {
+    "languages": {
+      "a": "中文",
+      "b": "English"
+    },
+    "title": {
+      "a": "生命的更新",
+      "b": "The Renewal"
+    },
+    "tags": ["天韻合唱團", "更新"],
+    "arrangement": [2, 0, 0, 1, 3, 0, 0, 1, 1, 6],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=dEYp7w_gpHM"
+      }
+    ],
+    "author": "天韻合唱團\n詞：李穎、王玫／曲：王玫"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "祢成就那不可能的",
+          "b": "You accomplish the impossible"
+        },
+        {
+          "a": "在曠野中開道路",
+          "b": "Making paths in the wilderness"
+        },
+        {
+          "a": "遠超過我的意念",
+          "b": "Exceeding far above my expectation"
+        },
+        {
+          "a": "讓舊事不再束縛",
+          "b": "The past no longer binds me"
+        },
+        {
+          "a": "祢成就那不可能的",
+          "b": "You accomplish the impossible"
+        },
+        {
+          "a": "在沙漠中開江河",
+          "b": "Making rivers in the desert"
+        },
+        {
+          "a": "遠超過一切想像",
+          "b": "Exceeding far above all imagination"
+        },
+        {
+          "a": "我生命已被更新",
+          "b": "My life has been renewed"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "在我敵人面前",
+          "b": "In the presence of my enemies"
+        },
+        {
+          "a": "祢為我擺設筵席",
+          "b": "You prepare a feast for me"
+        },
+        {
+          "a": "祢讓我抬起頭",
+          "b": "You raise my head high"
+        },
+        {
+          "a": "不再絕望難過",
+          "b": "No more despair and sadness"
+        },
+        {
+          "a": "挪去我的傷痛",
+          "b": "Removing my pains"
+        },
+        {
+          "a": "解開靈魂的枷鎖",
+          "b": "Setting my soul free"
+        },
+        {
+          "a": "勝過了舊的我",
+          "b": "Defeating the old me"
+        },
+        {
+          "a": "從此不再回頭",
+          "b": "Henceforth no turning back"
+        }
+      ]
+    }
+  ]
+}
