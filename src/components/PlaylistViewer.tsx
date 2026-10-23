@@ -316,7 +316,13 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
             return (
               <div
                 key={`${item.id}-${index}`}
-                className="text-lg font-bold text-slate-900 py-2 px-4 bg-transparent border-b border-slate-200/80 rounded-xl"
+                className={
+"text-lg font-bold text-slate-900 py-2 px-4 bg-transparent border-slate-200/80 rounded-xl" +
+                  (index < payload.s.length - 1 &&
+                  payload.s[index + 1].t !== "S"
+                    ? " border-b"
+                    : "")
+                }
               >
                 {item.note || "標題"}
               </div>
