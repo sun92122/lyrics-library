@@ -317,7 +317,7 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
               <div
                 key={`${item.id}-${index}`}
                 className={
-"text-lg font-bold text-slate-900 py-2 px-4 bg-transparent border-slate-200/80 rounded-xl" +
+                  "text-lg font-bold text-slate-900 py-2 px-4 bg-transparent border-slate-200/80 rounded-xl" +
                   (index < payload.s.length - 1 &&
                   payload.s[index + 1].t !== "S"
                     ? " border-b"
@@ -346,15 +346,19 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
           }
 
           const song = songMap.get(item.id);
-          const customKey = item.k || song?.meta.originalKey || "C";
-          const originalKey = song?.meta.originalKey || customKey;
-          const semitoneOffset = getSemitoneOffset(originalKey, customKey);
+          const customKey = item.k || song?.meta.originalKey;
+          const originalKey = song?.meta.originalKey;
+          const semitoneOffset =
+            customKey && originalKey
+              ? getSemitoneOffset(originalKey, customKey)
+              : 0;
           const flow = item.flow || [];
           const customFlow = item.customFlow || [];
+          const sondIndex = playlistSongs.findIndex((s) => s.item === item);
 
           const songUrl =
             `/songs/${item.id}?playlist=${encodeURIComponent(currentHash.slice(6))}` +
-            `#${encodeURIComponent(customKey)}---${flow.join(",")}---${encodeURIComponent(customFlow.join(","))}`;
+            `#${encodeURIComponent(customKey || originalKey || "C")}---${flow.join(",")}---${encodeURIComponent(customFlow.join(","))}`;
 
           return (
             <div
@@ -368,7 +372,7 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
               >
                 <div className="flex items-center gap-4">
                   <span className="w-10 h-10 rounded-2xl bg-indigo-50 group-hover:bg-indigo-600 group-hover:text-white text-indigo-700 font-mono text-base font-bold flex items-center justify-center transition-colors shadow-sm">
-                    {index + 1}
+                    {sondIndex + 1}
                   </span>
 
                   <div>
@@ -386,18 +390,21 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                 <div className="flex items-center gap-3">
                   <div className="flex flex-col gap-2">
                     {/* Key Badge */}
-                    <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold font-mono">
-                      <Music className="w-3.5 h-3.5 text-amber-600" />
-                      <span>Key: {customKey}</span>
-                      {semitoneOffset !== 0 && (
-                        <span className="text-[10px] text-amber-700 bg-amber-100/80 px-1.5 py-0.2 rounded font-normal">
-                          {semitoneOffset > 0
-                            ? `+${semitoneOffset}`
-                            : semitoneOffset}{" "}
-                          (原 {originalKey})
-                        </span>
-                      )}
-                    </div>
+                    {song?.meta.originalKey ||
+                      (customKey && (
+                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold font-mono">
+                          <Music className="w-3.5 h-3.5 text-amber-600" />
+                          <span>Key: {customKey}</span>
+                          {semitoneOffset !== 0 && (
+                            <span className="text-[10px] text-amber-700 bg-amber-100/80 px-1.5 py-0.2 rounded font-normal">
+                              {semitoneOffset > 0
+                                ? `+${semitoneOffset}`
+                                : semitoneOffset}{" "}
+                              (原 {originalKey})
+                            </span>
+                          )}
+                        </div>
+                      ))}
                     {song?.meta.bpm && (
                       <div className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold font-mono">
                         <span className="font-normal text-slate-400">BPM:</span>

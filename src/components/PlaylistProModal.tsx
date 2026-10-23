@@ -329,10 +329,9 @@ export const PlaylistProModal: React.FC<PlaylistProModalProps> = ({
                 </div>
               ) : (
                 <div className="space-y-2.5">
-                  {songs.map((entry) => {
-                    const { song, item, index } = entry;
+                  {songs.map((entry, index) => {
+                    const { song, item } = entry;
                     const isDownloadingThis = downloadingSingleId === song.id;
-                    const songKey = item.k || song.meta.originalKey || "C";
                     const flow = item.flow || [];
                     const customFlow = item.customFlow || [];
 
@@ -351,9 +350,6 @@ export const PlaylistProModal: React.FC<PlaylistProModalProps> = ({
                               {song.meta.title.a}
                             </div>
                             <div className="flex items-center gap-2 mt-0.5 text-xs text-slate-500">
-                              <span className="font-mono text-indigo-600 font-medium">
-                                Key: {songKey}
-                              </span>
                               {song.meta.title.b && (
                                 <span className="text-slate-400 truncate max-w-[120px]">
                                   {song.meta.title.b}
