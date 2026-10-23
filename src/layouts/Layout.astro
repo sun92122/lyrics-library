@@ -40,7 +40,9 @@ const { title, description = "現代化靜態詩歌歌詞與敬拜管理平台" 
     <meta name="description" content={description} />
     <meta name="robots" content="noindex, nofollow" />
   </head>
-  <body class="h-screen min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans">
+  <body
+    class="h-screen min-h-screen bg-slate-50 text-slate-900 flex flex-col font-sans"
+  >
     <!-- Navbar -->
     <Header />
 
@@ -55,7 +57,17 @@ const { title, description = "現代化靜態詩歌歌詞與敬拜管理平台" 
         class="border-t border-slate-200 bg-white py-4 text-center text-xs text-slate-500"
       >
         <div class="max-w-6xl mx-auto px-4">
-          <p>Lyrics Library - 歌詞資料版權歸原作者所有</p>
+          <p>
+            <a
+              href="https://github.com/sun92122/lyrics-library"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-slate-700"
+            >
+              Lyrics Library
+            </a>
+            <span> - 歌詞資料版權歸原作者所有 </span>
+          </p>
           <p>&copy; 2026 神奇</p>
         </div>
       </footer>
