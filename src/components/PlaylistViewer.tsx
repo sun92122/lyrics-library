@@ -289,10 +289,10 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
               <button
                 type="button"
                 onClick={() => setIsProModalOpen(true)}
-                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-white hover:bg-slate-50 text-slate-700 transition-all border border-slate-200 shadow-sm active:scale-95"
+                className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold bg-amber-500 hover:bg-amber-600 text-amber-100 transition-all border border-slate-200 shadow-sm active:scale-95"
                 title="下載此歌單所有詩歌的 ProPresenter 檔案"
               >
-                <Download className="w-3.5 h-3.5 text-indigo-600" />
+                <Download className="w-3.5 h-3.5 text-amber-100" />
                 <span>下載 ProPresenter</span>
               </button>
             )}
