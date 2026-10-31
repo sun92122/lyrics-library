@@ -390,21 +390,20 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                 <div className="flex items-center gap-3">
                   <div className="flex flex-col gap-2">
                     {/* Key Badge */}
-                    {song?.meta.originalKey ||
-                      (customKey && (
-                        <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold font-mono">
-                          <Music className="w-3.5 h-3.5 text-amber-600" />
-                          <span>Key: {customKey}</span>
-                          {semitoneOffset !== 0 && (
-                            <span className="text-[10px] text-amber-700 bg-amber-100/80 px-1.5 py-0.2 rounded font-normal">
-                              {semitoneOffset > 0
-                                ? `+${semitoneOffset}`
-                                : semitoneOffset}{" "}
-                              (原 {originalKey})
-                            </span>
-                          )}
-                        </div>
-                      ))}
+                    {originalKey || customKey ? (
+                      <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 text-xs font-bold font-mono">
+                        <Music className="w-3.5 h-3.5 text-amber-600" />
+                        <span>Key: {customKey || originalKey}</span>
+                        {semitoneOffset !== 0 && (
+                          <span className="text-[10px] text-amber-700 bg-amber-100/80 px-1.5 py-0.2 rounded font-normal">
+                            {semitoneOffset > 0
+                              ? `+${semitoneOffset}`
+                              : semitoneOffset}{" "}
+                            (原 {originalKey})
+                          </span>
+                        )}
+                      </div>
+                    ) : null}
                     {song?.meta.bpm && (
                       <div className="ml-auto flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold font-mono">
                         <span className="font-normal text-slate-400">BPM:</span>

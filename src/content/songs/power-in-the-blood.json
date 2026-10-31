@@ -8,8 +8,10 @@
       "a": "Power In the Blood",
       "b": "寶血大權能"
     },
+    "author": "Lewis E. Jones (1899)",
+    "originalKey": "",
+    "ccli": "",
     "tags": ["讚美詩", "天韻合唱團", "Make My Life a Miracle"],
-    "arrangement": [6, 0, 4, 1, 4, 2, 4, 3, 4, 10],
     "assets": [
       {
         "type": "youtube",
@@ -17,7 +19,8 @@
         "url": "https://www.youtube.com/watch?v=0GpWEX_HkWQ&t=290"
       }
     ],
-    "author": "Lewis E. Jones (1899)"
+    "arrangement": [8, 0, 1, 9, 2, 1, 3, 4, 5, 5, 6, 6, 6, 6, 5, 7, 12],
+    "note": ""
   },
   "sections": [
     {
@@ -25,19 +28,52 @@
       "lines": [
         {
           "a": "Would you be free from the burden of sin?",
-          "b": "你願從你的罪擔釋放麼？"
+          "b": "你是否願從罪擔得釋放？"
         },
         {
-          "a": "There's power in the blood, power in the blood",
-          "b": "在主寶血內大有權能"
+          "a": "There's power in the blood",
+          "b": "寶血有能力"
+        },
+        {
+          "a": "Power in the blood",
+          "b": "大有能力"
         },
         {
           "a": "Would you o'er evil a victory win?",
-          "b": "你願勝過一切惡性情麼？"
+          "b": "你是否願勝過罪惡捆綁？"
         },
         {
           "a": "There's wonderful power in the blood",
-          "b": "耶穌寶血大有權能"
+          "b": "耶穌的寶血有能力"
+        }
+      ]
+    },
+    {
+      "name": "$C1",
+      "lines": [
+        {
+          "a": "There is power, power",
+          "b": "真有權能"
+        },
+        {
+          "a": "Wonder-working power",
+          "b": "奇妙大權能"
+        },
+        {
+          "a": "In the blood of the Lamb",
+          "b": "在羔羊寶血裡"
+        },
+        {
+          "a": "There is power, power",
+          "b": "真有權能"
+        },
+        {
+          "a": "Wonder-working power",
+          "b": "奇妙大權能"
+        },
+        {
+          "a": "In the precious blood of the Lamb",
+          "b": "顯明在羔羊寶血裡"
         }
       ]
     },
@@ -45,20 +81,24 @@
       "name": "$V2",
       "lines": [
         {
-          "a": "Would you be free from your passion and pride?",
-          "b": "你願從驕傲私慾釋放麼？"
+          "a": "Would you be whiter, much whiter than snow?",
+          "b": "你是否願潔淨白過於雪？"
         },
         {
-          "a": "There's power in the blood, power in the blood",
-          "b": "在主寶血內大有權能"
+          "a": "There's power in the blood",
+          "b": "寶血有能力"
         },
         {
-          "a": "Come for a cleansing to Calvary's tide",
-          "b": "各各他血泉內潔淨罪過"
+          "a": "Power in the blood",
+          "b": "大有能力"
+        },
+        {
+          "a": "Sin stains are lost in its life-giving flow",
+          "b": "到生命泉你脫去眾罪孽"
         },
         {
           "a": "There's wonderful power in the blood",
-          "b": "耶穌寶血大有權能"
+          "b": "耶穌的寶血有能力"
         }
       ]
     },
@@ -66,20 +106,36 @@
       "name": "$V3",
       "lines": [
         {
-          "a": "Would you be whiter, much whiter than snow?",
-          "b": "你願被潔淨比雪還白麼？"
+          "a": "What can wash away my sin?",
+          "b": "如何被赦免潔淨？"
         },
         {
-          "a": "There's power in the blood, power in the blood",
-          "b": "在主寶血內大有權能"
+          "a": "(Nothing but the blood)",
+          "b": "(羔羊寶血裡)"
         },
         {
-          "a": "Sin-stains are lost in its life-giving flow",
-          "b": "這生命泉能潔淨你罪惡"
+          "a": "What can make me whole again?",
+          "b": "重新得著生命？"
         },
         {
-          "a": "there's wonderful power in the blood",
-          "b": "耶穌寶血大有權能"
+          "a": "(Nothing but the blood)",
+          "b": "(羔羊寶血裡)"
+        },
+        {
+          "a": "Nothing but the blood of Christ",
+          "b": "在羔羊的寶血裡"
+        },
+        {
+          "a": "God's atoning sacrifice",
+          "b": "基督成就馨香的祭"
+        },
+        {
+          "a": "This is all my hope and peace",
+          "b": "這是我平安希望"
+        },
+        {
+          "a": "This is all my righteousness",
+          "b": "我已因祂得稱義"
         }
       ]
     },
@@ -88,57 +144,90 @@
       "lines": [
         {
           "a": "Would you do service for Jesus your King?",
-          "b": "你願為主你君王做工麼？"
+          "b": "你是否願為王作祂聖工？"
         },
         {
-          "a": "There's power in the blood, power in the blood",
-          "b": "在主寶血內大有權能"
+          "a": "There's power in the blood",
+          "b": "寶血有能力"
+        },
+        {
+          "a": "Power in the blood",
+          "b": "大有能力"
         },
         {
           "a": "Would you live daily His praises to sing?",
-          "b": "你願日日唱得勝凱歌麼？"
+          "b": "你是否願常讚美常歌頌？"
         },
         {
           "a": "There's wonderful power in the blood",
-          "b": "耶穌寶血大有權能"
+          "b": "耶穌的寶血有能力"
         }
       ]
     },
     {
-      "name": "$C",
+      "name": "$C2",
       "lines": [
         {
-          "a": "There is power, power, wonder-working power",
-          "b": "大有權能奇妙大權能"
+          "a": "There is mighty power",
+          "b": "真有權柄大能"
+        },
+        {
+          "a": "Wonder-working power",
+          "b": "奇妙大權能"
         },
         {
           "a": "In the blood of the Lamb",
-          "b": "在羔羊寶血內"
+          "b": "在羔羊寶血裡"
         },
         {
-          "a": "There is power, power, wonder-working power",
-          "b": "大有權能奇妙大權能"
+          "a": "There is awesome power",
+          "b": "真有妙哉大能"
+        },
+        {
+          "a": "Wonder-working power",
+          "b": "奇妙大權能"
         },
         {
           "a": "In the precious blood of the Lamb",
-          "b": "在聖潔羔羊寶血內"
+          "b": "顯明在羔羊寶血裡"
         }
       ]
     },
     {
-      "name": "$E",
+      "name": "$T",
       "lines": [
         {
-          "a": "And the blood has never lost it power"
+          "a": "Every single hour",
+          "b": "每天每時每刻"
         },
         {
-          "a": "No never, no never"
+          "a": "Wonder-working power",
+          "b": "都有權柄大能"
         },
         {
-          "a": "Jesus blood avails for sin forever"
+          "a": "Flows to meet our every need",
+          "b": "灌滿我們一切所需"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "Every single hour",
+          "b": "每天每時每刻"
         },
         {
-          "a": "And will never lose it’s power"
+          "a": "Wonder-working power",
+          "b": "都有權柄大能"
+        },
+        {
+          "a": "Power, power, power",
+          "b": "權柄大能"
+        },
+        {
+          "a": "Power, power, power",
+          "b": "權柄大能"
         }
       ]
     }
