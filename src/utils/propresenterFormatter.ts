@@ -288,20 +288,21 @@ export function getProFormat(
     });
   }
 
-  let sectionIndex = 1;
-  for (const section of song.sections) {
-    const sectionUuid = generateUUID();
-    groupKV.set(sectionIndex, sectionUuid);
+  function buildSectionSlides(
+    sec: { lines: LineItem[] },
+    isInverted: boolean,
+  ): string[] {
     const slideUuids: string[] = [];
+    const getLineA = (l: LineItem) => (isInverted ? l.b || "" : l.a || "");
+    const getLineB = (l: LineItem) => (isInverted ? l.a || "" : l.b || "");
+
     if (options_twoLinesPerSlide) {
-      for (let i = 0; i < section.lines.length; i += 2) {
+      for (let i = 0; i < sec.lines.length; i += 2) {
+        const l1 = sec.lines[i];
+        const l2 = sec.lines[i + 1];
         const newLine: LineItem = {
-          a:
-            section.lines[i].a +
-            (section.lines[i + 1] ? "\n" + section.lines[i + 1].a : ""),
-          b:
-            section.lines[i].b +
-            (section.lines[i + 1] ? "\n" + section.lines[i + 1].b : ""),
+          a: getLineA(l1) + (l2 ? "\n" + getLineA(l2) : ""),
+          b: getLineB(l1) + (l2 ? "\n" + getLineB(l2) : ""),
         };
         const slideUuid = generateUUID();
         slideUuids.push(slideUuid);
@@ -311,15 +312,27 @@ export function getProFormat(
         });
       }
     } else {
-      for (const line of section.lines) {
+      for (const line of sec.lines) {
+        const newLine: LineItem = {
+          a: getLineA(line),
+          b: getLineB(line),
+        };
         const slideUuid = generateUUID();
         slideUuids.push(slideUuid);
         slides.push({
           uuid: slideUuid,
-          elements: getProFormatSlideElements(line, options),
+          elements: getProFormatSlideElements(newLine, options),
         });
       }
     }
+    return slideUuids;
+  }
+
+  let sectionIndex = 1;
+  for (const section of song.sections) {
+    const sectionUuid = generateUUID();
+    groupKV.set(sectionIndex, sectionUuid);
+    const slideUuids = buildSectionSlides(section, false);
     const groupName =
       section.name in flowMap
         ? flowMap[section.name as keyof typeof flowMap]
@@ -334,6 +347,41 @@ export function getProFormat(
       slideUuids: slideUuids as UUID[],
     });
     sectionIndex++;
+  }
+
+  const neededNegativeIndices = new Set<number>();
+  if (options_includeDefaultArrangement && song.meta?.arrangement) {
+    for (const idx of song.meta.arrangement) {
+      if (idx < 0) neededNegativeIndices.add(idx);
+    }
+  }
+  if (options_includeCurrentArrangement && flow && flow.length > 0) {
+    for (const idx of flow) {
+      if (idx < 0) neededNegativeIndices.add(idx);
+    }
+  }
+
+  for (const negIdx of neededNegativeIndices) {
+    const secIdx = Math.abs(negIdx);
+    if (secIdx >= 1 && secIdx <= song.sections.length) {
+      const section = song.sections[secIdx - 1];
+      const invertedSectionUuid = generateUUID();
+      groupKV.set(negIdx, invertedSectionUuid);
+      const slideUuids = buildSectionSlides(section, true);
+      const groupName =
+        section.name in flowMap
+          ? flowMap[section.name as keyof typeof flowMap]
+          : section.name in FLOW_ALIASES
+            ? flowMap[
+                (FLOW_ALIASES[section.name] || "default") as keyof typeof flowMap
+              ]
+            : section.name;
+      groups.push({
+        uuid: invertedSectionUuid,
+        name: groupName,
+        slideUuids: slideUuids as UUID[],
+      });
+    }
   }
 
   if (options_addBlankSlideDuringIntro) {

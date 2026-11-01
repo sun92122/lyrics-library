@@ -15,6 +15,7 @@ import {
   FLOW_CUSTOM_BASE,
   getFlowName,
   getFlowTagByIndex,
+  formatFlowTagName,
   getFlowColor,
 } from "@/constants/flow";
 import {
@@ -239,6 +240,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
         titleB?: string;
         originalKey?: string;
         sections?: { name: string }[];
+        languages?: { a: string; b?: string };
       }
     >();
     availableSongs.forEach((s) => {
@@ -247,6 +249,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
         titleB: s.meta.title.b,
         originalKey: s.meta.originalKey,
         sections: s.sections,
+        languages: s.meta.languages,
       });
     });
 
@@ -782,12 +785,24 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                               <>
                                 <div className="w-full inline-block items-center !mt-1 px-2 pt-1 pb-2 bg-white rounded-xl border border-slate-200/80 min-h-[36px]">
                                   {flow.map((tagIndex, tIndex) => {
+                                    const secondaryLanguage =
+                                      song?.meta.languages?.b?.trim() || "";
+                                    const hasSecondaryLanguage =
+                                      Boolean(secondaryLanguage);
+                                    const isBasicSection =
+                                      Math.abs(tagIndex) >= 1 &&
+                                      Math.abs(tagIndex) <=
+                                        (song?.sections.length || 0);
                                     const rawTag = getFlowTagByIndex(
                                       tagIndex,
                                       song?.sections,
                                       customFlowTags,
                                     );
-                                    const tag = getFlowName(rawTag);
+                                    const tag = formatFlowTagName(
+                                      tagIndex,
+                                      rawTag,
+                                      secondaryLanguage,
+                                    );
                                     const tagColor = getFlowColor(rawTag);
                                     return (
                                       <ContextMenu.Root key={`flow-${tIndex}`}>
@@ -827,7 +842,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                             )}
                                           </div>
                                         </ContextMenu.Trigger>
-                                        <ContextMenu.Content className="bg-white rounded-lg shadow-md border border-slate-200 py-1.5 w-24 z-50">
+                                        <ContextMenu.Content className="bg-white rounded-lg shadow-md border border-slate-200 py-1.5 min-w-[140px] px-1 z-50">
                                           {/* 左移、右移、更換 */}
                                           <ContextMenu.Item
                                             onClick={() =>
@@ -849,26 +864,66 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                           >
                                             右移
                                           </ContextMenu.Item>
+                                          {isBasicSection && hasSecondaryLanguage && (
+                                            <>
+                                              <ContextMenu.Separator className="my-1 h-px bg-slate-200" />
+                                              <ContextMenu.Item
+                                                onClick={() =>
+                                                  changeFlowTag(
+                                                    index,
+                                                    tIndex,
+                                                    tagIndex > 0
+                                                      ? -tagIndex
+                                                      : Math.abs(tagIndex),
+                                                  )
+                                                }
+                                                className="px-2 py-1 text-xs text-indigo-600 font-medium hover:bg-indigo-50 rounded cursor-pointer select-none"
+                                              >
+                                                {tagIndex > 0
+                                                  ? `標示為「${getFlowName(rawTag)}（${secondaryLanguage}）」`
+                                                  : `還原為「${getFlowName(rawTag)}」`}
+                                              </ContextMenu.Item>
+                                            </>
+                                          )}
                                           <ContextMenu.Separator className="my-1 h-px bg-slate-200" />
                                           {song?.sections.map(
                                             (preset, presetIndex) => {
-                                              const tag = getFlowName(
+                                              const presetTag = getFlowName(
                                                 preset.name,
                                               );
+                                              const presetTagIndex =
+                                                presetIndex + 1;
                                               return (
-                                                <ContextMenu.Item
+                                                <React.Fragment
                                                   key={`change-${presetIndex}`}
-                                                  onClick={() =>
-                                                    changeFlowTag(
-                                                      index,
-                                                      tIndex,
-                                                      presetIndex + 1,
-                                                    )
-                                                  }
-                                                  className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
                                                 >
-                                                  {tag}
-                                                </ContextMenu.Item>
+                                                  <ContextMenu.Item
+                                                    onClick={() =>
+                                                      changeFlowTag(
+                                                        index,
+                                                        tIndex,
+                                                        presetTagIndex,
+                                                      )
+                                                    }
+                                                    className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                                  >
+                                                    {presetTag}
+                                                  </ContextMenu.Item>
+                                                  {hasSecondaryLanguage && (
+                                                    <ContextMenu.Item
+                                                      onClick={() =>
+                                                        changeFlowTag(
+                                                          index,
+                                                          tIndex,
+                                                          -presetTagIndex,
+                                                        )
+                                                      }
+                                                      className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                                    >
+                                                      {presetTag}（{secondaryLanguage}）
+                                                    </ContextMenu.Item>
+                                                  )}
+                                                </React.Fragment>
                                               );
                                             },
                                           )}

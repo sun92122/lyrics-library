@@ -328,7 +328,7 @@ export const getFlowName = (
 
 /**
  * Resolves an arrangement/flow tag ID into its section name or flow string.
- * - 1 ~ n: sections[tagId - 1].name
+ * - 1 ~ n or -1 ~ -n: sections[abs(tagId) - 1].name
  * - 1001 ~ 1005: EX_FLOWS[tagId - 1001]
  * - 2000+: customFlow[tagId - 2000]
  */
@@ -338,8 +338,9 @@ export function getFlowTagByIndex(
   customFlow?: string[] | null,
 ): string {
   const sectionsCount = sections?.length || 0;
-  if (tagId >= FLOW_SECTION_OFFSET && tagId <= sectionsCount) {
-    return sections![tagId - FLOW_SECTION_OFFSET].name;
+  const absId = Math.abs(tagId);
+  if (absId >= FLOW_SECTION_OFFSET && absId <= sectionsCount) {
+    return sections![absId - FLOW_SECTION_OFFSET].name;
   }
   if (tagId >= FLOW_EX_BASE && tagId < FLOW_EX_BASE + EX_FLOWS.length) {
     return EX_FLOWS[tagId - FLOW_EX_BASE];
@@ -348,6 +349,24 @@ export function getFlowTagByIndex(
     return customFlow?.[tagId - FLOW_CUSTOM_BASE] ?? "?";
   }
   return "?";
+}
+
+/**
+ * Returns formatted flow tag name for display, taking inverted bilingual tags into account.
+ * E.g., if tagId < 0 and secondaryLanguage is "中文", returns "V（中文）".
+ */
+export function formatFlowTagName(
+  tagId: number,
+  rawTag: string,
+  secondaryLanguage?: string,
+  nameSet: keyof typeof FLOW_NAMES = "Magical",
+): string {
+  const name = getFlowName(rawTag, nameSet);
+  if (tagId < 0) {
+    const langSuffix = secondaryLanguage?.trim();
+    return langSuffix ? `${name}（${langSuffix}）` : `${name}（英文）`;
+  }
+  return name;
 }
 
 /**

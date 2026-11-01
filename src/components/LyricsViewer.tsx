@@ -4,6 +4,7 @@ import {
   FLOW_STYLE,
   getFlowName,
   getFlowTagByIndex,
+  formatFlowTagName,
   getFlowColor,
   type FlowMapping,
 } from "@/constants/flow";
@@ -237,7 +238,13 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
                     customFlow,
                   );
                   if (!rawTag || rawTag === "?") return null;
-                  const tag = getFlowName(rawTag);
+                  const secondaryLanguage =
+                    song?.meta.languages?.b?.trim() || "";
+                  const tag = formatFlowTagName(
+                    tagIndex,
+                    rawTag,
+                    secondaryLanguage,
+                  );
                   const tagColor = getFlowColor(rawTag);
 
                   return (

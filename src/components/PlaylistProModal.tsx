@@ -23,6 +23,7 @@ import {
 import {
   getFlowName,
   getFlowTagByIndex,
+  formatFlowTagName,
   getFlowColor,
 } from "@/constants/flow";
 
@@ -370,7 +371,13 @@ export const PlaylistProModal: React.FC<PlaylistProModalProps> = ({
                                     song.sections,
                                     customFlow,
                                   );
-                                  const tag = getFlowName(rawTag);
+                                  const secondaryLanguage =
+                                    song.meta.languages?.b?.trim() || "";
+                                  const tag = formatFlowTagName(
+                                    tagId,
+                                    rawTag,
+                                    secondaryLanguage,
+                                  );
                                   const tagColor = getFlowColor(rawTag);
 
                                   return (

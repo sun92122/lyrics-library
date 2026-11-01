@@ -3,6 +3,7 @@ import type { SongWithId } from "@/content.config";
 import {
   getFlowName,
   getFlowTagByIndex,
+  formatFlowTagName,
   getFlowColor,
 } from "@/constants/flow";
 import { getSemitoneOffset } from "@/utils/transposer";
@@ -141,6 +142,7 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
         titleB?: string;
         originalKey?: string;
         sections?: { name: string }[];
+        languages?: { a: string; b?: string };
       }
     >();
     availableSongs.forEach((s) => {
@@ -149,6 +151,7 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
         titleB: s.meta.title.b,
         originalKey: s.meta.originalKey,
         sections: s.sections,
+        languages: s.meta.languages,
       });
     });
 
@@ -437,7 +440,13 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                         song?.sections,
                         customFlow,
                       );
-                      const tag = getFlowName(rawTag);
+                      const secondaryLanguage =
+                        song?.meta.languages?.b?.trim() || "";
+                      const tag = formatFlowTagName(
+                        tagId,
+                        rawTag,
+                        secondaryLanguage,
+                      );
                       const tagColor = getFlowColor(rawTag);
 
                       return (

@@ -1,11 +1,15 @@
 import LZString from "lz-string";
-import { getFlowTagByIndex, getFlowName } from "@/constants/flow";
+import {
+  getFlowTagByIndex,
+  getFlowName,
+  formatFlowTagName,
+} from "@/constants/flow";
 
 export interface PlaylistItem {
   id: string; // 歌曲 ID
   t?: "H" | "D" | "S" | null; // H: header, D: description, S: separator, null: normal song
   k?: string; // 自訂使用調性 (例: "A")
-  flow?: number[]; // 段落自訂排程 (1~n: sections[0~n-1], 1001~1005: EX_FLOWS, 2000+: customFlow)
+  flow?: number[]; // 段落自訂排程 (1~n: sections[0~n-1]，負數代表雙語反轉，1001~1005: EX_FLOWS, 2000+: customFlow)
   note?: string; // 敬拜備註 (例: "開頭鋼琴引導由弱漸強")
   customFlow?: string[]; // 額外自訂段落排程 (例: ["V1", "C", "V2", "C", "Tag"])
 }
@@ -55,6 +59,7 @@ export function formatPlaylistOutline(
       titleB?: string;
       originalKey?: string;
       sections?: { name: string }[];
+      languages?: { a: string; b?: string };
     }
   >,
 ): string {
@@ -79,6 +84,7 @@ export function formatPlaylistOutline(
 
     const song = songMap.get(item.id);
     const title = song ? song.titleA : item.id;
+    const secondaryLanguage = song?.languages?.b?.trim() || "";
     const keyInfo = item.k
       ? `[調性: ${item.k}]`
       : // : song?.originalKey
@@ -95,7 +101,9 @@ export function formatPlaylistOutline(
             song?.sections,
             item.customFlow,
           );
-          return rawTag !== "?" ? getFlowName(rawTag) : tagId;
+          return rawTag !== "?"
+            ? formatFlowTagName(tagId, rawTag, secondaryLanguage)
+            : tagId;
         })
         .join(" ➔ ");
       lines.push(`   > 流程：${flowStr}`);
