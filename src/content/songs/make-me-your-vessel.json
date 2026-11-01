@@ -9,7 +9,7 @@
       "b": "Make Me Your Vessel"
     },
     "tags": ["The Hope"],
-    "arrangement": [5, 0, 1, 2, 6, 1, 2, 6, 3, 3, 2, 4, 9],
+    "arrangement": [1001, 1, 2, 3, 1002, 2, 3, 1002, 4, 4, 3, 5, 1005],
     "assets": [
       {
         "type": "youtube",

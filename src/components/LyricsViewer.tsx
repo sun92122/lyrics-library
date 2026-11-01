@@ -2,9 +2,9 @@ import React, { useState, useMemo, useEffect } from "react";
 import type { SongData, LineItem } from "@/content.config";
 import {
   FLOW_STYLE,
-  EX_FLOWS,
-  FLOW_ALIASES,
   getFlowName,
+  getFlowTagByIndex,
+  getFlowColor,
   type FlowMapping,
 } from "@/constants/flow";
 import { transposeChord, getSemitoneOffset } from "@/utils/transposer";
@@ -231,17 +231,14 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
               </div>
               <div className="inline-block items-center !mt-0">
                 {flow.map((tagIndex, tIndex) => {
-                  const tag =
-                    tagIndex < (song?.sections.length || 0)
-                      ? getFlowName(song.sections[tagIndex].name)
-                      : getFlowName(
-                          EX_FLOWS[tagIndex - (song?.sections.length || 0)],
-                        ) || flow?.[tagIndex - (song?.sections.length || 0)];
-                  if (!tag) return null;
-
-                  const tagColor =
-                    FLOW_STYLE[FLOW_ALIASES[tag] as keyof FlowMapping] ??
-                    FLOW_STYLE["default"];
+                  const rawTag = getFlowTagByIndex(
+                    tagIndex,
+                    song?.sections,
+                    customFlow,
+                  );
+                  if (!rawTag || rawTag === "?") return null;
+                  const tag = getFlowName(rawTag);
+                  const tagColor = getFlowColor(rawTag);
 
                   return (
                     <div

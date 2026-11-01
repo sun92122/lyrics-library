@@ -288,10 +288,10 @@ export function getProFormat(
     });
   }
 
-  let currentSectionIndex = 0;
+  let sectionIndex = 1;
   for (const section of song.sections) {
     const sectionUuid = generateUUID();
-    groupKV.set(currentSectionIndex, sectionUuid);
+    groupKV.set(sectionIndex, sectionUuid);
     const slideUuids: string[] = [];
     if (options_twoLinesPerSlide) {
       for (let i = 0; i < section.lines.length; i += 2) {
@@ -333,7 +333,7 @@ export function getProFormat(
       name: groupName,
       slideUuids: slideUuids as UUID[],
     });
-    currentSectionIndex++;
+    sectionIndex++;
   }
 
   if (options_addBlankSlideDuringIntro) {
@@ -343,14 +343,15 @@ export function getProFormat(
       elements: [],
       label: "前奏 Intro",
     });
-    groupKV.set(currentSectionIndex, generateUUID());
+    const introUuid = generateUUID();
+    groupKV.set(1001, introUuid);
     groups.push({
-      uuid: groupKV.get(currentSectionIndex),
+      uuid: introUuid,
       name: "Blank",
       slideUuids: [tempuuid],
     });
   }
-  currentSectionIndex++;
+
   if (options_addBlankSlideDuringInterlude) {
     const tempuuid = generateUUID();
     slides.push({
@@ -358,14 +359,15 @@ export function getProFormat(
       elements: [],
       label: "間奏 Interlude",
     });
-    groupKV.set(currentSectionIndex, generateUUID());
+    const interludeUuid = generateUUID();
+    groupKV.set(1002, interludeUuid);
     groups.push({
-      uuid: groupKV.get(currentSectionIndex),
+      uuid: interludeUuid,
       name: "Blank",
       slideUuids: [tempuuid],
     });
   }
-  currentSectionIndex++;
+
   if (options_addBlankSlideDuringWorship) {
     const tempuuid = generateUUID();
     slides.push({
@@ -373,14 +375,15 @@ export function getProFormat(
       elements: [],
       label: "自由敬拜 Worship",
     });
-    groupKV.set(currentSectionIndex, generateUUID());
+    const worshipUuid = generateUUID();
+    groupKV.set(1003, worshipUuid);
     groups.push({
-      uuid: groupKV.get(currentSectionIndex),
+      uuid: worshipUuid,
       name: "Blank",
       slideUuids: [tempuuid],
     });
   }
-  currentSectionIndex++;
+
   if (options_addBlankSlideDuringPrayer) {
     const tempuuid = generateUUID();
     slides.push({
@@ -388,9 +391,10 @@ export function getProFormat(
       elements: [],
       label: "禱告 Prayer",
     });
-    groupKV.set(currentSectionIndex, generateUUID());
+    const prayerUuid = generateUUID();
+    groupKV.set(1004, prayerUuid);
     groups.push({
-      uuid: groupKV.get(currentSectionIndex),
+      uuid: prayerUuid,
       name: "Blank",
       slideUuids: [tempuuid],
     });

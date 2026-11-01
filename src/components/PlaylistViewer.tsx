@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useMemo } from "react";
 import type { SongWithId } from "@/content.config";
 import {
-  FLOW_STYLE,
-  EX_FLOWS,
   getFlowName,
-  type FlowMapping,
+  getFlowTagByIndex,
+  getFlowColor,
 } from "@/constants/flow";
 import { getSemitoneOffset } from "@/utils/transposer";
 import {
@@ -137,13 +136,19 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
 
     const outlineMap = new Map<
       string,
-      { titleA: string; titleB?: string; originalKey?: string }
+      {
+        titleA: string;
+        titleB?: string;
+        originalKey?: string;
+        sections?: { name: string }[];
+      }
     >();
     availableSongs.forEach((s) => {
       outlineMap.set(s.id, {
         titleA: s.meta.title.a,
         titleB: s.meta.title.b,
         originalKey: s.meta.originalKey,
+        sections: s.sections,
       });
     });
 
@@ -427,17 +432,13 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                   </div>
                   <div className="!mt-0 inline-block items-center">
                     {flow.map((tagId, tIndex) => {
-                      const tag =
-                        tagId < (song?.sections.length || 0)
-                          ? song!.sections[tagId].name
-                          : tagId <
-                              (song?.sections.length || 0) + EX_FLOWS.length
-                            ? EX_FLOWS[tagId - (song?.sections.length || 0)]
-                            : (customFlow?.[
-                                tagId -
-                                  (song?.sections.length || 0) -
-                                  EX_FLOWS.length
-                              ] ?? "?");
+                      const rawTag = getFlowTagByIndex(
+                        tagId,
+                        song?.sections,
+                        customFlow,
+                      );
+                      const tag = getFlowName(rawTag);
+                      const tagColor = getFlowColor(rawTag);
 
                       return (
                         <div
@@ -447,18 +448,12 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                           <span
                             className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-100/80"
                             style={{
-                              backgroundColor:
-                                (FLOW_STYLE[tag as keyof FlowMapping] ??
-                                  FLOW_STYLE["default"]) + "22",
-                              color:
-                                FLOW_STYLE[tag as keyof FlowMapping] ??
-                                FLOW_STYLE["default"],
-                              borderColor:
-                                (FLOW_STYLE[tag as keyof FlowMapping] ??
-                                  FLOW_STYLE["default"]) + "44",
+                              backgroundColor: tagColor + "22",
+                              color: tagColor,
+                              borderColor: tagColor + "44",
                             }}
                           >
-                            {getFlowName(tag)}
+                            {tag}
                           </span>
                           {tIndex < flow.length - 1 && (
                             <>

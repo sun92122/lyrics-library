@@ -21,10 +21,9 @@ import {
   Layers,
 } from "lucide-react";
 import {
-  FLOW_STYLE,
   getFlowName,
-  EX_FLOWS,
-  type FlowMapping,
+  getFlowTagByIndex,
+  getFlowColor,
 } from "@/constants/flow";
 
 export interface PlaylistSongItem {
@@ -366,41 +365,25 @@ export const PlaylistProModal: React.FC<PlaylistProModalProps> = ({
                             {flow.length > 0 && (
                               <div className="flex flex-wrap items-center gap-1 mt-1.5">
                                 {flow.slice(0, 5).map((tagId, tIdx) => {
-                                  const tag =
-                                    tagId < (song.sections.length || 0)
-                                      ? song.sections[tagId].name
-                                      : tagId <
-                                          (song.sections.length || 0) +
-                                            EX_FLOWS.length
-                                        ? EX_FLOWS[
-                                            tagId - (song.sections.length || 0)
-                                          ]
-                                        : (customFlow?.[
-                                            tagId -
-                                              (song.sections.length || 0) -
-                                              EX_FLOWS.length
-                                          ] ?? "?");
+                                  const rawTag = getFlowTagByIndex(
+                                    tagId,
+                                    song.sections,
+                                    customFlow,
+                                  );
+                                  const tag = getFlowName(rawTag);
+                                  const tagColor = getFlowColor(rawTag);
 
                                   return (
                                     <span
                                       key={tIdx}
                                       className="px-1.5 py-0.5 rounded text-[10px] font-bold border"
                                       style={{
-                                        backgroundColor:
-                                          (FLOW_STYLE[
-                                            tag as keyof FlowMapping
-                                          ] ?? FLOW_STYLE["default"]) + "22",
-                                        color:
-                                          FLOW_STYLE[
-                                            tag as keyof FlowMapping
-                                          ] ?? FLOW_STYLE["default"],
-                                        borderColor:
-                                          (FLOW_STYLE[
-                                            tag as keyof FlowMapping
-                                          ] ?? FLOW_STYLE["default"]) + "44",
+                                        backgroundColor: tagColor + "22",
+                                        color: tagColor,
+                                        borderColor: tagColor + "44",
                                       }}
                                     >
-                                      {getFlowName(tag)}
+                                      {tag}
                                     </span>
                                   );
                                 })}

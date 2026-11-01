@@ -114,6 +114,7 @@ export interface SongSchema {
     author?: string; // 詞曲作者 / 版權資訊
     ccli?: string; // CCLI 歌曲編號
     tags: string[]; // 主題分類標籤 (例: ["讚美", "恩典"])
+    arrangement?: number[]; // 預設歌序編排 (1~n: sections[0~n-1], 1001~1005: EX_FLOWS)
     assets?: Array<{
       type: "sheet" | "ppt" | "audio" | "external";
       name: string; // 資源檔案名稱
@@ -221,7 +222,8 @@ export interface PlaylistPayload {
   s: Array<{
     id: string; // 歌曲 ID
     k?: string; // 自訂使用調性 (例: "A")
-    flow?: string[]; // 段落自訂排程 (例: ["V1", "C", "V2", "C", "Tag"])
+    flow?: number[]; // 段落自訂排程 (1~n: sections[0~n-1], 1001~1005: EX_FLOWS, 2000+: customFlow)
+    customFlow?: string[]; // 額外自訂段落名稱 (例: ["Solo", "結尾重覆"])
     note?: string; // 敬拜備註 (例: "開頭鋼琴引導由弱漸強")
   }>;
 }

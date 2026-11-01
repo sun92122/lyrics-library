@@ -11,8 +11,10 @@ import {
   FLOW_ALIASES,
   FLOW_NAMES,
   EX_FLOWS,
+  FLOW_EX_BASE,
   getFlowName,
-  type FlowMapping,
+  getFlowTagByIndex,
+  getFlowColor,
 } from "@/constants/flow";
 import type { SongData, SectionItem } from "@/content.config";
 import {
@@ -386,7 +388,26 @@ export function validateSongData(raw: unknown): ValidationResult {
             }))
         : [],
       arrangement: Array.isArray(obj.meta.arrangement)
-        ? obj.meta.arrangement.filter((n: any) => typeof n === "number")
+        ? (() => {
+            const arr = obj.meta.arrangement.filter(
+              (n: any) => typeof n === "number",
+            );
+            const secLen = Array.isArray(obj.sections)
+              ? obj.sections.length
+              : 0;
+            const isOldFormat = arr.some(
+              (v: number) => v === 0 || (v >= secLen && v < 1000),
+            );
+            if (isOldFormat) {
+              return arr.map((v: number) => {
+                if (v >= 0 && v < secLen) return v + 1;
+                if (v >= secLen && v < secLen + EX_FLOWS.length)
+                  return FLOW_EX_BASE + (v - secLen);
+                return v;
+              });
+            }
+            return arr;
+          })()
         : [],
     },
     sections: obj.sections.map((sec: any) => ({
@@ -1319,7 +1340,7 @@ export const SongBuilder: React.FC = () => {
                 <div className="flex flex-wrap max-w-[80%] w-full items-center gap-1">
                   {sections.map((preset, presetIndex) => {
                     const tag = getFlowName(preset.name);
-                    const tagIndex = presetIndex;
+                    const tagIndex = presetIndex + 1;
                     return (
                       <button
                         key={`tag-${tagIndex}`}
@@ -1346,7 +1367,7 @@ export const SongBuilder: React.FC = () => {
                   <div className="flex-initial flex-shrink-0 w-px h-3 bg-slate-200 mx-1"></div>
                   {EX_FLOWS.map((preset, presetIndex) => {
                     const tag = getFlowName(preset);
-                    const tagIndex = presetIndex + (sections.length || 0);
+                    const tagIndex = FLOW_EX_BASE + presetIndex;
                     return (
                       <button
                         key={`tag-${tagIndex}`}
@@ -1377,12 +1398,9 @@ export const SongBuilder: React.FC = () => {
                 <>
                   <div className="w-full inline-block items-center !mt-1 px-2 pt-1 pb-2 bg-white rounded-xl border border-slate-200/80 min-h-[36px]">
                     {meta.arrangement.map((tagIndex, tIndex) => {
-                      const tag =
-                        tagIndex < (sections.length || 0)
-                          ? sections[tagIndex].name
-                          : tagIndex < (sections.length || 0) + EX_FLOWS.length
-                            ? EX_FLOWS[tagIndex - (sections.length || 0)]
-                            : "?";
+                      const rawTag = getFlowTagByIndex(tagIndex, sections);
+                      const tag = getFlowName(rawTag);
+                      const tagColor = getFlowColor(rawTag);
                       return (
                         <div
                           className="mt-1 inline-block text-wrap items-center"
@@ -1393,18 +1411,12 @@ export const SongBuilder: React.FC = () => {
                               <span
                                 className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
                                 style={{
-                                  backgroundColor:
-                                    (FLOW_STYLE[tag as keyof FlowMapping] ??
-                                      FLOW_STYLE["default"]) + "22",
-                                  color:
-                                    FLOW_STYLE[tag as keyof FlowMapping] ??
-                                    FLOW_STYLE["default"],
-                                  borderColor:
-                                    (FLOW_STYLE[tag as keyof FlowMapping] ??
-                                      FLOW_STYLE["default"]) + "44",
+                                  backgroundColor: tagColor + "22",
+                                  color: tagColor,
+                                  borderColor: tagColor + "44",
                                 }}
                               >
-                                {getFlowName(tag)}
+                                {tag}
                                 <button
                                   type="button"
                                   onClick={() => {
@@ -1476,7 +1488,7 @@ export const SongBuilder: React.FC = () => {
                               <ContextMenu.Separator className="my-1 border-t border-slate-200" />
                               {sections.map((preset, presetIndex) => {
                                 const presetTag = getFlowName(preset.name);
-                                const presetTagIndex = presetIndex;
+                                const presetTagIndex = presetIndex + 1;
                                 return (
                                   <ContextMenu.Item
                                     key={`replace-${presetTagIndex}`}
@@ -1502,7 +1514,7 @@ export const SongBuilder: React.FC = () => {
                               {EX_FLOWS.map((preset, presetIndex) => {
                                 const presetTag = getFlowName(preset);
                                 const presetTagIndex =
-                                  presetIndex + (sections.length || 0);
+                                  FLOW_EX_BASE + presetIndex;
                                 return (
                                   <ContextMenu.Item
                                     key={`replace-ex-${presetTagIndex}`}

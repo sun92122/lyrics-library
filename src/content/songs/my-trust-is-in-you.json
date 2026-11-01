@@ -9,7 +9,7 @@
       "b": "My Trust is in You"
     },
     "tags": ["火把音樂", "葡萄樹計畫"],
-    "arrangement": [7, 0, 1, 2, 8, 1, 2, 3, 4, 5, 2, 6],
+    "arrangement": [1001, 1, 2, 3, 1002, 2, 3, 4, 5, 6, 3, 7],
     "assets": [
       {
         "type": "youtube",

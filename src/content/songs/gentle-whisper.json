@@ -9,7 +9,7 @@
       "b": "Gentle Whisper"
     },
     "tags": ["約書亞樂團"],
-    "arrangement": [5, 0, 1, 2, 3, 6, 1, 2, 3, 7, 3, 3, 4, 9],
+    "arrangement": [1001, 1, 2, 3, 4, 1002, 2, 3, 4, 1003, 4, 4, 5, 1005],
     "assets": [
       {
         "type": "youtube",

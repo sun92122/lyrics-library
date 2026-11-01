@@ -9,7 +9,7 @@
       "b": "What A Beautiful Name"
     },
     "tags": ["KUA", "Hillsong", "約書亞樂團"],
-    "arrangement": [9, 0, 1, 2, 3, 4, 5, 6, 7, 6, 8, 8, 13],
+    "arrangement": [1001, 1, 2, 3, 4, 5, 6, 7, 8, 7, 9, 9, 1005],
     "assets": [
       {
         "type": "youtube",
@@ -224,7 +224,6 @@
         }
       ]
     },
-
     {
       "name": "$E",
       "lines": [

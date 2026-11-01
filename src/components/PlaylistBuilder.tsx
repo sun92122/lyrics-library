@@ -10,11 +10,12 @@ import {
 import type { SongWithId } from "@/content.config";
 import { CHROMATIC_SCALE } from "@/constants/keys";
 import {
-  FLOW_STYLE,
-  FLOW_ALIASES,
   EX_FLOWS,
+  FLOW_EX_BASE,
+  FLOW_CUSTOM_BASE,
   getFlowName,
-  type FlowMapping,
+  getFlowTagByIndex,
+  getFlowColor,
 } from "@/constants/flow";
 import {
   encodePlaylist,
@@ -233,13 +234,19 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
   const handleCopyOutline = async () => {
     const outlineMap = new Map<
       string,
-      { titleA: string; titleB?: string; originalKey?: string }
+      {
+        titleA: string;
+        titleB?: string;
+        originalKey?: string;
+        sections?: { name: string }[];
+      }
     >();
     availableSongs.forEach((s) => {
       outlineMap.set(s.id, {
         titleA: s.meta.title.a,
         titleB: s.meta.title.b,
         originalKey: s.meta.originalKey,
+        sections: s.sections,
       });
     });
 
@@ -698,13 +705,13 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                               <div className="flex flex-wrap max-w-[80%] w-full items-center gap-1">
                                 {song?.sections.map((preset, presetIndex) => {
                                   const tag = getFlowName(preset.name);
-                                  const tagIndex = presetIndex;
+                                  const tagIndex = presetIndex + 1;
                                   return (
                                     <button
                                       key={`tag-${tagIndex}`}
                                       type="button"
                                       onClick={() =>
-                                        toggleFlowTag(index, presetIndex)
+                                        toggleFlowTag(index, tagIndex)
                                       }
                                       className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
                                     >
@@ -716,18 +723,13 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                 <div className="flex-initial flex-shrink-0 w-px h-3 bg-slate-200 mx-1"></div>
                                 {EX_FLOWS.map((preset, presetIndex) => {
                                   const tag = getFlowName(preset);
-                                  const tagIndex =
-                                    presetIndex + (song?.sections.length || 0);
+                                  const tagIndex = FLOW_EX_BASE + presetIndex;
                                   return (
                                     <button
                                       key={`tag-${tagIndex}`}
                                       type="button"
                                       onClick={() =>
-                                        toggleFlowTag(
-                                          index,
-                                          presetIndex +
-                                            (song?.sections.length || 0),
-                                        )
+                                        toggleFlowTag(index, tagIndex)
                                       }
                                       className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
                                     >
@@ -743,9 +745,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                     onClick={() =>
                                       toggleFlowTag(
                                         index,
-                                        tagIndex +
-                                          (song?.sections.length || 0) +
-                                          EX_FLOWS.length,
+                                        FLOW_CUSTOM_BASE + tagIndex,
                                       )
                                     }
                                     className="whitespace-nowrap flex-shrink-0 px-1.5 py-0.5 rounded bg-white hover:bg-indigo-50 border border-slate-200 hover:border-indigo-300 text-[10px] font-semibold text-slate-600 hover:text-indigo-600 transition-colors"
@@ -782,21 +782,13 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                               <>
                                 <div className="w-full inline-block items-center !mt-1 px-2 pt-1 pb-2 bg-white rounded-xl border border-slate-200/80 min-h-[36px]">
                                   {flow.map((tagIndex, tIndex) => {
-                                    const tag =
-                                      tagIndex < (song?.sections.length || 0)
-                                        ? song!.sections[tagIndex].name
-                                        : tagIndex <
-                                            (song?.sections.length || 0) +
-                                              EX_FLOWS.length
-                                          ? EX_FLOWS[
-                                              tagIndex -
-                                                (song?.sections.length || 0)
-                                            ]
-                                          : customFlowTags[
-                                              tagIndex -
-                                                (song?.sections.length || 0) -
-                                                EX_FLOWS.length
-                                            ] || "?";
+                                    const rawTag = getFlowTagByIndex(
+                                      tagIndex,
+                                      song?.sections,
+                                      customFlowTags,
+                                    );
+                                    const tag = getFlowName(rawTag);
+                                    const tagColor = getFlowColor(rawTag);
                                     return (
                                       <ContextMenu.Root key={`flow-${tIndex}`}>
                                         <ContextMenu.Trigger asChild>
@@ -807,23 +799,12 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                             <span
                                               className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
                                               style={{
-                                                backgroundColor:
-                                                  (FLOW_STYLE[
-                                                    tag as keyof FlowMapping
-                                                  ] ?? FLOW_STYLE["default"]) +
-                                                  "22",
-                                                color:
-                                                  FLOW_STYLE[
-                                                    tag as keyof FlowMapping
-                                                  ] ?? FLOW_STYLE["default"],
-                                                borderColor:
-                                                  (FLOW_STYLE[
-                                                    tag as keyof FlowMapping
-                                                  ] ?? FLOW_STYLE["default"]) +
-                                                  "44",
+                                                backgroundColor: tagColor + "22",
+                                                color: tagColor,
+                                                borderColor: tagColor + "44",
                                               }}
                                             >
-                                              {getFlowName(tag)}
+                                              {tag}
                                               <button
                                                 type="button"
                                                 onClick={() =>
@@ -881,7 +862,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                                     changeFlowTag(
                                                       index,
                                                       tIndex,
-                                                      presetIndex,
+                                                      presetIndex + 1,
                                                     )
                                                   }
                                                   className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
@@ -902,9 +883,8 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                                     changeFlowTag(
                                                       index,
                                                       tIndex,
-                                                      presetIndex +
-                                                        (song?.sections
-                                                          .length || 0),
+                                                      FLOW_EX_BASE +
+                                                        presetIndex,
                                                     )
                                                   }
                                                   className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
@@ -922,10 +902,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                                   changeFlowTag(
                                                     index,
                                                     tIndex,
-                                                    tagIndex +
-                                                      (song?.sections.length ||
-                                                        0) +
-                                                      EX_FLOWS.length,
+                                                    FLOW_CUSTOM_BASE + tagIndex,
                                                   )
                                                 }
                                                 className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
@@ -958,7 +935,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                   onClick={() => {
                                     const defaultFlow =
                                       song?.meta.arrangement ||
-                                      song?.sections.map((_, i) => i) ||
+                                      song?.sections.map((_, i) => i + 1) ||
                                       [];
 
                                     updateItem(index, { flow: defaultFlow });

@@ -32,6 +32,10 @@ export interface FlowMapping {
 
 export const EX_FLOWS = ["$I", "$Inter", "$Worship", "$Prayer", "$O"] as const;
 
+export const FLOW_SECTION_OFFSET = 1; // 1 ~ n represents sections[0 ~ n-1]
+export const FLOW_EX_BASE = 1001; // 1001 ~ 1005 represents EX_FLOWS
+export const FLOW_CUSTOM_BASE = 2000; // 2000+ represents customFlow
+
 export const FLOW_STYLE: FlowMapping = {
   $V: "#0077CC",
   $V1: "#0077CC",
@@ -321,3 +325,39 @@ export const getFlowName = (
       ? FLOW_NAMES[nameSet][FLOW_ALIASES[flow] as keyof FlowMapping]
       : flow;
 };
+
+/**
+ * Resolves an arrangement/flow tag ID into its section name or flow string.
+ * - 1 ~ n: sections[tagId - 1].name
+ * - 1001 ~ 1005: EX_FLOWS[tagId - 1001]
+ * - 2000+: customFlow[tagId - 2000]
+ */
+export function getFlowTagByIndex(
+  tagId: number,
+  sections?: { name: string }[] | null,
+  customFlow?: string[] | null,
+): string {
+  const sectionsCount = sections?.length || 0;
+  if (tagId >= FLOW_SECTION_OFFSET && tagId <= sectionsCount) {
+    return sections![tagId - FLOW_SECTION_OFFSET].name;
+  }
+  if (tagId >= FLOW_EX_BASE && tagId < FLOW_EX_BASE + EX_FLOWS.length) {
+    return EX_FLOWS[tagId - FLOW_EX_BASE];
+  }
+  if (tagId >= FLOW_CUSTOM_BASE) {
+    return customFlow?.[tagId - FLOW_CUSTOM_BASE] ?? "?";
+  }
+  return "?";
+}
+
+/**
+ * Returns the hex color string for a flow tag or its alias.
+ */
+export function getFlowColor(tag: string): string {
+  if (!tag || tag === "?") return FLOW_STYLE["default"];
+  return (
+    FLOW_STYLE[tag as keyof FlowMapping] ??
+    FLOW_STYLE[FLOW_ALIASES[tag] as keyof FlowMapping] ??
+    FLOW_STYLE["default"]
+  );
+}
