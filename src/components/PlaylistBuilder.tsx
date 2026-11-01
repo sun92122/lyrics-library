@@ -175,6 +175,15 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
     updateItem(itemIndex, { flow: nextFlow });
   };
 
+  const duplicateFlowTagAt = (itemIndex: number, tagIndex: number) => {
+    const it = items[itemIndex];
+    const currentFlow = it.flow || [];
+    if (tagIndex < 0 || tagIndex >= currentFlow.length) return;
+    const nextFlow = [...currentFlow];
+    nextFlow.splice(tagIndex + 1, 0, nextFlow[tagIndex]);
+    updateItem(itemIndex, { flow: nextFlow });
+  };
+
   const changeFlowTag = (
     itemIndex: number,
     tagIndex: number,
@@ -843,7 +852,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                           </div>
                                         </ContextMenu.Trigger>
                                         <ContextMenu.Content className="bg-white rounded-lg shadow-md border border-slate-200 py-1.5 min-w-[140px] px-1 z-50">
-                                          {/* 左移、右移、更換 */}
+                                          {/* 左移、右移、複製 */}
                                           <ContextMenu.Item
                                             onClick={() =>
                                               moveFlowTag(index, tIndex, "left")
@@ -863,6 +872,14 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                             className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
                                           >
                                             右移
+                                          </ContextMenu.Item>
+                                          <ContextMenu.Item
+                                            onClick={() =>
+                                              duplicateFlowTagAt(index, tIndex)
+                                            }
+                                            className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                          >
+                                            複製
                                           </ContextMenu.Item>
                                           {isBasicSection && hasSecondaryLanguage && (
                                             <>
@@ -894,36 +911,19 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                               const presetTagIndex =
                                                 presetIndex + 1;
                                               return (
-                                                <React.Fragment
+                                                <ContextMenu.Item
                                                   key={`change-${presetIndex}`}
+                                                  onClick={() =>
+                                                    changeFlowTag(
+                                                      index,
+                                                      tIndex,
+                                                      presetTagIndex,
+                                                    )
+                                                  }
+                                                  className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
                                                 >
-                                                  <ContextMenu.Item
-                                                    onClick={() =>
-                                                      changeFlowTag(
-                                                        index,
-                                                        tIndex,
-                                                        presetTagIndex,
-                                                      )
-                                                    }
-                                                    className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
-                                                  >
-                                                    {presetTag}
-                                                  </ContextMenu.Item>
-                                                  {hasSecondaryLanguage && (
-                                                    <ContextMenu.Item
-                                                      onClick={() =>
-                                                        changeFlowTag(
-                                                          index,
-                                                          tIndex,
-                                                          -presetTagIndex,
-                                                        )
-                                                      }
-                                                      className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
-                                                    >
-                                                      {presetTag}（{secondaryLanguage}）
-                                                    </ContextMenu.Item>
-                                                  )}
-                                                </React.Fragment>
+                                                  {presetTag}
+                                                </ContextMenu.Item>
                                               );
                                             },
                                           )}

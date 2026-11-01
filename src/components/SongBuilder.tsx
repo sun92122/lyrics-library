@@ -1449,7 +1449,7 @@ export const SongBuilder: React.FC = () => {
                               </span>
                             </ContextMenu.Trigger>
                             <ContextMenu.Content className="bg-white rounded-lg shadow-lg border border-slate-200/80 p-2 min-w-[140px] z-50">
-                              {/* 左移、右移、更換 */}
+                              {/* 左移、右移、複製 */}
                               <ContextMenu.Item
                                 onSelect={() => {
                                   setMeta((prev) => {
@@ -1496,6 +1496,28 @@ export const SongBuilder: React.FC = () => {
                               >
                                 右移
                               </ContextMenu.Item>
+                              <ContextMenu.Item
+                                onSelect={() => {
+                                  setMeta((prev) => {
+                                    if (!prev.arrangement) return prev;
+                                    const newArrangement = [
+                                      ...prev.arrangement,
+                                    ];
+                                    newArrangement.splice(
+                                      tIndex + 1,
+                                      0,
+                                      newArrangement[tIndex],
+                                    );
+                                    return {
+                                      ...prev,
+                                      arrangement: newArrangement,
+                                    };
+                                  });
+                                }}
+                                className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
+                              >
+                                複製
+                              </ContextMenu.Item>
                               {isBasicSection && hasSecondaryLanguage && (
                                 <>
                                   <ContextMenu.Separator className="my-1 border-t border-slate-200" />
@@ -1529,52 +1551,29 @@ export const SongBuilder: React.FC = () => {
                                 const presetTag = getFlowName(preset.name);
                                 const presetTagIndex = presetIndex + 1;
                                 return (
-                                  <React.Fragment
+                                  <ContextMenu.Item
                                     key={`replace-${presetTagIndex}`}
+                                    onSelect={() => {
+                                      setMeta((prev) => {
+                                        if (!prev.arrangement) return prev;
+                                        const newArrangement = [
+                                          ...prev.arrangement,
+                                        ];
+                                        newArrangement[tIndex] =
+                                          presetTagIndex;
+                                        return {
+                                          ...prev,
+                                          arrangement: newArrangement,
+                                        };
+                                      });
+                                    }}
+                                    className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
                                   >
-                                    <ContextMenu.Item
-                                      onSelect={() => {
-                                        setMeta((prev) => {
-                                          if (!prev.arrangement) return prev;
-                                          const newArrangement = [
-                                            ...prev.arrangement,
-                                          ];
-                                          newArrangement[tIndex] =
-                                            presetTagIndex;
-                                          return {
-                                            ...prev,
-                                            arrangement: newArrangement,
-                                          };
-                                        });
-                                      }}
-                                      className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
-                                    >
-                                      更換為 {presetTag}
-                                    </ContextMenu.Item>
-                                    {hasSecondaryLanguage && (
-                                      <ContextMenu.Item
-                                        onSelect={() => {
-                                          setMeta((prev) => {
-                                            if (!prev.arrangement) return prev;
-                                            const newArrangement = [
-                                              ...prev.arrangement,
-                                            ];
-                                            newArrangement[tIndex] =
-                                              -presetTagIndex;
-                                            return {
-                                              ...prev,
-                                              arrangement: newArrangement,
-                                            };
-                                          });
-                                        }}
-                                        className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
-                                      >
-                                        更換為 {presetTag}（{secondaryLanguage}）
-                                      </ContextMenu.Item>
-                                    )}
-                                  </React.Fragment>
+                                    更換為 {presetTag}
+                                  </ContextMenu.Item>
                                 );
                               })}
+                              <ContextMenu.Separator className="my-1 border-t border-slate-200" />
                               {EX_FLOWS.map((preset, presetIndex) => {
                                 const presetTag = getFlowName(preset);
                                 const presetTagIndex =
