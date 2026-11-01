@@ -1417,7 +1417,7 @@ export const SongBuilder: React.FC = () => {
                           className="mt-1 inline-block text-wrap items-center"
                           key={tIndex}
                         >
-                          <ContextMenu.Root>
+                          <ContextMenu.Root modal={false}>
                             <ContextMenu.Trigger asChild>
                               <span
                                 className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
@@ -1448,7 +1448,11 @@ export const SongBuilder: React.FC = () => {
                                 </button>
                               </span>
                             </ContextMenu.Trigger>
-                            <ContextMenu.Content className="bg-white rounded-lg shadow-lg border border-slate-200/80 p-2 min-w-[140px] z-50">
+                            <ContextMenu.Portal>
+                              <ContextMenu.Content
+                                onCloseAutoFocus={(e) => e.preventDefault()}
+                                className="bg-white rounded-lg shadow-lg border border-slate-200/80 p-2 min-w-[140px] z-50"
+                              >
                               {/* 左移、右移、複製 */}
                               <ContextMenu.Item
                                 onSelect={() => {
@@ -1601,7 +1605,8 @@ export const SongBuilder: React.FC = () => {
                                 );
                               })}
                             </ContextMenu.Content>
-                          </ContextMenu.Root>
+                          </ContextMenu.Portal>
+                        </ContextMenu.Root>
                           {meta.arrangement &&
                             tIndex < meta.arrangement.length - 1 && (
                               <>

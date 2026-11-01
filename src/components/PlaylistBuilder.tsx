@@ -814,7 +814,10 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                     );
                                     const tagColor = getFlowColor(rawTag);
                                     return (
-                                      <ContextMenu.Root key={`flow-${tIndex}`}>
+                                      <ContextMenu.Root
+                                        key={`flow-${tIndex}`}
+                                        modal={false}
+                                      >
                                         <ContextMenu.Trigger asChild>
                                           <div
                                             className="mt-1 inline-block text-wrap items-center"
@@ -823,7 +826,8 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                             <span
                                               className="inline-flex items-center gap-1 px-2 py-0.5 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-semibold border border-indigo-100"
                                               style={{
-                                                backgroundColor: tagColor + "22",
+                                                backgroundColor:
+                                                  tagColor + "22",
                                                 color: tagColor,
                                                 borderColor: tagColor + "44",
                                               }}
@@ -851,7 +855,13 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                             )}
                                           </div>
                                         </ContextMenu.Trigger>
-                                        <ContextMenu.Content className="bg-white rounded-lg shadow-md border border-slate-200 py-1.5 min-w-[140px] px-1 z-50">
+                                        <ContextMenu.Portal>
+                                          <ContextMenu.Content
+                                            onCloseAutoFocus={(e) =>
+                                              e.preventDefault()
+                                            }
+                                            className="bg-white rounded-lg shadow-md border border-slate-200 py-1.5 min-w-[140px] px-1 z-50"
+                                          >
                                           {/* 左移、右移、複製 */}
                                           <ContextMenu.Item
                                             onClick={() =>
@@ -967,6 +977,7 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                             ),
                                           )}
                                         </ContextMenu.Content>
+                                        </ContextMenu.Portal>
                                       </ContextMenu.Root>
                                     );
                                   })}
