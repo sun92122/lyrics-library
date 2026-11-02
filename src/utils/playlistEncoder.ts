@@ -4,6 +4,7 @@ import {
   getFlowName,
   formatFlowTagName,
 } from "@/constants/flow";
+import { getLanguageName } from "@/constants/languages";
 
 export interface PlaylistItem {
   id: string; // 歌曲 ID
@@ -84,7 +85,7 @@ export function formatPlaylistOutline(
 
     const song = songMap.get(item.id);
     const title = song ? song.titleA : item.id;
-    const secondaryLanguage = song?.languages?.b?.trim() || "";
+    const secondaryLanguage = getLanguageName(song?.languages?.b?.trim()) || "";
     const keyInfo = item.k
       ? `[調性: ${item.k}]`
       : // : song?.originalKey

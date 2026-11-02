@@ -27,7 +27,7 @@ export const songAssetSchema = z.object({
 export const songSchema = z.object({
   meta: z.object({
     languages: z.object({
-      a: z.string().default("中文"),
+      a: z.string().default("zh"),
       b: z.string().optional(),
     }),
     title: z.object({

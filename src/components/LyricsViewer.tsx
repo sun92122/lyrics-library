@@ -9,6 +9,7 @@ import {
   type FlowMapping,
 } from "@/constants/flow";
 import { transposeChord, getSemitoneOffset } from "@/utils/transposer";
+import { getLanguageName } from "@/constants/languages";
 import {
   formatLyricsText,
   type LanguageMode,
@@ -129,7 +130,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
                       : "text-slate-600 hover:text-slate-900"
                   }`}
                 >
-                  {song.meta.languages.a || "主語言"}
+                  {getLanguageName(song.meta.languages.a) || "主語言"}
                 </button>
                 {hasLanguageB && (
                   <button
@@ -239,7 +240,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
                   );
                   if (!rawTag || rawTag === "?") return null;
                   const secondaryLanguage =
-                    song?.meta.languages?.b?.trim() || "";
+                    getLanguageName(song?.meta.languages?.b?.trim()) || "";
                   const tag = formatFlowTagName(
                     tagIndex,
                     rawTag,

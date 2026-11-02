@@ -9,6 +9,7 @@ import {
 
 import type { SongWithId } from "@/content.config";
 import { CHROMATIC_SCALE } from "@/constants/keys";
+import { getLanguageName } from "@/constants/languages";
 import {
   EX_FLOWS,
   FLOW_EX_BASE,
@@ -795,7 +796,9 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                 <div className="w-full inline-block items-center !mt-1 px-2 pt-1 pb-2 bg-white rounded-xl border border-slate-200/80 min-h-[36px]">
                                   {flow.map((tagIndex, tIndex) => {
                                     const secondaryLanguage =
-                                      song?.meta.languages?.b?.trim() || "";
+                                      getLanguageName(
+                                        song?.meta.languages?.b?.trim(),
+                                      ) || "";
                                     const hasSecondaryLanguage =
                                       Boolean(secondaryLanguage);
                                     const isBasicSection =
@@ -862,121 +865,130 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                                             }
                                             className="bg-white rounded-lg shadow-md border border-slate-200 py-1.5 min-w-[140px] px-1 z-50"
                                           >
-                                          {/* 左移、右移、複製 */}
-                                          <ContextMenu.Item
-                                            onClick={() =>
-                                              moveFlowTag(index, tIndex, "left")
-                                            }
-                                            className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
-                                          >
-                                            左移
-                                          </ContextMenu.Item>
-                                          <ContextMenu.Item
-                                            onClick={() =>
-                                              moveFlowTag(
-                                                index,
-                                                tIndex,
-                                                "right",
-                                              )
-                                            }
-                                            className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
-                                          >
-                                            右移
-                                          </ContextMenu.Item>
-                                          <ContextMenu.Item
-                                            onClick={() =>
-                                              duplicateFlowTagAt(index, tIndex)
-                                            }
-                                            className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
-                                          >
-                                            複製
-                                          </ContextMenu.Item>
-                                          {isBasicSection && hasSecondaryLanguage && (
-                                            <>
-                                              <ContextMenu.Separator className="my-1 h-px bg-slate-200" />
-                                              <ContextMenu.Item
-                                                onClick={() =>
-                                                  changeFlowTag(
-                                                    index,
-                                                    tIndex,
-                                                    tagIndex > 0
-                                                      ? -tagIndex
-                                                      : Math.abs(tagIndex),
-                                                  )
-                                                }
-                                                className="px-2 py-1 text-xs text-indigo-600 font-medium hover:bg-indigo-50 rounded cursor-pointer select-none"
-                                              >
-                                                {tagIndex > 0
-                                                  ? `標示為「${getFlowName(rawTag)}（${secondaryLanguage}）」`
-                                                  : `還原為「${getFlowName(rawTag)}」`}
-                                              </ContextMenu.Item>
-                                            </>
-                                          )}
-                                          <ContextMenu.Separator className="my-1 h-px bg-slate-200" />
-                                          {song?.sections.map(
-                                            (preset, presetIndex) => {
-                                              const presetTag = getFlowName(
-                                                preset.name,
-                                              );
-                                              const presetTagIndex =
-                                                presetIndex + 1;
-                                              return (
+                                            {/* 左移、右移、複製 */}
+                                            <ContextMenu.Item
+                                              onClick={() =>
+                                                moveFlowTag(
+                                                  index,
+                                                  tIndex,
+                                                  "left",
+                                                )
+                                              }
+                                              className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                            >
+                                              左移
+                                            </ContextMenu.Item>
+                                            <ContextMenu.Item
+                                              onClick={() =>
+                                                moveFlowTag(
+                                                  index,
+                                                  tIndex,
+                                                  "right",
+                                                )
+                                              }
+                                              className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                            >
+                                              右移
+                                            </ContextMenu.Item>
+                                            <ContextMenu.Item
+                                              onClick={() =>
+                                                duplicateFlowTagAt(
+                                                  index,
+                                                  tIndex,
+                                                )
+                                              }
+                                              className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                            >
+                                              複製
+                                            </ContextMenu.Item>
+                                            {isBasicSection &&
+                                              hasSecondaryLanguage && (
+                                                <>
+                                                  <ContextMenu.Separator className="my-1 h-px bg-slate-200" />
+                                                  <ContextMenu.Item
+                                                    onClick={() =>
+                                                      changeFlowTag(
+                                                        index,
+                                                        tIndex,
+                                                        tagIndex > 0
+                                                          ? -tagIndex
+                                                          : Math.abs(tagIndex),
+                                                      )
+                                                    }
+                                                    className="px-2 py-1 text-xs text-indigo-600 font-medium hover:bg-indigo-50 rounded cursor-pointer select-none"
+                                                  >
+                                                    {tagIndex > 0
+                                                      ? `標示為「${getFlowName(rawTag)}（${secondaryLanguage}）」`
+                                                      : `還原為「${getFlowName(rawTag)}」`}
+                                                  </ContextMenu.Item>
+                                                </>
+                                              )}
+                                            <ContextMenu.Separator className="my-1 h-px bg-slate-200" />
+                                            {song?.sections.map(
+                                              (preset, presetIndex) => {
+                                                const presetTag = getFlowName(
+                                                  preset.name,
+                                                );
+                                                const presetTagIndex =
+                                                  presetIndex + 1;
+                                                return (
+                                                  <ContextMenu.Item
+                                                    key={`change-${presetIndex}`}
+                                                    onClick={() =>
+                                                      changeFlowTag(
+                                                        index,
+                                                        tIndex,
+                                                        presetTagIndex,
+                                                      )
+                                                    }
+                                                    className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                                  >
+                                                    {presetTag}
+                                                  </ContextMenu.Item>
+                                                );
+                                              },
+                                            )}
+                                            <ContextMenu.Separator className="my-1 h-px bg-slate-200" />
+                                            {EX_FLOWS.map(
+                                              (preset, presetIndex) => {
+                                                const tag = getFlowName(preset);
+                                                return (
+                                                  <ContextMenu.Item
+                                                    key={`change-ex-${presetIndex}`}
+                                                    onClick={() =>
+                                                      changeFlowTag(
+                                                        index,
+                                                        tIndex,
+                                                        FLOW_EX_BASE +
+                                                          presetIndex,
+                                                      )
+                                                    }
+                                                    className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
+                                                  >
+                                                    {tag}
+                                                  </ContextMenu.Item>
+                                                );
+                                              },
+                                            )}
+                                            {customFlowTags.map(
+                                              (tag, tagIndex) => (
                                                 <ContextMenu.Item
-                                                  key={`change-${presetIndex}`}
+                                                  key={`change-custom-${tagIndex}`}
                                                   onClick={() =>
                                                     changeFlowTag(
                                                       index,
                                                       tIndex,
-                                                      presetTagIndex,
-                                                    )
-                                                  }
-                                                  className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
-                                                >
-                                                  {presetTag}
-                                                </ContextMenu.Item>
-                                              );
-                                            },
-                                          )}
-                                          <ContextMenu.Separator className="my-1 h-px bg-slate-200" />
-                                          {EX_FLOWS.map(
-                                            (preset, presetIndex) => {
-                                              const tag = getFlowName(preset);
-                                              return (
-                                                <ContextMenu.Item
-                                                  key={`change-ex-${presetIndex}`}
-                                                  onClick={() =>
-                                                    changeFlowTag(
-                                                      index,
-                                                      tIndex,
-                                                      FLOW_EX_BASE +
-                                                        presetIndex,
+                                                      FLOW_CUSTOM_BASE +
+                                                        tagIndex,
                                                     )
                                                   }
                                                   className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
                                                 >
                                                   {tag}
                                                 </ContextMenu.Item>
-                                              );
-                                            },
-                                          )}
-                                          {customFlowTags.map(
-                                            (tag, tagIndex) => (
-                                              <ContextMenu.Item
-                                                key={`change-custom-${tagIndex}`}
-                                                onClick={() =>
-                                                  changeFlowTag(
-                                                    index,
-                                                    tIndex,
-                                                    FLOW_CUSTOM_BASE + tagIndex,
-                                                  )
-                                                }
-                                                className="px-2 py-1 text-xs text-slate-700 hover:bg-slate-100 rounded cursor-pointer select-none"
-                                              >
-                                                {tag}
-                                              </ContextMenu.Item>
-                                            ),
-                                          )}
-                                        </ContextMenu.Content>
+                                              ),
+                                            )}
+                                          </ContextMenu.Content>
                                         </ContextMenu.Portal>
                                       </ContextMenu.Root>
                                     );

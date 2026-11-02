@@ -26,6 +26,7 @@ import {
   formatFlowTagName,
   getFlowColor,
 } from "@/constants/flow";
+import { getLanguageName } from "@/constants/languages";
 
 export interface PlaylistSongItem {
   item: PlaylistItem;
@@ -372,7 +373,9 @@ export const PlaylistProModal: React.FC<PlaylistProModalProps> = ({
                                     customFlow,
                                   );
                                   const secondaryLanguage =
-                                    song.meta.languages?.b?.trim() || "";
+                                    getLanguageName(
+                                      song.meta.languages?.b?.trim(),
+                                    ) || "";
                                   const tag = formatFlowTagName(
                                     tagId,
                                     rawTag,

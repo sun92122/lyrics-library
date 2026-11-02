@@ -7,6 +7,7 @@ import {
   getFlowColor,
 } from "@/constants/flow";
 import { getSemitoneOffset } from "@/utils/transposer";
+import { getLanguageName } from "@/constants/languages";
 import {
   decodePlaylist,
   formatPlaylistOutline,
@@ -441,7 +442,7 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                         customFlow,
                       );
                       const secondaryLanguage =
-                        song?.meta.languages?.b?.trim() || "";
+                        getLanguageName(song?.meta.languages?.b?.trim()) || "";
                       const tag = formatFlowTagName(
                         tagId,
                         rawTag,

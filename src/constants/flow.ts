@@ -1,3 +1,5 @@
+import { getLanguageName } from "./languages";
+
 export interface FlowMapping {
   $V: string;
   $V1: string;
@@ -363,8 +365,9 @@ export function formatFlowTagName(
 ): string {
   const name = getFlowName(rawTag, nameSet);
   if (tagId < 0) {
-    const langSuffix = secondaryLanguage?.trim();
-    return langSuffix ? `${name}（${langSuffix}）` : `${name}（英文）`;
+    const langDisplay = getLanguageName(secondaryLanguage);
+    const langSuffix = langDisplay?.trim();
+    return langSuffix ? `${name}（${langSuffix}）` : `${name}（次）`;
   }
   return name;
 }

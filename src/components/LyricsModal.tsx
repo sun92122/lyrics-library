@@ -28,7 +28,7 @@ export const LyricsModal: React.FC<LyricsModalProps> = ({ song: songProp }) => {
     songProp ||
     useStore(currentSong) ||
     ({
-      meta: { title: { a: "Unknown" }, languages: { a: "中文" }, tags: [] },
+      meta: { title: { a: "Unknown" }, languages: { a: "zh" }, tags: [] },
       sections: [],
     } as SongData);
 

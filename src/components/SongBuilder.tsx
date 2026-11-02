@@ -17,6 +17,8 @@ import {
   formatFlowTagName,
   getFlowColor,
 } from "@/constants/flow";
+import { getLanguageName, getLanguageCode } from "@/constants/languages";
+import { LanguageCombobox } from "@/components/LanguageCombobox";
 import type { SongData, SectionItem } from "@/content.config";
 import {
   Fieldset,
@@ -344,11 +346,11 @@ export function validateSongData(raw: unknown): ValidationResult {
         a:
           typeof obj.meta.languages?.a === "string" &&
           obj.meta.languages.a.trim()
-            ? obj.meta.languages.a.trim()
-            : "中文",
+            ? getLanguageCode(obj.meta.languages.a.trim()) || "zh"
+            : "zh",
         b:
           typeof obj.meta.languages?.b === "string"
-            ? obj.meta.languages.b.trim()
+            ? getLanguageCode(obj.meta.languages.b.trim())
             : "",
       },
       title: {
@@ -452,7 +454,7 @@ export const SongBuilder: React.FC = () => {
   const [id, setId] = useState("");
   const [idError, setIdError] = useState<string | null>(null);
   const [meta, setMeta] = useState<SongData["meta"]>({
-    languages: { a: "中文", b: "" },
+    languages: { a: "zh", b: "" },
     title: { a: "", b: "" },
     tags: [],
     arrangement: [],
@@ -503,8 +505,10 @@ export const SongBuilder: React.FC = () => {
 
     setMeta({
       languages: {
-        a: songData.meta?.languages?.a || "中文",
-        b: songData.meta?.languages?.b || (isBilingualSong ? "English" : ""),
+        a: getLanguageCode(songData.meta?.languages?.a) || "zh",
+        b:
+          getLanguageCode(songData.meta?.languages?.b) ||
+          (isBilingualSong ? "en" : ""),
       },
       title: {
         a: songData.meta?.title?.a || "",
@@ -663,7 +667,7 @@ export const SongBuilder: React.FC = () => {
     if (parsedSections.some((sec) => sec.lines.some((line) => line.b))) {
       setMeta((prev) => ({
         ...prev,
-        languages: { ...prev.languages, b: prev.languages.b || "English" },
+        languages: { ...prev.languages, b: prev.languages.b || "en" },
       }));
     }
   }, [rawLyrics, isBilingual]);
@@ -956,40 +960,32 @@ export const SongBuilder: React.FC = () => {
               />
             </Field>
           </Field>
-          <Field className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Field className="flex flex-col gap-2">
-              <Label className="text-sm font-medium text-slate-700">
-                主要語言*
-              </Label>
-              <Input
-                value={meta.languages.a}
-                onChange={(e) =>
-                  setMeta((prev) => ({
-                    ...prev,
-                    languages: { ...prev.languages, a: e.target.value },
-                  }))
-                }
-                placeholder="中文"
-                className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </Field>
-            <Field className="flex flex-col gap-2">
-              <Label className="text-sm font-medium text-slate-700">
-                次要語言
-              </Label>
-              <Input
-                value={meta.languages.b}
-                onChange={(e) =>
-                  setMeta((prev) => ({
-                    ...prev,
-                    languages: { ...prev.languages, b: e.target.value },
-                  }))
-                }
-                placeholder="English"
-                className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              />
-            </Field>
-          </Field>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <LanguageCombobox
+              label="主要語言"
+              required
+              value={meta.languages.a}
+              onChange={(code) =>
+                setMeta((prev) => ({
+                  ...prev,
+                  languages: { ...prev.languages, a: code },
+                }))
+              }
+              placeholder="選擇主要語言 (預設 zh)"
+            />
+            <LanguageCombobox
+              label="次要語言"
+              allowClear
+              value={meta.languages.b || ""}
+              onChange={(code) =>
+                setMeta((prev) => ({
+                  ...prev,
+                  languages: { ...prev.languages, b: code },
+                }))
+              }
+              placeholder="選擇次要語言 (可留空)"
+            />
+          </div>
           <Field className="flex flex-col gap-2">
             <Label className="text-sm font-medium text-slate-700">
               創作者 / 樂團 (Author / Artist)
@@ -1400,7 +1396,7 @@ export const SongBuilder: React.FC = () => {
                   <div className="w-full inline-block items-center !mt-1 px-2 pt-1 pb-2 bg-white rounded-xl border border-slate-200/80 min-h-[36px]">
                     {meta.arrangement.map((tagIndex, tIndex) => {
                       const secondaryLanguage =
-                        meta.languages?.b?.trim() || "";
+                        getLanguageName(meta.languages?.b?.trim()) || "";
                       const hasSecondaryLanguage = Boolean(secondaryLanguage);
                       const isBasicSection =
                         Math.abs(tagIndex) >= 1 &&
@@ -1453,160 +1449,161 @@ export const SongBuilder: React.FC = () => {
                                 onCloseAutoFocus={(e) => e.preventDefault()}
                                 className="bg-white rounded-lg shadow-lg border border-slate-200/80 p-2 min-w-[140px] z-50"
                               >
-                              {/* 左移、右移、複製 */}
-                              <ContextMenu.Item
-                                onSelect={() => {
-                                  setMeta((prev) => {
-                                    if (!prev.arrangement) return prev;
-                                    const newArrangement = [
-                                      ...prev.arrangement,
-                                    ];
-                                    if (tIndex > 0) {
-                                      const temp = newArrangement[tIndex - 1];
-                                      newArrangement[tIndex - 1] =
-                                        newArrangement[tIndex];
-                                      newArrangement[tIndex] = temp;
-                                    }
-                                    return {
-                                      ...prev,
-                                      arrangement: newArrangement,
-                                    };
-                                  });
-                                }}
-                                className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
-                              >
-                                左移
-                              </ContextMenu.Item>
-                              <ContextMenu.Item
-                                onSelect={() => {
-                                  setMeta((prev) => {
-                                    if (!prev.arrangement) return prev;
-                                    const newArrangement = [
-                                      ...prev.arrangement,
-                                    ];
-                                    if (tIndex < newArrangement.length - 1) {
-                                      const temp = newArrangement[tIndex + 1];
-                                      newArrangement[tIndex + 1] =
-                                        newArrangement[tIndex];
-                                      newArrangement[tIndex] = temp;
-                                    }
-                                    return {
-                                      ...prev,
-                                      arrangement: newArrangement,
-                                    };
-                                  });
-                                }}
-                                className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
-                              >
-                                右移
-                              </ContextMenu.Item>
-                              <ContextMenu.Item
-                                onSelect={() => {
-                                  setMeta((prev) => {
-                                    if (!prev.arrangement) return prev;
-                                    const newArrangement = [
-                                      ...prev.arrangement,
-                                    ];
-                                    newArrangement.splice(
-                                      tIndex + 1,
-                                      0,
-                                      newArrangement[tIndex],
-                                    );
-                                    return {
-                                      ...prev,
-                                      arrangement: newArrangement,
-                                    };
-                                  });
-                                }}
-                                className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
-                              >
-                                複製
-                              </ContextMenu.Item>
-                              {isBasicSection && hasSecondaryLanguage && (
-                                <>
-                                  <ContextMenu.Separator className="my-1 border-t border-slate-200" />
-                                  <ContextMenu.Item
-                                    onSelect={() => {
-                                      setMeta((prev) => {
-                                        if (!prev.arrangement) return prev;
-                                        const newArrangement = [
-                                          ...prev.arrangement,
-                                        ];
-                                        newArrangement[tIndex] =
-                                          tagIndex > 0
-                                            ? -tagIndex
-                                            : Math.abs(tagIndex);
-                                        return {
-                                          ...prev,
-                                          arrangement: newArrangement,
-                                        };
-                                      });
-                                    }}
-                                    className="px-2 py-1 text-sm text-indigo-600 font-medium hover:bg-indigo-50 rounded cursor-pointer"
-                                  >
-                                    {tagIndex > 0
-                                      ? `標示為「${getFlowName(rawTag)}（${secondaryLanguage}）」`
-                                      : `還原為「${getFlowName(rawTag)}」`}
-                                  </ContextMenu.Item>
-                                </>
-                              )}
-                              <ContextMenu.Separator className="my-1 border-t border-slate-200" />
-                              {sections.map((preset, presetIndex) => {
-                                const presetTag = getFlowName(preset.name);
-                                const presetTagIndex = presetIndex + 1;
-                                return (
-                                  <ContextMenu.Item
-                                    key={`replace-${presetTagIndex}`}
-                                    onSelect={() => {
-                                      setMeta((prev) => {
-                                        if (!prev.arrangement) return prev;
-                                        const newArrangement = [
-                                          ...prev.arrangement,
-                                        ];
-                                        newArrangement[tIndex] =
-                                          presetTagIndex;
-                                        return {
-                                          ...prev,
-                                          arrangement: newArrangement,
-                                        };
-                                      });
-                                    }}
-                                    className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
-                                  >
-                                    更換為 {presetTag}
-                                  </ContextMenu.Item>
-                                );
-                              })}
-                              <ContextMenu.Separator className="my-1 border-t border-slate-200" />
-                              {EX_FLOWS.map((preset, presetIndex) => {
-                                const presetTag = getFlowName(preset);
-                                const presetTagIndex =
-                                  FLOW_EX_BASE + presetIndex;
-                                return (
-                                  <ContextMenu.Item
-                                    key={`replace-ex-${presetTagIndex}`}
-                                    onSelect={() => {
-                                      setMeta((prev) => {
-                                        if (!prev.arrangement) return prev;
-                                        const newArrangement = [
-                                          ...prev.arrangement,
-                                        ];
-                                        newArrangement[tIndex] = presetTagIndex;
-                                        return {
-                                          ...prev,
-                                          arrangement: newArrangement,
-                                        };
-                                      });
-                                    }}
-                                    className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
-                                  >
-                                    更換為 {presetTag}
-                                  </ContextMenu.Item>
-                                );
-                              })}
-                            </ContextMenu.Content>
-                          </ContextMenu.Portal>
-                        </ContextMenu.Root>
+                                {/* 左移、右移、複製 */}
+                                <ContextMenu.Item
+                                  onSelect={() => {
+                                    setMeta((prev) => {
+                                      if (!prev.arrangement) return prev;
+                                      const newArrangement = [
+                                        ...prev.arrangement,
+                                      ];
+                                      if (tIndex > 0) {
+                                        const temp = newArrangement[tIndex - 1];
+                                        newArrangement[tIndex - 1] =
+                                          newArrangement[tIndex];
+                                        newArrangement[tIndex] = temp;
+                                      }
+                                      return {
+                                        ...prev,
+                                        arrangement: newArrangement,
+                                      };
+                                    });
+                                  }}
+                                  className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
+                                >
+                                  左移
+                                </ContextMenu.Item>
+                                <ContextMenu.Item
+                                  onSelect={() => {
+                                    setMeta((prev) => {
+                                      if (!prev.arrangement) return prev;
+                                      const newArrangement = [
+                                        ...prev.arrangement,
+                                      ];
+                                      if (tIndex < newArrangement.length - 1) {
+                                        const temp = newArrangement[tIndex + 1];
+                                        newArrangement[tIndex + 1] =
+                                          newArrangement[tIndex];
+                                        newArrangement[tIndex] = temp;
+                                      }
+                                      return {
+                                        ...prev,
+                                        arrangement: newArrangement,
+                                      };
+                                    });
+                                  }}
+                                  className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
+                                >
+                                  右移
+                                </ContextMenu.Item>
+                                <ContextMenu.Item
+                                  onSelect={() => {
+                                    setMeta((prev) => {
+                                      if (!prev.arrangement) return prev;
+                                      const newArrangement = [
+                                        ...prev.arrangement,
+                                      ];
+                                      newArrangement.splice(
+                                        tIndex + 1,
+                                        0,
+                                        newArrangement[tIndex],
+                                      );
+                                      return {
+                                        ...prev,
+                                        arrangement: newArrangement,
+                                      };
+                                    });
+                                  }}
+                                  className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
+                                >
+                                  複製
+                                </ContextMenu.Item>
+                                {isBasicSection && hasSecondaryLanguage && (
+                                  <>
+                                    <ContextMenu.Separator className="my-1 border-t border-slate-200" />
+                                    <ContextMenu.Item
+                                      onSelect={() => {
+                                        setMeta((prev) => {
+                                          if (!prev.arrangement) return prev;
+                                          const newArrangement = [
+                                            ...prev.arrangement,
+                                          ];
+                                          newArrangement[tIndex] =
+                                            tagIndex > 0
+                                              ? -tagIndex
+                                              : Math.abs(tagIndex);
+                                          return {
+                                            ...prev,
+                                            arrangement: newArrangement,
+                                          };
+                                        });
+                                      }}
+                                      className="px-2 py-1 text-sm text-indigo-600 font-medium hover:bg-indigo-50 rounded cursor-pointer"
+                                    >
+                                      {tagIndex > 0
+                                        ? `標示為「${getFlowName(rawTag)}（${secondaryLanguage}）」`
+                                        : `還原為「${getFlowName(rawTag)}」`}
+                                    </ContextMenu.Item>
+                                  </>
+                                )}
+                                <ContextMenu.Separator className="my-1 border-t border-slate-200" />
+                                {sections.map((preset, presetIndex) => {
+                                  const presetTag = getFlowName(preset.name);
+                                  const presetTagIndex = presetIndex + 1;
+                                  return (
+                                    <ContextMenu.Item
+                                      key={`replace-${presetTagIndex}`}
+                                      onSelect={() => {
+                                        setMeta((prev) => {
+                                          if (!prev.arrangement) return prev;
+                                          const newArrangement = [
+                                            ...prev.arrangement,
+                                          ];
+                                          newArrangement[tIndex] =
+                                            presetTagIndex;
+                                          return {
+                                            ...prev,
+                                            arrangement: newArrangement,
+                                          };
+                                        });
+                                      }}
+                                      className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
+                                    >
+                                      更換為 {presetTag}
+                                    </ContextMenu.Item>
+                                  );
+                                })}
+                                <ContextMenu.Separator className="my-1 border-t border-slate-200" />
+                                {EX_FLOWS.map((preset, presetIndex) => {
+                                  const presetTag = getFlowName(preset);
+                                  const presetTagIndex =
+                                    FLOW_EX_BASE + presetIndex;
+                                  return (
+                                    <ContextMenu.Item
+                                      key={`replace-ex-${presetTagIndex}`}
+                                      onSelect={() => {
+                                        setMeta((prev) => {
+                                          if (!prev.arrangement) return prev;
+                                          const newArrangement = [
+                                            ...prev.arrangement,
+                                          ];
+                                          newArrangement[tIndex] =
+                                            presetTagIndex;
+                                          return {
+                                            ...prev,
+                                            arrangement: newArrangement,
+                                          };
+                                        });
+                                      }}
+                                      className="px-2 py-1 text-sm text-slate-700 hover:bg-indigo-50 rounded cursor-pointer"
+                                    >
+                                      更換為 {presetTag}
+                                    </ContextMenu.Item>
+                                  );
+                                })}
+                              </ContextMenu.Content>
+                            </ContextMenu.Portal>
+                          </ContextMenu.Root>
                           {meta.arrangement &&
                             tIndex < meta.arrangement.length - 1 && (
                               <>
