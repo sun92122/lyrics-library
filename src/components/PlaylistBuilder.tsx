@@ -88,6 +88,11 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
         !q ||
         song.id.toLowerCase().includes(q) ||
         song.meta.title.a.toLowerCase().includes(q) ||
+        song.meta.title.a
+          .toLowerCase()
+          .replace(/[祢妳]/g, "你")
+          .replace(/[祂牠]/g, "他")
+          .includes(q.replace(/[祢妳]/g, "你").replace(/[祂牠]/g, "他")) ||
         (song.meta.title.b && song.meta.title.b.toLowerCase().includes(q)) ||
         (song.meta.author && song.meta.author.toLowerCase().includes(q));
 
