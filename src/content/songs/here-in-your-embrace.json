@@ -1,0 +1,92 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "en"
+    },
+    "title": {
+      "a": "就這樣沉浸在祢的愛中",
+      "b": "Here in Your Embrace"
+    },
+    "tags": ["約書亞樂團", "大衛帳幕的榮耀 11 溫柔聖靈"],
+    "arrangement": [1001, 1, 2, 1, 2, 3, 3, 1002, 2, 4, 1005],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=bH-6cdmwhNU"
+      }
+    ],
+    "author": "約書亞樂團\n詞、曲：張全佑、謝思穎、璽恩、曾晨恩"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我在遠處望向 家的門口",
+          "b": "Here I am far away, longing for home"
+        },
+        {
+          "a": "祢在路的盡頭 等待著我",
+          "b": "There you stand at the gate waiting for me"
+        },
+        {
+          "a": "蹣跚狼狽的我 祢親吻我",
+          "b": "Desolate, yet I am met by Your kiss"
+        },
+        {
+          "a": "被祢掛念的我 不再失落",
+          "b": "I’m no longer at loss, here in Your heart"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祢接納我 回祢家中",
+          "b": "You pull me close, bring me back home"
+        },
+        {
+          "a": "有誰比祢愛我",
+          "b": "There is no love like Yours"
+        },
+        {
+          "a": "祢擁抱我 在祢懷中",
+          "b": "You hold me close in Your embrace"
+        },
+        {
+          "a": "祢永遠不放手",
+          "b": "You never let me go"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我想就這樣 沉浸在祢的愛中",
+          "b": "I just want to stay soaking deep within Your love"
+        },
+        {
+          "a": "我想就這樣 沉浸在祢的愛中",
+          "b": "I just want to stay soaking deep within Your love"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "我想就這樣 沉浸在祢的愛中",
+          "b": "I just want to stay soaking deep within Your love"
+        },
+        {
+          "a": "我想就這樣 沉浸在祢的懷中",
+          "b": "I just want to stay resting here in Your embrace"
+        }
+      ]
+    }
+  ]
+}

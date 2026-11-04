@@ -1,0 +1,111 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "en"
+    },
+    "title": {
+      "a": "我的生命獻給祢",
+      "b": "I Will Offer You My Life"
+    },
+    "tags": ["讚美之泉", "聽見這世代的呼喚"],
+    "arrangement": [1001, 1, 2, 1002, 1, 2, 1002, 3, 2, 2, 4, 1002, 5],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=x5elrTM-t6k"
+      }
+    ],
+    "ccli": "7176789",
+    "author": "讚美之泉\n詞、曲：曾祥怡",
+    "originalKey": "G"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "獻上生命 給最愛的耶穌",
+          "b": "I surrender all my life to Jesus"
+        },
+        {
+          "a": "完全順服 完全降服",
+          "b": "Give my everything for Your glory"
+        },
+        {
+          "a": "因祢恩典 使我得以事奉祢",
+          "b": "By Your grace alone, I can serve You with my all"
+        },
+        {
+          "a": "祢的選召沒有懷疑",
+          "b": "It's my calling, no holding back"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我的生命獻給祢 背起十架跟隨祢",
+          "b": "I will offer You my life, and with everything I have"
+        },
+        {
+          "a": "願祢的榮耀 彰顯在我生命",
+          "b": "Let Your glory come. Your name be lifted high"
+        },
+        {
+          "a": "我的心不要忘記 祢如何為我捨命",
+          "b": "Oh, my heart will not forget what You did upon the cross"
+        },
+        {
+          "a": "耶穌我愛祢 喜樂地跟隨祢",
+          "b": "Jesus, I love You, with joy, I follow You"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "賜給我屬於祢的夢想",
+          "b": "Let me see, see Your dreams and visions"
+        },
+        {
+          "a": "帶下祢國度如在天上",
+          "b": "Bringing down Your kingdom as in heaven"
+        },
+        {
+          "a": "賜給我奔跑不倦的力量",
+          "b": "Let me run, run and not be weary"
+        },
+        {
+          "a": "如鷹展翅上騰翱翔",
+          "b": "Like an eagle, soaring with You"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "耶穌我愛祢 喜樂地跟隨祢",
+          "b": "Jesus, I love You, with joy, I follow You"
+        }
+      ]
+    },
+    {
+      "name": "$O",
+      "lines": [
+        {
+          "a": "獻上生命 給最愛的耶穌",
+          "b": "I surrender all my life to Jesus"
+        },
+        {
+          "a": "我愛祢 我愛祢",
+          "b": "I love You, I love You"
+        }
+      ]
+    }
+  ]
+}

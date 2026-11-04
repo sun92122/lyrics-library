@@ -1,0 +1,128 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "en"
+    },
+    "title": {
+      "a": "祢是我的光",
+      "b": "You are the light of my life"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [1001, 1, 2, 3, 4, 1002, 1, 5, 3, 4, 6, 1005],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=bfwURZ4dcDI"
+      }
+    ],
+    "author": "約書亞樂團\n詞、曲：璽恩",
+    "originalKey": "G",
+    "bpm": 130
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "祢是我生命的光",
+          "b": "You are the light of my life"
+        },
+        {
+          "a": "讓我為祢不斷綻放",
+          "b": "Let me continually shine for You"
+        },
+        {
+          "a": "祢是我天國盼望",
+          "b": "You are my hope of heaven"
+        },
+        {
+          "a": "讓我為祢壯膽剛強",
+          "b": "Let me be strong and courageous for You"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "Woo~ Wow~"
+        },
+        {
+          "a": "Yeah~ Wow~"
+        }
+      ]
+    },
+    {
+      "name": "$PC",
+      "lines": [
+        {
+          "a": "歌唱跳舞和讚美 單單因為祢",
+          "b": "I sing, dance and praise, only because of You"
+        },
+        {
+          "a": "我肺腑中的氣息 全都出於祢",
+          "b": "The breath within me comes entirely from You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "頌讚榮耀歸於祢",
+          "b": "Praise and glory belong to You"
+        },
+        {
+          "a": "智慧能力屬於祢",
+          "b": "Wisoom and power are Yours"
+        },
+        {
+          "a": "全地都要讚美祢",
+          "b": "Let all the earth praise You"
+        },
+        {
+          "a": "榮耀歸祢 榮耀歸祢",
+          "b": "Glory to You, glory to You"
+        },
+        {
+          "a": "頌讚榮耀歸於祢",
+          "b": "Praise and glory belong to You"
+        },
+        {
+          "a": "智慧能力屬於祢",
+          "b": "Wisoom and power are Yours"
+        },
+        {
+          "a": "全地都要讚美祢",
+          "b": "Let all the earth praise You"
+        },
+        {
+          "a": "榮耀歸祢 榮耀歸祢",
+          "b": "Glory to You, glory to You"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "Woo~ Yeah~"
+        },
+        {
+          "a": "La~ Woo~"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "榮耀歸祢",
+          "b": "Glory to You"
+        }
+      ]
+    }
+  ]
+}
