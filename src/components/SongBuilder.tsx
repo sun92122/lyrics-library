@@ -399,7 +399,7 @@ export function validateSongData(raw: unknown): ValidationResult {
               ? obj.sections.length
               : 0;
             const isOldFormat = arr.some(
-              (v: number) => v === 0 || (v >= secLen && v < 1000),
+              (v: number) => v === 0 || (v > secLen && v < 1000),
             );
             if (isOldFormat) {
               return arr.map((v: number) => {
