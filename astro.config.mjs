@@ -2,6 +2,7 @@ import { defineConfig } from "astro/config";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
+import { unified } from "@astrojs/markdown-remark";
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,6 +25,8 @@ export default defineConfig({
     ],
   },
   markdown: {
-    remarkPlugins: [["remark-github-blockquote-alert", {}]],
+    processor: unified({
+      remarkPlugins: [["remark-github-blockquote-alert", {}]],
+    }),
   },
 });
