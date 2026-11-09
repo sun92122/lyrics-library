@@ -1,0 +1,123 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "en"
+    },
+    "title": {
+      "a": "直到列國萬民看見主",
+      "b": "Until The World Have Seen"
+    },
+    "tags": ["三一敬拜", "CLC"],
+    "arrangement": [1001, 1, 2, 3, 1002, 2, 3, 4, 1002, 3, 3, 5, 1005],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=VMOEXUsz874"
+      }
+    ],
+    "author": "三一敬拜\n詞曲：高享原／中譯：葉君儀",
+    "originalKey": "G",
+    "bpm": 62
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "開我雙眼看見主榮耀",
+          "b": "I see the glory of my Lord"
+        },
+        {
+          "a": "主的寶座在我們中間",
+          "b": "Who is in all of us"
+        },
+        {
+          "a": "至高神榮耀遍滿全宇宙",
+          "b": "The shining glory covers the sky"
+        },
+        {
+          "a": "讚美聲充滿在全地",
+          "b": "Praises are full in the world"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "開我雙眼看見主榮耀",
+          "b": "I see the glory of my Lord"
+        },
+        {
+          "a": "主的寶座就在讚美中",
+          "b": "Who stands on our praises"
+        },
+        {
+          "a": "哦至高全能神已面向全世界",
+          "b": "The face of God has found our world"
+        },
+        {
+          "a": "祂全能雙手已高舉",
+          "b": "God opens his mighty arms"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "主的榮耀已充滿 在這裡",
+          "b": "All in all that the world would praise the glory"
+        },
+        {
+          "a": "呼召我們在此地站立",
+          "b": "We stands for god if that's all we do"
+        },
+        {
+          "a": "讓我們揚聲讚美一同前進",
+          "b": "We'll gonna make God's praises"
+        },
+        {
+          "a": "直到列國萬民看見主",
+          "b": "Until the world have seen"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "至高全能神求祢來更新我們",
+          "b": "Father God, please renew us"
+        },
+        {
+          "a": "差遣我們在列邦宣揚祢至聖名",
+          "b": "Let us serve the Lord among all nations"
+        },
+        {
+          "a": "好讓萬國與萬民 同來敬拜祢",
+          "b": "Every nation will raise up to praise"
+        },
+        {
+          "a": "全地都要看見至高神榮耀",
+          "b": "And see the Lord of Glory"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "讓我們揚聲讚美一同前進",
+          "b": "We'll gonna make God's praises"
+        },
+        {
+          "a": "直到列國萬民看見主",
+          "b": "Until the world have seen"
+        }
+      ]
+    }
+  ]
+}

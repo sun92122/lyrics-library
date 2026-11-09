@@ -1,0 +1,199 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "id"
+    },
+    "title": {
+      "a": "忠心到永遠",
+      "b": "Ku Tetap Setia"
+    },
+    "tags": ["FGA Worship", "Delon"],
+    "arrangement": [1001, 1, 1, 2, 1002, 1, 2, 2, 1002, 2, 2, 2, 1005],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=1itbeitJt6Y"
+      }
+    ],
+    "author": "詞、曲：Delon\n中譯詞：FGACYC Worship",
+    "originalKey": "F"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "就像她 在背後 為祢抹香膏",
+          "b": "Seperti wanita mengurapi-Mu",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "F"
+            },
+            {
+              "index": 4,
+              "chord": "C/E"
+            },
+            {
+              "index": 8,
+              "chord": "Dm"
+            },
+            {
+              "index": 12,
+              "chord": "C"
+            }
+          ]
+        },
+        {
+          "a": "她用眼淚為我主洗腳",
+          "b": "Menangis di bawah kaki-Mu",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "Bb"
+            },
+            {
+              "index": 4,
+              "chord": "F/A"
+            },
+            {
+              "index": 7,
+              "chord": "C"
+            }
+          ]
+        },
+        {
+          "a": "我要這樣愛慕祢 一生都不離棄",
+          "b": "Demikian hidupku mau mengasihi-Mu",
+          "chords": [
+            {
+              "index": 0,
+              "chord": "Bb"
+            },
+            {
+              "index": 4,
+              "chord": "C/Bb"
+            },
+            {
+              "index": 9,
+              "chord": "Am"
+            },
+            {
+              "index": 13,
+              "chord": "Dm"
+            }
+          ]
+        },
+        {
+          "a": "耶穌我主 祢對我真好",
+          "b": "Yesus Engkau baik bagiku",
+          "chords": [
+            {
+              "index": 1,
+              "chord": "F/C"
+            },
+            {
+              "index": 5,
+              "chord": "C"
+            },
+            {
+              "index": 8,
+              "chord": "F"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "直到一天 我閉上我雙眼",
+          "b": "Sampai akhir ku menutup mata",
+          "chords": [
+            {
+              "index": 3,
+              "chord": "Bb"
+            },
+            {
+              "index": 5,
+              "chord": "C/Bb"
+            },
+            {
+              "index": 10,
+              "chord": "Am"
+            }
+          ]
+        },
+        {
+          "a": "我忠心不會變 等祢應許實現",
+          "b": "Ku tetap setia menanti janji-Mu",
+          "chords": [
+            {
+              "index": 1,
+              "chord": "Dm"
+            },
+            {
+              "index": 5,
+              "chord": "Gm"
+            },
+            {
+              "index": 7,
+              "chord": "C"
+            },
+            {
+              "index": 11,
+              "chord": "F"
+            }
+          ]
+        },
+        {
+          "a": "直到那日 我終於得著 生命的冠冕",
+          "b": "Sampai kudapatkan mahkota kehidupanku",
+          "chords": [
+            {
+              "index": 3,
+              "chord": "Bb"
+            },
+            {
+              "index": 6,
+              "chord": "C/Bb"
+            },
+            {
+              "index": 10,
+              "chord": "A"
+            },
+            {
+              "index": 12,
+              "chord": "A/C#"
+            },
+            {
+              "index": 15,
+              "chord": "Dm"
+            }
+          ]
+        },
+        {
+          "a": "我忠心不變 服事祢到永遠",
+          "b": "Ku tetap setia, 'tuk melayani-Mu",
+          "chords": [
+            {
+              "index": 2,
+              "chord": "Gm"
+            },
+            {
+              "index": 7,
+              "chord": "C"
+            },
+            {
+              "index": 10,
+              "chord": "F"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
