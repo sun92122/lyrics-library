@@ -1,0 +1,176 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "en"
+    },
+    "title": {
+      "a": "點燃",
+      "b": "Ignite"
+    },
+    "tags": ["Top Worship", "新店行道會"],
+    "arrangement": [1001, 1, 2, 3, 2, 3, 4, 4, 3, 1005],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=tmOpAKimzzY"
+      },
+      {
+        "type": "pdf",
+        "name": "歌譜",
+        "url": "https://new.topchurch.net/wp-content/uploads/2023/06/點燃_Official-Lead-Sheet_-1.pdf"
+      }
+    ],
+    "author": "Top Worship 新店行道會音樂\n詞曲：鄭曼綺、宗睿哲、吳思葦",
+    "originalKey": "Bb",
+    "bpm": 75
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "即使曠野道路",
+          "b": "Though in the wilderness"
+        },
+        {
+          "a": "無力淹沒我的心",
+          "b": "I'm overwhelmed in weakness"
+        },
+        {
+          "a": "我要向祢屈膝",
+          "b": "I will bow on my knees"
+        },
+        {
+          "a": "更多尋求祢的心意",
+          "b": "It is your will I'll be seeking"
+        },
+        {
+          "a": "求牽引我貼近祢",
+          "b": "Lord lead me closer to you"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "無論高處低處",
+          "b": "No matter ups or downs"
+        },
+        {
+          "a": "渴望能重新得力",
+          "b": "You'll be renewing my strength"
+        },
+        {
+          "a": "傾倒祢的火焰",
+          "b": "Fire pour down on me"
+        },
+        {
+          "a": "讓灰燼能再次燃起",
+          "b": "Raise all the ashes up again"
+        },
+        {
+          "a": "成為焚燒的生命",
+          "b": "A fire blazing in me"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "求祢點燃",
+          "b": "Lord would You come"
+        },
+        {
+          "a": "點燃我們起初為祢 火熱的心",
+          "b": "Ignite the first love in our hearts that burns for You"
+        },
+        {
+          "a": "主祢打開天門 焚燒煉淨我們",
+          "b": "You open the heavens, You purify Your Church"
+        },
+        {
+          "a": "向我們顯明祢心意",
+          "b": "Oh Lord we wanna know Your heart"
+        },
+        {
+          "a": "求祢點燃",
+          "b": "Lord would You come"
+        },
+        {
+          "a": "興起我的生命成為 馨香的活祭",
+          "b": "Revive our lives to be Your pleasing sacrifice"
+        },
+        {
+          "a": "主祢彰顯大能 醫治釋放我們",
+          "b": "You move with Your powers, bring healing and freedom"
+        },
+        {
+          "a": "求祢再次降臨 點燃我的心",
+          "b": "Lord would You come again, come ignite my heart"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "聖靈如風吹起挑旺信心",
+          "b": "Holy Spirit come and stir up my faith"
+        },
+        {
+          "a": "呼召因祢烈火再次燃起",
+          "b": "Every calling from You burning again"
+        },
+        {
+          "a": "奔向祭壇全然獻上自己",
+          "b": "I will give my whole life on the alter"
+        },
+        {
+          "a": "聖靈火降臨",
+          "b": "Holy Spirit come"
+        }
+      ]
+    },
+    {
+      "name": "$C2",
+      "lines": [
+        {
+          "a": "求祢點燃",
+          "b": "Lord would You come"
+        },
+        {
+          "a": "點燃我們起初為祢 火熱的心",
+          "b": "Ignite the first love in our hearts that burns for You"
+        },
+        {
+          "a": "主祢打開天門 焚燒煉淨我們",
+          "b": "You open the heavens, You purify Your Church"
+        },
+        {
+          "a": "向我們顯明祢心意",
+          "b": "Oh Lord we wanna know Your heart"
+        },
+        {
+          "a": "求祢點燃",
+          "b": "Lord would You come"
+        },
+        {
+          "a": "興起我的生命成為 馨香的活祭",
+          "b": "Revive our lives to be Your pleasing sacrifice"
+        },
+        {
+          "a": "主祢彰顯大能 醫治釋放我們",
+          "b": "You move with Your powers, bring healing and freedom"
+        },
+        {
+          "a": "求祢再次降臨這地",
+          "b": "Lord would You come again"
+        }
+      ]
+    }
+  ]
+}

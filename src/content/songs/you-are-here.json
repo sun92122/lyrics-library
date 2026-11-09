@@ -1,0 +1,119 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "en"
+    },
+    "title": {
+      "a": "在這裡",
+      "b": "You Are Here"
+    },
+    "tags": ["讚美之泉", "從早晨到夜晚"],
+    "arrangement": [1001, 1, 2, 1002, 1, 2, 3, 2, 4, 1002, 5],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=nJBLeMrhu9w"
+      }
+    ],
+    "author": "讚美之泉",
+    "originalKey": "F",
+    "ccli": "7125346"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "神的子民合一聚集",
+          "b": "Children of God, now is the time"
+        },
+        {
+          "a": "熱切期盼遇見祢",
+          "b": "Gather around, 'round His throne"
+        },
+        {
+          "a": "天要敞開 神的道傳遍",
+          "b": "Spreading Good News over all the earth"
+        },
+        {
+          "a": "因為我們渴慕尋求祢",
+          "b": "We are seeking after You alone"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "在這裡 在這裡",
+          "b": "You are here, You are here"
+        },
+        {
+          "a": "耶穌祢現在在這裡",
+          "b": "Jesus is with us here and now"
+        },
+        {
+          "a": "我相信 我相信",
+          "b": "I believe, I receive"
+        },
+        {
+          "a": "喜樂的江河在這裡",
+          "b": "Fountains of joy are flowing out"
+        },
+        {
+          "a": "榮耀彰顯 奇妙神蹟將顯明",
+          "b": "Lord, reveal Your glory and Your miracles"
+        },
+        {
+          "a": "天上國度降臨在這裡",
+          "b": "Let it be like heaven on earth"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "祢的靈在這裡 這裡就有自由",
+          "b": "Where the Spirit of the Lord is, there we will find freedom"
+        },
+        {
+          "a": "聖靈自由運行無止盡",
+          "b": "Let the Holy Spirit freely flow"
+        },
+        {
+          "a": "移山倒海信心 堅定不斷升起",
+          "b": "Faith that moves the mountains, growing and increasing"
+        },
+        {
+          "a": "期待偉大神做奇妙事",
+          "b": "We can't wait to see Your mighty works"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "榮耀彰顯 奇妙神蹟將顯明",
+          "b": "Lord, reveal Your glory and Your miracles"
+        },
+        {
+          "a": "天上國度降臨在這裡",
+          "b": "Let it be like heaven on earth"
+        }
+      ]
+    },
+    {
+      "name": "$O",
+      "lines": [
+        {
+          "a": "天上國度降臨在這裡",
+          "b": "Let it be like heaven on earth"
+        }
+      ]
+    }
+  ]
+}

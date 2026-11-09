@@ -1,0 +1,51 @@
+{
+  "id": "hcbolc-27-1",
+  "meta": {
+    "title": { "a": "竹靈青崇2027Q1歌庫" },
+    "tags": ["新竹靈糧堂", "青崇", "青少年崇拜", "HCBOLC"]
+  },
+  "songs": [
+    { "type": "header", "content": "#邀請" },
+    {
+      "type": "note",
+      "content": "邀請會眾專注於神！ 來吧，一起來到神的面前，在神的聖山、進入至聖所、到祂面前敬拜祂"
+    },
+    { "id": "you-are-the-light-of-my-life" },
+    { "id": "light-of-our-lives" },
+    { "id": "god-is-with-us-now" },
+    { "id": "mountains-move-for-me" },
+    { "id": "unshakeable-faith" },
+    { "id": "open-heaven" },
+    { "id": "no-one-compares-with-you" },
+    { "id": "nothing-is-impossible" },
+    { "id": "you-are-here" },
+    { "id": "my-heart-will-praise-you-lord" },
+    { "type": "separator" },
+    { "type": "header", "content": "#宣告與讚美" },
+    {
+      "type": "note",
+      "content": "以神的所是為先(Who God is)，明確地、肯定地、堅定地的宣告與讚美神"
+    },
+    { "id": "you-are-our-god" },
+    { "id": "what-a-beautiful-name" },
+    { "id": "you-are-good" },
+    { "id": "our-god-2" },
+    { "id": "our-god" },
+    { "id": "i-am-strengthened-in-him" },
+    { "id": "my-strength-in-the-wilderness" },
+    { "id": "one-thing-remains" },
+    { "type": "separator" },
+    { "type": "header", "content": "#宣告與讚美" },
+    {
+      "type": "note",
+      "content": "與神深刻、真實的相遇在敬拜之中，也回應神對我們的愛；讓我們與神之間的關係緊密連結在一起"
+    },
+    { "id": "follow-your-heart" },
+    { "id": "come-holy-spirit" },
+    { "id": "make-me-your-vessel" },
+    { "id": "here-i-bow" },
+    { "id": "your-blood-shed-for-me" },
+    { "id": "my-joy-is-overflowing" },
+    { "id": "ignite" }
+  ]
+}

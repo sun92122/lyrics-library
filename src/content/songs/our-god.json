@@ -1,0 +1,137 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "en"
+    },
+    "title": {
+      "a": "我們的神",
+      "b": "Our God"
+    },
+    "tags": ["約書亞樂團"],
+    "arrangement": [
+      1001, 1, 2, 3, 1002, 1, 2, 3, 3, 1002, 4, 5, 6, 3, 3, 4, 5, 4, 5, 6, 1005
+    ],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=BtO5xCIZmLI"
+      },
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=ZyH3Yyqq5Fw"
+      }
+    ],
+    "author": "詞、曲：Jesse Reeves, Chris Tomlin, Matt Redman, Jonas Myrin\n中譯詞：趙治德",
+    "ccli": "5677416"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "祢將水變為美酒",
+          "b": "Water You turned into wine"
+        },
+        {
+          "a": "使盲眼重見光明",
+          "b": "Opened the eyes of the blind"
+        },
+        {
+          "a": "無人能像祢 無人像祢",
+          "b": "There's no one like You, none like You"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "祢榮光驅走黑暗",
+          "b": "Into the darkness You shine"
+        },
+        {
+          "a": "賜華冠代替灰塵",
+          "b": "Out of the ashes we rise"
+        },
+        {
+          "a": "無人能像祢 無人像祢",
+          "b": "There's no one like You, none like You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我神最偉大 我神最剛強",
+          "b": "Our God is greater, our God is stronger"
+        },
+        {
+          "a": "遠超過世上一切的君王",
+          "b": "God, You are higher than any other"
+        },
+        {
+          "a": "祢醫治我們 祢滿有權能",
+          "b": "Our God is healer, awesome in power"
+        },
+        {
+          "a": "Our God Our God"
+        }
+      ]
+    },
+    {
+      "name": "$B1",
+      "lines": [
+        {
+          "a": "若上帝幫助我們",
+          "b": "And if our God is for us"
+        },
+        {
+          "a": "有誰能攔阻我們",
+          "b": "Then who could ever stop us"
+        },
+        {
+          "a": "若上帝與我同行",
+          "b": "And if our God is with us"
+        },
+        {
+          "a": "誰還能敵擋我",
+          "b": "Then what could stand against"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "若上帝幫助我們",
+          "b": "And if our God is for us"
+        },
+        {
+          "a": "有誰能攔阻我們",
+          "b": "Then who could ever stop us"
+        },
+        {
+          "a": "若上帝與我同行",
+          "b": "And if our God is with us"
+        },
+        {
+          "a": "誰還能敵擋我們",
+          "b": "Then what could stand against"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "誰還能敵擋我們",
+          "b": "Then what could stand against"
+        }
+      ]
+    }
+  ]
+}

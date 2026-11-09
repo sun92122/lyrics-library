@@ -1,0 +1,106 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "en"
+    },
+    "title": {
+      "a": "滿有能力",
+      "b": "I Am Strengthened in Him"
+    },
+    "tags": ["讚美之泉", "不要放棄，滿有能力"],
+    "arrangement": [1001, 1, 2, 1002, 1, 2, 3, 3, 2, 2, 4, 1005],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=uTGPl8f-reQ"
+      }
+    ],
+    "author": "讚美之泉\n詞：鄭懋柔／曲：游智婷",
+    "ccli": "5482429",
+    "originalKey": "Bb"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "我的盼望 就在耶穌基督裡",
+          "b": "All of my hope, lies in Jesus Christ alone"
+        },
+        {
+          "a": "在祢裡面 滿有平安",
+          "b": "For I know that He is my peace"
+        },
+        {
+          "a": "生命泉源 就在耶穌基督裡",
+          "b": "All of my joy, Lies in Jesus Christ alone"
+        },
+        {
+          "a": "有主在我裡面活著",
+          "b": "He lives in me forever more"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "我宣告在我裡面的",
+          "b": "Declare, the One who's within me"
+        },
+        {
+          "a": "比世上一切更有能力",
+          "b": "Is greater than the one in the world"
+        },
+        {
+          "a": "我不屬這世界 我高舉耶穌的名",
+          "b": "I'm not of this world, I belong to Jesus, the King"
+        },
+        {
+          "a": "我宣告在我裡面有",
+          "b": "Declare, the one who's within me"
+        },
+        {
+          "a": "活水湧流滿有能力",
+          "b": "Is greater than the one in the world"
+        },
+        {
+          "a": "有耶穌在我裡面活著 我勇敢站立",
+          "b": "I know that the King lives in me, I am strengthened in Him"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "有主在我裡面",
+          "b": "My Lord, who lives in me"
+        },
+        {
+          "a": "沒有懼怕 能戰勝仇敵",
+          "b": "Conquers all of my enemies"
+        },
+        {
+          "a": "有主在我裡面",
+          "b": "My Lord, who lives in me"
+        },
+        {
+          "a": "沒有懼怕 還得勝有餘",
+          "b": "Is my portion, my victory"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "有耶穌在我裡面活著 我勇敢站立",
+          "b": "I know that the King lives in me, I am strengthened in Him"
+        }
+      ]
+    }
+  ]
+}

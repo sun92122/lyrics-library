@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "en"
+    },
+    "title": {
+      "a": "不動搖的信心",
+      "b": "Unshakeable Faith"
+    },
+    "tags": ["讚美之泉", "聽見這世代的呼喚"],
+    "arrangement": [1001, 1, 2, 1002, 2, 3, 2, 4, 1005],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=H9OdfU5I9yQ"
+      }
+    ],
+    "ccli": "7176788",
+    "originalKey": "D",
+    "author": "讚美之泉\n詞：游智婷／曲：曾祥怡"
+  },
+  "sections": [
+    {
+      "name": "$V",
+      "lines": [
+        {
+          "a": "主 賜給我 不動搖的信心",
+          "b": "Lord, give me faith, give me faith unshakeable"
+        },
+        {
+          "a": "海浪之中 祢伸出大手拉住我",
+          "b": "In stormy seas, You reached down and took hold of me"
+        },
+        {
+          "a": "求除去我 心中所有的懷疑",
+          "b": "Lord, come and take, take away all fears and doubts"
+        },
+        {
+          "a": "曠野之中 緊緊跟隨 雲柱火柱",
+          "b": "Cloud by day, fire by night, I'll follow You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "海浪之中 我必不沉落",
+          "b": "In oceans deep, yet I will not sink"
+        },
+        {
+          "a": "曠野之中 我必不迷路",
+          "b": "In wilderness, I'll find my way"
+        },
+        {
+          "a": "不退縮也不害怕 不動搖也不放棄",
+          "b": "Won't retreat and will not fear, won't be shaken, nor give up"
+        },
+        {
+          "a": "因我深信祢應許不改變",
+          "b": "For I know Your promises never change"
+        },
+        {
+          "a": "困難之中 我仍然讚美",
+          "b": "In troubled times, I'll give You praise"
+        },
+        {
+          "a": "疑惑之中 我仍然禱告",
+          "b": "In valleys low, I'll call Your name"
+        },
+        {
+          "a": "行在水面的信心 剛強壯膽地前進",
+          "b": "Give me faith to walk on waves, I'll step forward, strong and brave"
+        },
+        {
+          "a": "我的神必在前面 為我爭戰",
+          "b": "For I know that You will go ahead of me"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "我的禱告 無論求什麼",
+          "b": "All of my prayers, whatever I ask"
+        },
+        {
+          "a": "只要相信 就必得著",
+          "b": "If I believe, I will receive"
+        },
+        {
+          "a": "我的禱告 無論求什麼",
+          "b": "All of my prayers, whatever I ask"
+        },
+        {
+          "a": "只要相信 只要相信",
+          "b": "I believe it, I believe it"
+        },
+        {
+          "a": "只要相信 就必得著",
+          "b": "I believe it, I will receive"
+        }
+      ]
+    },
+    {
+      "name": "$E",
+      "lines": [
+        {
+          "a": "行在水面的信心 剛強壯膽地前進",
+          "b": "Give me faith to walk on waves, I'll step forward, strong and brave"
+        },
+        {
+          "a": "我的神必在前面 為我爭戰",
+          "b": "For I know that You will go ahead of me"
+        }
+      ]
+    }
+  ]
+}

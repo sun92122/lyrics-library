@@ -5,67 +5,63 @@
       "b": "en"
     },
     "title": {
-      "a": "潔淨",
-      "b": "WASHED"
+      "a": "WASHED",
+      "b": ""
     },
-    "tags": ["We R One"],
-    "arrangement": [
-      1001, 2, 1, 2, 3, 2, 2, 1003, 4, 4, 4, 2, 2, 4, 4, 4, 4, 5, 5, 5, 1003, 2,
-      2, 1005
-    ],
+    "author": "詞／曲：Joshua Holiday, Mitch Wong, Joe L Barnes, Steven Furtick\n中譯詞：新店行道會",
+    "originalKey": "",
+    "ccli": "7263433",
+    "tags": ["新店行道會"],
     "assets": [
       {
         "type": "youtube",
         "name": "YouTube",
-        "url": "https://www.youtube.com/watch?v=BKb_mMkstSw"
+        "url": "https://www.youtube.com/watch?v=Pf4xonvtvK4&t=12"
       }
     ],
-    "ccli": "7263433",
-    "author": "詞／曲：Joshua Holiday, Mitch Wong, Joe L Barnes, Steven Furtick\n中譯詞：馮康恬 Audrey Feng"
+    "arrangement": [
+      1001, 1, 2, 1002, 1, 2, 2, 3, 2, 2, 2, 1002, 4, 4, 4, 4, 5, 5, 5, 5, 1003,
+      2, 2, 1005
+    ],
+    "note": ""
   },
   "sections": [
     {
       "name": "$V1",
       "lines": [
         {
-          "a": "潔淨",
-          "b": "I'm clean"
+          "a": "I'm clean"
         },
         {
-          "a": "罪曾侵蝕我",
+          "a": "曾陷罪惡裡",
           "b": "Sin was stained on me"
         },
         {
-          "a": "羞愧籠罩我",
+          "a": "直到遇見祢",
           "b": "Shame was running deep"
         },
         {
-          "a": "但祢愛傾倒各各他",
+          "a": "祢十架洗淨我羞愧",
           "b": "But love was spilled on Calvary"
         },
         {
-          "a": "喔哈利路亞",
-          "b": "Oh hallelujah"
+          "a": "Oh Hallelujah"
         },
         {
-          "a": "潔淨",
-          "b": "I'm clean"
+          "a": "I'm clean",
+          "b": "祢不可思議"
         },
         {
-          "a": "多不可思議",
-          "b": "God how can it be"
+          "a": "God how can it be",
+          "b": "贖回了我生命"
         },
         {
-          "a": "拯救我恢復我",
-          "b": "I'm ransomed and redeemed"
+          "a": "I'm ransomed and redeemed",
+          "b": "在祢得勝中站立"
         },
         {
-          "a": "我站立因祢的勝利",
-          "b": "Standing in Your victory"
-        },
-        {
-          "a": "喔哈利路亞",
-          "b": "Oh hallelujah"
+          "a": "Standing in Your victory",
+          "b": "Oh Hallelujah"
         }
       ]
     },
@@ -73,36 +69,26 @@
       "name": "$C",
       "lines": [
         {
-          "a": "寶血已洗淨我了",
-          "b": "I've been washed in the water"
+          "a": "我的罪已被洗凈 在寶血裡",
+          "b": "I've been washed in the water - washed in the blood"
         },
         {
-          "a": "水洗淨我",
-          "b": "Washed in the blood"
-        },
-        {
-          "a": "我是新造的",
+          "a": "我得新生命",
           "b": "I'm as good as new"
         },
         {
-          "a": "喔哈利路亞",
-          "b": "Oh hallelujah"
+          "a": "Oh Hallelujah"
         },
         {
-          "a": "寶血已洗淨我了",
-          "b": "I've been washed in the water"
+          "a": "我的罪已被洗凈 在寶血裡",
+          "b": "I've been washed in the water - washed in the blood"
         },
         {
-          "a": "水洗淨我",
-          "b": "Washed in the blood"
-        },
-        {
-          "a": "因為祢所做",
+          "a": "全因祢我神",
           "b": "All because of You"
         },
         {
-          "a": "喔哈利路亞",
-          "b": "Oh hallelujah"
+          "a": "Oh Hallelujah"
         }
       ]
     },
@@ -110,44 +96,40 @@
       "name": "$V2",
       "lines": [
         {
-          "a": "潔淨",
-          "b": "I'm clean"
+          "a": "I'm clean"
         },
         {
-          "a": "不是靠自己",
+          "a": "不憑我自己",
           "b": "Not what I have done"
         },
         {
-          "a": "祢為我捨生命",
+          "a": "祢的恩典滿溢",
           "b": "But what you've done for me"
         },
         {
-          "a": "為我上十架全還清",
+          "a": "十架上贖回我一切",
           "b": "You paid it all up on that tree"
         },
         {
-          "a": "喔哈利路亞",
-          "b": "Oh hallelujah"
+          "a": "Oh Hallelujah"
         },
         {
-          "a": "潔淨",
-          "b": "I'm clean"
+          "a": "I'm clean"
         },
         {
-          "a": "祢愛完全得勝",
+          "a": "因祢愛的能力",
           "b": "Your love has overcome"
         },
         {
-          "a": "祢憐憫已掌權",
+          "a": "祢無盡的憐憫",
           "b": "Your mercy is supreme"
         },
         {
-          "a": "我跳舞因祢的勝利",
+          "a": "跳舞在祢的得勝裡",
           "b": "I'm dancing in Your victory"
         },
         {
-          "a": "喔哈利路亞",
-          "b": "Oh hallelujah"
+          "a": "Oh Hallelujah"
         }
       ]
     },
@@ -155,19 +137,19 @@
       "name": "$B",
       "lines": [
         {
-          "a": "祢已拿走我羞愧",
+          "a": "因祢挪去我羞愧",
           "b": "You took away my shame"
         },
         {
-          "a": "全都釘在十字架",
+          "a": "為我釘在十字架",
           "b": "And You nailed it to the cross"
         },
         {
-          "a": "帶我逃離了死亡",
+          "a": "讓我重新活過來",
           "b": "Got me running out the grave"
         },
         {
-          "a": "哈利路亞我獻上",
+          "a": "Hallelujah 讚美祢",
           "b": "Hallelujah here I come"
         }
       ]
@@ -176,7 +158,7 @@
       "name": "$T",
       "lines": [
         {
-          "a": "哈利路亞我獻上",
+          "a": "Hallelujah 讚美祢",
           "b": "Hallelujah here I come"
         }
       ]

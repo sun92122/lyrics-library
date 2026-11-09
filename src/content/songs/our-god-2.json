@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "languages": {
+      "a": "zh",
+      "b": "en"
+    },
+    "title": {
+      "a": "Our God",
+      "b": ""
+    },
+    "tags": ["Chris Tomlin", "新店行道會"],
+    "arrangement": [
+      1001, 1, 2, 1002, 1, 2, 3, 3, 4, 4, 4, 4, 1003, 5, 1002, 3, 1005
+    ],
+    "assets": [
+      {
+        "type": "youtube",
+        "name": "YouTube",
+        "url": "https://www.youtube.com/watch?v=5USlF4ogyCk"
+      }
+    ],
+    "author": "詞、曲：Jesse Reeves, Chris Tomlin, Matt Redman, Jonas Myrin",
+    "ccli": "5677416"
+  },
+  "sections": [
+    {
+      "name": "$V1",
+      "lines": [
+        {
+          "a": "祢能使水變成酒",
+          "b": "Water You turned into wine"
+        },
+        {
+          "a": "醫治瞎眼得看見",
+          "b": "Opened the eyes of the blind"
+        },
+        {
+          "a": "無人能像祢 無人像祢",
+          "b": "There's no one like You, none like You"
+        }
+      ]
+    },
+    {
+      "name": "$V2",
+      "lines": [
+        {
+          "a": "祢照亮黑暗深夜",
+          "b": "Into the darkness You shine"
+        },
+        {
+          "a": "卑微中興起我們",
+          "b": "Out of the ashes we rise"
+        },
+        {
+          "a": "無人能像祢 無人像祢",
+          "b": "There's no one like You, none like You"
+        }
+      ]
+    },
+    {
+      "name": "$C",
+      "lines": [
+        {
+          "a": "祢何等偉大 祢何等剛強",
+          "b": "Our God is greater, our God is stronger"
+        },
+        {
+          "a": "祢超越一切 在全地之上",
+          "b": "God, You are higher than any other"
+        },
+        {
+          "a": "祢是醫治者 我驚嘆祢大能",
+          "b": "Our God is healer, awesome in power"
+        },
+        {
+          "a": "我主 我神",
+          "b": "Our God, our God"
+        }
+      ]
+    },
+    {
+      "name": "$B",
+      "lines": [
+        {
+          "a": "若有神幫助我們",
+          "b": "And if our God is for us"
+        },
+        {
+          "a": "誰還能停止我們",
+          "b": "Then who could ever stop us"
+        },
+        {
+          "a": "若有神幫助我們",
+          "b": "And if our God is with us"
+        },
+        {
+          "a": "誰還能抵擋我們",
+          "b": "Then what could stand against"
+        }
+      ]
+    },
+    {
+      "name": "$T",
+      "lines": [
+        {
+          "a": "誰還能抵擋我們",
+          "b": "Then what could stand against"
+        }
+      ]
+    }
+  ]
+}
