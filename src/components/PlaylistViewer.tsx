@@ -14,6 +14,10 @@ import {
   type PlaylistPayload,
 } from "@/utils/playlistEncoder";
 import {
+  buildAutoYoutubePlaylist,
+  parseCustomYoutubeUrl,
+} from "@/utils/youtube";
+import {
   Calendar,
   Music,
   Share2,
@@ -25,6 +29,11 @@ import {
   MessageSquare,
   FileText,
   Download,
+  ListVideo,
+  ExternalLink,
+  ChevronUp,
+  ChevronDown,
+  AlertCircle,
 } from "lucide-react";
 import {
   PlaylistProModal,
@@ -43,6 +52,7 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
   const [copiedLink, setCopiedLink] = useState(false);
   const [copiedOutline, setCopiedOutline] = useState(false);
   const [currentHash, setCurrentHash] = useState("");
+  const [isYoutubeExpanded, setIsYoutubeExpanded] = useState(true);
 
   // Map song ID to song data
   const songMap = useMemo(() => {
@@ -64,6 +74,29 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
     });
     return list;
   }, [payload, songMap]);
+
+  const isYoutubeEnabled = payload ? payload.yt !== false : false;
+  const customYoutubeRawUrl =
+    typeof payload?.ytUrl === "string" ? payload.ytUrl.trim() : "";
+
+  const customYoutube = useMemo(() => {
+    if (!isYoutubeEnabled || !customYoutubeRawUrl) return null;
+    return parseCustomYoutubeUrl(customYoutubeRawUrl);
+  }, [isYoutubeEnabled, customYoutubeRawUrl]);
+
+  const autoYoutube = useMemo(() => {
+    if (!isYoutubeEnabled || customYoutubeRawUrl || !payload) return null;
+    return buildAutoYoutubePlaylist(payload.s, songMap);
+  }, [isYoutubeEnabled, customYoutubeRawUrl, payload, songMap]);
+
+  const activeYoutubeEmbedUrl = customYoutube
+    ? customYoutube.embedUrl
+    : autoYoutube?.embedUrl || null;
+  const activeYoutubeExternalUrl = customYoutube
+    ? customYoutube.externalUrl
+    : autoYoutube?.externalUrl || null;
+  const hasInvalidCustomYoutube =
+    isYoutubeEnabled && Boolean(customYoutubeRawUrl) && !customYoutube;
 
   // Decode hash on mount and hashchange
   useEffect(() => {
@@ -317,6 +350,88 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
           </span>
         </div>
       </div>
+
+      {/* Embedded YouTube Playlist */}
+      {activeYoutubeEmbedUrl ? (
+        <div className="bg-white p-5 sm:p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2.5">
+              <div className="w-9 h-9 rounded-xl bg-rose-50 border border-rose-100 text-rose-600 flex items-center justify-center">
+                <ListVideo className="w-5 h-5" />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-base font-bold text-slate-900">
+                    YouTube 播放列表
+                  </h2>
+                  {customYoutube ? (
+                    <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100 text-[11px] font-semibold">
+                      自訂{customYoutube.kind === "playlist" ? "播放清單" : "影片"}
+                    </span>
+                  ) : autoYoutube ? (
+                    <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200/80 text-[11px] font-semibold">
+                      自動彙整 · {autoYoutube.tracks.length} 首
+                    </span>
+                  ) : null}
+                </div>
+                {!customYoutube &&
+                  autoYoutube &&
+                  autoYoutube.skippedSongTitles.length > 0 && (
+                    <p className="text-[11px] text-slate-400 mt-0.5">
+                      未包含無 YouTube 連結之曲目：
+                      {autoYoutube.skippedSongTitles.join("、")}
+                    </p>
+                  )}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
+              {activeYoutubeExternalUrl && (
+                <a
+                  href={activeYoutubeExternalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold bg-slate-50 hover:bg-rose-50 text-slate-700 hover:text-rose-700 border border-slate-200 hover:border-rose-200 transition-colors"
+                >
+                  <span>在 YouTube 開啟</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              )}
+              <button
+                type="button"
+                onClick={() => setIsYoutubeExpanded((prev) => !prev)}
+                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-medium text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-colors"
+              >
+                <span>{isYoutubeExpanded ? "收合" : "展開"}</span>
+                {isYoutubeExpanded ? (
+                  <ChevronUp className="w-4 h-4" />
+                ) : (
+                  <ChevronDown className="w-4 h-4" />
+                )}
+              </button>
+            </div>
+          </div>
+
+          {isYoutubeExpanded && (
+            <iframe
+              key={activeYoutubeEmbedUrl}
+              className="w-full aspect-video rounded-2xl border border-slate-200/80 bg-slate-950"
+              src={activeYoutubeEmbedUrl}
+              title={`${payload.t || "敬拜歌單"} - YouTube 播放列表`}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          )}
+        </div>
+      ) : hasInvalidCustomYoutube ? (
+        <div className="bg-amber-50/70 p-4 rounded-2xl border border-amber-200/80 text-xs text-amber-800 flex items-center gap-2.5">
+          <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
+          <span>
+            無法解析此歌單的自訂 YouTube 播放列表連結，請前往「編輯歌單」確認網址格式是否正確。
+          </span>
+        </div>
+      ) : null}
 
       {/* Playlist Timeline Items */}
       <div className="space-y-4">

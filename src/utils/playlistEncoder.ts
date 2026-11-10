@@ -19,6 +19,8 @@ export interface PlaylistPayload {
   t?: string; // 活動/聚會名稱 (例: "2026-08-30 主日敬拜")
   d?: string; // 日期 (例: "2026-08-30")
   s: PlaylistItem[];
+  yt?: boolean; // 是否啟用 YouTube 播放列表 (預設開啟: undefined / true，false 為關閉)
+  ytUrl?: string; // 自訂 YouTube 播放列表連結 (留空時自動彙整每首歌第一個 YouTube 連結)
 }
 
 /**
@@ -39,7 +41,16 @@ export function decodePlaylist(encoded: string): PlaylistPayload | null {
     if (!decompressed) return null;
     const parsed = JSON.parse(decompressed);
     if (parsed && Array.isArray(parsed.s)) {
-      return parsed as PlaylistPayload;
+      const result: PlaylistPayload = {
+        ...parsed,
+      };
+      if (typeof parsed.yt !== "boolean") {
+        delete result.yt;
+      }
+      if (typeof parsed.ytUrl !== "string") {
+        delete result.ytUrl;
+      }
+      return result;
     }
     return null;
   } catch (err) {

@@ -5,6 +5,8 @@ import {
   DialogPanel,
   DialogTitle,
   Description,
+  Button,
+  Switch,
 } from "@headlessui/react";
 
 import type { SongWithId } from "@/content.config";
@@ -27,6 +29,10 @@ import {
   type PlaylistItem,
 } from "@/utils/playlistEncoder";
 import {
+  buildAutoYoutubePlaylist,
+  parseCustomYoutubeUrl,
+} from "@/utils/youtube";
+import {
   Search,
   Plus,
   Trash2,
@@ -39,8 +45,10 @@ import {
   Sparkles,
   Layers,
   FileText,
+  ListVideo,
+  X,
+  AlertCircle,
 } from "lucide-react";
-import { Button } from "@headlessui/react";
 
 export interface PlaylistBuilderProps {
   availableSongs: SongWithId[];
@@ -52,6 +60,8 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
   const [title, setTitle] = useState("主日敬拜");
   const [date, setDate] = useState(() => new Date().toISOString().slice(0, 10));
   const [items, setItems] = useState<PlaylistItem[]>([]);
+  const [enableYoutube, setEnableYoutube] = useState(true);
+  const [customYoutubeUrl, setCustomYoutubeUrl] = useState("");
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -75,6 +85,10 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
           if (decoded.t) setTitle(decoded.t);
           if (decoded.d) setDate(decoded.d);
           if (Array.isArray(decoded.s)) setItems(decoded.s);
+          setEnableYoutube(decoded.yt !== false);
+          setCustomYoutubeUrl(
+            typeof decoded.ytUrl === "string" ? decoded.ytUrl : "",
+          );
         }
       }
     }
@@ -202,15 +216,40 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
     updateItem(itemIndex, { flow: nextFlow });
   };
 
+  const handleYoutubeUrlChange = (value: string) => {
+    const trimmed = value.trim();
+    if (/^<iframe\b/i.test(trimmed)) {
+      const srcMatch = trimmed.match(/\bsrc\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
+      if (srcMatch) {
+        setCustomYoutubeUrl((srcMatch[1] || srcMatch[2] || "").trim());
+        return;
+      }
+    }
+    setCustomYoutubeUrl(value);
+  };
+
+  const autoYoutube = useMemo(
+    () => buildAutoYoutubePlaylist(items, songMap),
+    [items, songMap],
+  );
+
+  const customYoutube = useMemo(
+    () => parseCustomYoutubeUrl(customYoutubeUrl),
+    [customYoutubeUrl],
+  );
+
   // Encode payload
   const encodedData = useMemo(() => {
+    const trimmedYtUrl = customYoutubeUrl.trim();
     const payload: PlaylistPayload = {
       t: title.trim() || "敬拜歌單",
       ...(date.trim() ? { d: date.trim() } : {}),
       s: items,
+      ...(enableYoutube ? {} : { yt: false }),
+      ...(trimmedYtUrl ? { ytUrl: trimmedYtUrl } : {}),
     };
     return encodePlaylist(payload);
-  }, [title, date, items]);
+  }, [title, date, items, enableYoutube, customYoutubeUrl]);
 
   const shareUrl = `${origin}/playlist#data=${encodedData}`;
   const [previewLyrics, setPreviewLyrics] = useState<string | null>(null);
@@ -512,6 +551,148 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                   />
                 </div>
               </div>
+            </div>
+
+            {/* YouTube Playlist Settings */}
+            <div className="pt-4 border-t border-slate-100 space-y-3">
+              <div className="flex items-center justify-between gap-4">
+                <div className="space-y-0.5">
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-slate-700">
+                    <ListVideo className="w-4 h-4 text-rose-600" />
+                    <span>YouTube 播放列表</span>
+                  </div>
+                  <p className="text-[11px] text-slate-400">
+                    {enableYoutube
+                      ? "開啟時會在歌單檢視頁內嵌 YouTube 播放列表"
+                      : "已關閉：歌單檢視頁不會顯示 YouTube 播放列表"}
+                  </p>
+                </div>
+
+                <Switch
+                  checked={enableYoutube}
+                  onChange={setEnableYoutube}
+                  aria-label="啟用 YouTube 播放列表"
+                  className={`${
+                    enableYoutube ? "bg-indigo-600" : "bg-slate-200"
+                  } relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40`}
+                >
+                  <span
+                    aria-hidden="true"
+                    className={`${
+                      enableYoutube ? "translate-x-5" : "translate-x-0"
+                    } pointer-events-none inline-block h-5 w-5 transform rounded-full bg-white shadow ring-0 transition duration-200 ease-in-out`}
+                  />
+                </Switch>
+              </div>
+
+              {enableYoutube && (
+                <div className="space-y-1.5">
+                  <label
+                    htmlFor="custom-youtube-url"
+                    className="block text-xs font-medium text-slate-600"
+                  >
+                    自訂播放列表連結（選填）
+                  </label>
+                  <div className="relative">
+                    <input
+                      id="custom-youtube-url"
+                      type="text"
+                      value={customYoutubeUrl}
+                      onChange={(e) => handleYoutubeUrlChange(e.target.value)}
+                      placeholder="留空則自動使用每首歌第一個 YouTube 連結，或貼上自訂播放清單網址..."
+                      className={`w-full pl-3.5 ${
+                        customYoutubeUrl ? "pr-8" : "pr-3.5"
+                      } py-2 bg-slate-50 border rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${
+                        customYoutubeUrl.trim() && !customYoutube
+                          ? "border-rose-300 focus:ring-rose-500/20 focus:border-rose-500"
+                          : "border-slate-200 focus:ring-indigo-500/20 focus:border-indigo-600"
+                      }`}
+                    />
+                    {customYoutubeUrl && (
+                      <button
+                        type="button"
+                        onClick={() => setCustomYoutubeUrl("")}
+                        aria-label="清除自訂播放列表連結"
+                        title="清除並改回自動建立播放清單"
+                        className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 rounded-md"
+                      >
+                        <X className="w-3.5 h-3.5" />
+                      </button>
+                    )}
+                  </div>
+
+                  {customYoutubeUrl.trim() ? (
+                    customYoutube ? (
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-emerald-700 bg-emerald-50/70 border border-emerald-200/60 px-2.5 py-1.5 rounded-lg">
+                        <span>
+                          已套用自訂 YouTube{" "}
+                          {customYoutube.kind === "playlist"
+                            ? "播放清單"
+                            : "影片"}
+                          連結
+                        </span>
+                        <a
+                          href={customYoutube.externalUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 font-semibold text-emerald-800 hover:underline"
+                        >
+                          <span>前往確認</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      </div>
+                    ) : (
+                      <div className="flex items-start gap-1.5 text-[11px] text-rose-600 bg-rose-50/70 border border-rose-200/60 px-2.5 py-1.5 rounded-lg">
+                        <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                        <span>
+                          無法辨識此 YouTube 連結格式，請確認貼上的是有效的
+                          YouTube 播放清單網址（例：youtube.com/playlist?list=...）或影片網址
+                        </span>
+                      </div>
+                    )
+                  ) : (
+                    <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500 px-0.5">
+                      {items.filter((i) => !i.t).length === 0 ? (
+                        <span>
+                          自動模式：加入歌曲後，將自動使用每首歌的第一個 YouTube
+                          連結建立播放清單
+                        </span>
+                      ) : autoYoutube.tracks.length > 0 ? (
+                        <>
+                          <span>
+                            自動模式：已使用{" "}
+                            <strong className="text-slate-700">
+                              {autoYoutube.tracks.length}
+                            </strong>{" "}
+                            首曲目的第一個 YouTube 連結建立清單
+                            {autoYoutube.skippedSongTitles.length > 0 && (
+                              <span className="text-slate-400">
+                                （另有 {autoYoutube.skippedSongTitles.length}{" "}
+                                首無 YouTube 連結）
+                              </span>
+                            )}
+                          </span>
+                          {autoYoutube.externalUrl && (
+                            <a
+                              href={autoYoutube.externalUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center gap-1 font-semibold text-indigo-600 hover:text-indigo-700"
+                            >
+                              <span>在 YouTube 開啟</span>
+                              <ExternalLink className="w-3 h-3" />
+                            </a>
+                          )}
+                        </>
+                      ) : (
+                        <span className="text-amber-600">
+                          自動模式：目前選取的曲目皆未設定 YouTube 連結
+                        </span>
+                      )}
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </div>
 
