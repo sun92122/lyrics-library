@@ -428,7 +428,12 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                       {song.meta.title.a}
                     </div>
                   </div>
-                  <div className="flex flex-row gap-2 items-baseline">
+                  <div className="flex flex-col items-baseline">
+                    {song.meta.title.b && (
+                      <div className="text-[11px] text-slate-400">
+                        {song.meta.title.b}
+                      </div>
+                    )}
                     {song.meta.author && (
                       <div className="text-[11px] text-slate-400 line-clamp-3 whitespace-pre-line">
                         {song.meta.author}
