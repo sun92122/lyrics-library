@@ -29,9 +29,14 @@ import {
   type PlaylistItem,
 } from "@/utils/playlistEncoder";
 import {
+  analyzeYoutubeUrl,
   buildAutoYoutubePlaylist,
-  parseCustomYoutubeUrl,
+  extractYoutubeTimeFields,
+  formatSecondsDisplay,
+  parseYoutubeTimeInput,
+  updateYoutubeUrlTimeParams,
 } from "@/utils/youtube";
+import { YoutubePreview } from "@/components/YoutubePreview";
 import {
   Search,
   Plus,
@@ -48,6 +53,7 @@ import {
   ListVideo,
   X,
   AlertCircle,
+  Clock,
 } from "lucide-react";
 
 export interface PlaylistBuilderProps {
@@ -62,6 +68,13 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
   const [items, setItems] = useState<PlaylistItem[]>([]);
   const [enableYoutube, setEnableYoutube] = useState(true);
   const [customYoutubeUrl, setCustomYoutubeUrl] = useState("");
+  const [committedCustomYoutubeUrl, setCommittedCustomYoutubeUrl] =
+    useState("");
+  const [ytStartDraft, setYtStartDraft] = useState("");
+  const [ytEndDraft, setYtEndDraft] = useState("");
+  const [committedYtStartDraft, setCommittedYtStartDraft] = useState("");
+  const [committedYtEndDraft, setCommittedYtEndDraft] = useState("");
+  const [ytTimeError, setYtTimeError] = useState<string | null>(null);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -86,9 +99,24 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
           if (decoded.d) setDate(decoded.d);
           if (Array.isArray(decoded.s)) setItems(decoded.s);
           setEnableYoutube(decoded.yt !== false);
-          setCustomYoutubeUrl(
-            typeof decoded.ytUrl === "string" ? decoded.ytUrl : "",
-          );
+          const loadedYtUrl =
+            typeof decoded.ytUrl === "string" ? decoded.ytUrl : "";
+          setCustomYoutubeUrl(loadedYtUrl);
+          setCommittedCustomYoutubeUrl(loadedYtUrl);
+          const loadedTimes = extractYoutubeTimeFields(loadedYtUrl);
+          const nextStart =
+            loadedTimes.startSeconds !== undefined
+              ? String(loadedTimes.startSeconds)
+              : "";
+          const nextEnd =
+            loadedTimes.endSeconds !== undefined
+              ? String(loadedTimes.endSeconds)
+              : "";
+          setYtStartDraft(nextStart);
+          setYtEndDraft(nextEnd);
+          setCommittedYtStartDraft(nextStart);
+          setCommittedYtEndDraft(nextEnd);
+          setYtTimeError(null);
         }
       }
     }
@@ -228,15 +256,286 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
     setCustomYoutubeUrl(value);
   };
 
+  const commitYoutubeUrlBlur = () => {
+    const trimmed = customYoutubeUrl.trim();
+    if (!trimmed) {
+      setCustomYoutubeUrl("");
+      setCommittedCustomYoutubeUrl("");
+      setYtStartDraft("");
+      setYtEndDraft("");
+      setCommittedYtStartDraft("");
+      setCommittedYtEndDraft("");
+      setYtTimeError(null);
+      return;
+    }
+
+    const analysis = analyzeYoutubeUrl(trimmed);
+    if (!analysis.target) {
+      setCommittedCustomYoutubeUrl(trimmed);
+      setYtTimeError(null);
+      return;
+    }
+
+    const prevTimes = extractYoutubeTimeFields(committedCustomYoutubeUrl);
+    const prevHadTime =
+      prevTimes.startSeconds !== undefined ||
+      prevTimes.endSeconds !== undefined;
+    const rawHasTime =
+      analysis.target.startSeconds !== undefined ||
+      analysis.target.endSeconds !== undefined;
+
+    if (rawHasTime) {
+      const canonicalUrl = analysis.target.externalUrl;
+      const nextStart =
+        analysis.target.startSeconds !== undefined
+          ? String(analysis.target.startSeconds)
+          : "";
+      const nextEnd =
+        analysis.target.endSeconds !== undefined
+          ? String(analysis.target.endSeconds)
+          : "";
+      setCustomYoutubeUrl(canonicalUrl);
+      setCommittedCustomYoutubeUrl(canonicalUrl);
+      setYtStartDraft(nextStart);
+      setYtEndDraft(nextEnd);
+      setCommittedYtStartDraft(nextStart);
+      setCommittedYtEndDraft(nextEnd);
+      setYtTimeError(null);
+      return;
+    }
+
+    if (!prevHadTime && (ytStartDraft.trim() || ytEndDraft.trim())) {
+      const startRes = parseYoutubeTimeInput(ytStartDraft, {
+        allowZeroAsUnset: true,
+      });
+      const endRes = parseYoutubeTimeInput(ytEndDraft, {
+        allowZeroAsUnset: false,
+      });
+      if (startRes.error) {
+        setCommittedCustomYoutubeUrl(analysis.target.externalUrl);
+        setYtTimeError(startRes.error);
+        setCommittedYtStartDraft(ytStartDraft);
+        setCommittedYtEndDraft(ytEndDraft);
+        return;
+      }
+      if (endRes.error) {
+        setCommittedCustomYoutubeUrl(analysis.target.externalUrl);
+        setYtTimeError(endRes.error);
+        setCommittedYtStartDraft(ytStartDraft);
+        setCommittedYtEndDraft(ytEndDraft);
+        return;
+      }
+      const updated = updateYoutubeUrlTimeParams(
+        analysis.target.externalUrl,
+        startRes.seconds,
+        endRes.seconds,
+      );
+      if (updated.error || !updated.nextUrl) {
+        setCommittedCustomYoutubeUrl(analysis.target.externalUrl);
+        setYtTimeError(updated.error || "時間設定無效");
+        setCommittedYtStartDraft(ytStartDraft);
+        setCommittedYtEndDraft(ytEndDraft);
+        return;
+      }
+      const normalizedStart =
+        startRes.seconds === undefined ? "" : ytStartDraft.trim();
+      const normalizedEnd = ytEndDraft.trim();
+      setCustomYoutubeUrl(updated.nextUrl);
+      setCommittedCustomYoutubeUrl(updated.nextUrl);
+      setYtStartDraft(normalizedStart);
+      setYtEndDraft(normalizedEnd);
+      setCommittedYtStartDraft(normalizedStart);
+      setCommittedYtEndDraft(normalizedEnd);
+      setYtTimeError(null);
+      return;
+    }
+
+    const canonicalUrl = analysis.target.externalUrl;
+    setCustomYoutubeUrl(canonicalUrl);
+    setCommittedCustomYoutubeUrl(canonicalUrl);
+    setYtStartDraft("");
+    setYtEndDraft("");
+    setCommittedYtStartDraft("");
+    setCommittedYtEndDraft("");
+    setYtTimeError(null);
+  };
+
+  const handleYoutubeTimeDraftChange = (
+    field: "start" | "end",
+    value: string,
+  ) => {
+    const nextStart = field === "start" ? value : ytStartDraft;
+    const nextEnd = field === "end" ? value : ytEndDraft;
+    if (field === "start") {
+      setYtStartDraft(value);
+    } else {
+      setYtEndDraft(value);
+    }
+
+    if (!customYoutubeUrl.trim()) return;
+    const startRes = parseYoutubeTimeInput(nextStart, {
+      allowZeroAsUnset: true,
+    });
+    const endRes = parseYoutubeTimeInput(nextEnd, {
+      allowZeroAsUnset: false,
+    });
+    if (startRes.error || endRes.error) return;
+
+    const updated = updateYoutubeUrlTimeParams(
+      customYoutubeUrl,
+      startRes.seconds,
+      endRes.seconds,
+    );
+    if (updated.nextUrl && !updated.error) {
+      setCustomYoutubeUrl(updated.nextUrl);
+    }
+  };
+
+  const commitYoutubeTimeBlur = () => {
+    const trimmedStart = ytStartDraft.trim();
+    const trimmedEnd = ytEndDraft.trim();
+
+    const startRes = parseYoutubeTimeInput(trimmedStart, {
+      allowZeroAsUnset: true,
+    });
+    if (startRes.error) {
+      setYtTimeError(startRes.error);
+      setCommittedYtStartDraft(trimmedStart);
+      setCommittedYtEndDraft(trimmedEnd);
+      return;
+    }
+
+    const endRes = parseYoutubeTimeInput(trimmedEnd, {
+      allowZeroAsUnset: false,
+    });
+    if (endRes.error) {
+      setYtTimeError(endRes.error);
+      setCommittedYtStartDraft(trimmedStart);
+      setCommittedYtEndDraft(trimmedEnd);
+      return;
+    }
+
+    if (
+      startRes.seconds !== undefined &&
+      endRes.seconds !== undefined &&
+      endRes.seconds <= startRes.seconds
+    ) {
+      setYtTimeError(
+        `結束時間（${endRes.seconds} 秒）必須大於開始時間（${startRes.seconds} 秒）`,
+      );
+      setCommittedYtStartDraft(trimmedStart);
+      setCommittedYtEndDraft(trimmedEnd);
+      return;
+    }
+
+    setYtTimeError(null);
+    const normalizedStart = startRes.seconds === undefined ? "" : trimmedStart;
+    setYtStartDraft(normalizedStart);
+    setYtEndDraft(trimmedEnd);
+    setCommittedYtStartDraft(normalizedStart);
+    setCommittedYtEndDraft(trimmedEnd);
+
+    if (!customYoutubeUrl.trim()) {
+      setCommittedCustomYoutubeUrl("");
+      return;
+    }
+
+    const updated = updateYoutubeUrlTimeParams(
+      customYoutubeUrl,
+      startRes.seconds,
+      endRes.seconds,
+    );
+    if (updated.nextUrl && !updated.error) {
+      setCustomYoutubeUrl(updated.nextUrl);
+      setCommittedCustomYoutubeUrl(updated.nextUrl);
+    } else {
+      setCommittedCustomYoutubeUrl(customYoutubeUrl.trim());
+    }
+  };
+
+  const handleClearCustomYoutube = () => {
+    setCustomYoutubeUrl("");
+    setCommittedCustomYoutubeUrl("");
+    setYtStartDraft("");
+    setYtEndDraft("");
+    setCommittedYtStartDraft("");
+    setCommittedYtEndDraft("");
+    setYtTimeError(null);
+  };
+
   const autoYoutube = useMemo(
     () => buildAutoYoutubePlaylist(items, songMap),
     [items, songMap],
   );
 
-  const customYoutube = useMemo(
-    () => parseCustomYoutubeUrl(customYoutubeUrl),
-    [customYoutubeUrl],
+  const committedCustomAnalysis = useMemo(
+    () => analyzeYoutubeUrl(committedCustomYoutubeUrl),
+    [committedCustomYoutubeUrl],
   );
+  const committedCustomYoutube = committedCustomAnalysis.target;
+
+  const hasCustomYoutubeInput = Boolean(customYoutubeUrl.trim());
+  const isCommittedCustomMode = Boolean(committedCustomYoutubeUrl.trim());
+  const hasPendingYoutubeEdit =
+    customYoutubeUrl.trim() !== committedCustomYoutubeUrl.trim() ||
+    ytStartDraft.trim() !== committedYtStartDraft.trim() ||
+    ytEndDraft.trim() !== committedYtEndDraft.trim();
+
+  const ytStartHintSeconds = useMemo(
+    () =>
+      parseYoutubeTimeInput(ytStartDraft, { allowZeroAsUnset: true }).seconds,
+    [ytStartDraft],
+  );
+  const ytEndHintSeconds = useMemo(
+    () =>
+      parseYoutubeTimeInput(ytEndDraft, { allowZeroAsUnset: false }).seconds,
+    [ytEndDraft],
+  );
+
+  const songItemCount = items.filter((i) => !i.t).length;
+  const autoFirstTrackRange =
+    autoYoutube.tracks[0] &&
+    (autoYoutube.tracks[0].startSeconds !== undefined ||
+      autoYoutube.tracks[0].endSeconds !== undefined)
+      ? `${
+          autoYoutube.tracks[0].startSeconds !== undefined
+            ? formatSecondsDisplay(autoYoutube.tracks[0].startSeconds)
+            : "0:00"
+        }${
+          autoYoutube.tracks[0].endSeconds !== undefined
+            ? ` – ${formatSecondsDisplay(autoYoutube.tracks[0].endSeconds)}`
+            : " 起"
+        }`
+      : null;
+
+  const customTimeRangeLabel =
+    committedCustomYoutube &&
+    (committedCustomYoutube.startSeconds !== undefined ||
+      committedCustomYoutube.endSeconds !== undefined)
+      ? `${
+          committedCustomYoutube.startSeconds !== undefined
+            ? formatSecondsDisplay(committedCustomYoutube.startSeconds)
+            : "0:00"
+        }${
+          committedCustomYoutube.endSeconds !== undefined
+            ? ` – ${formatSecondsDisplay(committedCustomYoutube.endSeconds)}`
+            : " 起"
+        }`
+      : null;
+
+  const previewEmbedUrl = isCommittedCustomMode
+    ? ytTimeError
+      ? null
+      : (committedCustomYoutube?.embedUrl ?? null)
+    : autoYoutube.embedUrl;
+
+  const previewExternalUrl = isCommittedCustomMode
+    ? (committedCustomYoutube?.externalUrl ?? null)
+    : autoYoutube.externalUrl;
+
+  const previewErrorMessage = isCommittedCustomMode
+    ? ytTimeError || committedCustomAnalysis.error || null
+    : null;
 
   // Encode payload
   const encodedData = useMemo(() => {
@@ -586,53 +885,154 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
               </div>
 
               {enableYoutube && (
-                <div className="space-y-1.5">
-                  <label
-                    htmlFor="custom-youtube-url"
-                    className="block text-xs font-medium text-slate-600"
-                  >
-                    自訂播放列表連結（選填）
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="custom-youtube-url"
-                      type="text"
-                      value={customYoutubeUrl}
-                      onChange={(e) => handleYoutubeUrlChange(e.target.value)}
-                      placeholder="留空則自動使用每首歌第一個 YouTube 連結，或貼上自訂播放清單網址..."
-                      className={`w-full pl-3.5 ${
-                        customYoutubeUrl ? "pr-8" : "pr-3.5"
-                      } py-2 bg-slate-50 border rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${
-                        customYoutubeUrl.trim() && !customYoutube
-                          ? "border-rose-300 focus:ring-rose-500/20 focus:border-rose-500"
-                          : "border-slate-200 focus:ring-indigo-500/20 focus:border-indigo-600"
-                      }`}
-                    />
-                    {customYoutubeUrl && (
-                      <button
-                        type="button"
-                        onClick={() => setCustomYoutubeUrl("")}
-                        aria-label="清除自訂播放列表連結"
-                        title="清除並改回自動建立播放清單"
-                        className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 rounded-md"
-                      >
-                        <X className="w-3.5 h-3.5" />
-                      </button>
-                    )}
+                <div className="space-y-3">
+                  <div className="space-y-1.5">
+                    <label
+                      htmlFor="custom-youtube-url"
+                      className="block text-xs font-medium text-slate-600"
+                    >
+                      自訂播放列表連結（選填）
+                    </label>
+                    <div className="relative">
+                      <input
+                        id="custom-youtube-url"
+                        type="text"
+                        value={customYoutubeUrl}
+                        onChange={(e) => handleYoutubeUrlChange(e.target.value)}
+                        onBlur={commitYoutubeUrlBlur}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            commitYoutubeUrlBlur();
+                          }
+                        }}
+                        placeholder="留空則自動使用每首歌第一個 YouTube 連結，或貼上自訂播放清單網址..."
+                        className={`w-full pl-3.5 ${
+                          customYoutubeUrl ? "pr-8" : "pr-3.5"
+                        } py-2 bg-slate-50 border rounded-xl text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${
+                          isCommittedCustomMode &&
+                          !hasPendingYoutubeEdit &&
+                          committedCustomAnalysis.error
+                            ? "border-rose-300 focus:ring-rose-500/20 focus:border-rose-500"
+                            : "border-slate-200 focus:ring-indigo-500/20 focus:border-indigo-600"
+                        }`}
+                      />
+                      {customYoutubeUrl && (
+                        <button
+                          type="button"
+                          onClick={handleClearCustomYoutube}
+                          aria-label="清除自訂播放列表連結"
+                          title="清除並改回自動建立播放清單"
+                          className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 rounded-md"
+                        >
+                          <X className="w-3.5 h-3.5" />
+                        </button>
+                      )}
+                    </div>
                   </div>
 
-                  {customYoutubeUrl.trim() ? (
-                    customYoutube ? (
+                  {/* Custom Playlist Start / End Time Controls */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="custom-youtube-start"
+                        className="flex items-center justify-between text-[11px] font-medium text-slate-600"
+                      >
+                        <span className="inline-flex items-center gap-1">
+                          <Clock className="w-3 h-3 text-slate-400" />
+                          <span>開始時間（選填）</span>
+                        </span>
+                        {ytStartHintSeconds !== undefined && (
+                          <span className="font-mono text-indigo-600">
+                            {formatSecondsDisplay(ytStartHintSeconds)}
+                          </span>
+                        )}
+                      </label>
+                      <input
+                        id="custom-youtube-start"
+                        type="text"
+                        value={ytStartDraft}
+                        disabled={!hasCustomYoutubeInput}
+                        onChange={(e) =>
+                          handleYoutubeTimeDraftChange("start", e.target.value)
+                        }
+                        onBlur={commitYoutubeTimeBlur}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            commitYoutubeTimeBlur();
+                          }
+                        }}
+                        placeholder={
+                          hasCustomYoutubeInput
+                            ? "例：90 或 1:30"
+                            : "填入自訂連結後可設定"
+                        }
+                        className="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                      />
+                    </div>
+
+                    <div className="space-y-1">
+                      <label
+                        htmlFor="custom-youtube-end"
+                        className="flex items-center justify-between text-[11px] font-medium text-slate-600"
+                      >
+                        <span className="inline-flex items-center gap-1">
+                          <Clock className="w-3 h-3 text-slate-400" />
+                          <span>結束時間（選填）</span>
+                        </span>
+                        {ytEndHintSeconds !== undefined && (
+                          <span className="font-mono text-indigo-600">
+                            {formatSecondsDisplay(ytEndHintSeconds)}
+                          </span>
+                        )}
+                      </label>
+                      <input
+                        id="custom-youtube-end"
+                        type="text"
+                        value={ytEndDraft}
+                        disabled={!hasCustomYoutubeInput}
+                        onChange={(e) =>
+                          handleYoutubeTimeDraftChange("end", e.target.value)
+                        }
+                        onBlur={commitYoutubeTimeBlur}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter") {
+                            e.preventDefault();
+                            commitYoutubeTimeBlur();
+                          }
+                        }}
+                        placeholder={
+                          hasCustomYoutubeInput
+                            ? "例：180 或 3:00"
+                            : "填入自訂連結後可設定"
+                        }
+                        className="w-full px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-xl text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 disabled:opacity-50 disabled:cursor-not-allowed"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Mode / Status Summary */}
+                  {isCommittedCustomMode ? (
+                    previewErrorMessage ? (
+                      <div className="flex items-start gap-1.5 text-[11px] text-rose-600 bg-rose-50/70 border border-rose-200/60 px-2.5 py-1.5 rounded-lg">
+                        <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                        <span>{previewErrorMessage}</span>
+                      </div>
+                    ) : committedCustomYoutube ? (
                       <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-emerald-700 bg-emerald-50/70 border border-emerald-200/60 px-2.5 py-1.5 rounded-lg">
                         <span>
                           已套用自訂 YouTube{" "}
-                          {customYoutube.kind === "playlist"
+                          {committedCustomYoutube.kind === "playlist"
                             ? "播放清單"
                             : "影片"}
-                          連結
+                          連結（循環播放）
+                          {customTimeRangeLabel
+                            ? ` · 區間 ${customTimeRangeLabel}`
+                            : ""}
                         </span>
                         <a
-                          href={customYoutube.externalUrl}
+                          href={committedCustomYoutube.externalUrl}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="inline-flex items-center gap-1 font-semibold text-emerald-800 hover:underline"
@@ -641,18 +1041,10 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                           <ExternalLink className="w-3 h-3" />
                         </a>
                       </div>
-                    ) : (
-                      <div className="flex items-start gap-1.5 text-[11px] text-rose-600 bg-rose-50/70 border border-rose-200/60 px-2.5 py-1.5 rounded-lg">
-                        <AlertCircle className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                        <span>
-                          無法辨識此 YouTube 連結格式，請確認貼上的是有效的
-                          YouTube 播放清單網址（例：youtube.com/playlist?list=...）或影片網址
-                        </span>
-                      </div>
-                    )
+                    ) : null
                   ) : (
                     <div className="flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500 px-0.5">
-                      {items.filter((i) => !i.t).length === 0 ? (
+                      {songItemCount === 0 ? (
                         <span>
                           自動模式：加入歌曲後，將自動使用每首歌的第一個 YouTube
                           連結建立播放清單
@@ -664,7 +1056,13 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                             <strong className="text-slate-700">
                               {autoYoutube.tracks.length}
                             </strong>{" "}
-                            首曲目的第一個 YouTube 連結建立清單
+                            首曲目的第一個 YouTube 連結建立清單（循環播放）
+                            {autoFirstTrackRange && (
+                              <span className="text-amber-700 font-medium">
+                                {" "}
+                                · 首曲區間 {autoFirstTrackRange}
+                              </span>
+                            )}
                             {autoYoutube.skippedSongTitles.length > 0 && (
                               <span className="text-slate-400">
                                 （另有 {autoYoutube.skippedSongTitles.length}{" "}
@@ -691,6 +1089,64 @@ export const PlaylistBuilder: React.FC<PlaylistBuilderProps> = ({
                       )}
                     </div>
                   )}
+
+                  {/* Embedded Preview (loads on blur) */}
+                  <div className="space-y-1.5 pt-1">
+                    <div className="flex items-center justify-between text-[11px] text-slate-500">
+                      <span className="font-medium text-slate-600">
+                        播放列表內嵌預覽（輸入後於失焦時載入）
+                      </span>
+                      {previewExternalUrl && !hasPendingYoutubeEdit && (
+                        <a
+                          href={previewExternalUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1 font-medium text-indigo-600 hover:underline"
+                        >
+                          <span>開啟外部連結</span>
+                          <ExternalLink className="w-3 h-3" />
+                        </a>
+                      )}
+                    </div>
+
+                    <YoutubePreview
+                      embedUrl={previewEmbedUrl}
+                      externalUrl={previewExternalUrl}
+                      title={`${title.trim() || "敬拜歌單"} - YouTube 播放列表預覽`}
+                      errorTitle="YouTube 播放列表預覽失敗"
+                      errorMessage={previewErrorMessage}
+                      emptyTitle={
+                        songItemCount === 0
+                          ? "自動播放列表（尚未加入曲目）"
+                          : "自動播放列表（無可用 YouTube 連結）"
+                      }
+                      emptyMessage={
+                        songItemCount === 0
+                          ? "從左側曲目庫加入詩歌後將自動產生預覽，或於上方填入自訂連結並失焦載入。"
+                          : "目前選取的詩歌皆未設定有效的 YouTube 連結，可於上方填入自訂 YouTube 連結並失焦載入。"
+                      }
+                      statusDetail={
+                        isCommittedCustomMode
+                          ? `正在載入自訂${
+                              committedCustomYoutube?.kind === "playlist"
+                                ? "播放清單"
+                                : "影片"
+                            }${customTimeRangeLabel ? `（區間 ${customTimeRangeLabel}）` : ""}`
+                          : autoYoutube.tracks.length > 0
+                            ? `正在載入自動彙整清單 · 共 ${autoYoutube.tracks.length} 首${
+                                autoFirstTrackRange
+                                  ? `（首曲區間 ${autoFirstTrackRange}）`
+                                  : ""
+                              }`
+                            : undefined
+                      }
+                      pendingHint={
+                        hasPendingYoutubeEdit
+                          ? "已修改 · 失焦或按 Enter 更新預覽"
+                          : null
+                      }
+                    />
+                  </div>
                 </div>
               )}
             </div>

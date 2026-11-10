@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useMemo } from "react";
 import CodeMirror from "@uiw/react-codemirror";
 import * as prettier from "prettier/standalone";
 import parserBabel from "prettier/plugins/babel";
@@ -40,7 +40,17 @@ import {
   CheckCircle2,
   AlertCircle,
   X,
+  Clock,
+  ExternalLink,
 } from "lucide-react";
+import {
+  analyzeYoutubeUrl,
+  extractYoutubeTimeFields,
+  formatSecondsDisplay,
+  parseYoutubeTimeInput,
+  updateYoutubeUrlTimeParams,
+} from "@/utils/youtube";
+import { YoutubePreview } from "@/components/YoutubePreview";
 import { LyricsViewer } from "@/components/LyricsViewer";
 import {
   customHighlight,
@@ -437,17 +447,430 @@ export function validateSongData(raw: unknown): ValidationResult {
   return { success: true, data: normalizedData };
 }
 
-function getYoutubeVideoUrl(url: string): string | null {
-  const yturl = new URL(url);
-  const videoId =
-    yturl.searchParams.get("v") ||
-    yturl.pathname.split("/").pop()?.slice(0, 11);
-  if (!videoId) return null;
-
-  const t = yturl.searchParams.get("t");
-
-  return `https://www.youtube.com/watch?v=${videoId}` + (t ? `&t=${t}` : "");
+interface SongYoutubeAssetFieldsProps {
+  url: string;
+  assetName: string;
+  onUrlChange: (nextUrl: string) => void;
 }
+
+const SONG_YOUTUBE_PARSE_OPTIONS = { preferSingleVideo: true } as const;
+
+const SongYoutubeAssetFields: React.FC<SongYoutubeAssetFieldsProps> = ({
+  url,
+  assetName,
+  onUrlChange,
+}) => {
+  const initialTimes = extractYoutubeTimeFields(url);
+  const [committedUrl, setCommittedUrl] = useState(url);
+  const [startDraft, setStartDraft] = useState(
+    initialTimes.startSeconds !== undefined
+      ? String(initialTimes.startSeconds)
+      : "",
+  );
+  const [endDraft, setEndDraft] = useState(
+    initialTimes.endSeconds !== undefined
+      ? String(initialTimes.endSeconds)
+      : "",
+  );
+  const [committedStartDraft, setCommittedStartDraft] = useState(
+    initialTimes.startSeconds !== undefined
+      ? String(initialTimes.startSeconds)
+      : "",
+  );
+  const [committedEndDraft, setCommittedEndDraft] = useState(
+    initialTimes.endSeconds !== undefined
+      ? String(initialTimes.endSeconds)
+      : "",
+  );
+  const [timeError, setTimeError] = useState<string | null>(null);
+
+  const handleUrlInputChange = (value: string) => {
+    const trimmed = value.trim();
+    if (/^<iframe\b/i.test(trimmed)) {
+      const srcMatch = trimmed.match(/\bsrc\s*=\s*(?:"([^"]*)"|'([^']*)')/i);
+      if (srcMatch) {
+        onUrlChange((srcMatch[1] || srcMatch[2] || "").trim());
+        return;
+      }
+    }
+    onUrlChange(value);
+  };
+
+  const commitUrlBlur = () => {
+    const trimmed = url.trim();
+    if (!trimmed) {
+      onUrlChange("");
+      setCommittedUrl("");
+      setStartDraft("");
+      setEndDraft("");
+      setCommittedStartDraft("");
+      setCommittedEndDraft("");
+      setTimeError(null);
+      return;
+    }
+
+    const analysis = analyzeYoutubeUrl(trimmed, SONG_YOUTUBE_PARSE_OPTIONS);
+    if (!analysis.target) {
+      setCommittedUrl(trimmed);
+      setTimeError(null);
+      return;
+    }
+
+    const prevTimes = extractYoutubeTimeFields(committedUrl);
+    const prevHadTime =
+      prevTimes.startSeconds !== undefined ||
+      prevTimes.endSeconds !== undefined;
+    const rawHasTime =
+      analysis.target.startSeconds !== undefined ||
+      analysis.target.endSeconds !== undefined;
+
+    if (rawHasTime) {
+      const canonicalUrl = analysis.target.externalUrl;
+      const nextStart =
+        analysis.target.startSeconds !== undefined
+          ? String(analysis.target.startSeconds)
+          : "";
+      const nextEnd =
+        analysis.target.endSeconds !== undefined
+          ? String(analysis.target.endSeconds)
+          : "";
+      onUrlChange(canonicalUrl);
+      setCommittedUrl(canonicalUrl);
+      setStartDraft(nextStart);
+      setEndDraft(nextEnd);
+      setCommittedStartDraft(nextStart);
+      setCommittedEndDraft(nextEnd);
+      setTimeError(null);
+      return;
+    }
+
+    if (!prevHadTime && (startDraft.trim() || endDraft.trim())) {
+      const startRes = parseYoutubeTimeInput(startDraft, {
+        allowZeroAsUnset: true,
+      });
+      const endRes = parseYoutubeTimeInput(endDraft, {
+        allowZeroAsUnset: false,
+      });
+      if (startRes.error) {
+        onUrlChange(analysis.target.externalUrl);
+        setCommittedUrl(analysis.target.externalUrl);
+        setTimeError(startRes.error);
+        setCommittedStartDraft(startDraft.trim());
+        setCommittedEndDraft(endDraft.trim());
+        return;
+      }
+      if (endRes.error) {
+        onUrlChange(analysis.target.externalUrl);
+        setCommittedUrl(analysis.target.externalUrl);
+        setTimeError(endRes.error);
+        setCommittedStartDraft(startDraft.trim());
+        setCommittedEndDraft(endDraft.trim());
+        return;
+      }
+      const updated = updateYoutubeUrlTimeParams(
+        analysis.target.externalUrl,
+        startRes.seconds,
+        endRes.seconds,
+        SONG_YOUTUBE_PARSE_OPTIONS,
+      );
+      if (updated.error || !updated.nextUrl) {
+        onUrlChange(analysis.target.externalUrl);
+        setCommittedUrl(analysis.target.externalUrl);
+        setTimeError(updated.error || "時間設定無效");
+        setCommittedStartDraft(startDraft.trim());
+        setCommittedEndDraft(endDraft.trim());
+        return;
+      }
+      const normalizedStart =
+        startRes.seconds === undefined ? "" : startDraft.trim();
+      const normalizedEnd = endDraft.trim();
+      onUrlChange(updated.nextUrl);
+      setCommittedUrl(updated.nextUrl);
+      setStartDraft(normalizedStart);
+      setEndDraft(normalizedEnd);
+      setCommittedStartDraft(normalizedStart);
+      setCommittedEndDraft(normalizedEnd);
+      setTimeError(null);
+      return;
+    }
+
+    const canonicalUrl = analysis.target.externalUrl;
+    onUrlChange(canonicalUrl);
+    setCommittedUrl(canonicalUrl);
+    setStartDraft("");
+    setEndDraft("");
+    setCommittedStartDraft("");
+    setCommittedEndDraft("");
+    setTimeError(null);
+  };
+
+  const handleTimeDraftChange = (field: "start" | "end", value: string) => {
+    if (field === "start") {
+      setStartDraft(value);
+    } else {
+      setEndDraft(value);
+    }
+  };
+
+  const commitTimeBlur = () => {
+    const trimmedStart = startDraft.trim();
+    const trimmedEnd = endDraft.trim();
+
+    const startRes = parseYoutubeTimeInput(trimmedStart, {
+      allowZeroAsUnset: true,
+    });
+    if (startRes.error) {
+      setTimeError(startRes.error);
+      setCommittedStartDraft(trimmedStart);
+      setCommittedEndDraft(trimmedEnd);
+      return;
+    }
+
+    const endRes = parseYoutubeTimeInput(trimmedEnd, {
+      allowZeroAsUnset: false,
+    });
+    if (endRes.error) {
+      setTimeError(endRes.error);
+      setCommittedStartDraft(trimmedStart);
+      setCommittedEndDraft(trimmedEnd);
+      return;
+    }
+
+    if (
+      startRes.seconds !== undefined &&
+      endRes.seconds !== undefined &&
+      endRes.seconds <= startRes.seconds
+    ) {
+      setTimeError(
+        `結束時間（${endRes.seconds} 秒）必須大於開始時間（${startRes.seconds} 秒）`,
+      );
+      setCommittedStartDraft(trimmedStart);
+      setCommittedEndDraft(trimmedEnd);
+      return;
+    }
+
+    setTimeError(null);
+    const normalizedStart = startRes.seconds === undefined ? "" : trimmedStart;
+    setStartDraft(normalizedStart);
+    setEndDraft(trimmedEnd);
+    setCommittedStartDraft(normalizedStart);
+    setCommittedEndDraft(trimmedEnd);
+
+    if (!url.trim()) {
+      setCommittedUrl("");
+      return;
+    }
+
+    const updated = updateYoutubeUrlTimeParams(
+      url,
+      startRes.seconds,
+      endRes.seconds,
+      SONG_YOUTUBE_PARSE_OPTIONS,
+    );
+    if (updated.nextUrl && !updated.error) {
+      onUrlChange(updated.nextUrl);
+      setCommittedUrl(updated.nextUrl);
+    } else {
+      setCommittedUrl(url.trim());
+    }
+  };
+
+  const handleClear = () => {
+    onUrlChange("");
+    setCommittedUrl("");
+    setStartDraft("");
+    setEndDraft("");
+    setCommittedStartDraft("");
+    setCommittedEndDraft("");
+    setTimeError(null);
+  };
+
+  const committedAnalysis = useMemo(
+    () => analyzeYoutubeUrl(committedUrl, SONG_YOUTUBE_PARSE_OPTIONS),
+    [committedUrl],
+  );
+  const committedTarget = committedAnalysis.target;
+  const hasPendingEdit =
+    url.trim() !== committedUrl.trim() ||
+    startDraft.trim() !== committedStartDraft.trim() ||
+    endDraft.trim() !== committedEndDraft.trim();
+
+  const startHintSeconds = useMemo(
+    () => parseYoutubeTimeInput(startDraft, { allowZeroAsUnset: true }).seconds,
+    [startDraft],
+  );
+  const endHintSeconds = useMemo(
+    () => parseYoutubeTimeInput(endDraft, { allowZeroAsUnset: false }).seconds,
+    [endDraft],
+  );
+
+  const timeRangeLabel =
+    committedTarget &&
+    (committedTarget.startSeconds !== undefined ||
+      committedTarget.endSeconds !== undefined)
+      ? `${
+          committedTarget.startSeconds !== undefined
+            ? formatSecondsDisplay(committedTarget.startSeconds)
+            : "0:00"
+        }${
+          committedTarget.endSeconds !== undefined
+            ? ` – ${formatSecondsDisplay(committedTarget.endSeconds)}`
+            : " 起"
+        }`
+      : null;
+
+  const previewErrorMessage =
+    timeError || (committedUrl.trim() ? committedAnalysis.error || null : null);
+  const previewEmbedUrl = previewErrorMessage
+    ? null
+    : (committedTarget?.embedUrl ?? null);
+  const previewExternalUrl = committedTarget?.externalUrl ?? null;
+
+  return (
+    <div className="space-y-3">
+      <Field className="flex flex-col gap-1.5">
+        <Label className="text-xs font-medium text-slate-600">
+          YouTube 連結
+        </Label>
+        <div className="relative">
+          <Input
+            value={url}
+            onChange={(e) => handleUrlInputChange(e.target.value)}
+            onBlur={commitUrlBlur}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                commitUrlBlur();
+              }
+            }}
+            placeholder="https://www.youtube.com/watch?v=example"
+            className={`w-full rounded-lg border p-3 ${
+              url ? "pr-9" : ""
+            } text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 ${
+              committedUrl.trim() && !hasPendingEdit && committedAnalysis.error
+                ? "border-rose-300 focus:ring-rose-500/30"
+                : "border-slate-300 focus:ring-blue-500"
+            }`}
+          />
+          {url && (
+            <button
+              type="button"
+              onClick={handleClear}
+              aria-label="清除 YouTube 連結"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 p-1 text-slate-400 hover:text-slate-600 rounded-md"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          )}
+        </div>
+      </Field>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <Field className="flex flex-col gap-1">
+          <Label className="flex items-center justify-between text-xs font-medium text-slate-600">
+            <span className="inline-flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5 text-slate-400" />
+              <span>開始時間（選填）</span>
+            </span>
+            {startHintSeconds !== undefined && (
+              <span className="font-mono text-indigo-600">
+                {formatSecondsDisplay(startHintSeconds)}
+              </span>
+            )}
+          </Label>
+          <Input
+            value={startDraft}
+            onChange={(e) => handleTimeDraftChange("start", e.target.value)}
+            onBlur={commitTimeBlur}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                commitTimeBlur();
+              }
+            }}
+            placeholder="例：90 或 1:30"
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </Field>
+
+        <Field className="flex flex-col gap-1">
+          <Label className="flex items-center justify-between text-xs font-medium text-slate-600">
+            <span className="inline-flex items-center gap-1">
+              <Clock className="w-3.5 h-3.5 text-slate-400" />
+              <span>結束時間（選填）</span>
+            </span>
+            {endHintSeconds !== undefined && (
+              <span className="font-mono text-indigo-600">
+                {formatSecondsDisplay(endHintSeconds)}
+              </span>
+            )}
+          </Label>
+          <Input
+            value={endDraft}
+            onChange={(e) => handleTimeDraftChange("end", e.target.value)}
+            onBlur={commitTimeBlur}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                commitTimeBlur();
+              }
+            }}
+            placeholder="例：180 或 3:00"
+            className="w-full rounded-lg border border-slate-300 px-3 py-2 text-xs text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </Field>
+      </div>
+
+      <div className="space-y-1.5">
+        <div className="flex items-center justify-between text-[11px] text-slate-500">
+          <span>
+            內嵌預覽（輸入後於失焦時載入 · 循環播放
+            {timeRangeLabel ? ` · 區間 ${timeRangeLabel}` : ""}）
+          </span>
+          {previewExternalUrl && !hasPendingEdit && (
+            <a
+              href={previewExternalUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1 font-medium text-indigo-600 hover:underline"
+            >
+              <span>在 YouTube 開啟</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+          )}
+        </div>
+
+        <YoutubePreview
+          embedUrl={previewEmbedUrl}
+          externalUrl={previewExternalUrl}
+          title={`${assetName || "YouTube"} 預覽`}
+          emptyTitle="尚未載入 YouTube 預覽"
+          emptyMessage="輸入任意 YouTube 連結（支援影片、youtu.be、Shorts、Live、音樂、內嵌碼等）與開始／結束時間，失焦後自動檢查、格式化並顯示預覽"
+          errorTitle="無法載入 YouTube 預覽"
+          errorMessage={previewErrorMessage}
+          statusDetail={
+            committedTarget
+              ? `正在載入 YouTube ${
+                  committedTarget.kind === "playlist" ? "播放清單" : "影片"
+                }${timeRangeLabel ? `（區間 ${timeRangeLabel}）` : ""}`
+              : undefined
+          }
+          pendingHint={
+            hasPendingEdit ? "已修改 · 失焦或按 Enter 更新預覽" : null
+          }
+        />
+
+        {committedTarget?.kind === "playlist" && !hasPendingEdit && (
+          <p className="text-[11px] text-amber-700 bg-amber-50 border border-amber-200/70 rounded-lg px-2.5 py-1.5">
+            提醒：目前輸入的是 YouTube
+            播放清單連結，仍可在此預覽；若要讓歌單功能自動彙整此曲，請使用含單支影片
+            ID 的網址。
+          </p>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export const SongBuilder: React.FC = () => {
   const [isBilingual, setIsBilingual] = useState(false);
@@ -468,6 +891,7 @@ export const SongBuilder: React.FC = () => {
     type: "success" | "error";
     message: string;
   } | null>(null);
+  const [assetSyncVersion, setAssetSyncVersion] = useState(0);
 
   const editorViewRef = useRef<EditorView | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -526,6 +950,7 @@ export const SongBuilder: React.FC = () => {
       arrangement: songData.meta?.arrangement || [],
       note: songData.meta?.note || "",
     });
+    setAssetSyncVersion((v) => v + 1);
   };
 
   const handleFile = async (file: File) => {
@@ -683,12 +1108,12 @@ export const SongBuilder: React.FC = () => {
 
   const handleDownloadJson = async () => {
     const songData: SongData = {
-      meta,
+      meta: {
+        ...meta,
+        assets: meta.assets?.filter((asset) => asset.name && asset.url),
+      },
       sections,
     };
-    songData.meta.assets = songData.meta.assets?.filter(
-      (asset) => asset.name && asset.url,
-    );
     if (!songData.meta.title.a || !songData.meta.languages.a) {
       setIdError("請設定歌曲主要名稱和語言");
       return;
@@ -1192,13 +1617,14 @@ export const SongBuilder: React.FC = () => {
                       <span>資源 {index + 1}</span>
                       <Button
                         type="button"
-                        onClick={() =>
+                        onClick={() => {
                           setMeta((prev) => {
                             const newAssets = [...(prev.assets || [])];
                             newAssets.splice(index, 1);
                             return { ...prev, assets: newAssets };
-                          })
-                        }
+                          });
+                          setAssetSyncVersion((v) => v + 1);
+                        }}
                         className="ml-auto px-2 py-0.5 bg-red-600 text-white rounded-lg text-xs font-medium hover:bg-red-700 transition-colors"
                       >
                         刪除
@@ -1232,16 +1658,29 @@ export const SongBuilder: React.FC = () => {
                         <div className="w-full !rounded-lg border border-slate-300 h-[46px]">
                           <Select
                             value={asset.type}
-                            onChange={(e) =>
+                            onChange={(e) => {
+                              const nextType = e.target.value as any;
                               setMeta((prev) => {
                                 const newAssets = [...(prev.assets || [])];
+                                const cur = newAssets[index];
+                                let nextUrl = cur.url;
+                                if (nextType === "youtube" && cur.url.trim()) {
+                                  const analyzed = analyzeYoutubeUrl(
+                                    cur.url,
+                                    SONG_YOUTUBE_PARSE_OPTIONS,
+                                  );
+                                  if (analyzed.target) {
+                                    nextUrl = analyzed.target.externalUrl;
+                                  }
+                                }
                                 newAssets[index] = {
-                                  ...newAssets[index],
-                                  type: e.target.value as any,
+                                  ...cur,
+                                  type: nextType,
+                                  url: nextUrl,
                                 };
                                 return { ...prev, assets: newAssets };
-                              })
-                            }
+                              });
+                            }}
                             className="w-full h-full bg-transparent text-sm pl-3 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-0"
                           >
                             <option value="youtube">YouTube</option>
@@ -1254,38 +1693,42 @@ export const SongBuilder: React.FC = () => {
                         </div>
                       </Field>
                     </Field>
-                    <Field>
-                      <Input
-                        value={asset.url}
-                        onChange={(e) =>
+                    {asset.type === "youtube" ? (
+                      <SongYoutubeAssetFields
+                        key={`${assetSyncVersion}-${index}`}
+                        url={asset.url}
+                        assetName={asset.name}
+                        onUrlChange={(nextUrl) =>
                           setMeta((prev) => {
                             const newAssets = [...(prev.assets || [])];
+                            if (!newAssets[index]) return prev;
                             newAssets[index] = {
                               ...newAssets[index],
-                              url: e.target.value,
+                              url: nextUrl,
                             };
                             return { ...prev, assets: newAssets };
                           })
                         }
-                        onBlur={(e) => {
-                          if (asset.type === "youtube") {
-                            const validUrl = getYoutubeVideoUrl(e.target.value);
-                            if (validUrl) {
-                              setMeta((prev) => {
-                                const newAssets = [...(prev.assets || [])];
-                                newAssets[index] = {
-                                  ...newAssets[index],
-                                  url: validUrl,
-                                };
-                                return { ...prev, assets: newAssets };
-                              });
-                            }
-                          }
-                        }}
-                        placeholder="https://www.youtube.com/watch?v=example"
-                        className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
                       />
-                    </Field>
+                    ) : (
+                      <Field>
+                        <Input
+                          value={asset.url}
+                          onChange={(e) =>
+                            setMeta((prev) => {
+                              const newAssets = [...(prev.assets || [])];
+                              newAssets[index] = {
+                                ...newAssets[index],
+                                url: e.target.value,
+                              };
+                              return { ...prev, assets: newAssets };
+                            })
+                          }
+                          placeholder="https://example.com/resource"
+                          className="w-full rounded-lg border border-slate-300 p-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        />
+                      </Field>
+                    )}
                   </div>
                 </div>
               ))}

@@ -14,9 +14,11 @@ import {
   type PlaylistPayload,
 } from "@/utils/playlistEncoder";
 import {
+  analyzeYoutubeUrl,
   buildAutoYoutubePlaylist,
-  parseCustomYoutubeUrl,
+  formatSecondsDisplay,
 } from "@/utils/youtube";
+import { YoutubePreview } from "@/components/YoutubePreview";
 import {
   Calendar,
   Music,
@@ -79,10 +81,12 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
   const customYoutubeRawUrl =
     typeof payload?.ytUrl === "string" ? payload.ytUrl.trim() : "";
 
-  const customYoutube = useMemo(() => {
+  const customYoutubeAnalysis = useMemo(() => {
     if (!isYoutubeEnabled || !customYoutubeRawUrl) return null;
-    return parseCustomYoutubeUrl(customYoutubeRawUrl);
+    return analyzeYoutubeUrl(customYoutubeRawUrl);
   }, [isYoutubeEnabled, customYoutubeRawUrl]);
+
+  const customYoutube = customYoutubeAnalysis?.target ?? null;
 
   const autoYoutube = useMemo(() => {
     if (!isYoutubeEnabled || customYoutubeRawUrl || !payload) return null;
@@ -97,6 +101,31 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
     : autoYoutube?.externalUrl || null;
   const hasInvalidCustomYoutube =
     isYoutubeEnabled && Boolean(customYoutubeRawUrl) && !customYoutube;
+
+  const activeTimeRange = customYoutube
+    ? customYoutube.startSeconds !== undefined ||
+      customYoutube.endSeconds !== undefined
+      ? {
+          start: customYoutube.startSeconds,
+          end: customYoutube.endSeconds,
+        }
+      : null
+    : autoYoutube?.tracks[0] &&
+        (autoYoutube.tracks[0].startSeconds !== undefined ||
+          autoYoutube.tracks[0].endSeconds !== undefined)
+      ? {
+          start: autoYoutube.tracks[0].startSeconds,
+          end: autoYoutube.tracks[0].endSeconds,
+        }
+      : null;
+
+  const activeTimeRangeLabel = activeTimeRange
+    ? `${activeTimeRange.start !== undefined ? formatSecondsDisplay(activeTimeRange.start) : "0:00"}${
+        activeTimeRange.end !== undefined
+          ? ` – ${formatSecondsDisplay(activeTimeRange.end)}`
+          : " 起"
+      }`
+    : null;
 
   // Decode hash on mount and hashchange
   useEffect(() => {
@@ -366,7 +395,8 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
                   </h2>
                   {customYoutube ? (
                     <span className="px-2 py-0.5 rounded-full bg-indigo-50 text-indigo-700 border border-indigo-100 text-[11px] font-semibold">
-                      自訂{customYoutube.kind === "playlist" ? "播放清單" : "影片"}
+                      自訂
+                      {customYoutube.kind === "playlist" ? "播放清單" : "影片"}
                     </span>
                   ) : autoYoutube ? (
                     <span className="px-2 py-0.5 rounded-full bg-slate-100 text-slate-600 border border-slate-200/80 text-[11px] font-semibold">
@@ -413,14 +443,17 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
           </div>
 
           {isYoutubeExpanded && (
-            <iframe
-              key={activeYoutubeEmbedUrl}
-              className="w-full aspect-video rounded-2xl border border-slate-200/80 bg-slate-950"
-              src={activeYoutubeEmbedUrl}
+            <YoutubePreview
+              embedUrl={activeYoutubeEmbedUrl}
+              externalUrl={activeYoutubeExternalUrl}
               title={`${payload.t || "敬拜歌單"} - YouTube 播放列表`}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              referrerPolicy="strict-origin-when-cross-origin"
-              allowFullScreen
+              statusDetail={
+                customYoutube
+                  ? `正在載入自訂 YouTube ${customYoutube.kind === "playlist" ? "播放清單" : "影片"}${activeTimeRangeLabel ? `（區間 ${activeTimeRangeLabel}）` : ""}`
+                  : autoYoutube
+                    ? `正在載入自動彙整清單 · 共 ${autoYoutube.tracks.length} 首${activeTimeRangeLabel ? `（首曲區間 ${activeTimeRangeLabel}）` : ""}`
+                    : undefined
+              }
             />
           )}
         </div>
@@ -428,7 +461,11 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
         <div className="bg-amber-50/70 p-4 rounded-2xl border border-amber-200/80 text-xs text-amber-800 flex items-center gap-2.5">
           <AlertCircle className="w-4 h-4 text-amber-600 shrink-0" />
           <span>
-            無法解析此歌單的自訂 YouTube 播放列表連結，請前往「編輯歌單」確認網址格式是否正確。
+            無法解析此歌單的自訂 YouTube 播放列表連結
+            {customYoutubeAnalysis?.error
+              ? `（${customYoutubeAnalysis.error}）`
+              : ""}
+            ，請前往「編輯歌單」確認網址與時間格式是否正確。
           </span>
         </div>
       ) : null}
