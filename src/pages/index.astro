@@ -2,35 +2,14 @@
 import { getCollection } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import { SearchPanel } from "@/components/SearchPanel";
-import type { SearchDoc } from "@/pages/search-index.json";
+import { buildSearchDocs, extractSortedTags } from "@/utils/searchIndex";
 import { BookOpen, SlidersHorizontal } from "lucide-react";
 
 const songEntries = await getCollection("songs");
 
-// Prepare initial search docs for SSR
-const searchDocs: SearchDoc[] = songEntries.map((song) => {
-  const lyricsALines: string[] = [];
-  const lyricsBLines: string[] = [];
-
-  song.data.sections.forEach((sec) => {
-    sec.lines.forEach((line) => {
-      if (line.a) lyricsALines.push(line.a);
-      if (line.b) lyricsBLines.push(line.b);
-    });
-  });
-
-  return {
-    id: song.id,
-    titleA: song.data.meta.title.a,
-    titleB: song.data.meta.title.b || "",
-    originalKey: song.data.meta.originalKey || "",
-    bpm: song.data.meta.bpm,
-    tags: song.data.meta.tags || [],
-    author: song.data.meta.author || "",
-    lyricsA: lyricsALines.join(" "),
-    lyricsB: lyricsBLines.join(" "),
-  };
-});
+// Prepare pre-sorted search docs and tags for SSR & hydration without post-mount re-sort
+const searchDocs = buildSearchDocs(songEntries);
+const initialTags = extractSortedTags(searchDocs);
 ---
 
 <Layout title="Lyrics Library - 詩歌歌詞與敬拜管理">
@@ -68,7 +47,11 @@ const searchDocs: SearchDoc[] = songEntries.map((song) => {
 
     <!-- Interactive MiniSearch & Filtering Panel -->
     <section>
-      <SearchPanel client:load initialDocs={searchDocs} />
+      <SearchPanel
+        client:load
+        initialDocs={searchDocs}
+        initialTags={initialTags}
+      />
     </section>
   </div>
 </Layout>

@@ -1,37 +1,40 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useMemo } from "react";
 import MiniSearch from "minisearch";
-import type { SearchDoc } from "@/pages/search-index.json";
+import {
+  extractSortedTags,
+  type SearchDoc,
+  type TagCount,
+} from "@/utils/searchIndex";
 import { Search, X, Music, ArrowRight, Sparkles, Filter } from "lucide-react";
 
 export interface SearchPanelProps {
+  /** Pre-sorted initial search documents generated during SSR. */
   initialDocs: SearchDoc[];
+  /** Pre-sorted initial tag counts generated during SSR. */
+  initialTags?: TagCount[];
 }
 
-export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
+const normalizeTerm = (term: string) => {
+  return term.replace(/[祢妳]/g, "你").replace(/[祂牠]/g, "他");
+};
+
+export const SearchPanel: React.FC<SearchPanelProps> = ({
+  initialDocs,
+  initialTags,
+}) => {
   const [query, setQuery] = useState("");
   const [selectedTag, setSelectedTag] = useState<string | null>(null);
   const [bilingualMode, setBilingualMode] = useState(0); // 0: All, 1: A and B, -1: A only
-  const [docs, setDocs] = useState<SearchDoc[]>(initialDocs);
+  const docs = initialDocs;
 
-  // Extract all unique tags with song counts
+  // Use pre-sorted SSR tags when provided, with deterministic fallback
   const allTags = useMemo(() => {
-    const counts = new Map<string, number>();
-    docs.forEach((doc) => {
-      doc.tags.forEach((tag) => {
-        counts.set(tag, (counts.get(tag) || 0) + 1);
-      });
-    });
-    return Array.from(counts.entries())
-      .sort((a, b) => b[1] - a[1])
-      .filter((tag) => tag[1] > 1); // Only include tags with more than one song
-  }, [docs]);
+    return initialTags ?? extractSortedTags(docs);
+  }, [docs, initialTags]);
 
-  const segmenter = new Intl.Segmenter("zh", { granularity: "word" });
-  const normalizeTerm = (term: string) => {
-    return term.replace(/[祢妳]/g, "你").replace(/[祂牠]/g, "他");
-  };
   // Initialize MiniSearch instance with CJK-friendly tokenizer
   const miniSearch = useMemo(() => {
+    const segmenter = new Intl.Segmenter("zh", { granularity: "word" });
     const ms = new MiniSearch<SearchDoc>({
       fields: ["titleA", "titleB", "lyricsA", "lyricsB", "author", "tags"],
       storeFields: [
@@ -69,28 +72,9 @@ export const SearchPanel: React.FC<SearchPanelProps> = ({ initialDocs }) => {
     return ms;
   }, [docs]);
 
-  // Fetch updated search index if needed on client
-  useEffect(() => {
-    fetch("/search-index.json")
-      .then((res) => {
-        if (res.ok) return res.json();
-        return null;
-      })
-      .then((data: SearchDoc[] | null) => {
-        if (data && Array.isArray(data)) {
-          setDocs(data);
-        }
-      })
-      .catch(() => {
-        // Fallback to initialDocs
-      });
-  }, []);
-
-  // Filter & search results computation
+  // Filter & search results computation (preserve pre-sorted order when query is empty)
   const filteredResults = useMemo(() => {
-    let resultList: SearchDoc[] = docs.sort((a, b) =>
-      a.titleA.localeCompare(b.titleA),
-    );
+    let resultList: SearchDoc[] = docs;
 
     const trimmedQuery = query.trim();
     if (trimmedQuery) {
