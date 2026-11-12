@@ -15,11 +15,11 @@ export interface SongViewContainerProps {
 type MainTab = ScoreViewMode | "lyrics";
 
 const SCORE_TABS: readonly { id: MainTab; label: string }[] = [
+  { id: "lyrics", label: "歌詞" },
   { id: "original", label: "簡譜" },
   { id: "staff", label: "五線譜" },
   { id: "mixed", label: "混排" },
   { id: "expanded", label: "投影" },
-  { id: "lyrics", label: "歌詞" },
 ];
 
 export const SongViewContainer: React.FC<SongViewContainerProps> = ({
@@ -38,9 +38,7 @@ export const SongViewContainer: React.FC<SongViewContainerProps> = ({
     undefined,
   );
   const [customFlow, setCustomFlow] = useState<string[] | undefined>(undefined);
-  const [activeTab, setActiveTab] = useState<MainTab>(
-    song.score ? (song.score.defaultView ?? "original") : "lyrics",
-  );
+  const [activeTab, setActiveTab] = useState<MainTab>("lyrics");
 
   const hasExplicitKeyRef = useRef(false);
 

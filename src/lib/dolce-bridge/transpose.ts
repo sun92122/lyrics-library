@@ -1,14 +1,35 @@
 import { CHROMATIC_SCALE } from "@/constants/keys";
-import { HeadlessSession } from "../dolce/editor/headless";
-import type { ScorePainter } from "../dolce/layout/painter";
+import { docView } from "../dolce/jianpu/slots";
+import {
+  PaintResources,
+  ScorePainter,
+  type StaffPaintRequest,
+  type SyncPaintRequest,
+} from "../dolce/layout/painter";
 import type { Diagnostic, Harmony, Key, Pitch, ScoreDoc, Song } from "../dolce/model/doc";
 import { keyAlter, midiOfPitch, respellMeasure } from "../dolce/model/edit";
 import { assignDegrees } from "../dolce/model/jianpu";
 import { fifthsOfSpelling, tonicSpelling } from "../dolce/model/keyshift";
+import { carryPlayOrder } from "../dolce/model/sections";
+import { scoreDocToMusicXml } from "../dolce/model/toxml";
 import { isXmlShaped } from "../dolce/model/xmlproject";
 import { chordStepAlter } from "../dolce/score/harmonyparse";
 import { MusicCommon } from "../dolce/score/jppitch";
-import { ensureDolceReady, parseScoreDoc, type ScoreFormat, type ScoreViewMode } from "./runtime";
+import { headerLayerOfSong } from "../dolce/style/header";
+import { docPageLayer, pageMargins, resolvePaper } from "../dolce/style/paper";
+import {
+  STAFF_LONG_IMAGE_WIDTH,
+  THEMES,
+  computeStyleForPaper,
+  themeOfMode,
+} from "../dolce/style/themes";
+import {
+  ensureDolceReady,
+  parseMusicXmlScoreDoc,
+  parseScoreDoc,
+  type ScoreFormat,
+  type ScoreViewMode,
+} from "./runtime";
 
 const DIATONIC_STEPS = ["C", "D", "E", "F", "G", "A", "B"] as const;
 type StepLetter = (typeof DIATONIC_STEPS)[number];
@@ -408,11 +429,34 @@ export function transposeScoreDoc(
 }
 
 export interface RenderedScoreSession {
-  session: HeadlessSession;
   painter: ScorePainter;
   renderedDoc: ScoreDoc | null;
   pages: SVGSVGElement[];
   diagnostics: Diagnostic[];
+}
+
+function hasDocLines(doc: ScoreDoc): boolean {
+  return docView(doc).songs[0]?.pages.some((p) => p.groups.length > 0) ?? false;
+}
+
+function makeJianpuRequest(
+  doc: ScoreDoc,
+  mode: "original" | "expanded",
+): SyncPaintRequest | null {
+  const theme = themeOfMode(mode);
+  const page = theme === "print" ? docPageLayer(doc.songs[0]) : [];
+  const header = headerLayerOfSong(doc.songs[0], {
+    sizes: theme === "print",
+    titleFamily: theme !== "print",
+  });
+  const style = computeStyleForPaper([THEMES[theme], [], page, header, [], []], {
+    mode,
+    engine: "jianpu",
+  });
+  if (mode === "expanded") {
+    return hasDocLines(doc) ? { view: "expanded", doc, style } : null;
+  }
+  return { view: "original", doc, style };
 }
 
 export async function renderScoreSession(opts: {
@@ -427,19 +471,76 @@ export async function renderScoreSession(opts: {
   const doc =
     semitones % 12 !== 0 ? transposeScoreDoc(parsed, opts.format, semitones) : parsed;
 
-  const session = new HeadlessSession(meta);
-  session.loadDoc(opts.format, doc);
-  await session.setViewMode(opts.view);
+  const painter = new ScorePainter(PaintResources.fixed(meta));
+  let renderedDoc: ScoreDoc | null = doc;
+
+  if (opts.view === "staff" || opts.view === "mixed") {
+    const staffStyle = computeStyleForPaper(
+      [
+        THEMES.staff,
+        [],
+        docPageLayer(doc.songs[0]),
+        headerLayerOfSong(doc.songs[0], { sizes: true, titleFamily: true }),
+        [],
+        [],
+      ],
+      { mode: "staff", engine: "staff" },
+    );
+    const paper = resolvePaper(staffStyle.page);
+    const marginsPt = pageMargins(staffStyle.page);
+    const page = paper
+      ? { widthPt: paper.w, heightPt: paper.h, marginsPt, override: false }
+      : { widthPt: STAFF_LONG_IMAGE_WIDTH, heightPt: null, marginsPt, override: false };
+
+    let mixedDoc: ScoreDoc;
+    if (opts.format === "musicxml") {
+      mixedDoc = doc;
+    } else {
+      let lineStarts: ReadonlySet<number> | null = null;
+      if (opts.format !== "abc") {
+        const lineReq = makeJianpuRequest(doc, "expanded");
+        if (lineReq) {
+          const linePainter = new ScorePainter(painter.resources);
+          linePainter.loadSync(lineReq);
+          lineStarts = new Set(linePainter.result?.jianpuLineStarts ?? []);
+        }
+      }
+      const xml = scoreDocToMusicXml(doc, {
+        lineStarts,
+        midLineStarts: false,
+        sourceIds: true,
+      });
+      mixedDoc = parseMusicXmlScoreDoc(xml);
+      carryPlayOrder(doc, mixedDoc);
+    }
+
+    const req: StaffPaintRequest = {
+      view: opts.view,
+      doc: mixedDoc,
+      style: staffStyle,
+      page,
+      hideBarNumber: false,
+      jianpuPart: 0,
+      sourceBreaks: opts.format === "abc",
+    };
+    await painter.load(req);
+    renderedDoc = mixedDoc;
+  } else {
+    const req = makeJianpuRequest(doc, opts.view);
+    if (!req) {
+      throw new Error("此樂譜沒有可排版的曲行");
+    }
+    painter.loadSync(req);
+  }
 
   const pages: SVGSVGElement[] = [];
-  for (let k = 0; k < session.painter.pageCount; k++) {
-    pages.push(session.painter.renderPage(k));
+  for (let k = 0; k < painter.pageCount; k++) {
+    pages.push(painter.renderPage(k));
   }
 
   return {
-    session,
-    painter: session.painter,
-    renderedDoc: session.renderedScoreDoc,
+    painter,
+    renderedDoc,
     pages,
     diagnostics: parsed.diagnostics,
   };

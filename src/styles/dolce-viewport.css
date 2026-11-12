@@ -1,0 +1,68 @@
+/* Lightweight scoped score SVG viewport styles for `/songs/<id>` readers.
+ * Intentionally excludes workbench/CodeMirror/OMR/dialog CSS for strict bundle isolation. */
+.dolce-scope {
+  --score-page-max: 960px;
+  --score-zoom: 1;
+}
+
+.dolce-scope.score-pages-container,
+.dolce-scope .score-pages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  width: 100%;
+  overflow-x: auto;
+  padding: 12px 4px;
+}
+
+.dolce-scope .score-page-wrap {
+  width: calc(min(var(--score-page-max, 960px), 100%) * var(--score-zoom, 1));
+  aspect-ratio: 210 / 297;
+  margin-inline: auto;
+  flex: 0 0 auto;
+  position: relative;
+  background: var(--score-page-bg, #ffffff);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+  border-radius: 6px;
+  overflow: hidden;
+  content-visibility: auto;
+}
+
+.dolce-scope .score-page {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dolce-scope .score-page g.selected [fill]:not([fill="none"]) {
+  fill: #1565ff;
+}
+
+.dolce-scope .score-page g.selected [stroke] {
+  stroke: #1565ff;
+}
+
+.dolce-scope .score-page g.selected {
+  cursor: pointer;
+}
+
+.dolce-scope .score-page text,
+.dolce-scope .score-page path,
+.dolce-scope .score-page line {
+  cursor: default;
+}
+
+.dolce-scope .score-page rect.playhead,
+.dolce-scope .mixed-page rect.playhead {
+  fill: rgba(232, 89, 12, 0.16);
+  stroke: rgba(232, 89, 12, 0.72);
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+
+.dolce-scope .mixed-page g.staff-chord {
+  cursor: pointer;
+}

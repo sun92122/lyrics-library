@@ -987,7 +987,7 @@ export const SongBuilder: React.FC = () => {
       (f) =>
         f.type.startsWith("image/") ||
         f.type === "application/pdf" ||
-        /\.(png|jpe?g|webp|gif|bmp|tiff?|pdf|123|abc|xml|musicxml|jpwabc)$/i.test(
+        /\.(png|jpe?g|webp|gif|bmp|tiff?|pdf|123|abc|xml|musicxml|jpwabc|dolce|jly|jcx|jps|pu|fq|txt)$/i.test(
           f.name,
         ),
     );
@@ -1257,7 +1257,7 @@ export const SongBuilder: React.FC = () => {
                 釋放以載入歌曲或樂譜檔案
               </h3>
               <p className="text-sm text-slate-500">
-                支援歌曲 JSON 匯入，或拖曳樂譜圖片（PNG／JPG）、PDF、.123／MusicXML 進行辨識
+                支援歌曲 JSON 匯入，或拖曳樂譜圖片（PNG／JPG）、PDF、.dolce／.123／JPWABC／MusicXML／ABC／文字譜進行辨識與編輯
               </p>
             </div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold">

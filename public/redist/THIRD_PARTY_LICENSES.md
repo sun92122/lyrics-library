@@ -6,9 +6,9 @@ The sheet music recognition and rendering assets in this directory are redistrib
    - License: MIT License (see `src/lib/dolce/LICENSE`)
    - Copyright (c) 2026 lodebar2026
 
-2. **Bravura & Bravura Text Music Fonts** (`Bravura.woff2`, `BravuraText.otf`, `bravura_metadata.json`)
+2. **Bravura & Bravura Text Music Fonts** (`Bravura.woff2`, `Bravura.otf`, `BravuraText.otf`, `bravura_metadata.json`)
    - License: SIL Open Font License 1.1 (`https://scripts.sil.org/OFL`)
-   - Note: `BravuraText.otf` is a subset containing only the chord-symbol (`csym`) glyphs used by Dolce.
+   - Note: `Bravura.otf` provides full SMuFL glyph outlines for PPTX vector export; `BravuraText.otf` is a subset containing the chord-symbol (`csym`) glyphs used by Dolce.
 
 3. **PaddleOCR Models & Dictionary** (`ocr/ch_PP-OCRv4_det_infer.onnx`, `ocr/ch_PP-OCRv6_small_rec_infer.onnx`, `ocr/ppocrv6_dict.txt`)
    - Source: PaddleOCR (`https://github.com/PaddlePaddle/PaddleOCR`)

@@ -5,13 +5,21 @@ import { MetaData } from "../dolce/smufl/smufl";
 import { parse123, parseAbc } from "../dolce/abcfamily/parse";
 import { emit123 } from "../dolce/abcfamily/emit123.entry";
 import { emitAbc } from "../dolce/abcfamily/emitabc.entry";
-import { musicXmlFormat } from "../dolce/editor/formats";
+import { loadScoreDoc } from "../dolce/model/fromxml";
+import { fillDegreesFromPitch } from "../dolce/model/jianpu";
 import { withPageMeta } from "../dolce/model/pagemeta";
 import { scoreDocToMusicXml } from "../dolce/model/toxml";
 import type { ScoreDoc } from "../dolce/model/doc";
 
 export type ScoreFormat = "123" | "abc" | "musicxml";
 export type ScoreViewMode = "original" | "expanded" | "staff" | "mixed";
+
+/** Parses MusicXML into a `ScoreDoc` and computes jianpu degrees without pulling editor format/CodeMirror modules. */
+export function parseMusicXmlScoreDoc(content: string): ScoreDoc {
+  const doc = loadScoreDoc(content);
+  for (const song of doc.songs) fillDegreesFromPitch(song);
+  return doc;
+}
 
 let readyPromise: Promise<MetaData> | null = null;
 let loadedFontsDoc: Document | null = null;
@@ -78,7 +86,7 @@ export function parseScoreDoc(format: ScoreFormat, content: string): ScoreDoc {
     case "abc":
       return parseAbc(content);
     case "musicxml":
-      return musicXmlFormat.toScoreDoc(content);
+      return parseMusicXmlScoreDoc(content);
   }
 }
 

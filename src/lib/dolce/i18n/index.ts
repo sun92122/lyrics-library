@@ -52,20 +52,21 @@ function readPref(): LangPref {
 
 export function getLangPref(): LangPref { return readPref(); }
 
-/** 「跟随系统」的落点：`/en/` 页（html data-ui-lang）优先，其次浏览器语言。 */
+/** 「跟隨系統」的落點：頁面的 `data-ui-lang` 優先，否則固定預設為中文（zh-TW）。 */
 function autoLang(): Lang {
-  const page = document.documentElement.dataset.uiLang;
-  if (page === "zh" || page === "en") return page;
-  const langs = navigator.languages?.length ? navigator.languages : [navigator.language];
-  return langs.some((l) => /^zh\b/i.test(l ?? "")) ? "zh" : "en";
+  if (typeof document !== "undefined") {
+    const page = document.documentElement.dataset.uiLang;
+    if (page === "zh" || page === "en") return page;
+  }
+  return "zh";
 }
 
-/** 启动时定语言：URL ?lang= → 已存设置 → 页面/浏览器。 */
+/** 啟動時定語言：URL ?lang= → 已存設定 → 預設中文。 */
 export function initLang(): Lang {
-  const q = new URLSearchParams(location.search).get("lang");
+  const q = typeof location !== "undefined" ? new URLSearchParams(location.search).get("lang") : null;
   const pref = readPref();
   current = q === "zh" || q === "en" ? q : pref !== "auto" ? pref : autoLang();
-  applyI18n(document);
+  if (typeof document !== "undefined") applyI18n(document);
   return current;
 }
 
@@ -95,8 +96,4 @@ export function applyI18n(root: ParentNode): void {
   each("data-i18n-aria", (el, k) => { el.setAttribute("aria-label", t(k)); });
   each("data-i18n-placeholder", (el, k) => { el.setAttribute("placeholder", t(k)); });
   each("data-i18n-label", (el, k) => { el.setAttribute("label", t(k)); });
-}
-
-async function syncWindowTitle(): Promise<void> {
-  // Desktop window title sync is omitted in pure web builds.
 }

@@ -25,6 +25,7 @@ import { relayoutFanqieText } from "../fanqie/relayout";
 import type { LinePlan } from "../jianpu/phrase";
 import { parse123, parseAbc, parseJcx } from "../abcfamily/parse";
 import { parseJly, rewrapJlyText } from "../jly/fromjly";
+import { DIALECT_JLY } from "./visual/dialects/jly";
 import { emit123 } from "../abcfamily/emit123.entry";
 import { emitAbc } from "../abcfamily/emitabc.entry";
 import { emitJcx } from "../abcfamily/emitjcx.entry";
@@ -35,6 +36,12 @@ import { fillDegreesFromPitch } from "../model/jianpu";
 import { relayoutDocBreaks, relayoutJpwabcText, spliceComments } from "../jianpu/docrelayout";
 import { jpwToScoreDoc } from "../model/fromjpw";
 import { JpwFile } from "../jpword/jpwfile";
+import type { EditDialect } from "./visual/dialect";
+import { DIALECT_123 } from "./visual/dialects/j123";
+import { DIALECT_ABC } from "./visual/dialects/abc";
+import { DIALECT_JCX } from "./visual/dialects/jcx";
+import { DIALECT_JPW } from "./visual/dialects/jpw";
+import { DIALECT_FANQIE } from "./visual/dialects/fanqie";
 
 /** 可打开的源格式。`musicxml` 没有代码区（`caps.textEditor === false`），只看谱面、转成文本格式再编辑。 */
 export type { DocFormatId } from "../convert/docfile";
@@ -107,6 +114,9 @@ interface FormatAdapterBase {
   /** 用哪个档位旋钮记「投影/简谱」：`jp` = `jpProfile`(normal/pptx)、`original` = `originalProfile`(print/slide)。
    *  两种格式各记各的档，换格式可能就换了档。 */
   profileKnob: "jp" | "original";
+  /** 可视化编辑怎么改这种格式的原文（`editor/visual/dialect.ts`）。**给了就能在谱面上改谱**；
+   *  不给的格式在谱面上只能选中、移动，不能改。 */
+  editDialect?: EditDialect;
 }
 
 /** `caps.layout` 与重排办法的搭配：`scoredoc` 那一路给 `toScoreDoc` + `reloadSpec`（走 App 的同一个模板），
@@ -185,6 +195,7 @@ const JPWABC: FormatAdapter = {
     if (!f) return text;
     return relayoutJpwabcText(text, jpwToScoreDoc(f), { plan });
   },
+  editDialect: DIALECT_JPW,
 };
 
 const FANQIE: FormatAdapter = {
@@ -216,6 +227,7 @@ const FANQIE: FormatAdapter = {
     diagLabel: (doc) => dialectLabel((doc.fanqieDialect ?? "tomato") as Dialect),
   },
   relayoutText: (text, plan) => relayoutFanqieText(text, parseFanqie(text), { plan }),
+  editDialect: DIALECT_FANQIE,
 };
 
 /** 123 —— 简谱主格式。原生解析直出 `ScoreDoc`；排版直接吃 `ScoreDoc`。
@@ -244,6 +256,7 @@ const J123: FormatAdapter = {
     reject: rejectFatal((d) => t("status.j123Fatal", { line: d.source.line + 1, error: diagText(d) })),
   },
   relayoutText: (text, plan) => emitFrom(text, plan, parse123, emit123),
+  editDialect: DIALECT_123,
 };
 
 /** ABC —— 与 123 同源的那一支（123 是 ABC 方言）。**原生解析直出 `ScoreDoc`**，
@@ -271,6 +284,7 @@ const ABC: FormatAdapter = {
   toScoreDoc: parseAbc,
   reloadSpec: { what: () => "ABC", reject: rejectNoNotes(() => t("status.abcNoNotes")), reportOnReject: true },
   relayoutText: (text, plan) => emitFrom(text, plan, parseAbc, emitAbc),
+  editDialect: DIALECT_ABC,
 };
 
 /** Muse 曲谱软件的 `.jcx` —— ABC 家族的第三个方言（简谱轨里字母是首调唱名，C=1），**原生解析直出 `ScoreDoc`**。
@@ -301,6 +315,7 @@ const JCX: FormatAdapter = {
   toScoreDoc: parseJcx,
   reloadSpec: { what: () => t("fmt.jcx.label"), reject: rejectNoNotes(() => t("status.jcxNoNotes")), reportOnReject: true },
   relayoutText: (text, plan) => emitFrom(text, plan, parseJcx, emitJcx),
+  editDialect: DIALECT_JCX,
 };
 
 /** jianpu-ly —— 上游 jianpu-ly 预处理器（简谱文本 → LilyPond）的输入格式。
@@ -339,6 +354,7 @@ const JLY: FormatAdapter = {
   toScoreDoc: (text) => parseJly(text).doc,
   // 本版不收的写法（`LP:` 块、倚音和弦、布局开关…）`parseJly` 记进诊断，原样报出——不静默丢
   reloadSpec: { what: () => "jianpu-ly", reject: rejectNoNotes(() => t("status.abcNoNotes")), reportOnReject: true },
+  editDialect: DIALECT_JLY,
 };
 
 /** MusicXML —— 五线谱主格式。**没有代码区**：编辑器文档里存的就是 XML 原文（不显示），

@@ -1,11 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   AlertTriangle,
   Loader2,
   Pause,
   Play,
+  Repeat,
   RotateCcw,
   Square,
+  Timer,
   ZoomIn,
   ZoomOut,
 } from "lucide-react";
@@ -20,10 +22,20 @@ import {
   renderScoreSession,
 } from "@/lib/dolce-bridge/transpose";
 import type { ScorePainter } from "@/lib/dolce/layout/painter";
-import { ScorePlayer, type PlayState } from "@/lib/dolce/editor/player";
+import {
+  ScorePlayer,
+  anchorSeconds,
+  timelineSeconds,
+  type PlayState,
+} from "@/lib/dolce/editor/player";
 import { playSourceOf } from "@/lib/dolce/jianpu/playsong";
+import {
+  SPEED_STEPS,
+  type PlaySource,
+  type Timeline,
+} from "@/lib/dolce/score/timeline";
 import { getSemitoneOffset } from "@/utils/transposer";
-import "../styles/dolce.css";
+import "../styles/dolce-viewport.css";
 
 export const VIEW_MODE_OPTIONS: readonly {
   id: ScoreViewMode;
@@ -51,6 +63,11 @@ export interface DolceScoreViewportProps {
 const ZOOM_MIN = 0.55;
 const ZOOM_MAX = 1.85;
 const ZOOM_STEP = 0.15;
+
+function fmtTime(sec: number): string {
+  const s = Math.max(0, Math.round(sec));
+  return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
+}
 
 export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
   score,
@@ -96,14 +113,52 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
   const [playState, setPlayState] = useState<PlayState>("stopped");
   const [playError, setPlayError] = useState<string | null>(null);
   const [hasPlayableNotes, setHasPlayableNotes] = useState<boolean>(false);
+  const [durationSec, setDurationSec] = useState<number>(0);
+  const [currentTimeSec, setCurrentTimeSec] = useState<number>(0);
+  const [speed, setSpeed] = useState<number>(1);
+  const [loopOn, setLoopOn] = useState<boolean>(false);
+  const [metronomeOn, setMetronomeOn] = useState<boolean>(false);
+  const [showRemaining, setShowRemaining] = useState<boolean>(false);
 
   const painterRef = useRef<ScorePainter | null>(null);
   const renderedDocRef = useRef<ScoreDoc | null>(null);
   const playerRef = useRef<ScorePlayer | null>(null);
+  const playSrcRef = useRef<PlaySource | null>(null);
+  const tlCacheRef = useRef<{
+    src: PlaySource;
+    speed: number;
+    tl: Timeline;
+    spq: number;
+  } | null>(null);
+  const cueSecRef = useRef<number | null>(null);
+  const draggingRef = useRef<boolean>(false);
+  const progressRef = useRef<HTMLInputElement | null>(null);
+  const speedRef = useRef<number>(speed);
+  speedRef.current = speed;
+  const loopOnRef = useRef<boolean>(loopOn);
+  loopOnRef.current = loopOn;
+  const metronomeOnRef = useRef<boolean>(metronomeOn);
+  metronomeOnRef.current = metronomeOn;
+  const durationRef = useRef<number>(durationSec);
+  durationRef.current = durationSec;
+
   const pageContainerRefs = useRef<(HTMLDivElement | null)[]>([]);
   const lastHighlightedPageRef = useRef<number | null>(null);
   const onDetectedKeyRef = useRef(onDetectedOriginalKey);
   onDetectedKeyRef.current = onDetectedOriginalKey;
+
+  const getTimeline = useCallback((src: PlaySource, spd: number) => {
+    const cached = tlCacheRef.current;
+    if (cached && cached.src === src && cached.speed === spd) return cached;
+    try {
+      const { tl, spq } = timelineSeconds(src, { speed: spd });
+      const next = { src, speed: spd, tl, spq };
+      tlCacheRef.current = next;
+      return next;
+    } catch {
+      return null;
+    }
+  }, []);
 
   // Detect original key from score in browser (DOMParser safe)
   useEffect(() => {
@@ -150,6 +205,17 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
       },
       (nextState) => {
         setPlayState(nextState);
+        if (nextState === "stopped") {
+          lastHighlightedPageRef.current = null;
+          setCurrentTimeSec(cueSecRef.current ?? 0);
+        } else if (nextState === "paused") {
+          setCurrentTimeSec(player.position);
+        }
+      },
+      (pos) => {
+        if (!draggingRef.current) {
+          setCurrentTimeSec(pos);
+        }
       },
     );
     playerRef.current = player;
@@ -165,8 +231,12 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
     let cancelled = false;
 
     const cleanupCurrent = () => {
+      cueSecRef.current = null;
+      draggingRef.current = false;
       playerRef.current?.stop();
       lastHighlightedPageRef.current = null;
+      playSrcRef.current = null;
+      tlCacheRef.current = null;
       if (painterRef.current) {
         painterRef.current.dispose();
         painterRef.current = null;
@@ -176,6 +246,8 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
 
     cleanupCurrent();
     setPlayError(null);
+    setDurationSec(0);
+    setCurrentTimeSec(0);
 
     if (!score.content.trim()) {
       setRendering(false);
@@ -224,12 +296,23 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
                 ? {}
                 : { forExpanded: true },
             );
+            playSrcRef.current = playSrc;
             setHasPlayableNotes(Boolean(playSrc));
+            if (playSrc) {
+              const t = getTimeline(playSrc, speedRef.current);
+              setDurationSec(t ? t.tl.duration * t.spq : 0);
+            } else {
+              setDurationSec(0);
+            }
           } catch {
+            playSrcRef.current = null;
             setHasPlayableNotes(false);
+            setDurationSec(0);
           }
         } else {
+          playSrcRef.current = null;
           setHasPlayableNotes(false);
+          setDurationSec(0);
         }
         setRendering(false);
       } catch (err) {
@@ -237,7 +320,9 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
         setRendering(false);
         setRenderedPages([]);
         setDiagnostics([]);
+        playSrcRef.current = null;
         setHasPlayableNotes(false);
+        setDurationSec(0);
         setRenderError(
           err instanceof Error
             ? err.message
@@ -250,7 +335,7 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
       cancelled = true;
       cleanupCurrent();
     };
-  }, [score.format, score.content, semitones, activeView]);
+  }, [score.format, score.content, semitones, activeView, getTimeline]);
 
   // Mount generated SVGSVGElements into their containers
   useEffect(() => {
@@ -262,10 +347,62 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
     });
   }, [renderedPages]);
 
+  const commitSeekRef = useRef<(sec: number) => Promise<void>>(async () => {});
+  commitSeekRef.current = async (sec: number) => {
+    const player = playerRef.current;
+    const dur =
+      player && (player.state === "playing" || player.state === "paused")
+        ? player.duration
+        : durationRef.current;
+    const clamped = Math.max(0, Math.min(sec, dur));
+    if (player && (player.state === "playing" || player.state === "paused")) {
+      try {
+        await player.seek(clamped);
+        setCurrentTimeSec(clamped);
+      } catch (err) {
+        setPlayError(
+          err instanceof Error ? err.message : "無法定位試聽進度",
+        );
+      }
+      return;
+    }
+    cueSecRef.current = clamped;
+    setCurrentTimeSec(clamped);
+  };
+
+  // Attach native "change" listener so scrubber commits on pointer/keyboard release (matches upstream playback.ts)
+  useEffect(() => {
+    const el = progressRef.current;
+    if (!el) return;
+    const handleCommit = () => {
+      draggingRef.current = false;
+      const val = parseFloat(el.value) || 0;
+      void commitSeekRef.current(val);
+    };
+    el.addEventListener("change", handleCommit);
+    return () => {
+      el.removeEventListener("change", handleCommit);
+    };
+  }, [hasPlayableNotes]);
+
+  const resolvePlaySource = (): PlaySource | null => {
+    if (playSrcRef.current) return playSrcRef.current;
+    const doc = renderedDocRef.current;
+    if (!doc) return null;
+    const src = playSourceOf(
+      doc,
+      0,
+      activeView === "staff" || activeView === "mixed"
+        ? {}
+        : { forExpanded: true },
+    );
+    playSrcRef.current = src;
+    return src;
+  };
+
   const handlePlayToggle = async () => {
     const player = playerRef.current;
-    const doc = renderedDocRef.current;
-    if (!player || !doc) return;
+    if (!player || !renderedDocRef.current) return;
     setPlayError(null);
 
     try {
@@ -274,18 +411,26 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
       } else if (playState === "paused") {
         await player.resume();
       } else if (playState === "stopped") {
-        const src = playSourceOf(
-          doc,
-          0,
-          activeView === "staff" || activeView === "mixed"
-            ? {}
-            : { forExpanded: true },
-        );
+        const src = resolvePlaySource();
         if (!src) {
           setPlayError("此樂譜沒有可試聽的旋律或音符");
           return;
         }
-        await player.play(src);
+        const t = getTimeline(src, speedRef.current);
+        const dur = t ? t.tl.duration * t.spq : durationRef.current;
+        const start = cueSecRef.current ?? 0;
+        cueSecRef.current = null;
+        player.setLoop(
+          loopOnRef.current && dur > 0 ? { from: 0, to: dur } : null,
+        );
+        await player.play(
+          src,
+          {
+            speed: speedRef.current,
+            metronome: metronomeOnRef.current,
+          },
+          start,
+        );
       }
     } catch (err) {
       setPlayError(
@@ -295,25 +440,151 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
   };
 
   const handleStop = () => {
+    cueSecRef.current = null;
+    draggingRef.current = false;
     playerRef.current?.stop();
+    setCurrentTimeSec(0);
+  };
+
+  const handleSpeedChange = async (nextSpeed: number) => {
+    const oldSpeed = speedRef.current;
+    if (nextSpeed === oldSpeed) return;
+    speedRef.current = nextSpeed;
+    setSpeed(nextSpeed);
+
+    const src = resolvePlaySource();
+    const nextTl = src ? getTimeline(src, nextSpeed) : null;
+    const nextDur = nextTl ? nextTl.tl.duration * nextTl.spq : 0;
+    setDurationSec(nextDur);
+
+    const player = playerRef.current;
+    if (
+      player &&
+      (player.state === "playing" || player.state === "paused") &&
+      src
+    ) {
+      const paused = player.state === "paused";
+      const nextPos = Math.max(
+        0,
+        Math.min((player.position * oldSpeed) / nextSpeed, nextDur),
+      );
+      cueSecRef.current = nextPos;
+      setCurrentTimeSec(nextPos);
+      player.setLoop(
+        loopOnRef.current && nextDur > 0 ? { from: 0, to: nextDur } : null,
+      );
+      try {
+        await player.play(
+          src,
+          { speed: nextSpeed, metronome: metronomeOnRef.current },
+          nextPos,
+          paused,
+        );
+      } catch (err) {
+        setPlayError(
+          err instanceof Error ? err.message : "調整播放速度時發生錯誤",
+        );
+      } finally {
+        cueSecRef.current = null;
+      }
+      return;
+    }
+
+    if (cueSecRef.current !== null) {
+      const nextCue = Math.max(
+        0,
+        Math.min((cueSecRef.current * oldSpeed) / nextSpeed, nextDur),
+      );
+      cueSecRef.current = nextCue;
+      setCurrentTimeSec(nextCue);
+    } else {
+      setCurrentTimeSec(0);
+    }
+  };
+
+  const handleLoopToggle = () => {
+    const next = !loopOnRef.current;
+    loopOnRef.current = next;
+    setLoopOn(next);
+    const player = playerRef.current;
+    if (player && (player.state === "playing" || player.state === "paused")) {
+      const dur = player.duration || durationRef.current;
+      player.setLoop(next && dur > 0 ? { from: 0, to: dur } : null);
+    }
+  };
+
+  const handleMetronomeToggle = async () => {
+    const next = !metronomeOnRef.current;
+    metronomeOnRef.current = next;
+    setMetronomeOn(next);
+
+    const player = playerRef.current;
+    const src = resolvePlaySource();
+    if (
+      player &&
+      (player.state === "playing" || player.state === "paused") &&
+      src
+    ) {
+      const at = player.position;
+      const paused = player.state === "paused";
+      const dur = player.duration || durationRef.current;
+      cueSecRef.current = at;
+      player.setLoop(
+        loopOnRef.current && dur > 0 ? { from: 0, to: dur } : null,
+      );
+      try {
+        await player.play(
+          src,
+          { speed: speedRef.current, metronome: next },
+          at,
+          paused,
+        );
+      } catch (err) {
+        setPlayError(
+          err instanceof Error ? err.message : "切換節拍器時發生錯誤",
+        );
+      } finally {
+        cueSecRef.current = null;
+      }
+    }
   };
 
   const handleContainerClick = (e: React.MouseEvent<HTMLDivElement>) => {
     const player = playerRef.current;
     const painter = painterRef.current;
     if (!player || !painter) return;
-    if (playState !== "playing" && playState !== "paused") return;
     const hitId = painter.noteAt(e.target as Element | null);
     if (hitId === null) return;
-    const sec = player.timeOf({ id: hitId, pass: 0 });
-    if (sec !== null) {
-      void player.seek(sec);
+
+    if (playState === "playing" || playState === "paused") {
+      const sec = player.timeOf({ id: hitId, pass: 1 });
+      if (sec !== null) {
+        setCurrentTimeSec(sec);
+        void player.seek(sec);
+      }
+      return;
+    }
+
+    if (playState === "stopped") {
+      const src = resolvePlaySource();
+      const t = src ? getTimeline(src, speedRef.current) : null;
+      if (!t) return;
+      const sec = anchorSeconds(t.tl, t.spq, { id: hitId, pass: 1 });
+      if (sec !== null) {
+        cueSecRef.current = sec;
+        setCurrentTimeSec(sec);
+      }
     }
   };
 
+  const clampedTime = Math.max(0, Math.min(currentTimeSec, durationSec));
+  const timeDisplay = showRemaining
+    ? `-${fmtTime(Math.max(0, durationSec - clampedTime))} / ${fmtTime(durationSec)}`
+    : `${fmtTime(clampedTime)} / ${fmtTime(durationSec)}`;
+
   return (
     <div
-      className={`dolce-scope bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden ${className}`}
+      className={`bg-white rounded-3xl border border-slate-200/80 shadow-sm overflow-hidden ${className}`}
     >
       {/* Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-2.5 px-4 py-3 bg-slate-50/80 border-b border-slate-200/70">
@@ -337,8 +608,8 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
             </div>
           )}
 
-          {/* Audio Playback */}
-          <div className="inline-flex items-center gap-1.5">
+          {/* Audio Playback Controls */}
+          <div className="flex flex-wrap items-center gap-1.5">
             <button
               type="button"
               disabled={!hasPlayableNotes || rendering || playState === "loading"}
@@ -374,16 +645,98 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
               )}
             </button>
 
-            {playState !== "stopped" && (
-              <button
-                type="button"
-                onClick={handleStop}
-                aria-label="停止播放"
-                className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-medium bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 transition-colors"
-              >
-                <Square className="w-3 h-3 fill-current" />
-                <span>停止</span>
-              </button>
+            <button
+              type="button"
+              onClick={handleStop}
+              disabled={playState === "stopped"}
+              aria-label="停止播放"
+              title="停止試聽並回到曲首"
+              className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-xl text-xs font-medium bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              <Square className="w-3 h-3 fill-current" />
+              <span>停止</span>
+            </button>
+
+            {hasPlayableNotes && (
+              <div className="inline-flex flex-wrap items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white border border-slate-200">
+                <input
+                  ref={progressRef}
+                  type="range"
+                  min={0}
+                  max={durationSec > 0 ? durationSec : 1}
+                  step="any"
+                  value={durationSec > 0 ? clampedTime : 0}
+                  disabled={rendering || durationSec <= 0 || playState === "loading"}
+                  onChange={(e) => {
+                    draggingRef.current = true;
+                    setCurrentTimeSec(parseFloat(e.target.value) || 0);
+                  }}
+                  aria-label="試聽進度條"
+                  className="w-24 sm:w-32 h-1.5 accent-indigo-600 cursor-pointer disabled:opacity-40 disabled:cursor-not-allowed"
+                />
+
+                <button
+                  type="button"
+                  onClick={() => setShowRemaining((v) => !v)}
+                  title="點擊切換已播時間／剩餘時間"
+                  aria-label="播放時間顯示"
+                  className="font-mono text-[11px] tabular-nums text-slate-600 hover:text-indigo-600 px-1.5 py-0.5 rounded-lg hover:bg-slate-100 transition-colors"
+                >
+                  {timeDisplay}
+                </button>
+
+                <span className="h-3.5 w-px bg-slate-200" aria-hidden="true" />
+
+                <select
+                  value={speed}
+                  disabled={rendering || playState === "loading"}
+                  onChange={(e) => {
+                    void handleSpeedChange(parseFloat(e.target.value) || 1);
+                  }}
+                  aria-label="播放速度"
+                  title="調整試聽播放速度"
+                  className="bg-transparent text-xs font-medium text-slate-700 hover:text-indigo-600 focus:outline-none cursor-pointer pr-1 disabled:opacity-45"
+                >
+                  {SPEED_STEPS.map((v) => (
+                    <option key={v} value={v}>
+                      {v === 1 ? "原速" : `×${v}`}
+                    </option>
+                  ))}
+                </select>
+
+                <button
+                  type="button"
+                  onClick={handleLoopToggle}
+                  aria-pressed={loopOn}
+                  title="循環播放整首樂譜"
+                  className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-medium border transition-colors ${
+                    loopOn
+                      ? "bg-indigo-50 text-indigo-700 border-indigo-300"
+                      : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100"
+                  }`}
+                >
+                  <Repeat className="w-3 h-3" />
+                  <span>循環</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    void handleMetronomeToggle();
+                  }}
+                  disabled={playState === "loading"}
+                  aria-pressed={metronomeOn}
+                  title="開啟或關閉試聽節拍器"
+                  className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-lg text-[11px] font-medium border transition-colors disabled:opacity-45 ${
+                    metronomeOn
+                      ? "bg-indigo-50 text-indigo-700 border-indigo-300"
+                      : "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100"
+                  }`}
+                >
+                  <Timer className="w-3 h-3" />
+                  <span>節拍</span>
+                </button>
+              </div>
             )}
           </div>
         </div>
@@ -406,7 +759,9 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
               type="button"
               aria-label="縮小樂譜"
               onClick={() =>
-                setZoom((z) => Math.max(ZOOM_MIN, Number((z - ZOOM_STEP).toFixed(2))))
+                setZoom((z) =>
+                  Math.max(ZOOM_MIN, Number((z - ZOOM_STEP).toFixed(2))),
+                )
               }
               disabled={zoom <= ZOOM_MIN}
               className="p-1 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg disabled:opacity-40"
@@ -425,7 +780,9 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
               type="button"
               aria-label="放大樂譜"
               onClick={() =>
-                setZoom((z) => Math.min(ZOOM_MAX, Number((z + ZOOM_STEP).toFixed(2))))
+                setZoom((z) =>
+                  Math.min(ZOOM_MAX, Number((z + ZOOM_STEP).toFixed(2))),
+                )
               }
               disabled={zoom >= ZOOM_MAX}
               className="p-1 text-slate-600 hover:text-slate-900 hover:bg-slate-100 rounded-lg disabled:opacity-40"
@@ -497,7 +854,7 @@ export const DolceScoreViewport: React.FC<DolceScoreViewportProps> = ({
           </div>
         ) : (
           <div
-            className="score-pages-container"
+            className="dolce-scope score-pages-container"
             style={{ "--score-zoom": zoom } as React.CSSProperties}
           >
             {renderedPages.map((entry, idx) => (
