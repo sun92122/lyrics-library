@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import type { SongData, LineItem } from "@/content.config";
 import {
   FLOW_STYLE,
@@ -8,7 +8,6 @@ import {
   getFlowColor,
   type FlowMapping,
 } from "@/constants/flow";
-import { transposeChord, getSemitoneOffset } from "@/utils/transposer";
 import { getLanguageName } from "@/constants/languages";
 import {
   formatLyricsText,
@@ -24,6 +23,7 @@ export interface LyricsViewerProps {
   originalKey?: string;
   currentKey?: string;
   onKeyChange?: (newKey: string) => void;
+  hideKeyController?: boolean;
   currentFlow?: number[];
   customFlow?: string[];
   className?: string;
@@ -38,6 +38,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
   originalKey,
   currentKey,
   onKeyChange,
+  hideKeyController = false,
   currentFlow,
   customFlow,
   className = "",
@@ -46,15 +47,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
 }) => {
   const [languageMode, setLanguageMode] = useState<LanguageMode>("both");
   const [layoutMode, setLayoutMode] = useState<LayoutMode>("segmented");
-  const [showChords, setShowChords] = useState<boolean>(false);
   const [copied, setCopied] = useState<boolean>(false);
-
-  const semitoneOffset = useMemo(() => {
-    return getSemitoneOffset(
-      song.meta.originalKey || "C",
-      currentKey || song.meta.originalKey || "C",
-    );
-  }, [song.meta.originalKey, currentKey]);
 
   const hasLanguageB = Boolean(
     song.meta.languages.b &&
@@ -62,12 +55,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
       section.lines.some((line) => line.b && line.b.trim() !== ""),
     ),
   );
-  const hasChords = Boolean(
-    originalKey ||
-    song.sections.some((section) =>
-      section.lines.some((line) => line.chords && line.chords.length > 0),
-    ),
-  );
+  const showInlineKeyController = Boolean(!hideKeyController && originalKey);
   const flow = useMemo(() => {
     return currentFlow && currentFlow.length > 0
       ? currentFlow
@@ -178,54 +166,51 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
               </div>
             </div>
 
-            {/* Right: Chords Toggle & Copy Button */}
-            {!readonly && (
-              <div className="flex items-center gap-2 max-sm:flex-col max-sm:items-start">
-                {hasChords && (
-                  <KeyController
-                    showChords={showChords}
-                    setShowChords={setShowChords}
-                    originalKey={originalKey}
-                    currentKey={currentKey || originalKey || "C"}
-                    onKeyChange={onKeyChange || (() => {})}
-                  />
-                )}
-                <div className="flex items-center gap-2">
-                  <button
-                    type="button"
-                    onClick={handleCopy}
-                    className={`flex items-center px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm ${
-                      copied
-                        ? "bg-emerald-600 text-white"
-                        : "bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95"
-                    }`}
-                  >
-                    {copied ? (
-                      <>
-                        <Check className="w-3.5 h-3.5" />
-                        <span>已複製歌詞</span>
-                      </>
-                    ) : (
-                      <>
-                        <Copy className="w-3.5 h-3.5" />
-                        <span>　複製歌詞</span>
-                      </>
-                    )}
-                  </button>
+            {/* Right: Key Controller, Copy & ProPresenter Export */}
+            <div className="flex items-center gap-2 max-sm:flex-col max-sm:items-start">
+              {showInlineKeyController && (
+                <KeyController
+                  originalKey={originalKey}
+                  currentKey={currentKey || originalKey || "C"}
+                  onKeyChange={onKeyChange || (() => {})}
+                />
+              )}
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleCopy}
+                  className={`flex items-center px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm ${
+                    copied
+                      ? "bg-emerald-600 text-white"
+                      : "bg-indigo-600 hover:bg-indigo-700 text-white active:scale-95"
+                  }`}
+                >
+                  {copied ? (
+                    <>
+                      <Check className="w-3.5 h-3.5" />
+                      <span>已複製歌詞</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="w-3.5 h-3.5" />
+                      <span>　複製歌詞</span>
+                    </>
+                  )}
+                </button>
 
-                  {/* Propresenter modal */}
-                  <button
-                    id="pro-presenter-export-modal-button"
-                    type="button"
-                    onClick={() => proPresenterExportModalOpen.set(true)}
-                    className={`flex items-center px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm ${"bg-amber-500 hover:bg-amber-600 text-amber-100 active:scale-95"}`}
-                  >
-                    <span>ProPresenter</span>
-                  </button>
-                </div>
+                {/* Propresenter modal */}
+                <button
+                  id="pro-presenter-export-modal-button"
+                  type="button"
+                  onClick={() => proPresenterExportModalOpen.set(true)}
+                  className="flex items-center px-3 py-1.5 rounded-xl text-xs font-medium transition-all shadow-sm bg-amber-500 hover:bg-amber-600 text-amber-100 active:scale-95"
+                >
+                  <span>ProPresenter</span>
+                </button>
               </div>
-            )}
+            </div>
           </div>
+
           {flow && flow.length > 0 && (
             <div className="space-y-1.5 p-4 pt-2 border-t border-slate-100">
               <div className="text-xs font-semibold text-slate-500">
@@ -284,7 +269,7 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
       <div
         className={
           "p-6 md:p-8 bg-white rounded-3xl border border-slate-200 shadow-sm space-y-8 " +
-          ui?.container
+          (ui?.container || "")
         }
       >
         {song.sections.map((section, sIndex) => (
@@ -292,24 +277,22 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
             {/* Section Header (if segmented) */}
             {layoutMode === "segmented" && (
               <div className="flex flex-wrap items-center gap-1">
-                <React.Fragment key={`section-${sIndex}`}>
-                  <span
-                    className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-100/80"
-                    style={{
-                      backgroundColor:
-                        (FLOW_STYLE[section.name as keyof FlowMapping] ??
-                          FLOW_STYLE["default"]) + "22",
-                      color:
-                        FLOW_STYLE[section.name as keyof FlowMapping] ??
-                        FLOW_STYLE["default"],
-                      borderColor:
-                        (FLOW_STYLE[section.name as keyof FlowMapping] ??
-                          FLOW_STYLE["default"]) + "44",
-                    }}
-                  >
-                    {getFlowName(section.name)}
-                  </span>
-                </React.Fragment>
+                <span
+                  className="px-2.5 py-1 bg-indigo-50 text-indigo-700 rounded-lg text-xs font-bold border border-indigo-100/80"
+                  style={{
+                    backgroundColor:
+                      (FLOW_STYLE[section.name as keyof FlowMapping] ??
+                        FLOW_STYLE["default"]) + "22",
+                    color:
+                      FLOW_STYLE[section.name as keyof FlowMapping] ??
+                      FLOW_STYLE["default"],
+                    borderColor:
+                      (FLOW_STYLE[section.name as keyof FlowMapping] ??
+                        FLOW_STYLE["default"]) + "44",
+                  }}
+                >
+                  {getFlowName(section.name)}
+                </span>
               </div>
             )}
 
@@ -320,8 +303,6 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
                   key={lIndex}
                   line={line}
                   languageMode={languageMode}
-                  showChords={showChords}
-                  semitoneOffset={semitoneOffset}
                 />
               ))}
               <div style={{ fontSize: 0 }}>{"\n"}</div>
@@ -336,82 +317,14 @@ export const LyricsViewer: React.FC<LyricsViewerProps> = ({
 interface RenderLineProps {
   line: LineItem;
   languageMode: LanguageMode;
-  showChords: boolean;
-  semitoneOffset: number;
 }
 
-const RenderLine: React.FC<RenderLineProps> = ({
-  line,
-  languageMode,
-  showChords,
-  semitoneOffset,
-}) => {
-  // Parse characters for language 'a'
-  const primaryChars = Array.from(line.a || "");
-  const chords = line.chords || [];
-
-  // Find max index needed for chords (including trailing chords)
-  const maxChordIndex = chords.reduce((max, c) => Math.max(max, c.index), -1);
-  const totalSlots = Math.max(primaryChars.length, maxChordIndex + 1);
-
-  // Map chord index to chord item
-  const chordMap = new Map<number, string>();
-  chords.forEach((c) => {
-    const transposed = transposeChord(c.chord, semitoneOffset);
-    chordMap.set(c.index, transposed);
-  });
-
+const RenderLine: React.FC<RenderLineProps> = ({ line, languageMode }) => {
   return (
     <div className="flex flex-col space-y-1">
-      {/* Primary Line with Anchored Chords */}
-      <div className="flex flex-wrap items-end leading-none select-text">
-        {showChords ? (
-          Array.from({ length: totalSlots }).map((_, index) => {
-            const char = primaryChars[index] ?? "";
-            const chord = chordMap.get(index);
-            const isTrailingSpacer = index >= primaryChars.length;
-
-            return (
-              <div
-                key={index}
-                className={`inline-flex flex-col items-start justify-end flex-shrink-0 ${
-                  isTrailingSpacer ? "min-w-[2.2rem]" : ""
-                }`}
-              >
-                {/* Chord Slot */}
-                {
-                  <div className="h-5 flex items-center pr-1 min-w-[1ch]">
-                    {chord ? (
-                      <span className="font-mono text-sm font-bold text-amber-600 hover:text-amber-700 bg-amber-50/80 px-1 py-0.5 rounded leading-none">
-                        {chord}
-                      </span>
-                    ) : (
-                      <span className="invisible text-xs select-none leading-none">
-                        _
-                      </span>
-                    )}
-                  </div>
-                }
-
-                {/* Character Slot */}
-                <div className="text-slate-800 text-lg md:text-xl font-normal leading-relaxed whitespace-pre">
-                  {char ||
-                    (isTrailingSpacer ? (
-                      <span className="inline-block w-4">&nbsp;</span>
-                    ) : (
-                      ""
-                    ))}
-                </div>
-              </div>
-            );
-          })
-        ) : (
-          <div className="text-slate-800 text-lg md:text-xl font-normal leading-relaxed whitespace-pre">
-            {line.a}
-          </div>
-        )}
+      <div className="text-slate-800 text-lg md:text-xl font-normal leading-relaxed whitespace-pre-wrap select-text">
+        {line.a}
       </div>
-      {/* Secondary Language Subtitle (if enabled) */}
       {languageMode === "both" && line.b && (
         <div className="text-slate-500 text-sm md:text-base font-normal leading-normal pt-0.5 whitespace-pre-line">
           {line.b}

@@ -1,0 +1,389 @@
+// 源格式适配器注册表。**每加一种可编辑的源格式，只该动这张表**。
+//
+// 以前每种格式的差异是 `app.ts` 里散在约二十处的 `docFormat === "fanqie"` 三目式：
+// 高亮、存盘编码、默认扩展名、标题取法、档位旋钮、格式标签、能不能简繁转换……
+// 加第三、第四种格式时那二十处每处都要再分一次叉，漏一处就是一个只在某格式下复现的 bug。
+//
+// 这里只收**真正成表的那些**：数据与纯函数。`scoredoc` 那一路的重排是同一个模板
+// （`App._reloadScoreDoc`：解析 → 闸门 → 排版 → 报诊断），各格式只在 `reloadSpec` 里给差异；
+// 流水线真不一样的（`.jpwabc` 的 `reloadJpwabc`）仍留在 `app.ts`，由适配器分派——照
+// `OmrHost` / `PlaybackHost` 的既有做法，用一个**列全了的**宿主接口向 App 要能力，而不是把 App 的状态搬进来。
+
+import type { Extension } from "@codemirror/state";
+import { jpwHighlighter } from "./highlight";
+import { fanqieHighlighter } from "../fanqie/highlight";
+import { j123Highlighter } from "../abcfamily/highlight";
+import { decodeJpwabc, encodeJpwabc } from "./fileio";
+import { DOC_EXT, utf8, type DocFormatId } from "../convert/docfile";
+import { parseFanqie } from "../fanqie";
+import { t } from "../i18n";
+import { diagText, dialectLabel } from "../i18n/labels";
+import type { Diagnostic } from "../model/doc";
+import { eachChord } from "../model/helpers";
+import type { Dialect } from "../fanqie";
+import { relayoutFanqieText } from "../fanqie/relayout";
+import type { LinePlan } from "../jianpu/phrase";
+import { parse123, parseAbc, parseJcx } from "../abcfamily/parse";
+import { parseJly, rewrapJlyText } from "../jly/fromjly";
+import { emit123 } from "../abcfamily/emit123.entry";
+import { emitAbc } from "../abcfamily/emitabc.entry";
+import { emitJcx } from "../abcfamily/emitjcx.entry";
+import { decodeJcx, encodeJcx } from "../common/jcxcodec";
+import type { ScoreDoc } from "../model/doc";
+import { loadScoreDoc } from "../model/fromxml";
+import { fillDegreesFromPitch } from "../model/jianpu";
+import { relayoutDocBreaks, relayoutJpwabcText, spliceComments } from "../jianpu/docrelayout";
+import { jpwToScoreDoc } from "../model/fromjpw";
+import { JpwFile } from "../jpword/jpwfile";
+
+/** 可打开的源格式。`musicxml` 没有代码区（`caps.textEditor === false`），只看谱面、转成文本格式再编辑。 */
+export type { DocFormatId } from "../convert/docfile";
+
+/** 适配器向 App 要的那些能力（**列全**，加一条就想想是不是该留在 App 里）。 */
+export interface FormatHost {
+  getText(): string;
+  /** 文本谱已解析出的方言，用于代码区标签（解析前为 null）。 */
+  readonly fanqieDialectName: string | null;
+  /** 当前谱面排版器认得的标题（`.jpwabc` 那路由引擎输入给）。 */
+  readonly painterTitle: string;
+  /** `.jpwabc` 重排/重渲染。 */
+  reloadJpwabc(text: string): boolean;
+  /** 五线谱/混排那份模型跟上这份 MusicXML 原文（原文没变就不重读）。 */
+  syncMixedXml(text: string): void;
+}
+
+/** `scoredoc` 那一路重排的格式差异。模板本身（解析 → 闸门 → 排版 → 报诊断）在 `App._reloadScoreDoc`。 */
+export interface ScoreDocReload {
+  /** 状态栏、排版失败提示里这种格式叫什么。 */
+  what(): string;
+  /** 解析抛异常时的状态栏文案；缺省 `status.parseFailed`。 */
+  parseFailed?(error: string): string;
+  /** 解析出来拦不拦排版：返回状态栏文案就拦下（文本保留不动），null 放行。 */
+  reject(doc: ScoreDoc): string | null;
+  /** 拦下时先把诊断报出来（ABC 家族读不出音符，多半是不认的写法，诊断里有）。 */
+  reportOnReject?: boolean;
+  /** 诊断列表的来源标签；缺省 `what()`。 */
+  diagLabel?(doc: ScoreDoc): string;
+  /** 解析之前的准备（MusicXML 先让混排那份跟上原文）。 */
+  before?(host: FormatHost, text: string): void;
+}
+
+/** 闸门：有 error 级诊断就拦，报那一条。 */
+const rejectFatal = (msg: (d: Diagnostic) => string) => (doc: ScoreDoc): string | null => {
+  const fatal = doc.diagnostics.find((d) => d.severity === "error");
+  return fatal ? msg(fatal) : null;
+};
+
+/** 闸门：一个音都没读出来就拦（不回落别的读法）。 */
+const rejectNoNotes = (msg: () => string) => (doc: ScoreDoc): string | null =>
+  doc.songs.some((song) => !eachChord(song).next().done) ? null : msg();
+
+export interface FormatCaps {
+  /** 有没有代码区。`.musicxml` 没有：打开只进谱面视图（五线谱编辑那一路），要编辑先转成文本格式（新文档）。 */
+  textEditor: boolean;
+  /** 源文怎么变成 `ScoreDoc`：`scoredoc` = 适配器的 `toScoreDoc` 解析（文本谱、123、ABC、jcx、jianpu-ly、MusicXML）；
+   *  `jpwabc` = `.jpwabc` 分节文件经 `jpwToScoreDoc`，另带 `.Layout` 分页描述（只管投影档）。排版都是同一个旧简谱引擎。 */
+  layout: "scoredoc" | "jpwabc";
+  /** 有没有「按乐句重排」（要有 `FormatAdapter.relayoutText`）。`.musicxml` 没有代码区，不给。 */
+  phraseRelayout: boolean;
+}
+
+interface FormatAdapterBase {
+  id: DocFormatId;
+  /** 另存为时的默认扩展名（含点）。扩展名白名单本身只在 `common/filetypes.ts` 写一次。 */
+  defaultExt: string;
+  /** 代码区的 CodeMirror 高亮扩展。 */
+  highlighter: Extension;
+  /** 读盘解码。`.jpwabc` 是 JP-Word 的 UTF-16LE+BOM，其余是 UTF-8。 */
+  decode(bytes: Uint8Array): string;
+  /** 存盘编码，与 `decode` 对称。 */
+  encode(text: string): Uint8Array;
+  /** 编码装不下原文时的提示（Muse `.jcx` 写 GBK，个别字写不出）；没问题返回 null。缺省 = 总装得下 */
+  encodeWarning?(text: string): string | null;
+  /** 代码区右上角的格式标签。 */
+  label(host: FormatHost): string;
+  /** 文档标题（另存为的默认文件名）。 */
+  title(host: FormatHost): string;
+  /** 用哪个档位旋钮记「投影/简谱」：`jp` = `jpProfile`(normal/pptx)、`original` = `originalProfile`(print/slide)。
+   *  两种格式各记各的档，换格式可能就换了档。 */
+  profileKnob: "jp" | "original";
+}
+
+/** `caps.layout` 与重排办法的搭配：`scoredoc` 那一路给 `toScoreDoc` + `reloadSpec`（走 App 的同一个模板），
+ *  `.jpwabc` 那一路自己给 `reload`。 */
+type LayoutPart =
+  | {
+    caps: FormatCaps & { layout: "scoredoc" };
+    /** 这种格式怎么得到一份 `ScoreDoc`。 */
+    toScoreDoc(text: string): ScoreDoc;
+    reloadSpec: ScoreDocReload;
+    reload?: undefined;
+  }
+  | {
+    caps: FormatCaps & { layout: "jpwabc" };
+    toScoreDoc?: undefined;
+    reloadSpec?: undefined;
+    /** 解析 → 排版 → 渲染。失败返回 false（文本保留不动）。 */
+    reload(host: FormatHost, text: string): boolean;
+  };
+
+/** `caps.phraseRelayout` 与 `relayoutText` 的搭配：声明了能重排就必须给写回的办法。 */
+type RelayoutPart =
+  | {
+    caps: FormatCaps & { phraseRelayout: true };
+    /**
+     * 重排（「按乐句重排」/「每行 N 小节」）怎么写回原文。分行本身与格式无关
+     * （`score/phrase.ts`），各格式的差别只在写回那一步：文本谱只搬原文片段（`fanqie/relayout.ts`），
+     * 123/ABC 把断点写进模型再整份重出，`.jpwabc` 只挪 `.Voice` 里的 `$`（见 `jianpu/docrelayout.ts`）。
+     *
+     * @param plan 新行怎么分（`jianpu/phrase.ts::LinePlan`）。按乐句时带行长尺子（文本谱与多声部的简谱档不给，
+     *             见 `App._fanqiePhraseMeasure`；没有就按出厂的小节数目标断，也就是一句一行）
+     * @returns 新原文；没有可重排的曲行时原样返回 `text`
+     */
+    relayoutText(text: string, plan: LinePlan): string;
+  }
+  | { caps: FormatCaps & { phraseRelayout: false }; relayoutText?: undefined };
+
+/** 能力（`caps`）与方法的搭配写进类型：漏配在注册这张表时就编译不过，不必等到打开、重排时才撞见。 */
+export type FormatAdapter = FormatAdapterBase & LayoutPart & RelayoutPart;
+
+/** 有 `toScoreDoc` 的那些适配器（`caps.layout === "scoredoc"`）。 */
+export type ScoreDocAdapter = FormatAdapter & { toScoreDoc(text: string): ScoreDoc; reloadSpec: ScoreDocReload };
+
+
+/** 123 读取时忽略 BOM（规范 §1）。 */
+const stripBom = (bytes: Uint8Array): Uint8Array =>
+  bytes[0] === 0xef && bytes[1] === 0xbb && bytes[2] === 0xbf ? bytes.subarray(3) : bytes;
+
+/** 123/ABC 的重排：断点写进模型（小节中间的原位记在和弦上，写出端在那个音后写 `$`），整份重出。
+ *  重出会丢注释（注释不进模型），所以再把原文的注释按「跟着哪个和弦」缝回去（`spliceComments`）。 */
+function emitFrom(
+  text: string, plan: LinePlan,
+  parse: (text: string) => ScoreDoc, emit: (doc: ScoreDoc) => string,
+): string {
+  const doc = parse(text);
+  if (!relayoutDocBreaks(doc, { plan, midBreaks: "inline" })) return text;
+  const out = emit(doc);
+  return spliceComments(text, doc, out, parse(out));
+}
+
+const JPWABC: FormatAdapter = {
+  id: "jpwabc",
+  defaultExt: DOC_EXT.jpwabc,
+  highlighter: jpwHighlighter,
+  decode: decodeJpwabc,
+  encode: encodeJpwabc,
+  label: () => "JPWABC",
+  title: (host) => host.painterTitle.split("\n")[0] ?? "",
+  profileKnob: "jp",
+  caps: { textEditor: true, layout: "jpwabc", phraseRelayout: true },
+  reload: (host, text) => host.reloadJpwabc(text),
+  // `.jpwabc` 是分节文件：只重切 `.Voice` 的行，别的节（样式、歌词、分页描述）一个字不动。
+  // 尺子与 123/ABC 同一把：不量的话乐句行在简谱档放不下，引擎整首按宽度重断，两种格式排出来就不一样了
+  relayoutText: (text, plan) => {
+    const f = JpwFile.fromString(text);
+    if (!f) return text;
+    return relayoutJpwabcText(text, jpwToScoreDoc(f), { plan });
+  },
+};
+
+const FANQIE: FormatAdapter = {
+  id: "fanqie",
+  defaultExt: DOC_EXT.fanqie,
+  highlighter: fanqieHighlighter,
+  // 文本谱是纯文本源格式：UTF-8 原文进、UTF-8 原文出。
+  decode: (bytes) =>
+    new TextDecoder(bytes[0] === 0xff || bytes[0] === 0xfe ? "utf-16" : "utf-8").decode(bytes),
+  encode: utf8,
+  label: (host) => (host.fanqieDialectName === null ? t("fmt.fanqie.label") : t("fmt.fanqie.labelWith", { dialect: host.fanqieDialectName })),
+  // 头部第一条 T:/B:
+  title: (host) => {
+    const first = host
+      .getText()
+      .split(/\r?\n/)
+      .map((l) => /^\s*[TB]\s*[:：](.*)$/.exec(l))
+      .find((m) => m !== null);
+    return first ? first[1]!.trim() : "";
+  },
+  profileKnob: "original",
+  caps: { textEditor: true, layout: "scoredoc", phraseRelayout: true },
+  toScoreDoc: (text) => parseFanqie(text),
+  // 简谱档走原样文档布局（印刷原版的观感），投影档投影成简谱输入模型
+  reloadSpec: {
+    what: () => t("fmt.textScore"),
+    reject: rejectFatal((d) => t("status.fanqieFatal", { error: diagText(d) })),
+    // 解析告警不拦排版，按方言报（谱面往往仍然是对的）
+    diagLabel: (doc) => dialectLabel((doc.fanqieDialect ?? "tomato") as Dialect),
+  },
+  relayoutText: (text, plan) => relayoutFanqieText(text, parseFanqie(text), { plan }),
+};
+
+/** 123 —— 简谱主格式。原生解析直出 `ScoreDoc`；排版直接吃 `ScoreDoc`。
+ *  档位旋钮跟文本谱同一个（`originalProfile`）：两者的简谱档都可走原样文档布局、投影档都投影成简谱输入模型。 */
+const J123: FormatAdapter = {
+  id: "123",
+  defaultExt: DOC_EXT["123"],
+  highlighter: j123Highlighter,
+  decode: (bytes) => new TextDecoder("utf-8").decode(stripBom(bytes)),
+  encode: utf8,
+  label: () => "123",
+  // `T:` 的第一条是标题（其后为副标题）；中文别名 `标题：` 等价
+  title: (host) => {
+    const first = host
+      .getText()
+      .split(/\r?\n/)
+      .map((l) => /^\s*(?:T|标题)\s*[:：](.*)$/.exec(l))
+      .find((m) => m !== null);
+    return first ? first[1]!.trim() : "";
+  },
+  profileKnob: "original",
+  caps: { textEditor: true, layout: "scoredoc", phraseRelayout: true },
+  toScoreDoc: parse123,
+  reloadSpec: {
+    what: () => "123",
+    reject: rejectFatal((d) => t("status.j123Fatal", { line: d.source.line + 1, error: diagText(d) })),
+  },
+  relayoutText: (text, plan) => emitFrom(text, plan, parse123, emit123),
+};
+
+/** ABC —— 与 123 同源的那一支（123 是 ABC 方言）。**原生解析直出 `ScoreDoc`**，
+ *  不经 MusicXML 转一手——那条路把源字符偏移丢光了，双向定位最多到小节级。
+ *  见 `docs/模块/源格式-abc家族.md`。 */
+const ABC: FormatAdapter = {
+  id: "abc",
+  defaultExt: DOC_EXT.abc,
+  // 高亮暂借 123 那一份：两者的字段头、小节线、歌词行完全同形，音乐体的音符会被当成
+  // 「认不出」而不上色——比不上色好，等 ABC 专用的那份写出来再换。
+  highlighter: j123Highlighter,
+  decode: (bytes) => new TextDecoder("utf-8").decode(stripBom(bytes)),
+  encode: utf8,
+  label: () => "ABC",
+  title: (host) => {
+    const first = host
+      .getText()
+      .split(/\r?\n/)
+      .map((l) => /^\s*T\s*:(.*)$/.exec(l))
+      .find((m) => m !== null);
+    return first ? first[1]!.trim() : "";
+  },
+  profileKnob: "original",
+  caps: { textEditor: true, layout: "scoredoc", phraseRelayout: true },
+  toScoreDoc: parseAbc,
+  reloadSpec: { what: () => "ABC", reject: rejectNoNotes(() => t("status.abcNoNotes")), reportOnReject: true },
+  relayoutText: (text, plan) => emitFrom(text, plan, parseAbc, emitAbc),
+};
+
+/** Muse 曲谱软件的 `.jcx` —— ABC 家族的第三个方言（简谱轨里字母是首调唱名，C=1），**原生解析直出 `ScoreDoc`**。
+ *  读盘按版本行与内容判编码（`%MUSE2` GBK/BIG5、`%MUSE3` UTF-8），存盘写 `%MUSE2` + GBK、CRLF（新旧版 Muse 都能开），
+ *  打开的是 `%MUSE3` 就照 UTF-8 存回。见 `docs/格式/jcx.md`。 */
+const JCX: FormatAdapter = {
+  id: "jcx",
+  defaultExt: DOC_EXT.jcx,
+  // 高亮暂借 123 那一份（同 ABC）：字段头、小节线、歌词行同形，字母音符不上色
+  highlighter: j123Highlighter,
+  decode: decodeJcx,
+  encode: (text) => encodeJcx(text).bytes,
+  encodeWarning: (text) => {
+    const { missing } = encodeJcx(text);
+    return missing.length ? t("diag.jcx.gbkMissing", { chars: missing.join("") }) : null;
+  },
+  label: () => t("fmt.jcx.label"),
+  title: (host) => {
+    const first = host
+      .getText()
+      .split(/\r?\n/)
+      .map((l) => /^\s*T\s*:(.*)$/.exec(l))
+      .find((m) => m !== null);
+    return first ? first[1]!.trim() : "";
+  },
+  profileKnob: "original",
+  caps: { textEditor: true, layout: "scoredoc", phraseRelayout: true },
+  toScoreDoc: parseJcx,
+  reloadSpec: { what: () => t("fmt.jcx.label"), reject: rejectNoNotes(() => t("status.jcxNoNotes")), reportOnReject: true },
+  relayoutText: (text, plan) => emitFrom(text, plan, parseJcx, emitJcx),
+};
+
+/** jianpu-ly —— 上游 jianpu-ly 预处理器（简谱文本 → LilyPond）的输入格式。
+ *
+ *  **独立实现**（不进 `abcfamily` 家族）：它的页头（`title=` / `1=Bb` / 裸 `4/4`）、歌词（`L:` / `H:`）
+ *  与连音（`3[ … ]`）都不是那个家族的形状；缘由见 `jly/fromjly.ts` 文件头。
+ *
+ *  **判"是不是这个格式"只看扩展名**：上游输入里没有版本行 / 签名 / 必需项
+ *  （README 原话是"普通文本文件**以空格分隔**的"，`title=` / `4/4` 都只是 token），
+ *  所以任何内容嗅探都只是特征猜测，不做。
+ *
+ *  可视化编辑走 `visual/dialects/jly.ts`（词内顺序无关、时值是字母、连音 `3[ ]`、
+ *  装饰 `\fermata` 写在音后；**行结构不是语义，所以换行就写真换行，不写 123 那个 `$`**）。 */
+const JLY: FormatAdapter = {
+  id: "jly",
+  defaultExt: DOC_EXT.jly,
+  // 高亮暂借 123 那一份：字段头与小节线形状接近，音符那一层认不出就不上色（同 ABC 当初的做法）。
+  highlighter: j123Highlighter,
+  decode: (bytes) => new TextDecoder("utf-8").decode(stripBom(bytes)),
+  encode: utf8,
+  label: () => "jianpu-ly",
+  title: (host) => {
+    const first = host
+      .getText()
+      .split(/\r?\n/)
+      .map((l) => /^\s*title\s*=(.*)$/.exec(l))
+      .find((m) => m !== null);
+    return first ? first[1]!.trim() : "";
+  },
+  profileKnob: "original",
+  caps: { textEditor: true, layout: "scoredoc", phraseRelayout: true },
+  // 重排：**只把曲行按每 N 小节重新断行**，词行/页头/注释一个字不动（上游不看行，
+  // 但 dolce 自己按文件的行排版；一行到底就挤成一团）。按乐句时尺子还没接（`measure` 先不用），
+  // 用的是写出端同一套"每 4 小节一行"的出厂值。
+  relayoutText: (text, plan) => (plan.kind === "bars" ? rewrapJlyText(text, plan.n, { skipPickup: true }) : rewrapJlyText(text)),
+  toScoreDoc: (text) => parseJly(text).doc,
+  // 本版不收的写法（`LP:` 块、倚音和弦、布局开关…）`parseJly` 记进诊断，原样报出——不静默丢
+  reloadSpec: { what: () => "jianpu-ly", reject: rejectNoNotes(() => t("status.abcNoNotes")), reportOnReject: true },
+};
+
+/** MusicXML —— 五线谱主格式。**没有代码区**：编辑器文档里存的就是 XML 原文（不显示），
+ *  谱面由 `ScoreDoc` 出（`fromxml.ts` 读全、读不懂的原样挂 `raw`）。存回原文件：没改过就是原文，
+ *  经 `App.editScoreDoc` 改过的已经整份重写成 `toxml.ts` 的产物。 */
+const MUSICXML: ScoreDocAdapter = {
+  id: "musicxml",
+  defaultExt: DOC_EXT.musicxml,
+  highlighter: [],
+  decode: (bytes) =>
+    new TextDecoder(bytes[0] === 0xff || bytes[0] === 0xfe ? "utf-16" : "utf-8").decode(stripBom(bytes)),
+  encode: utf8,
+  label: () => "MusicXML",
+  title: (host) => {
+    const m = /<(?:work-title|movement-title)>([^<]*)</.exec(host.getText());
+    return m ? m[1]!.trim() : "";
+  },
+  profileKnob: "original",
+  caps: { textEditor: false, layout: "scoredoc", phraseRelayout: false },
+  // MusicXML 只给绝对音高，简谱排版要度数
+  toScoreDoc: (text) => {
+    const doc = loadScoreDoc(text);
+    for (const song of doc.songs) fillDegreesFromPitch(song);
+    return doc;
+  },
+  // 简谱档读成 `ScoreDoc` 排；五线谱/混排档另读一份（`mixedDoc`）
+  reloadSpec: {
+    what: () => "MusicXML",
+    parseFailed: (error) => t("status.xmlReadFailed", { error }),
+    reject: rejectNoNotes(() => t("status.xmlNoNotes")),
+    before: (host, text) => host.syncMixedXml(text),
+  },
+};
+
+export const FORMATS: Record<DocFormatId, FormatAdapter> = {
+  jpwabc: JPWABC,
+  fanqie: FANQIE,
+  "123": J123,
+  abc: ABC,
+  musicxml: MUSICXML,
+  jly: JLY,
+  jcx: JCX,
+};
+
+export const formatOf = (id: DocFormatId): FormatAdapter => FORMATS[id];
+
+/** `.musicxml` 的适配器（五线谱/混排那一路各格式都要经它读回模型）。 */
+export const musicXmlFormat: ScoreDocAdapter = MUSICXML;

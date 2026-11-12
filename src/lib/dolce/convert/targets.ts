@@ -1,0 +1,59 @@
+// 源格式之间的**转换目标注册表**：同一份 `ScoreDoc` 能写成哪几种可编辑的文本格式。
+//
+// 用它的有三处，以前各列各的：识别结果的输出格式（`omr/emit.ts`）、打开文件后在代码区标题栏切格式
+// （`editor/formatswitch.ts`）、另存为别的源格式（`App.saveAsFormat`）。加一种目标格式 = 往这里补一项。
+// 无 DOM 依赖（Node CLI 与回归脚本也用）。放在 model 之上：它要调各格式的写出端，模型层不反过来依赖格式。
+
+import type { ScoreDoc } from "../model/doc";
+import type { TargetFormat } from "./capability";
+import { emit123 } from "../abcfamily/emit123.entry";
+import { emitAbc } from "../abcfamily/emitabc.entry";
+import { emitJcx } from "../abcfamily/emitjcx.entry";
+import { emitJpwabc } from "./jpwabc";
+import { emitJly } from "../jly/tojly";
+import { emitFanqie } from "../fanqie/tofanqie";
+import { withPageMeta } from "../model/pagemeta";
+import { t } from "../i18n";
+
+/** 可写出的文本格式。文本谱两种方言各算一种。 */
+export type ConvertTarget = "123" | "abc" | "jpwabc" | "tomato" | "shige" | "jly" | "jcx";
+
+export interface TargetSpec {
+  id: ConvertTarget & TargetFormat;
+  /** 下拉里的显示名（按界面语言） */
+  readonly label: string;
+  /** 写出来的文本在编辑器里按哪种源格式打开（`editor/formats.ts::DocFormatId`） */
+  docFormat: "123" | "abc" | "jpwabc" | "fanqie" | "jly" | "jcx";
+  emit(doc: ScoreDoc): string;
+}
+
+/** 顺序即下拉里的顺序；第一项是识别的默认输出格式。 */
+export const CONVERT_TARGETS: readonly TargetSpec[] = [
+  // 123 / ABC 把 MusicXML 的纸写成 `I:meta page …`（`model/pagemeta.ts`），转过去再打开纸不丢
+  { id: "123", get label() { return t("fmt.target.123"); }, docFormat: "123", emit: (doc) => emit123(withPageMeta(doc)) },
+  {
+    id: "jpwabc",
+    get label() { return t("fmt.target.jpwabc"); },
+    docFormat: "jpwabc",
+    emit: (doc) => {
+      const text = emitJpwabc(doc);
+      if (text === null) throw new Error(t("err.noLines"));
+      return text;
+    },
+  },
+  { id: "abc", get label() { return t("fmt.target.abc"); }, docFormat: "abc", emit: (doc) => emitAbc(withPageMeta(doc)) },
+  { id: "tomato", get label() { return t("fmt.target.tomato"); }, docFormat: "fanqie", emit: (doc) => emitFanqie(doc, "tomato") },
+  { id: "shige", get label() { return t("fmt.target.shige"); }, docFormat: "fanqie", emit: (doc) => emitFanqie(doc, "shige") },
+  // jianpu-ly：能读能写，导出端是 `jly/tojly.ts`（`%` 注释里带着"装不下什么"的说明，写在文本里随文件走）
+  { id: "jly", get label() { return t("fmt.target.jly"); }, docFormat: "jly", emit: (doc) => emitJly(doc).text },
+  // Muse 曲谱软件：存盘按 `%MUSE2` + GBK（`common/jcxcodec.ts`），新旧版 Muse 都能开
+  { id: "jcx", get label() { return t("fmt.target.jcx"); }, docFormat: "jcx", emit: (doc) => emitJcx(doc) },
+];
+
+export function isConvertTarget(v: unknown): v is ConvertTarget {
+  return CONVERT_TARGETS.some((t) => t.id === v);
+}
+
+export function targetSpec(id: ConvertTarget): TargetSpec {
+  return CONVERT_TARGETS.find((t) => t.id === id) ?? CONVERT_TARGETS[0]!;
+}

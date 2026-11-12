@@ -1,20 +1,22 @@
 import { defineCollection } from "astro:content";
 import { z } from "astro/zod";
-
-export const chordItemSchema = z.object({
-  index: z.number().int().min(0),
-  chord: z.string(),
-});
+import { glob } from "astro/loaders";
 
 export const lineItemSchema = z.object({
   a: z.string(),
   b: z.string().optional(),
-  chords: z.array(chordItemSchema).optional(),
 });
 
 export const sectionItemSchema = z.object({
   name: z.string(),
   lines: z.array(lineItemSchema),
+});
+
+export const songScoreSchema = z.object({
+  format: z.enum(["123", "abc", "musicxml"]),
+  content: z.string(),
+  sourceKind: z.enum(["jianpu", "staff", "mixed"]).optional(),
+  defaultView: z.enum(["original", "expanded", "staff", "mixed"]).optional(),
 });
 
 export const songAssetSchema = z.object({
@@ -44,6 +46,7 @@ export const songSchema = z.object({
     arrangement: z.array(z.number()).optional(),
   }),
   sections: z.array(sectionItemSchema),
+  score: songScoreSchema.optional(),
 });
 
 export const librarySchema = z.object({
@@ -64,8 +67,6 @@ export const librarySchema = z.object({
     }),
   ),
 });
-
-import { glob, file } from "astro/loaders";
 
 const post = defineCollection({
   loader: glob({ base: "src/content/docs", pattern: "**/*.md" }),
@@ -89,9 +90,9 @@ export const collections = {
   post,
 };
 
-export type ChordItem = z.infer<typeof chordItemSchema>;
 export type LineItem = z.infer<typeof lineItemSchema>;
 export type SectionItem = z.infer<typeof sectionItemSchema>;
+export type SongScore = z.infer<typeof songScoreSchema>;
 export type SongAsset = z.infer<typeof songAssetSchema>;
 export type SongData = z.infer<typeof songSchema>;
 export type SongWithId = SongData & { id: string };

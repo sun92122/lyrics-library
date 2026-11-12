@@ -2,26 +2,31 @@ import { CHROMATIC_SCALE, KEY_ALIASES, type KeyName } from '@/constants/keys';
 
 /**
  * Normalizes note or key name to standard representation in CHROMATIC_SCALE.
- * E.g., 'C#' -> 'Db', 'Gb' -> 'F#', 'A#' -> 'Bb'.
+ * Supports Unicode accidentals (♯/♭) and prefix accidentals (#F -> F#, bB -> Bb).
  */
 export function normalizeNote(note: string): KeyName | string {
   if (!note) return note;
-  const trimmed = note.trim();
-  if (KEY_ALIASES[trimmed]) {
-    return KEY_ALIASES[trimmed];
+  const ascii = note.trim().replace(/♯/g, "#").replace(/♭/g, "b");
+  const suffixForm = ascii.replace(/^([#b])([A-G])(.*)$/, "$2$1$3");
+  const match = suffixForm.match(/^([A-G][#b]?)(.*)$/);
+  if (match) {
+    const mapped = KEY_ALIASES[match[1]] ?? match[1];
+    return `${mapped}${match[2]}`;
   }
-  return trimmed;
+  return suffixForm;
 }
 
 /**
- * Parses the root note and modifier/suffix of a chord token.
+ * Parses the root note and modifier/suffix of a chord token or key name.
  * E.g., "Em7" -> { root: "E", suffix: "m7" }
- * "C#m" -> { root: "C#", suffix: "m" }
- * "Bbmaj7" -> { root: "Bb", suffix: "maj7" }
+ * "#Fm" -> { root: "F#", suffix: "m" }
+ * "♭B" -> { root: "Bb", suffix: "" }
  */
 export function parseRootAndSuffix(chordPart: string): { root: string; suffix: string } {
   if (!chordPart) return { root: '', suffix: '' };
-  const match = chordPart.match(/^([A-G][#b]?)(.*)$/);
+  const ascii = chordPart.trim().replace(/♯/g, "#").replace(/♭/g, "b");
+  const suffixForm = ascii.replace(/^([#b])([A-G])(.*)$/, "$2$1$3");
+  const match = suffixForm.match(/^([A-G][#b]?)(.*)$/);
   if (!match) {
     return { root: chordPart, suffix: '' };
   }

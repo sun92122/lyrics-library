@@ -1,5 +1,6 @@
 allowBuilds:
   esbuild: true
+  protobufjs: false
   sharp: true
 minimumReleaseAgeExclude:
   - propresenter-js@1.3.0

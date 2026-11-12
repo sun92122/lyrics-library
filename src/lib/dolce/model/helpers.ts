@@ -1,0 +1,247 @@
+// `ScoreDoc` 的遍历、查询与构造。
+//
+// 音高 ↔ 度数、临时记号延续这些**简谱语义**在 `jianpu.ts`（简谱语义层），不在这里。
+//
+// 无 DOM 依赖（Node CLI 要 import）。
+
+import type {
+  Chord,
+  Direction,
+  Element,
+  ElementId,
+  Lyric,
+  Measure,
+  Note,
+  Part,
+  ScoreDoc,
+  Song,
+  SourceSpan,
+} from "./doc";
+
+// ───────────────────────── id 分配 ─────────────────────────
+
+/** 元素 id 分配器。**全文档唯一、不随数组增删变化**——`Mark`、歌词锚点、`playOrder`
+ *  都引用 id，用数组下标的话插一个元素就全错（`FanqieDoc` 就是那样）。 */
+export class IdGen {
+  private _next = 1;
+  next(): ElementId {
+    return this._next++;
+  }
+  /** 已分配到哪（序列化/合并文档时要接着往下发） */
+  get watermark(): number {
+    return this._next;
+  }
+  /** 合并两份文档时把分配器推到安全位置 */
+  bump(to: number): void {
+    if (to >= this._next) this._next = to + 1;
+  }
+}
+
+// ───────────────────────── 遍历 ─────────────────────────
+
+export function* eachPart(song: Song): Generator<Part> {
+  for (const p of song.parts) yield p;
+}
+
+export function* eachMeasure(song: Song): Generator<{ part: Part; measure: Measure; index: number }> {
+  for (const part of song.parts) {
+    for (let i = 0; i < part.measures.length; i++) {
+      yield { part, measure: part.measures[i]!, index: i };
+    }
+  }
+}
+
+export function* eachElement(song: Song): Generator<{ part: Part; measure: Measure; element: Element }> {
+  for (const { part, measure } of eachMeasure(song)) {
+    for (const element of measure.elements) yield { part, measure, element };
+  }
+}
+
+/** 只过和弦（含休止），跳过占位符。 */
+export function* eachChord(song: Song): Generator<{ part: Part; measure: Measure; chord: Chord }> {
+  for (const { part, measure, element } of eachElement(song)) {
+    if (element.kind === "chord") yield { part, measure, chord: element };
+  }
+}
+
+/** 逐音符。休止没有 `notes`，自然跳过。 */
+export function* eachNote(song: Song): Generator<{ part: Part; measure: Measure; chord: Chord; note: Note }> {
+  for (const { part, measure, chord } of eachChord(song)) {
+    for (const note of chord.notes) yield { part, measure, chord, note };
+  }
+}
+
+// ───────────────────────── 查询 ─────────────────────────
+
+/** 按 id 找元素。线性扫——文档规模下够用，需要时再加索引。 */
+export function findElement(song: Song, id: ElementId): Element | null {
+  for (const { element } of eachElement(song)) {
+    if (element.id === id) return element;
+  }
+  return null;
+}
+
+/** 建 id → 元素的索引。批量查（`Mark` 配对、转换器）时用，别反复调 `findElement`。 */
+export function elementIndex(song: Song): Map<ElementId, { part: Part; measure: Measure; element: Element }> {
+  const m = new Map<ElementId, { part: Part; measure: Measure; element: Element }>();
+  for (const hit of eachElement(song)) m.set(hit.element.id, hit);
+  // 增时线也有 id，且和弦可以挂在它上面（规范 §8.1），所以一并收进来
+  for (const { part, measure, chord } of eachChord(song)) {
+    for (const s of chord.sustains ?? []) {
+      m.set(s.id, { part, measure, element: chord });
+    }
+  }
+  return m;
+}
+
+/** 这首歌有几段歌词。取所有 `Lyric.number` 与 `numberTo` 的最大值。 */
+export function verseCount(song: Song): number {
+  let max = 0;
+  for (const { chord } of eachChord(song)) {
+    for (const l of chord.lyrics ?? []) {
+      max = Math.max(max, l.numberTo ?? l.number);
+    }
+  }
+  return max;
+}
+
+/** 取某一段的歌词。副歌（`refrain`）对所有段都算命中。 */
+export function lyricOfVerse(lyrics: readonly Lyric[] | undefined, verse: number): Lyric | null {
+  for (const l of lyrics ?? []) {
+    if (l.refrain) return l;
+    const from = l.number;
+    const to = l.numberTo ?? l.number;
+    if (verse >= from && verse <= to) return l;
+  }
+  return null;
+}
+
+/** 小节的总时值（divisions）。取各 voice 的最大值——和弦音与多声部不能累加。 */
+export function measureDuration(measure: Measure): number {
+  const perVoice = new Map<number, number>();
+  for (const el of measure.elements) {
+    const d = el.kind === "chord" ? el.duration.divisions : (el.duration?.divisions ?? 0);
+    perVoice.set(el.voice, (perVoice.get(el.voice) ?? 0) + d);
+  }
+  let max = 0;
+  for (const v of perVoice.values()) max = Math.max(max, v);
+  return max;
+}
+
+// ───────────────────────── 段落标记 ─────────────────────────
+
+/** 段落词（流行/敬拜谱常见的段落方框标记）。`<words>` 也用于表情记号(rit./dolce)，故只认这些词，
+ *  免把普通文字当段落；`<rehearsal>` 本就是排练/段落记号，一律收下。 */
+export const SECTION_WORD_RE =
+  /^(intro|verse|chorus|pre-?chorus|bridge|coda|outro|ending|interlude|solo|refrain|tag|前奏|主歌|副歌|间奏|尾奏|尾声|桥段|插曲)\s*\d*$/i;
+
+/** 段落词里标副歌起头的那几个。 */
+export const REFRAIN_WORD_RE = /^(chorus|refrain|副歌)/i;
+
+/** 一段文字是不是段落词：去掉谱面常见的括号（「【Chorus】」「(副歌)」「[Verse 2]」）再认。是就返回去掉括号的词。 */
+export function sectionWordOf(text: string | undefined): string | null {
+  const t = (text ?? "").trim().replace(/^[【\[（(]\s*/, "").replace(/\s*[】\]）)]$/, "");
+  return t && SECTION_WORD_RE.test(t) ? t : null;
+}
+
+/**
+ * 这一小节的段落标记（Intro/Verse/Chorus…），没有返回 null。**各格式同一个判据**，按乐句排版的段界、
+ * 投影档副歌前换页都从这里读：MusicXML 的 `<rehearsal>` / 段落词 `<words>` 在 `Measure.directions` 上，
+ * 123/ABC（`"^Chorus"`）与文本谱的段落注记在和弦（或增时线）的 `sectionWord` 上。
+ * 标记具体挂在哪个音上不作数（常挂在下一段的弱起、甚至上一句收尾那个音上）：消费者只把它当大致位置，
+ * 真正的段界由断句按乐句定（`phrase.ts::aroundSectionPickup`）、投影档就近对到行首。
+ *
+ * 给了 `prev`（上一小节）时按小节分清：**写在小节所有音之后**的 `<direction>`（`afterElements` 到了小节末）
+ * 标的是下一小节——433《福杯满溢》的「（副歌）」写在主歌末小节「福 无 边。」之后，算在那一小节上，
+ * 段界就切在「福」前、一整小节的收尾被甩到副歌行首。不给 `prev` 照旧本小节的都算。
+ */
+export function sectionMarkOf(m: Measure, prev?: Measure | null): string | null {
+  const atEnd = (x: Measure, d: Direction): boolean => d.afterElements !== undefined && x.elements.length > 0 && d.afterElements >= x.elements.length;
+  const fromDirections = (x: Measure, keep: (d: Direction) => boolean): string | null => {
+    for (const d of x.directions ?? []) {
+      const t = (d.text ?? "").trim();
+      if (!t || !keep(d)) continue;
+      if (d.type === "rehearsal") return t;
+      const w = d.type === "words" ? sectionWordOf(t) : null;
+      if (w !== null) return w;
+    }
+    return null;
+  };
+  if (prev !== undefined) {
+    const carried = prev ? fromDirections(prev, (d) => atEnd(prev, d)) : null;
+    if (carried !== null) return carried;
+  }
+  const own = fromDirections(m, (d) => prev === undefined || !atEnd(m, d));
+  if (own !== null) return own;
+  for (const el of m.elements) {
+    if (el.kind !== "chord") continue;
+    for (const host of [el, ...(el.sustains ?? [])]) {
+      // 分行的几条逐条认（「副歌」与演奏提示叠在一个音上）
+      for (const line of (host.sectionWord ?? "").split("\n")) {
+        const w = sectionWordOf(line || undefined);
+        if (w !== null) return w;
+      }
+    }
+  }
+  return null;
+}
+
+// ───────────────────────── 换行口径 ─────────────────────────
+
+/** 换行种类。 */
+export type BreakKind = "system" | "page";
+
+/** 源码里「这一小节**之后**换行」→ 模型口径「下一小节**起**新系统」（见 `doc.ts::Print`）。
+ *
+ *  解析时按源码顺序只知道「之后」（`$` 写在小节线后面，下一小节还没建出来），
+ *  所以各解析器先把换行记进 `after`，整个声部建完后调这里一次性翻过去。
+ *  同一小节既有换行又有换页时换页为准。 */
+export function breaksAfterToStart(part: Part, after: ReadonlyMap<Measure, BreakKind>): void {
+  const ms = part.measures;
+  for (let i = 0; i < ms.length; i++) {
+    const kind = after.get(ms[i]!);
+    if (!kind) continue;
+    const next = ms[i + 1];
+    if (!next) {
+      if (part.endBreak !== "page") part.endBreak = kind;
+      continue;
+    }
+    const p = { ...(next.print ?? {}) };
+    if (kind === "page") {
+      p.newPage = true;
+      delete p.newSystem;
+    } else if (!p.newPage) {
+      p.newSystem = true;
+    }
+    next.print = p;
+  }
+}
+
+/** `breaksAfterToStart` 的反向：第 `i` 小节**之后**要不要换行（写出端用）。 */
+export function breakAfter(part: Part, i: number): BreakKind | null {
+  const next = part.measures[i + 1];
+  if (!next) return part.endBreak ?? null;
+  if (next.print?.newPage) return "page";
+  if (next.print?.newSystem) return "system";
+  return null;
+}
+
+// ───────────────────────── 构造 ─────────────────────────
+
+export const ZERO_SPAN: SourceSpan = { line: 0, column: 0, offset: 0, length: 0 };
+
+export function emptySong(): Song {
+  return { work: { subtitles: [] }, parts: [], marks: [] };
+}
+
+export function emptyDoc(sourceFormat: ScoreDoc["sourceFormat"]): ScoreDoc {
+  return { sourceFormat, songs: [], diagnostics: [] };
+}
+
+/** 第一首。多曲文件里绝大多数调用方只关心它（对应 `jianpu/ast.ts::primaryMetadata` 的用法）。 */
+export function primarySong(doc: ScoreDoc): Song | null {
+  return doc.songs[0] ?? null;
+}
+
+/** 派生五线谱时 `<note>` 上的源 id 前缀（`toxml.ts::ToXmlOptions.sourceIds` 写、`fromxml.ts` 认）。 */
+export const SOURCE_ID_PREFIX = "jp";

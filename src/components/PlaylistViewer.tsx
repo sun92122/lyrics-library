@@ -375,7 +375,7 @@ export const PlaylistViewer: React.FC<PlaylistViewerProps> = ({
             共收錄 {payload.s.filter((item) => !item.t).length} 首詩歌流程
           </span>
           <span className="text-slate-400">
-            點擊曲目直接開啟即時調性歌詞與和弦
+            點擊曲目直接開啟即時調性歌詞與樂譜
           </span>
         </div>
       </div>

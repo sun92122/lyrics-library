@@ -1,22 +1,12 @@
-import React, { useEffect } from "react";
-import { CHROMATIC_SCALE } from "@/constants/keys";
+import React, { useEffect, useRef } from "react";
 import {
   transposeKey,
   getSemitoneOffset,
   normalizeNote,
 } from "@/utils/transposer";
-import {
-  RotateCcw,
-  ArrowDown,
-  ArrowUp,
-  Music2,
-  Eye,
-  EyeOff,
-} from "lucide-react";
+import { RotateCcw, ArrowDown, ArrowUp } from "lucide-react";
 
 export interface KeyControllerProps {
-  showChords: boolean;
-  setShowChords: (show: boolean) => void;
   originalKey?: string;
   currentKey: string;
   onKeyChange: (newKey: string) => void;
@@ -24,8 +14,6 @@ export interface KeyControllerProps {
 }
 
 export const KeyController: React.FC<KeyControllerProps> = ({
-  showChords,
-  setShowChords,
   originalKey = "C",
   currentKey,
   onKeyChange,
@@ -33,10 +21,15 @@ export const KeyController: React.FC<KeyControllerProps> = ({
 }) => {
   const semitoneOffset = getSemitoneOffset(originalKey, currentKey);
   const isOriginal = normalizeNote(currentKey) === normalizeNote(originalKey);
+  const didMountRef = useRef(false);
 
-  // Sync to URL query param (?key=...)
+  // Sync to URL query param (?key=...) after initial mount so SSR/hydration never clears ?key=
   useEffect(() => {
     if (typeof window === "undefined") return;
+    if (!didMountRef.current) {
+      didMountRef.current = true;
+      return;
+    }
 
     const url = new URL(window.location.href);
     if (isOriginal) {
@@ -48,15 +41,13 @@ export const KeyController: React.FC<KeyControllerProps> = ({
           `${url.pathname}${url.search}${url.hash}`,
         );
       }
-    } else {
-      if (url.searchParams.get("key") !== currentKey) {
-        url.searchParams.set("key", currentKey);
-        window.history.replaceState(
-          {},
-          "",
-          `${url.pathname}${url.search}${url.hash}`,
-        );
-      }
+    } else if (url.searchParams.get("key") !== currentKey) {
+      url.searchParams.set("key", currentKey);
+      window.history.replaceState(
+        {},
+        "",
+        `${url.pathname}${url.search}${url.hash}`,
+      );
     }
   }, [currentKey, isOriginal]);
 
@@ -65,37 +56,14 @@ export const KeyController: React.FC<KeyControllerProps> = ({
     onKeyChange(nextKey);
   };
 
-  // not used
   const handleReset = () => {
     onKeyChange(originalKey);
   };
 
   return (
     <div
-      className={`inline-flex flex-wrap items-center gap-2.5 backdrop-blur-md ${className}`}
+      className={`inline-flex flex-wrap items-center gap-1.5 backdrop-blur-md ${className}`}
     >
-      <button
-        type="button"
-        onClick={() => setShowChords(!showChords)}
-        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl border text-xs font-medium transition-all ${
-          showChords
-            ? "bg-amber-50 border-amber-200 text-amber-800 hover:bg-amber-100"
-            : "bg-slate-50 border-slate-300 text-slate-600 hover:bg-slate-100"
-        }`}
-      >
-        {showChords ? (
-          <>
-            <Music2 className="w-3.5 h-3.5 text-amber-600" />
-            <span>顯示和弦</span>
-          </>
-        ) : (
-          <>
-            <EyeOff className="w-3.5 h-3.5 text-slate-400" />
-            <span>隱藏和弦</span>
-          </>
-        )}
-      </button>
-
       <div className="flex items-center gap-1">
         <button
           type="button"
@@ -108,7 +76,7 @@ export const KeyController: React.FC<KeyControllerProps> = ({
           <ArrowDown className="w-3 h-3" />
         </button>
 
-        <div className="flex items-center justify-center gap-1 w-14 max-[500px]:w-12">
+        <div className="flex items-center justify-center gap-1 min-w-[3.5rem] px-1">
           <span className="text-lg font-bold text-amber-600 font-mono min-w-[28px] text-center">
             {currentKey}
           </span>
@@ -118,19 +86,6 @@ export const KeyController: React.FC<KeyControllerProps> = ({
             </span>
           )}
         </div>
-
-        {/* {!isOriginal && (
-          <button
-            type="button"
-            onClick={handleReset}
-            aria-label="重設原調"
-            title={`重設原調 (${originalKey})`}
-            className="flex items-center gap-1 h-8 px-2.5 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 text-xs font-medium transition-all border border-amber-500/40 active:scale-95"
-          >
-            <RotateCcw className="w-3 h-3" />
-            <span>原調</span>
-          </button>
-        )} */}
 
         <button
           type="button"
@@ -142,6 +97,19 @@ export const KeyController: React.FC<KeyControllerProps> = ({
           <span className="font-bold text-sm">♯</span>
           <ArrowUp className="w-3 h-3" />
         </button>
+
+        {!isOriginal && (
+          <button
+            type="button"
+            onClick={handleReset}
+            aria-label="重設原調"
+            title={`回復原調 (${originalKey})`}
+            className="flex items-center gap-1 h-7 px-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-800 text-xs font-medium transition-all border border-amber-200 active:scale-95"
+          >
+            <RotateCcw className="w-3 h-3" />
+            <span className="hidden sm:inline">原調</span>
+          </button>
+        )}
       </div>
     </div>
   );

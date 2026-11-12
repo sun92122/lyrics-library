@@ -19,7 +19,12 @@ import {
 } from "@/constants/flow";
 import { getLanguageName, getLanguageCode } from "@/constants/languages";
 import { LanguageCombobox } from "@/components/LanguageCombobox";
-import type { SongData, SectionItem } from "@/content.config";
+import type { SongData, SectionItem, SongScore } from "@/content.config";
+import {
+  DolceOmrWorkspace,
+  type IncomingOmrBatch,
+} from "@/components/song-builder/DolceOmrWorkspace";
+import type { ExtractedSongContent } from "@/lib/dolce-bridge/extractor";
 import {
   Fieldset,
   Input,
@@ -118,35 +123,6 @@ function matchFlowAlias(line: string): {
   return { isValid: false, sectionName: "" };
 }
 
-function parseLineWithChords(raw: string): {
-  text: string;
-  chords: { index: number; chord: string }[];
-} {
-  let text = "";
-  const chords: { index: number; chord: string }[] = [];
-  let cursor = 0;
-  let charCount = 0;
-
-  while (cursor < raw.length) {
-    if (raw[cursor] === "[") {
-      const closeIdx = raw.indexOf("]", cursor);
-      if (closeIdx !== -1) {
-        const chord = raw.slice(cursor + 1, closeIdx).trim();
-        if (chord) {
-          chords.push({ index: charCount, chord });
-        }
-        cursor = closeIdx + 1;
-        continue;
-      }
-    }
-    text += raw[cursor];
-    charCount++;
-    cursor++;
-  }
-
-  return { text, chords };
-}
-
 function parseLyricsText(
   text: string,
   isBilingual: boolean,
@@ -155,7 +131,6 @@ function parseLyricsText(
   lines: {
     a: string;
     b?: string;
-    chords?: { index: number; chord: string }[];
   }[];
 }[] {
   const rawLines = text.split("\n").map((l) => l.trimEnd());
@@ -164,7 +139,6 @@ function parseLyricsText(
     lines: {
       a: string;
       b?: string;
-      chords?: { index: number; chord: string }[];
     }[];
   }[] = [];
   let currentSection: {
@@ -172,7 +146,6 @@ function parseLyricsText(
     lines: {
       a: string;
       b?: string;
-      chords?: { index: number; chord: string }[];
     }[];
   } | null = null;
 
@@ -203,7 +176,6 @@ function parseLyricsText(
     }
 
     if (isBilingual) {
-      const parsedA = parseLineWithChords(line);
       let lineB = "";
 
       if (i + 1 < rawLines.length) {
@@ -215,15 +187,12 @@ function parseLyricsText(
       }
 
       currentSection.lines.push({
-        a: parsedA.text,
+        a: line,
         ...(lineB ? { b: lineB.replaceAll("\\n", "\n") } : {}),
-        ...(parsedA.chords.length > 0 ? { chords: parsedA.chords } : {}),
       });
     } else {
-      const parsedA = parseLineWithChords(line);
       currentSection.lines.push({
-        a: parsedA.text,
-        ...(parsedA.chords.length > 0 ? { chords: parsedA.chords } : {}),
+        a: line,
       });
     }
     i++;
@@ -250,20 +219,7 @@ export function convertSectionsToRawLyrics(
     result.push(`[${tag}]`);
 
     for (const line of section.lines) {
-      let lineA = line.a;
-      if (line.chords && line.chords.length > 0) {
-        const sortedChords = [...line.chords].sort((x, y) => x.index - y.index);
-        let built = "";
-        let prevIndex = 0;
-        for (const c of sortedChords) {
-          const idx = Math.min(Math.max(c.index, 0), lineA.length);
-          built += lineA.slice(prevIndex, idx) + `[${c.chord}]`;
-          prevIndex = idx;
-        }
-        built += lineA.slice(prevIndex);
-        lineA = built;
-      }
-      result.push(lineA);
+      result.push(line.a);
 
       if (isBilingual) {
         if (line.b !== undefined && line.b !== null && line.b !== "") {
@@ -281,6 +237,10 @@ export function convertSectionsToRawLyrics(
 
 export type ValidationResult =
   { success: true; data: SongData } | { success: false; error: string };
+
+const VALID_SCORE_FORMATS = new Set(["123", "abc", "musicxml"]);
+const VALID_SOURCE_KINDS = new Set(["jianpu", "staff", "mixed"]);
+const VALID_DEFAULT_VIEWS = new Set(["original", "expanded", "staff", "mixed"]);
 
 export function validateSongData(raw: unknown): ValidationResult {
   if (typeof raw !== "object" || raw === null || Array.isArray(raw)) {
@@ -309,11 +269,37 @@ export function validateSongData(raw: unknown): ValidationResult {
     return { success: false, error: "缺少歌曲主要名稱 (meta.title.a)" };
   }
 
+  let normalizedScore: SongScore | undefined;
+  if (obj.score !== undefined) {
+    if (
+      !obj.score ||
+      typeof obj.score !== "object" ||
+      Array.isArray(obj.score) ||
+      !VALID_SCORE_FORMATS.has(obj.score.format) ||
+      typeof obj.score.content !== "string"
+    ) {
+      return {
+        success: false,
+        error: "樂譜欄位 (score) 格式無效，需包含 format (123/abc/musicxml) 與 content 字串",
+      };
+    }
+    normalizedScore = {
+      format: obj.score.format,
+      content: obj.score.content,
+      ...(VALID_SOURCE_KINDS.has(obj.score.sourceKind)
+        ? { sourceKind: obj.score.sourceKind }
+        : {}),
+      ...(VALID_DEFAULT_VIEWS.has(obj.score.defaultView)
+        ? { defaultView: obj.score.defaultView }
+        : {}),
+    };
+  }
+
   if (!obj.sections || !Array.isArray(obj.sections)) {
     return { success: false, error: "缺少段落列表 (sections)" };
   }
 
-  if (obj.sections.length === 0) {
+  if (obj.sections.length === 0 && !normalizedScore) {
     return { success: false, error: "段落列表 (sections) 不能為空" };
   }
 
@@ -428,20 +414,9 @@ export function validateSongData(raw: unknown): ValidationResult {
       lines: sec.lines.map((line: any) => ({
         a: line.a,
         ...(typeof line.b === "string" ? { b: line.b } : {}),
-        ...(Array.isArray(line.chords)
-          ? {
-              chords: line.chords
-                .filter(
-                  (c: any) =>
-                    c &&
-                    typeof c.index === "number" &&
-                    typeof c.chord === "string",
-                )
-                .map((c: any) => ({ index: c.index, chord: c.chord })),
-            }
-          : {}),
       })),
     })),
+    ...(normalizedScore ? { score: normalizedScore } : {}),
   };
 
   return { success: true, data: normalizedData };
@@ -886,6 +861,9 @@ export const SongBuilder: React.FC = () => {
   const [tagsInput, setTagsInput] = useState<string>("");
   const [sections, setSections] = useState<SectionItem[]>([]);
   const [rawLyrics, setRawLyrics] = useState("");
+  const [score, setScore] = useState<SongScore | undefined>(undefined);
+  const [incomingOmrBatch, setIncomingOmrBatch] =
+    useState<IncomingOmrBatch | null>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [feedback, setFeedback] = useState<{
     type: "success" | "error";
@@ -896,6 +874,8 @@ export const SongBuilder: React.FC = () => {
   const editorViewRef = useRef<EditorView | null>(null);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const dragCounterRef = useRef<number>(0);
+  const omrBatchIdRef = useRef<number>(0);
+  const handleDroppedFilesRef = useRef<(files: File[]) => void>(() => {});
 
   const loadSongFile = (songData: SongData, fileName?: string) => {
     const isBilingualSong = Boolean(
@@ -923,6 +903,7 @@ export const SongBuilder: React.FC = () => {
     setIsBilingual(isBilingualSong);
     setRawLyrics(raw);
     setSections(songData.sections);
+    setScore(songData.score);
 
     const tags = songData.meta?.tags || [];
     setTagsInput(tags.join(", "));
@@ -987,6 +968,40 @@ export const SongBuilder: React.FC = () => {
         message: `讀取檔案「${file.name}」時發生錯誤：${err instanceof Error ? err.message : String(err)}`,
       });
     }
+  };
+
+  handleDroppedFilesRef.current = (files: File[]) => {
+    if (files.length === 0) return;
+
+    const first = files[0]!;
+    if (
+      files.length === 1 &&
+      (first.type === "application/json" ||
+        first.name.toLowerCase().endsWith(".json"))
+    ) {
+      void handleFile(first);
+      return;
+    }
+
+    const sheetFiles = files.filter(
+      (f) =>
+        f.type.startsWith("image/") ||
+        f.type === "application/pdf" ||
+        /\.(png|jpe?g|webp|gif|bmp|tiff?|pdf|123|abc|xml|musicxml|jpwabc)$/i.test(
+          f.name,
+        ),
+    );
+
+    if (sheetFiles.length > 0) {
+      omrBatchIdRef.current += 1;
+      setIncomingOmrBatch({
+        id: omrBatchIdRef.current,
+        files: sheetFiles,
+      });
+      return;
+    }
+
+    void handleFile(first);
   };
 
   useEffect(() => {
@@ -1055,8 +1070,7 @@ export const SongBuilder: React.FC = () => {
         e.dataTransfer.files &&
         e.dataTransfer.files.length > 0
       ) {
-        const file = e.dataTransfer.files[0];
-        handleFile(file);
+        handleDroppedFilesRef.current(Array.from(e.dataTransfer.files));
       }
     };
 
@@ -1081,6 +1095,28 @@ export const SongBuilder: React.FC = () => {
       window.removeEventListener("keydown", handleKeyDown, true);
     };
   }, []);
+
+  const handleExtractToSong = (extracted: ExtractedSongContent) => {
+    setMeta((prev) => ({
+      ...prev,
+      title: {
+        a: extracted.titleA || prev.title.a,
+        b: extracted.titleB || prev.title.b,
+      },
+      author: extracted.author || prev.author,
+      originalKey: extracted.originalKey || prev.originalKey,
+      bpm: extracted.bpm ?? prev.bpm,
+    }));
+
+    if (extracted.sections.length > 0) {
+      const nextRaw = convertSectionsToRawLyrics(
+        extracted.sections,
+        isBilingual,
+      );
+      setRawLyrics(nextRaw);
+      setSections(extracted.sections);
+    }
+  };
 
   const handleReplace = () => {
     replacePronounsAndSelect(editorViewRef.current);
@@ -1107,12 +1143,23 @@ export const SongBuilder: React.FC = () => {
   }, [tagsInput]);
 
   const handleDownloadJson = async () => {
+    const cleanScore =
+      score && score.content.trim()
+        ? {
+            format: score.format,
+            content: score.content,
+            ...(score.sourceKind ? { sourceKind: score.sourceKind } : {}),
+            ...(score.defaultView ? { defaultView: score.defaultView } : {}),
+          }
+        : undefined;
+
     const songData: SongData = {
       meta: {
         ...meta,
         assets: meta.assets?.filter((asset) => asset.name && asset.url),
       },
       sections,
+      ...(cleanScore ? { score: cleanScore } : {}),
     };
     if (!songData.meta.title.a || !songData.meta.languages.a) {
       setIdError("請設定歌曲主要名稱和語言");
@@ -1207,15 +1254,15 @@ export const SongBuilder: React.FC = () => {
             </div>
             <div className="space-y-1">
               <h3 className="text-xl sm:text-2xl font-bold text-slate-900">
-                釋放以載入歌曲檔案
+                釋放以載入歌曲或樂譜檔案
               </h3>
               <p className="text-sm text-slate-500">
-                支援合法的歌曲 JSON 檔案，載入後將覆蓋當前內容以供修改
+                支援歌曲 JSON 匯入，或拖曳樂譜圖片（PNG／JPG）、PDF、.123／MusicXML 進行辨識
               </p>
             </div>
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo-50 text-indigo-700 text-xs font-semibold">
               <Sparkles className="w-3.5 h-3.5" />
-              <span>自動填入歌曲名稱、調性、段落標籤與歌序</span>
+              <span>自動填入歌曲名稱、調性、樂譜與歌詞段落</span>
             </div>
           </div>
         </div>
@@ -1229,10 +1276,10 @@ export const SongBuilder: React.FC = () => {
             <span>Song Builder</span>
           </div>
           <h1 className="text-2xl sm:text-3xl font-black tracking-tight">
-            產生歌曲 JSON
+            建立歌曲與樂譜 JSON
           </h1>
           <p className="text-slate-400 text-xs sm:text-sm">
-            支援直接編輯或將歌曲 JSON 檔案拖曳至此頁面載入進行修改。
+            支援離線樂譜圖片／PDF 識別、簡譜／五線譜編輯與四態渲染，亦可將現有歌曲 JSON 檔案拖曳至此修改。
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -1286,6 +1333,16 @@ export const SongBuilder: React.FC = () => {
           </button>
         </div>
       )}
+
+      {/* Dolce OMR & Score Editor Workspace */}
+      <DolceOmrWorkspace
+        score={score}
+        originalKey={meta.originalKey || undefined}
+        onScoreChange={setScore}
+        onExtractToSong={handleExtractToSong}
+        incomingFiles={incomingOmrBatch}
+      />
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         <div className="lg:col-span-7 bg-white p-6 rounded-3xl border border-slate-200/80 shadow-sm space-y-4">
           <div className="flex items-center justify-between">
@@ -1570,7 +1627,7 @@ export const SongBuilder: React.FC = () => {
             </div>
             <CodeMirror
               className="w-full rounded-lg border border-slate-300 p-3 cm-custom"
-              placeholder="在此輸入原始歌詞，支援段落標記 [V1]、[C] 等"
+              placeholder="在此輸入原始歌詞（每行一句），支援段落標記 [V1]、[C] 等"
               height="300px"
               value={rawLyrics}
               onChange={(value) => setRawLyrics(value)}

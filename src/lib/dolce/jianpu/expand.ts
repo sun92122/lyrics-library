@@ -1,0 +1,96 @@
+// 反复展开的公共那一半：按 `PlayItem[]`（`playData.measures`）逐遍走小节。
+//
+// 「这首歌该唱成什么样」由 `score/playorder.ts` 从 `ScoreDoc` 推（反复与跳转 / `.Repeat` 段），
+// 两种格式都拿到同一种 `PlayItem[]`；这里只负责**怎么走**——逐遍、逐小节、首尾小节的裁切、
+// 遍末换页。「怎么放一个小节」由 sink 决定：排版往 Line 里装小节（layout.ts::buildLine）。
+// 投影档各格式投影成同一种引擎输入，走的是同一条路（jianpu/expanded.ts）。
+
+import { PlayItem } from "../score/playorder";
+
+/** 简谱档：按原谱排一遍——一小节一项、pass = 0（多段歌词叠排、不展开任何反复）。 */
+export function identityPlan(measureCount: number): PlayItem[] {
+  const out: PlayItem[] = [];
+  for (let i = 0; i < measureCount; i++) {
+    const it = new PlayItem();
+    it.mid = i;
+    it.end = i + 1;
+    it.pass = 0;
+    it.skip = 0;
+    it.limit = -1;
+    it.endOfPass = false;
+    out.push(it);
+  }
+  return out;
+}
+
+/** 一个小节在这一遍里的裁切。 */
+export interface MeasureCut {
+  /** 首小节跳过前几个和弦（弱起式接入，`.Repeat` 写作 `11.2-20V4`） */
+  skip: number;
+  /** 末小节只取前几个和弦（-1 = 整节） */
+  limit: number;
+  /** 整首最后一小节 */
+  final: boolean;
+  /** 接在前一小节同一行、不在它前面换行（`PlayItem.glueFrom`） */
+  glue?: boolean;
+  /** 按 `P:` 排的：这一遍的词只在这些小节里算（`PlayItem.scope`） */
+  scope?: ReadonlySet<number>;
+}
+
+export interface PlaySink {
+  measure(mid: number, pass: number, cut: MeasureCut): void;
+  /** 一遍唱完（`endOfPass`）：投影档据此换页 */
+  passEnd(): void;
+  /** 往回跳、但还是同一段词（反复只有一段、D.S./D.C. 回去唱到 Fine）：给了它就只另起一行、不换页 */
+  jumpBack?(): void;
+}
+
+/**
+ * 逐遍逐小节回调。换页（`passEnd`）有两处：`endOfPass`，以及**往回跳**（反复、D.C./D.S.）——
+ * 那是新的一遍；往回跳还唱同一段词的，sink 给了 `jumpBack` 就只换行（投影档：一页一行的碎页，250《主，差遣我》）。遍号变了但往前接着唱的（二房之后 pass 归 1 的尾段、跳过一房）不换页，
+ * 否则前一页常只剩一行半（同一首歌）。同一小节被 limit/skip 切成前后两截的，后一截也是接着唱。
+ */
+export function walkPlay(items: readonly PlayItem[], sink: PlaySink): void {
+  let lastMid = -1;
+  let lastPass = -1;
+  let broke = true; // 刚换过页，不必再换
+  items.forEach((it, idx) => {
+    // 进 `P:` 的段落不换页也不换行，换行换页看源里写的（上一段末尾的 `$`、`%%newpage`）
+    if (lastMid >= 0 && !broke && !it.sectionEntry && (it.mid < lastMid || (it.mid === lastMid && it.skip === 0))) {
+      if (sink.jumpBack && it.pass === lastPass) sink.jumpBack();
+      else sink.passEnd();
+    }
+    broke = false;
+    lastPass = it.pass;
+    for (let mid = it.mid; mid < it.end; mid++) {
+      lastMid = mid;
+      sink.measure(mid, it.pass, {
+        skip: mid === it.mid ? it.skip : 0,
+        limit: mid === it.end - 1 ? it.limit : -1,
+        final: mid === it.end - 1 && idx === items.length - 1,
+        ...(it.glueFrom >= 0 && mid >= it.glueFrom ? { glue: true } : {}),
+        ...(it.scope ? { scope: it.scope } : {}),
+      });
+    }
+    if (it.endOfPass) {
+      sink.passEnd();
+      broke = true;
+    }
+  });
+}
+
+/** 投影档应有几遍——按 walkPlay 的换页切出来、确有小节的段数。page-check 的 P5 拿它对页面结构。 */
+export function countPasses(items: readonly PlayItem[]): number {
+  let n = 0;
+  let open = false;
+  walkPlay(items, {
+    measure: () => {
+      if (!open) n++;
+      open = true;
+    },
+    passEnd: () => {
+      open = false;
+    },
+  });
+  return n;
+}

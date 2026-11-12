@@ -1,6 +1,7 @@
 # build output
 dist/
 .astro/
+public/redist/pdfjs/
 
 # dependencies
 node_modules/

@@ -1,0 +1,280 @@
+/* Scoped styles for Dolce score rendering, OMR verification overlays, and .123/.abc syntax highlighting */
+
+.dolce-scope {
+  --score-page-max: 960px;
+  --score-zoom: 1;
+}
+
+.dolce-scope .score-pages-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  width: 100%;
+  overflow-x: auto;
+  padding: 12px 4px;
+}
+
+.dolce-scope .score-page-wrap {
+  width: calc(min(var(--score-page-max, 960px), 100%) * var(--score-zoom, 1));
+  aspect-ratio: 210 / 297;
+  margin-inline: auto;
+  flex: 0 0 auto;
+  position: relative;
+  background: var(--score-page-bg, #ffffff);
+  box-shadow: 0 2px 10px rgba(15, 23, 42, 0.12);
+  border-radius: 6px;
+  overflow: hidden;
+  content-visibility: auto;
+}
+
+.dolce-scope .score-page {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.dolce-scope .score-page g.selected [fill]:not([fill="none"]) {
+  fill: #1565ff;
+}
+.dolce-scope .score-page g.selected [stroke] {
+  stroke: #1565ff;
+}
+.dolce-scope .score-page text,
+.dolce-scope .score-page path,
+.dolce-scope .score-page line {
+  cursor: default;
+}
+
+/* Playback vertical cursor line */
+.dolce-scope .score-page rect.playhead,
+.dolce-scope .mixed-page rect.playhead {
+  fill: rgba(232, 89, 12, 0.16);
+  stroke: rgba(232, 89, 12, 0.72);
+  stroke-width: 1.5;
+  pointer-events: none;
+}
+
+.dolce-scope .mixed-page g.staff-chord {
+  cursor: pointer;
+}
+
+/* OMR verification overlay SVGs (jianpu + raster/vector staff) */
+.dolce-scope .omr-recognize {
+  background: #ffffff;
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.dolce-scope .omr-recognize > image {
+  opacity: 1;
+}
+.dolce-scope .omr-recognize .omr-overlay {
+  pointer-events: none;
+  opacity: 0.88;
+}
+.dolce-scope .omr-recognize .omr-beat rect {
+  fill: rgba(224, 49, 49, 0.1);
+  stroke: rgba(224, 49, 49, 0.72);
+  stroke-width: 2;
+  stroke-dasharray: 6 4;
+}
+.dolce-scope .omr-beat .omr-beat-tag {
+  fill: #e03131;
+  stroke: none;
+  font-weight: 600;
+  pointer-events: none;
+}
+
+.dolce-scope .omr-overlay text {
+  fill: #d4145a;
+  font-weight: 700;
+  font-family: "PingFang SC", "Microsoft YaHei", ui-sans-serif, sans-serif;
+}
+.dolce-scope .omr-overlay circle {
+  fill: #d4145a;
+}
+.dolce-scope .omr-overlay .omr-mark {
+  stroke: #d4145a;
+}
+.dolce-scope .omr-overlay .omr-barline {
+  stroke: #1565ff;
+  stroke-linecap: round;
+  opacity: 0.95;
+}
+.dolce-scope .omr-overlay text.omr-header {
+  fill: #0a7d2c;
+}
+.dolce-scope .omr-overlay text.omr-lyric {
+  fill: #6a1b9a;
+}
+.dolce-scope .omr-overlay text.omr-chord {
+  fill: #b35c00;
+}
+.dolce-scope .omr-overlay text.omr-chord-fixed {
+  fill: #087f5b;
+}
+.dolce-scope .omr-overlay text.omr-chord-deleted {
+  opacity: 0.45;
+  text-decoration: line-through;
+}
+.dolce-scope .omr-doubt-box {
+  pointer-events: none;
+  fill: rgba(250, 176, 5, 0.18);
+  stroke: #f59f00;
+  stroke-width: 2;
+  stroke-dasharray: 4 2;
+}
+.dolce-scope .omr-overlay .omr-num-edited text,
+.dolce-scope .omr-overlay .omr-num-inserted text {
+  fill: #087f5b;
+}
+.dolce-scope .omr-overlay .omr-num-edited circle,
+.dolce-scope .omr-overlay .omr-num-inserted circle {
+  fill: #087f5b;
+}
+.dolce-scope .omr-overlay .omr-num-edited .omr-mark,
+.dolce-scope .omr-overlay .omr-num-inserted .omr-mark {
+  stroke: #087f5b;
+}
+.dolce-scope .omr-overlay .omr-num-deleted {
+  opacity: 0.45;
+}
+.dolce-scope .omr-overlay .omr-strike {
+  stroke: #e03131;
+  stroke-linecap: round;
+}
+.dolce-scope .omr-overlay .omr-inserted-box {
+  fill: rgba(8, 127, 91, 0.08);
+  stroke: #087f5b;
+  stroke-dasharray: 4 3;
+  stroke-width: 1.5;
+}
+.dolce-scope .omr-overlay .omr-lyric-mask {
+  fill: #ffffff;
+}
+.dolce-scope .omr-overlay text.omr-lyric-fixed {
+  fill: #087f5b;
+}
+.dolce-scope .omr-overlay .omr-slur {
+  stroke: #e65100;
+}
+.dolce-scope .omr-overlay .omr-tie {
+  stroke: #00838f;
+}
+
+/* Staff OMR overlay classes */
+.dolce-scope .omr-staff-overlay .omr-staff-box {
+  fill: rgba(212, 20, 90, 0.06);
+  stroke: #d4145a;
+}
+.dolce-scope .omr-staff-overlay .omr-num-edited .omr-staff-box {
+  fill: rgba(8, 127, 91, 0.1);
+  stroke: #087f5b;
+}
+.dolce-scope .omr-staff-overlay .omr-num-deleted .omr-staff-box {
+  stroke: #868e96;
+}
+.dolce-scope .omr-staff-overlay .omr-num-inserted .omr-staff-box {
+  fill: rgba(8, 127, 91, 0.08);
+  stroke: #087f5b;
+  stroke-dasharray: 4 3;
+}
+.dolce-scope .omr-staff-overlay .omr-num-inserted text,
+.dolce-scope .omr-staff-overlay .omr-num-edited text {
+  fill: #087f5b;
+}
+.dolce-scope .omr-staff-overlay .omr-src-box {
+  fill: none;
+  stroke: #e8590c;
+  opacity: 0.7;
+}
+.dolce-scope .omr-staff-overlay .omr-src-slur .omr-src-box,
+.dolce-scope .omr-staff-overlay .omr-src-tied .omr-src-box {
+  stroke-dasharray: 4 3;
+  opacity: 0.5;
+}
+.dolce-scope .omr-staff-overlay .omr-staff-src.omr-num-edited .omr-src-box {
+  fill: rgba(8, 127, 91, 0.1);
+  stroke: #087f5b;
+  opacity: 1;
+}
+.dolce-scope .omr-staff-overlay .omr-staff-src.omr-num-deleted .omr-src-box {
+  stroke: #868e96;
+}
+.dolce-scope .omr-staff-overlay .omr-staff-bar {
+  stroke: #1565ff;
+  stroke-linecap: round;
+  opacity: 0.55;
+}
+.dolce-scope .omr-staff-overlay .omr-staff-bar-gone {
+  stroke: #868e96;
+  stroke-dasharray: 3 3;
+  opacity: 0.6;
+}
+
+.dolce-scope .omr-hits rect {
+  fill: transparent;
+  pointer-events: all;
+  cursor: pointer;
+}
+.dolce-scope .omr-hits rect.omr-hover {
+  fill: rgba(255, 109, 0, 0.12);
+  stroke: #ff6d00;
+  stroke-width: 2;
+}
+.dolce-scope .omr-hits rect.selected,
+.dolce-scope .omr-hits rect.omr-playing {
+  fill: rgba(21, 101, 255, 0.16);
+  stroke: #1565ff;
+  stroke-width: 2;
+}
+.dolce-scope .omr-recognize rect.omr-playhead {
+  fill: rgba(232, 89, 12, 0.16);
+  stroke: rgba(232, 89, 12, 0.7);
+  stroke-width: 2;
+  pointer-events: none;
+}
+
+/* Dark CodeMirror theme & Dolce token colors for .123 / .abc score editing */
+.dolce-scope .dolce-cm-dark .cm-editor {
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 13px;
+  line-height: 1.55;
+}
+.dolce-scope .dolce-cm-dark .cm-gutters {
+  background: #0b1120;
+  color: #64748b;
+  border-right: 1px solid #1e293b;
+}
+.dolce-scope .dolce-cm-dark .cm-activeLine,
+.dolce-scope .dolce-cm-dark .cm-activeLineGutter {
+  background: rgba(148, 163, 184, 0.08);
+}
+.dolce-scope .dolce-cm-dark .cm-selectionBackground,
+.dolce-scope .dolce-cm-dark .cm-content ::selection {
+  background: rgba(56, 189, 248, 0.28) !important;
+}
+.dolce-scope .dolce-cm-dark .cm-content {
+  caret-color: #38bdf8;
+}
+.dolce-scope .dolce-cm-dark .cm-cursor {
+  border-left-color: #38bdf8;
+}
+
+.dolce-scope .dolce-cm-dark .note { color: #75a7ff; }
+.dolce-scope .dolce-cm-dark .break { color: #ff9e80; }
+.dolce-scope .dolce-cm-dark .barline { color: #e58cff; }
+.dolce-scope .dolce-cm-dark .comment { color: #64748b; }
+.dolce-scope .dolce-cm-dark .text { color: #57d995; }
+.dolce-scope .dolce-cm-dark .lrc { color: #e2e8f0; }
+.dolce-scope .dolce-cm-dark .slash { color: #94a3b8; }
+.dolce-scope .dolce-cm-dark .lrcspec { color: #e58cff; }
+.dolce-scope .dolce-cm-dark .metakey { color: #ffc766; }
+.dolce-scope .dolce-cm-dark .metaval { color: #79d9a6; }
+.dolce-scope .dolce-cm-dark .unknown { color: #f87171; }
+.dolce-scope .dolce-cm-dark .section { font-weight: 700; color: #f8fafc; }
+.dolce-scope .dolce-cm-dark .space { }
